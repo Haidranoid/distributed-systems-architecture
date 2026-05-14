@@ -1,0 +1,22 @@
+spring:
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: authentication-service
+              uri: http://localhost:8080
+              predicates:
+                - Path=/api/auth/**
+            - id: accounts-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/accounts/**
+application:
+  security:
+    jwt:
+      algorithm: RS256
+      public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5uD98RhaZcg9x9W8yXufSceb4hyRbuZg4pcCGfiag4ucnxZ8yglcQMPqUrdGm7q1tFPRhMomAtQhwSXlbH33zeL8Coe4qQ4mOCGS5ZsltY5rLapS41QYlsFLrQ6liw98ZFOBDorJcyMxdr1ABsmke3TUR2AyKIciJJ9BAhHwL6kIsQVln3DDltG+ZiEWWVCH9haFQ5ScutD2i+MK82gVpw0MKR+rdXLwKm3DF8Y0PuLM/EXesM5QuZ53IWT+S8NOlAvI3Ze9ZZp3RVEFYF6/nOAecQdr0tRIE4+pcRaPArMhEAUJWuGHL/jWEy/eXlNN5FS3HEmj2g9L3TtQCUtzWQIDAQAB
+      issuer: ${spring.application.name}
