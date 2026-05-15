@@ -1,0 +1,32 @@
+spring:
+  config:
+    import: optional:configserver:http://host.docker.internal:8888
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5432/authentication_service_dev
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+application:
+  security:
+    jwt:
+      algorithm: RS256
+      private-key: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDm4P3xGFplyD3H1bzJe59Jx5viHJFu5mDilwIZ+JqDi5yfFnzKCVxAw+pSt0aburW0U9GEyiYC1CHBJeVsfffN4vwKh7ipDiY4IZLlmyW1jmstqlLjVBiWwUutDqWLD3xkU4EOislzIzF2vUAGyaR7dNRHYDIohyIkn0ECEfAvqQixBWWfcMOW0b5mIRZZUIf2FoVDlJy60PaL4wrzaBWnDQwpH6t1cvAqbcMXxjQ+4sz8Rd6wzlC5nnchZP5Lw06UC8jdl71lmndFUQVgXr+c4B5xB2vS1EgTj6lxFo8CsyEQBQla4Ycv+NYTL95eU03kVLccSaPaD0vdO1AJS3NZAgMBAAECggEAAz9JWw16YgGXutqK+fN66Uz9KIg51Gs5lB5HGYnpVG3PgV5N2YKZsVCAGHM680BEQ3nFUd6M+8+zfNW1XRoFdPgbDuPbSUdparMwL3oH5P6Qi9cgLNHXObGUyKWS1vqcB4Y0I7n4fN3TGYYuYxoNbe4V+T4FXpQN+yFhRu/tJqJtZcYvDgBs5U5tBGAdeIowXGGRWJYSrOvU14CxCgMrr3bsLyJZgupbMZxIDT6URcjOV2Y5pQB9BZBzGNpU4SVSy1PsvKP9ePrRj9xlrJdQ+WWiQAQMgwvSbiTkC5gRtRwy9BHl6kW0O8S9yc4vCEZG9PMpZ0nvs8td7m6mYNhPnQKBgQDwL0FqwuIjck+MvPJGNTd/aTn4uN9Vm8nyHkJxPnxhUcbbrkDE+G74rZplAf6FOEk8txJ6hnRiPOi2QCDbZ50AgAKFVVffg4xyzdCUgv6RfVh+4CPGtF5txLk2WFTZlFZi+REhhzYMVcL7eMtYEaVU4bU7aCDLY631cF36ipri1QKBgQD2FN8tApyt9wKOM3T7s7XpE9v/92S7bF+/zg+K/+tw8gYzPdRgIYoUzDHSK4uwUD8gbQlxBFWew2af0LEDKqMplXfaUqdKalcwOrCMXRDekB7OzvLpn4NmFhdRJerMgKYvZjebZy6jM16Ya5o90qtFHYe1WNR8m5PAtrgIFA6odQKBgAEGsqjaHE06d8yKIh7aq1oIAQ9m+s1K1RoLtwz0z2M7DjZyECTHSvIVC8vSrluzWdzAi3uqh2TEDdp5e6p0Tt9prJkVPELgNQFoj7OSu7OzbWVdX8nBi4W8iW4KApLLZ3MUzVXvVfPHigW5BmVh7erm6/dNApbb3ipmSICBhxfhAoGBAJw0mYpXyx8+2ddsYIjaBdIjMhakcsPqQkldw04Hr+ttJnRmfiZbg+w5xjJURAKyna+2pzSffL4f6UfvUD3jVdkysPbcWqcJI7lQt/sRpICy2WuLwHR+NgmaYki3mfkgfN0/tHKoJ9me5SA5xZoS3XctDJUYAyHqG/tLwTwXh0p1AoGBAOjDYBgxLa9sk8iGYrNJ3DwJHG2GEHG7gnhSQDJaOhSNRWGiyOBjG3x6kFV9HaJmFXlqmYhnBlYB2jey1fwurjNxZmBqp3PiLcoq5JnDSCwIgZTMq0dcIpyb0S8oS+wCSBNN9VAoeQuXMXvWsnpvbwxNWh06yLMcmGJfc9BezP5J
+      public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5uD98RhaZcg9x9W8yXufSceb4hyRbuZg4pcCGfiag4ucnxZ8yglcQMPqUrdGm7q1tFPRhMomAtQhwSXlbH33zeL8Coe4qQ4mOCGS5ZsltY5rLapS41QYlsFLrQ6liw98ZFOBDorJcyMxdr1ABsmke3TUR2AyKIciJJ9BAhHwL6kIsQVln3DDltG+ZiEWWVCH9haFQ5ScutD2i+MK82gVpw0MKR+rdXLwKm3DF8Y0PuLM/EXesM5QuZ53IWT+S8NOlAvI3Ze9ZZp3RVEFYF6/nOAecQdr0tRIE4+pcRaPArMhEAUJWuGHL/jWEy/eXlNN5FS3HEmj2g9L3TtQCUtzWQIDAQAB
+      access-token-expiration: 2592000000
+      refresh-token-expiration: 5184000000
+      issuer: ${spring.application.name}
+      audience:
+        - gateway
+        - accounts-service
+  endpoints:
+    account-service-endpoint: http://localhost:8081/api/v1/accounts
+    account-service-internal-endpoint: http://localhost:8081/api/v1/internal/accounts
