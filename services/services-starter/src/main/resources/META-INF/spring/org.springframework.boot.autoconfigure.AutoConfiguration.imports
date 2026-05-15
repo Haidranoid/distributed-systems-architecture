@@ -1,1 +1,3 @@
+org.dsa.services.core.servicesstarter.autoconfig.AlgorithmsKeysAutoConfig
+org.dsa.services.core.servicesstarter.autoconfig.SecurityAutoConfig
 org.dsa.services.core.servicesstarter.autoconfig.ServicesStarterAutoConfig
