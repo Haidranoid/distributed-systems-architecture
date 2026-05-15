@@ -15,6 +15,14 @@ java {
     }
 }
 
+jar {
+    enabled = true
+}
+
+repositories {
+    mavenCentral()
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -30,10 +38,16 @@ publishing {
             from components.java
         }
     }
-}
 
-repositories {
-    mavenCentral()
+    repositories {
+        maven {
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/services-starter/'
+            credentials {
+                username "aws"
+                password System.getenv("CODEARTIFACT_AUTH_TOKEN")
+            }
+        }
+    }
 }
 
 ext {
