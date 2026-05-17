@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.dsa.services.core'
-version = '0.0.4'
+version = '0.1.0'
 description = 'services-starter'
 
 java {
