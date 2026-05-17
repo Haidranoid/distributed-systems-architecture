@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'org.dsa.services.core'
-version = '0.2.2'
+version = '0.2.3'
 description = 'services-starter'
 
 java {
@@ -41,27 +41,23 @@ publishing {
     }
 
     repositories {
-        def codeArtifactAuthToken = providers
-                .environmentVariable("CODEARTIFACT_AUTH_TOKEN")
-                .orElse(
-                        providers.exec {
-                            commandLine(
-                                    'aws',
-                                    'codeartifact',
-                                    'get-authorization-token',
-                                    '--domain', 'artifacts',
-                                    '--query', 'authorizationToken',
-                                    '--output', 'text'
-                            )
-                        }.standardOutput.asText
-                )
-                .map { it.trim() }
+
+        def codeArtifactAuthToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+
+        if (!codeArtifactAuthToken) {
+            codeArtifactAuthToken = providers.exec {
+                commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                        '--domain', 'artifacts',
+                        '--query', 'authorizationToken',
+                        '--output', 'text'
+            }.standardOutput.asText.get().trim()
+        }
 
         maven {
             url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/services-starter/'
             credentials {
                 username "aws"
-                password codeArtifactAuthToken.get()
+                password codeArtifactAuthToken
             }
         }
     }
