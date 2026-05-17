@@ -1,16 +1,14 @@
-# -------- Stage 1: Build --------
-FROM eclipse-temurin:21-jdk-jammy AS build
+# -------- Stage 1: Dependencies --------
+FROM amazoncorretto:21-alpine3.23-jdk AS dependencies
 
-# Accept optional build-time args
+# Accept build-time args and pass them to env vars
 ARG CODEARTIFACT_AUTH_TOKEN
-
-# Pass env vars to build-time
 ENV CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN
 
 # Create working directory
 WORKDIR /app
 
-# Copy wrapper + gradle config first
+# Copy Gradle wrapper and build config
 COPY gradlew .
 COPY gradle ./gradle
 COPY build.gradle settings.gradle ./
@@ -18,29 +16,48 @@ COPY build.gradle settings.gradle ./
 # Make wrapper executable
 RUN chmod +x gradlew
 
-# Download dependencies (cache layer)
-RUN ./gradlew classes -x test --no-daemon || true
+# Pre-download/cache dependencies
+RUN ./gradlew assemble \
+    -x test \
+    --no-daemon || true
+
+
+# -------- Stage 2: Build --------
+FROM amazoncorretto:21-alpine3.23-jdk AS build
+
+# Accept build-time args and pass them to env vars
+ARG CODEARTIFACT_AUTH_TOKEN
+ENV CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN
+
+WORKDIR /app
+
+# Reuse cached Gradle artifacts/wrapper
+COPY --from=dependencies /root/.gradle /root/.gradle
+COPY --from=dependencies /app /app
 
 # Copy source code
 COPY src ./src
 
-# Build
-RUN ./gradlew bootJar -x test --no-daemon
+# Build application
+RUN ./gradlew bootJar \
+    -x test \
+    --no-daemon
 
-# -------- Stage 2: Runtime --------
-FROM eclipse-temurin:21-jre-jammy
+
+# -------- Stage 3: Runtime --------
+FROM eclipse-temurin:21-jre-alpine-3.23
 
 # Create working directory
 WORKDIR /app
 
-# Pass env vars to runtime
+# Runtime profile
 ENV SPRING_PROFILES_ACTIVE=dev-docker
 
-# Copy JAR from build stage
-COPY --from=build /app/build/libs/authentication-service.jar app.jar
+# Copy generated jar
+COPY --from=build /app/build/libs/*.jar app.jar
 
-# Expose the app port
+# Expose application port
 EXPOSE 8080
 
-# Run the app
-ENTRYPOINT ["java","-jar","app.jar"]
+# Run application
+ENTRYPOINT ["java", "-jar", "app.jar"]

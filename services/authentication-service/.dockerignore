@@ -1,0 +1,33 @@
+# Gradle
+.gradle
+build
+out
+
+# IDEs
+.idea
+.vscode
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# OS / logs
+.DS_Store
+*.log
+
+# IntelliJ
+*.iml
+
+# Documentation
+README.md
+HELP.md
+
+# Docker compose
+docker-compose.yml
+
+# Tests
+src/test
+
+# Environment files
+.env
