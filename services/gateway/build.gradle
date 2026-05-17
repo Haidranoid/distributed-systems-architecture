@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '4.0.6'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'io.freefair.lombok' version '9.5.0'
+    id 'maven-publish'
 }
 
 group = 'org.dsa.services'
@@ -15,9 +16,40 @@ java {
     }
 }
 
+jar {
+    enabled = false
+}
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}
+
 repositories {
-    mavenCentral()
     mavenLocal()
+
+    def codeArtifactAuthToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+
+    try {
+        if (!codeArtifactAuthToken) {
+            codeArtifactAuthToken = providers.exec {
+                commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                        '--domain', 'artifacts',
+                        '--query', 'authorizationToken',
+                        '--output', 'text'
+            }.standardOutput.asText.get().trim()
+        }
+
+        maven {
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/services-starter/'
+
+            credentials {
+                username "aws"
+                password codeArtifactAuthToken
+            }
+        }
+    } catch (Exception ignored) {
+        mavenCentral()
+    }
 }
 
 ext {
@@ -31,16 +63,14 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.services.core:services-starter:0.0.1'
+    implementation 'org.dsa.services.core:services-starter:0.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
