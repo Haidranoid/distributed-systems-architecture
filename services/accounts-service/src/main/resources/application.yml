@@ -3,12 +3,23 @@ server:
 spring:
   application:
     name: accounts-service
-  profiles:
-    active: dev
   config:
     import: optional:configserver:http://config-server:8888
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 management:
   endpoints:
     web:
       exposure:
         include: health, info
+application:
+  security:
+    jwt:
+      issuer: ${spring.application.name}
