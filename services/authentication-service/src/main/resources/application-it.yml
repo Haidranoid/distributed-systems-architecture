@@ -1,13 +1,10 @@
 spring:
-  config:
-    import: optional:configserver:http://host.docker.internal:8888
-  datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/authentication_service_dev
-    username: postgres
-    password: postgres
+  cloud:
+    config:
+      enabled: false
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 application:
   security:
     jwt:
@@ -17,5 +14,5 @@ application:
       access-token-expiration: 2592000000
       refresh-token-expiration: 5184000000
   endpoints:
-    accounts-service-endpoint: http://host.docker.internal:8081/api/v1/accounts
-    accounts-service-internal-endpoint: http://host.docker.internal:8081/api/v1/internal/accounts
+    accounts-service-endpoint: http://localhost:8081/api/v1/accounts
+    accounts-service-internal-endpoint: http://localhost:8081/api/v1/internal/accounts

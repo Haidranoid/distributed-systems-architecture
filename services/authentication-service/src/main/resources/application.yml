@@ -13,9 +13,16 @@ spring:
       hibernate:
         format_sql: true
     database: postgresql
-    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 management:
   endpoints:
     web:
       exposure:
         include: health, info
+application:
+  security:
+    jwt:
+      issuer: ${spring.application.name}
+      audience:
+        - gateway
+        - accounts-service
