@@ -3,15 +3,17 @@ server:
 spring:
   application:
     name: gateway
-  profiles:
-    active: dev
+  config:
+    import: optional:configserver:http://config-server:8888
   threads:
     virtual:
       enabled: true
-  config:
-    import: optional:configserver:http://config-server:8888
 management:
   endpoints:
     web:
       exposure:
         include: health, info
+application:
+  security:
+    jwt:
+      issuer: ${spring.application.name}

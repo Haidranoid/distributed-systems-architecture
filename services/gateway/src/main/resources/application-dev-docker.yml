@@ -1,17 +1,17 @@
 spring:
   config:
-    import: optional:configserver:http://localhost:8888
+    import: optional:configserver:http://host.docker.internal:8888
   cloud:
     gateway:
       server:
         webmvc:
           routes:
             - id: authentication-service
-              uri: http://localhost:8080
+              uri: http://host.docker.internal:8080
               predicates:
                 - Path=/api/v1/auth/**
             - id: accounts-service
-              uri: http://localhost:8081
+              uri: http://host.docker.internal:8081
               predicates:
                 - Path=/api/v1/accounts/**
 application:
