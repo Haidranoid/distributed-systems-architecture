@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @IntegrationEnvironment
-class AccountsServiceApplicationTests {
+class AccountServiceApplicationTests {
 
     @Test
     @DisplayName("accounts-service smoke test")
