@@ -6,12 +6,12 @@ import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.VerifyAccountCredentialsDto;
 import org.dsa.services.accountsservice.common.dtos.CreateAccountDto;
 import org.dsa.services.accountsservice.common.dtos.UpdateAccountDto;
-import org.dsa.services.core.servicesstarter.exceptions.AccountNotFoundException;
-import org.dsa.services.core.servicesstarter.exceptions.UnauthorizedException;
-import org.dsa.services.accountsservice.mappers.AccountsMapper;
+import org.dsa.services.core.servicesstarter.common.exceptions.AccountNotFoundException;
+import org.dsa.services.core.servicesstarter.common.exceptions.UnauthorizedException;
+import org.dsa.services.accountsservice.mappers.AccountMapper;
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
-import org.dsa.services.accountsservice.services.AccountsService;
-import org.dsa.services.core.servicesstarter.utils.SessionUtils;
+import org.dsa.services.accountsservice.services.AccountService;
+import org.dsa.services.core.servicesstarter.utils.SessionService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +22,14 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountsServiceImpl implements AccountsService {
+public class AccountServiceImpl implements AccountService {
 
     private final AccountsRepository accountsRepository;
-    private final AccountsMapper accountsMapper;
-    private final SessionUtils sessionUtils;
+    private final AccountMapper accountMapper;
+    private final SessionService sessionService;
 
     public AccountDto me() {
-        var username = sessionUtils.getCurrentUsername();
+        var username = sessionService.getCurrentUsername();
 
         if (username == null) {
             throw new UnauthorizedException();
@@ -38,23 +38,23 @@ public class AccountsServiceImpl implements AccountsService {
         var account = accountsRepository.findByUsername(username)
                 .orElseThrow(() -> new AccountNotFoundException("username " + username));
 
-        return accountsMapper.toDto(account);
+        return accountMapper.toDto(account);
     }
 
     public AccountDto verifyCredentials(VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
         var account = accountsRepository.findByUsername(verifyAccountCredentialsDto.username())
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
-        return accountsMapper.toDto(account);
+        return accountMapper.toDto(account);
     }
 
     @Override
     public AccountDto create(CreateAccountDto createAccountDto) {
         //TODO: handle the case when the account already exist
-        var accountEntity = accountsMapper.toEntity(createAccountDto);
+        var accountEntity = accountMapper.toEntity(createAccountDto);
         var accountSaved = accountsRepository.save(accountEntity);
 
-        return accountsMapper.toDto(accountSaved);
+        return accountMapper.toDto(accountSaved);
     }
 
     @Override
@@ -70,13 +70,13 @@ public class AccountsServiceImpl implements AccountsService {
         var account = accountsRepository.findById(userId)
                 .orElseThrow(() -> new AccountNotFoundException("id " + userId));
 
-        return accountsMapper.toDto(account);
+        return accountMapper.toDto(account);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<AccountDto> findAll() {
-        var accountsList = accountsRepository.findAll().stream().map(accountsMapper::toDto).toList();
+        var accountsList = accountsRepository.findAll().stream().map(accountMapper::toDto).toList();
 
         return accountsList;
     }
@@ -90,6 +90,6 @@ public class AccountsServiceImpl implements AccountsService {
 
         var accountUpdated = accountsRepository.save(account);
 
-        return accountsMapper.toDto(accountUpdated);
+        return accountMapper.toDto(accountUpdated);
     }
 }

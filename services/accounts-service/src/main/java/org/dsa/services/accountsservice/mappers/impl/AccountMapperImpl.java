@@ -3,11 +3,11 @@ package org.dsa.services.accountsservice.mappers.impl;
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.CreateAccountDto;
 import org.dsa.services.accountsservice.common.entities.AccountEntity;
-import org.dsa.services.accountsservice.mappers.AccountsMapper;
+import org.dsa.services.accountsservice.mappers.AccountMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AccountsMapperImpl implements AccountsMapper {
+public class AccountMapperImpl implements AccountMapper {
 
     @Override
     public AccountEntity toEntity(CreateAccountDto dto) {

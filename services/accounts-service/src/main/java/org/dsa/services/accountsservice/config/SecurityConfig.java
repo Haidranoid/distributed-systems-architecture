@@ -1,7 +1,7 @@
 package org.dsa.services.accountsservice.config;
 
 import lombok.RequiredArgsConstructor;
-import org.dsa.services.core.servicesstarter.security.JwtAuthenticationConverter;
+import org.dsa.services.core.servicesstarter.utils.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,8 +33,10 @@ public class SecurityConfig {
             "/swagger-ui.html"
     };
 
+    //TODO: fix this in order to test it property
     private static final String[] WHITE_LIST_URL = {
             "/actuator/**",
+            "/api/v1/accounts/**",
             "/api/v1/internal/accounts/**",
     };
 

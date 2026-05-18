@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.UpdateAccountPasswordDto;
 import org.dsa.services.accountsservice.common.dtos.UpdateAccountDto;
-import org.dsa.services.accountsservice.services.impl.AccountsServiceImpl;
+import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountsController {
 
-    private final AccountsServiceImpl accountsService;
+    private final AccountServiceImpl accountService;
 
     @GetMapping("/me")
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -29,7 +29,7 @@ public class AccountsController {
     public AccountDto getMe() {
         log.info("getMe request started");
 
-        var currentSession = accountsService.me();
+        var currentSession = accountService.me();
 
         log.info("getMe request response: {}", currentSession);
         return currentSession;
@@ -39,7 +39,7 @@ public class AccountsController {
     public List<AccountDto> getAllAccounts() {
         log.info("getAllAccounts request started");
 
-        var accountList = accountsService.findAll();
+        var accountList = accountService.findAll();
 
         log.info("getAllAccounts request response: [{}]", "...");
         return accountList;
@@ -50,7 +50,7 @@ public class AccountsController {
     public AccountDto getAccountById(@PathVariable Long userId) {
         log.info("getAccountById request: {}", userId);
 
-        var account = accountsService.findById(userId);
+        var account = accountService.findById(userId);
 
         log.info("getAccountById response: {}", account);
         return account;
@@ -63,7 +63,7 @@ public class AccountsController {
     ) {
         log.info("updateAccount request body: {}", updateAccountDto);
 
-        var accountUpdated = accountsService.update(userId, updateAccountDto);
+        var accountUpdated = accountService.update(userId, updateAccountDto);
 
         log.info("updateAccount request response: {}", accountUpdated);
         return accountUpdated;
@@ -74,7 +74,7 @@ public class AccountsController {
     public void deleteAccount(@PathVariable Long userId) {
         log.info("deleteAccount request: {}", userId);
 
-        accountsService.delete(userId);
+        accountService.delete(userId);
 
         log.info("deleteAccount request response: {}", userId);
     }
@@ -84,7 +84,7 @@ public class AccountsController {
     public void changePassword(@RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
         log.info("changePassword request: {}", updateAccountPasswordDto);
 
-        //accountsService.changePassword(changePasswordAccountDto);
+        //accountService.changePassword(changePasswordAccountDto);
 
         log.info("changePassword response: {}", "success");
     }

@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.VerifyAccountCredentialsDto;
 import org.dsa.services.accountsservice.common.dtos.CreateAccountDto;
-import org.dsa.services.accountsservice.services.impl.AccountsServiceImpl;
+import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class InternalAccountsController {
 
-    private final AccountsServiceImpl accountsServiceImpl;
+    private final AccountServiceImpl accountsServiceImpl;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

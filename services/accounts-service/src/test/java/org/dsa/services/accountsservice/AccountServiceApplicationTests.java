@@ -1,14 +1,16 @@
 package org.dsa.services.accountsservice;
 
+import org.dsa.services.core.servicesstarter.testing.annotations.IntegrationEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
+@IntegrationEnvironment
 class AccountsServiceApplicationTests {
 
     @Test
-    @DisplayName("AccountService - Smoke test")
+    @DisplayName("accounts-service smoke test")
     void contextLoads() {
     }
 

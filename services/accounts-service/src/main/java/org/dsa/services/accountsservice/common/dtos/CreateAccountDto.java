@@ -2,7 +2,7 @@ package org.dsa.services.accountsservice.common.dtos;
 
 import lombok.Builder;
 import lombok.NonNull;
-import org.dsa.services.core.servicesstarter.constants.Role;
+import org.dsa.services.core.servicesstarter.common.constants.Role;
 
 @Builder
 public record CreateAccountDto(

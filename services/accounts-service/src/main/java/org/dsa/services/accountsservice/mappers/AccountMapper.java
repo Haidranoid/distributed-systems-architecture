@@ -4,7 +4,7 @@ import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.CreateAccountDto;
 import org.dsa.services.accountsservice.common.entities.AccountEntity;
 
-public interface AccountsMapper {
+public interface AccountMapper {
     AccountEntity toEntity(CreateAccountDto dto);
     AccountDto toDto(AccountEntity account);
 }
