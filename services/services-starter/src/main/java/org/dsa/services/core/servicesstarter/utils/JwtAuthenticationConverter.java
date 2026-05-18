@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.security;
+package org.dsa.services.core.servicesstarter.utils;
 
 import lombok.NonNull;
 import org.springframework.core.convert.converter.Converter;

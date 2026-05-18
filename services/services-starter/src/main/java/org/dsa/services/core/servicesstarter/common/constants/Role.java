@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.constants;
+package org.dsa.services.core.servicesstarter.common.constants;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.dsa.services.core.servicesstarter.constants.Permission.*;
+import static org.dsa.services.core.servicesstarter.common.constants.Permission.*;
 
 @Getter
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.exceptions;
+package org.dsa.services.core.servicesstarter.common.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.properties;
+package org.dsa.services.core.servicesstarter.common.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.errors;
+package org.dsa.services.core.servicesstarter.common.errors;
 
 import lombok.Builder;
 import lombok.Data;

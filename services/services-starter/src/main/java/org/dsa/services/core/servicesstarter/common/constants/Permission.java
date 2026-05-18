@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.constants;
+package org.dsa.services.core.servicesstarter.common.constants;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

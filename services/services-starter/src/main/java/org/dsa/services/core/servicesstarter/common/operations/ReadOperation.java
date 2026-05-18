@@ -1,4 +1,4 @@
-package org.dsa.services.core.servicesstarter.services.operations;
+package org.dsa.services.core.servicesstarter.common.operations;
 
 import java.util.List;
 
