@@ -1,6 +1,6 @@
 package org.dsa.services.authenticationservice.common.dtos;
 
-import org.dsa.services.core.servicesstarter.constants.Role;
+import org.dsa.services.core.servicesstarter.common.constants.Role;
 import lombok.Builder;
 
 @Builder
