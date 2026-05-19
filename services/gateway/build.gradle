@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'org.dsa.services'
-version = '0.0.1'
+version = '1.0.0'
 description = 'gateway'
 
 java {
@@ -63,7 +63,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.services.core:services-starter:1.0.7'
+    implementation 'org.dsa.services.core:services-starter:2.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
