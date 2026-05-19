@@ -5,6 +5,7 @@ plugins {
     id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
     id 'jacoco'
+    id 'com.gorylenko.gradle-git-properties' version '2.5.7'
 }
 
 group = 'org.dsa.services'
@@ -23,6 +24,10 @@ jar {
 
 bootJar {
     archiveFileName = "${project.name}.jar"
+}
+
+springBoot {
+    buildInfo()
 }
 
 repositories {
@@ -123,7 +128,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation(testFixtures('org.dsa.services.core:services-starter:0.2.2'))
+    testImplementation(testFixtures('org.dsa.services.core:services-starter:2.0.0'))
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'net.datafaker:datafaker:2.5.3'
 }
