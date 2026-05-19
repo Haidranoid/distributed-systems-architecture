@@ -5,10 +5,11 @@ plugins {
     id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
     id 'jacoco'
+    id 'com.gorylenko.gradle-git-properties' version '2.5.7'
 }
 
 group = 'org.dsa.services'
-version = '0.0.1'
+version = '1.0.0'
 description = 'accounts-service'
 
 java {
@@ -23,6 +24,10 @@ jar {
 
 bootJar {
     archiveFileName = "${project.name}.jar"
+}
+
+springBoot {
+    buildInfo()
 }
 
 repositories {
@@ -113,7 +118,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.services.core:services-starter:1.0.7'
+    implementation 'org.dsa.services.core:services-starter:2.0.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -122,7 +127,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation(testFixtures('org.dsa.services.core:services-starter:0.2.2'))
+    testImplementation(testFixtures('org.dsa.services.core:services-starter:2.0.0'))
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'net.datafaker:datafaker:2.5.3'
 }

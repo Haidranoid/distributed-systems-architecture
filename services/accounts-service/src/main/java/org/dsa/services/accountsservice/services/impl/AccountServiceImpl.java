@@ -24,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
+    
     private final AccountsRepository accountsRepository;
     private final AccountMapper accountMapper;
     private final SessionService sessionService;
@@ -31,6 +32,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto me() {
         var username = sessionService.getCurrentUsername();
 
+         
         if (username == null) {
             throw new UnauthorizedException();
         }
