@@ -1,21 +1,29 @@
-include:
-  - local: '/infra/ci/gitlab/templates/artifacts/setup-env.yml'
+variables:
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=true
+    -Dorg.gradle.caching=true
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
 
 test:
-  extends:
-    - .setup-gradle
-
   stage: test
-
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:
+    - cd services/services-starter
+
+    - chmod +x ./gradlew
+
     - ./gradlew test --build-cache --parallel
 
   artifacts:
     when: always
     paths:
-      - services/services-starter/build/reports/tests/test
+      - /services/services-starter/build/reports/tests/test
     reports:
       junit:
-        - services/services-starter/build/test-results/test/*.xml
+        - /services/services-starter/build/test-results/test/*.xml
