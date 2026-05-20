@@ -1,13 +1,13 @@
-default:
-  tags:
-    - local
+include:
+  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/test.yml'
+  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/build.yml'
+  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/publish.yml'
 
 stages:
   - test
   - build
   - publish
-  
-include:
-  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/test.yml'
-  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/build.yml'
-  - local: '/infra/ci/gitlab/templates/artifacts/services-starter/publish.yml'
+
+default:
+  tags:
+    - local
