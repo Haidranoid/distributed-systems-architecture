@@ -8,9 +8,9 @@
 
   cache:
     paths:
-      - "$CI_PROJECT_DIR/.gradle/wrapper"
-      - "$CI_PROJECT_DIR/.gradle/caches"
+      - "$CI_PROJECT_DIR/services/services-starter/.gradle/wrapper"
+      - "$CI_PROJECT_DIR/services/services-starter/.gradle/caches"
 
   before_script:
-    - cd services/services-starter
+    - cd ./services/services-starter
     - chmod +x ./gradlew
