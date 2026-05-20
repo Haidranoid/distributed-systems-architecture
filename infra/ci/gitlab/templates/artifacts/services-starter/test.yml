@@ -10,7 +10,7 @@ test:
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:
-    - ./services/services-starter/gradlew test --build-cache --parallel
+    - ./gradlew test --build-cache --parallel
 
   artifacts:
     when: always

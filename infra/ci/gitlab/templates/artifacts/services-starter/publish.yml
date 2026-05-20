@@ -14,4 +14,4 @@ publish:
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:
-    - ./services/services-starter/gradlew publish --build-cache --parallel
+    - ./gradlew publish --build-cache --parallel

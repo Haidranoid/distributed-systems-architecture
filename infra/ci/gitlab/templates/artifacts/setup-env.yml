@@ -12,4 +12,5 @@
       - .gradle/caches
 
   before_script:
-    - chmod +x services/services-starter/gradlew
+    - cd services/services-starter
+    - chmod +x ./gradlew
