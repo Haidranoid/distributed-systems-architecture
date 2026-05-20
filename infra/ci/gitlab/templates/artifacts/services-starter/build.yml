@@ -8,14 +8,14 @@ build:
   stage: build
 
   needs:
-    - job: test
+    - test
 
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:
-    - ./gradlew assemble -x test --build-cache --parallel
+    - ./services/services-starter/gradlew assemble -x test --build-cache --parallel
 
   artifacts:
     when: on_success
     paths:
-      - build/libs/*.jar
+      - services/services-starter/build/libs/*.jar
