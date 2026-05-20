@@ -1,6 +1,5 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: "$CI_PROJECT_DIR/services/services-starter/.gradle"
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
