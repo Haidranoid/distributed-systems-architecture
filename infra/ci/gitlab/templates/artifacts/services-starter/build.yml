@@ -18,4 +18,4 @@ build:
   artifacts:
     when: on_success
     paths:
-      - services/services-starter/build/libs/*.jar
+      - build/libs/*.jar
