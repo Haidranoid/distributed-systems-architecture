@@ -1,6 +1,6 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: "$CI_PROJECT_DIR/services/services-starter/.gradle"
+    GRADLE_USER_HOME: services/services-starter/.gradle
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
@@ -8,9 +8,9 @@
 
   cache:
     paths:
-      - "$CI_PROJECT_DIR/services/services-starter/.gradle/wrapper"
-      - "$CI_PROJECT_DIR/services/services-starter/.gradle/caches"
+      - services/services-starter/.gradle/wrapper
+      - services/services-starter/.gradle/caches
 
   before_script:
-    - cd ./services/services-starter
+    - cd services/services-starter
     - chmod +x ./gradlew
