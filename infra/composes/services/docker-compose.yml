@@ -1,0 +1,63 @@
+services:
+
+  config-server-srv:
+    image: config-server:dev-compose
+    build:
+      context: ../../../services/config-server
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+    ports:
+      - "8888:8888"
+
+  authentication-service-srv:
+    image: authentication-service:dev-compose
+    build:
+      context: ../../../services/authentication-service
+      dockerfile: Dockerfile
+      args:
+        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+    ports:
+      - "8080:8080"
+    depends_on:
+      - config-server-srv
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  accounts-service-srv:
+    image: accounts-service:dev-compose
+    build:
+      context: ../../../services/accounts-service
+      dockerfile: Dockerfile
+      args:
+        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+    ports:
+      - "8081:8081"
+    depends_on:
+      - config-server-srv
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  gateway-srv:
+    image: gateway:dev-compose
+    build:
+      context: ../../../services/gateway
+      dockerfile: Dockerfile
+      args:
+        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+    ports:
+      - "8222:8222"
+    depends_on:
+      - config-server-srv
+      - authentication-service-srv
+      - accounts-service-srv
+
+networks:
+  default:
+    name: distributed-systems

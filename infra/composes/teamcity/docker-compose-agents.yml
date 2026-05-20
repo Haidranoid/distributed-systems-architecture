@@ -1,0 +1,73 @@
+services:
+
+  teamcity-agent-1:
+    image: jetbrains/teamcity-agent
+    container_name: teamcity-agent-1
+
+    user: root
+
+    cpus: 4
+    mem_limit: 6g
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    environment:
+      AGENT_NAME: "teamcity-agent-1"
+      SERVER_URL: "http://host.docker.internal:8111"
+      CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+      ECR_REPOSITORY_URL: "${ECR_REPOSITORY_URL}"
+      ECR_AUTH_PASSWORD: "${ECR_AUTH_PASSWORD}"
+
+      JAVA_OPTS: >-
+        -Xms1g
+        -Xmx4g
+
+    volumes:
+      - teamcity-agent-1-conf:/data/teamcity_agent/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    privileged: true
+
+    restart: unless-stopped
+
+
+  teamcity-agent-2:
+    image: jetbrains/teamcity-agent
+    container_name: teamcity-agent-2
+
+    user: root
+
+    cpus: 4
+    mem_limit: 6g
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    environment:
+      AGENT_NAME: "teamcity-agent-2"
+      SERVER_URL: "http://host.docker.internal:8111"
+      CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+      ECR_REPOSITORY_URL: "${ECR_REPOSITORY_URL}"
+      ECR_AUTH_PASSWORD: "${ECR_AUTH_PASSWORD}"
+
+      JAVA_OPTS: >-
+        -Xms1g
+        -Xmx4g
+
+    volumes:
+      - teamcity-agent-2-conf:/data/teamcity_agent/conf
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    privileged: true
+
+    restart: unless-stopped
+
+
+volumes:
+  teamcity-agent-1-conf:
+    name: teamcity-agent-1-conf
+    external: true
+  teamcity-agent-2-conf:
+    name: teamcity-agent-2-conf
+    external: true

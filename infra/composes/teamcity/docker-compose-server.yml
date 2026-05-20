@@ -1,0 +1,38 @@
+services:
+
+  teamcity-server:
+    image: jetbrains/teamcity-server
+    container_name: teamcity-server
+
+    mem_limit: 8g
+
+    ports:
+      - "8111:8111"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    environment:
+      TEAMCITY_SERVER_MEM_OPTS: >-
+        -Xms2g
+        -Xmx6g
+        -XX:ReservedCodeCacheSize=1g
+        -XX:+UseG1GC
+        -XX:+UseStringDeduplication
+
+    volumes:
+      - teamcity-data:/data/teamcity_server/datadir
+      - teamcity-logs:/opt/teamcity/logs
+
+    restart: unless-stopped
+
+
+volumes:
+
+  teamcity-data:
+    name: teamcity-data
+    external: true
+
+  teamcity-logs:
+    name: teamcity-logs
+    external: true
