@@ -1,4 +1,5 @@
 variables:
+  GRADLE_USER_HOME: services/services-starter/.gradle
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
@@ -6,8 +7,8 @@ variables:
 
 cache:
   paths:
-    - .gradle/wrapper
-    - .gradle/caches
+    - services/services-starter/.gradle/wrapper
+    - services/services-starter/.gradle/caches
 
 test:
   stage: test
