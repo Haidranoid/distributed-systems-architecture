@@ -1,4 +1,7 @@
 .setup-gradle:
+  tags:
+    - local
+    - docker
   variables:
     GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
     GRADLE_OPTS: >-
@@ -12,4 +15,5 @@
       - .gradle/caches
 
   before_script:
+    - cd services/services-starter
     - chmod +x ./gradlew
