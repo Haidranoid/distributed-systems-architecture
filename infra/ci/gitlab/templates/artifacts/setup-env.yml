@@ -1,7 +1,4 @@
 .setup-gradle:
-  tags:
-    - local
-    - docker
   variables:
     GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
     GRADLE_OPTS: >-
