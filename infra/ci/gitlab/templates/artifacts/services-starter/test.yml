@@ -15,7 +15,7 @@ test:
   artifacts:
     when: always
     paths:
-      - "$CI_PROJECT_DIR/build/reports/tests/test"
+      - ./build/reports/tests/test
     reports:
       junit:
-        - "$CI_PROJECT_DIR/build/test-results/test/*.xml"
+        - ./build/test-results/test/*.xml
