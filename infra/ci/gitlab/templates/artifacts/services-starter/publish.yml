@@ -1,0 +1,17 @@
+include:
+  - local: '/infra/ci/gitlab/templates/artifacts/setup-env.yml'
+
+publish:
+  extends:
+    - .setup-gradle
+
+  stage: publish
+
+  needs:
+    - job: build
+      artifacts: true
+
+  image: amazoncorretto:21-alpine3.23-jdk
+
+  script:
+    - ./gradlew publish --build-cache --parallel
