@@ -1,6 +1,5 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: services/services-starter/.gradle
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
@@ -8,8 +7,8 @@
 
   cache:
     paths:
-      - services/services-starter/.gradle/wrapper
-      - services/services-starter/.gradle/caches
+      - .gradle/wrapper
+      - .gradle/caches
 
   before_script:
     - cd services/services-starter
