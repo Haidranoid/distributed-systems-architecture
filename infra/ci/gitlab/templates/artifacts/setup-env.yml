@@ -9,7 +9,3 @@
     paths:
       - .gradle/wrapper
       - .gradle/caches
-
-  before_script:
-    - cd services/services-starter
-    - chmod +x ./gradlew
