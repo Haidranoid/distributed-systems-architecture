@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-service
+spec:
+  template:
+    spec:
+      containers: []  # This is required to avoid "missing containers" error
+      initContainers:
+        - name: wait-for-config-server
+          image: curlimages/curl:8.7.1
+          command:
+            - sh
+            - -c
+            - |
+              until curl -sf http://config-server-srv:8888/actuator/health | grep UP; do
+                echo "Waiting for Config Server..."
+                sleep 5
+              done

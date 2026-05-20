@@ -1,0 +1,31 @@
+namespace: dev-k8s
+
+resources:
+  - namespace.yml
+  - config/configmap.yml
+  - ../../base
+
+images:
+  - name: config-server
+    newTag: latest
+
+  - name: accounts-service
+    newTag: latest
+
+  - name: authentication-service
+    newTag: latest
+
+  - name: gateway
+    newTag: latest
+
+
+patches:
+  - path: accounts-service/initcontainer-patch.yml
+  - path: authentication-service/initcontainer-patch.yml
+  - path: gateway/initcontainer-patch.yml
+
+  - path: accounts-service/deployment-patch.yml
+  - path: authentication-service/deployment-patch.yml
+  - path: config-server/deployment-patch.yml
+  - path: gateway/deployment-patch.yml
+

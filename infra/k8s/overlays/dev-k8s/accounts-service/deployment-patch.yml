@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accounts-service
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: accounts-service
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-k8s-configmap
+                  key: SPRING_PROFILES_ACTIVE
