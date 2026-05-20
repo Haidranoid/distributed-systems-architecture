@@ -7,10 +7,6 @@ test:
 
   stage: test
 
-  needs:
-    - job: build
-      artifacts: true
-
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:

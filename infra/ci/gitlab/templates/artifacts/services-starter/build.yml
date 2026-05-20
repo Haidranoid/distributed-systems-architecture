@@ -7,6 +7,9 @@ build:
 
   stage: build
 
+  needs:
+    - job: test
+
   image: amazoncorretto:21-alpine3.23-jdk
 
   script:
