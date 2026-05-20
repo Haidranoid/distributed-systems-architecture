@@ -15,7 +15,7 @@ test:
   artifacts:
     when: always
     paths:
-      - ./build/reports/tests/test
+      - ./services/services-starter/build/reports/tests/test
     reports:
       junit:
-        - ./build/test-results/test/*.xml
+        - ./services/services-starter/build/test-results/test/*.xml
