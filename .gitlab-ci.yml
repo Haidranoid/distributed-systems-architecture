@@ -1,6 +1,22 @@
-include:
-  - local: '/artifacts/shared-starter/.gitlab-ci.yml'
-  - local: '/services/config-server/.gitlab-ci.yml'
+trigger-shared-starter-workflow:
+  trigger:
+    include:
+      - local: '/artifacts/shared-starter/.gitlab-ci.yml'
+    rules:
+      - if: "$CI_COMMIT_BRANCH == 'master'"
+        changes:
+          - artifacts/shared-starter/**/*
+          - infra/ci/**/*
+
+trigger-config-server-workflow:
+  trigger:
+    include:
+      - local: '/services/config-server/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/config-server/**/*
+        - infra/ci/**/*
 
 default:
   tags:

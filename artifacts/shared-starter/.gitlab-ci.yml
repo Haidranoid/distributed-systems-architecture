@@ -2,14 +2,6 @@ include:
   - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/test.yml'
   - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/publish.yml'
 
-workflow:
-  name: shared-starter-workflow
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - artifacts/shared-starter/**/*
-        - infra/ci/**/*
-
 stages:
   - test
   - publish
