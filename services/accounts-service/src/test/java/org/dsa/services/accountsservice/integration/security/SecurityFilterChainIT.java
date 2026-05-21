@@ -1,6 +1,6 @@
 package org.dsa.services.accountsservice.integration.security;
 
-import org.dsa.services.core.servicesstarter.testing.integration.SpringBootIntegrationTest;
+import org.dsa.core.sharedstarter.testing.integration.SpringBootIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;

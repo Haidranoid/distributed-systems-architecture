@@ -6,7 +6,7 @@ import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
 import org.dsa.services.accountsservice.mappers.AccountMapper;
 import org.dsa.services.accountsservice.mappers.impl.AccountMapperImpl;
-import org.dsa.services.core.servicesstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.services.accountsservice.common.entities.AccountEntity;
 import org.junit.jupiter.api.Test;
 

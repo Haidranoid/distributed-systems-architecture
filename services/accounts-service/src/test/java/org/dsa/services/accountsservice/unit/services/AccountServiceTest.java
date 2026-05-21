@@ -1,14 +1,14 @@
 package org.dsa.services.accountsservice.unit.services;
 
-import org.dsa.services.core.servicesstarter.common.exceptions.AccountNotFoundException;
-import org.dsa.services.core.servicesstarter.common.exceptions.UnauthorizedException;
+import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
+import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
 import org.dsa.services.accountsservice.mappers.impl.AccountMapperImpl;
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
-import org.dsa.services.core.servicesstarter.common.constants.Role;
-import org.dsa.services.core.servicesstarter.utils.SessionService;
+import org.dsa.core.sharedstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.utils.SessionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;

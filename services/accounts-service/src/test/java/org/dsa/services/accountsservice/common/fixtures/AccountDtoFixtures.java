@@ -1,7 +1,7 @@
 package org.dsa.services.accountsservice.common.fixtures;
 
 import org.dsa.services.accountsservice.common.dtos.*;
-import org.dsa.services.core.servicesstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.common.constants.Role;
 
 import java.util.ArrayList;
 import java.util.Collections;

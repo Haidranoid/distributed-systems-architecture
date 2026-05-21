@@ -4,7 +4,7 @@ import org.dsa.services.accountsservice.controllers.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.controllers.InternalAccountsController;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
-import org.dsa.services.core.servicesstarter.testing.annotations.WebSliceEnvironment;
+import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

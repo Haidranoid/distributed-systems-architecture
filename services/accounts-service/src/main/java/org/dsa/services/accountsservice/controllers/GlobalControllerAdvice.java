@@ -1,8 +1,8 @@
 package org.dsa.services.accountsservice.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.core.servicesstarter.common.errors.ApiError;
-import org.dsa.services.core.servicesstarter.common.exceptions.BaseException;
+import org.dsa.core.sharedstarter.common.errors.ApiError;
+import org.dsa.core.sharedstarter.common.exceptions.BaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

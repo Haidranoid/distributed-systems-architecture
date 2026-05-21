@@ -2,7 +2,7 @@ package org.dsa.services.accountsservice.integration.flows;
 
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.core.servicesstarter.testing.integration.SpringBootIntegrationTest;
+import org.dsa.core.sharedstarter.testing.integration.SpringBootIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

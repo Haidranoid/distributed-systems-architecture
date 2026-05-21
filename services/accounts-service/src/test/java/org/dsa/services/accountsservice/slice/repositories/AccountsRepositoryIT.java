@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.slice.repositories;
 import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
 
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
-import org.dsa.services.core.servicesstarter.testing.integration.DataJpaIntegrationTest;
+import org.dsa.core.sharedstarter.testing.integration.DataJpaIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,6 +1,6 @@
 package org.dsa.services.accountsservice.common.factories;
 
-import org.dsa.services.core.servicesstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.services.accountsservice.common.entities.AccountEntity;
 import net.datafaker.Faker;
 
