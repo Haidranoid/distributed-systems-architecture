@@ -1,6 +1,6 @@
 include:
-  - local: '/artifacts/shared-starter/.gitlab-ci.yml'
-  - local: '/services/config-server/.gitlab-ci.yml'
+  - local: 'artifacts/shared-starter/.gitlab-ci.yml'
+  - local: 'services/config-server/.gitlab-ci.yml'
 
 default:
   tags:
