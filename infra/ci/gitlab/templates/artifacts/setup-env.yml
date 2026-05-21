@@ -12,7 +12,8 @@
 
   before_script:
     - echo "Loads environment"
-    - . infra/env.sh
+    - cd infra
+    - . env.sh
 
     - echo "Installs aws-cli"
     - apk add --no-cache aws-cli
