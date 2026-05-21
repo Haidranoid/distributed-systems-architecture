@@ -1,6 +1,6 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
+    GRADLE_USER_HOME: .gradle
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
@@ -8,22 +8,15 @@
 
   cache:
     paths:
-      - "$CI_PROJECT_DIR/.gradle/wrapper"
-      - "$CI_PROJECT_DIR/.gradle/caches"
+      - .gradle/wrapper
+      - .gradle/caches
 
   before_script:
-    - echo "Loads environment"
     - cd infra
     - . env.sh
-
-    - echo "Installs aws-cli"
-    - apk add --no-cache aws-cli
 
     - echo "Authenticate aws credentials"
     - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
-
-    - echo "Validate aws credentials"
-    - aws configure list
 
     - cd ../
