@@ -4,9 +4,9 @@ import org.dsa.services.authenticationservice.controllers.AuthenticationControll
 import org.dsa.services.authenticationservice.controllers.GlobalControllerAdvice;
 import org.dsa.services.authenticationservice.common.fixtures.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
-import org.dsa.services.core.servicesstarter.common.constants.Role;
-import org.dsa.services.core.servicesstarter.common.exceptions.InvalidCredentialsException;
-import org.dsa.services.core.servicesstarter.testing.annotations.WebSliceEnvironment;
+import org.dsa.core.sharedstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
+import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

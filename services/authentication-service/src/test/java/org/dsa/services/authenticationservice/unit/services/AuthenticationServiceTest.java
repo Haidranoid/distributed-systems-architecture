@@ -7,9 +7,9 @@ import org.dsa.services.authenticationservice.mappers.impl.AuthenticationMapperI
 import org.dsa.services.authenticationservice.common.properties.Endpoints;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
 import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
-import org.dsa.services.core.servicesstarter.common.constants.Permission;
+import org.dsa.core.sharedstarter.common.constants.Permission;
 import org.dsa.services.authenticationservice.common.constants.TokenType;
-import org.dsa.services.core.servicesstarter.common.exceptions.InvalidCredentialsException;
+import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

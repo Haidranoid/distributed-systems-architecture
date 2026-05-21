@@ -4,7 +4,7 @@ import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
 import org.dsa.services.authenticationservice.common.dtos.AuthResponseDto;
 import org.dsa.services.authenticationservice.common.dtos.LoginDto;
 import org.dsa.services.authenticationservice.common.dtos.SignupDto;
-import org.dsa.services.core.servicesstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.services.authenticationservice.common.constants.TokenType;
 import org.dsa.services.authenticationservice.common.entities.TokenEntity;
 

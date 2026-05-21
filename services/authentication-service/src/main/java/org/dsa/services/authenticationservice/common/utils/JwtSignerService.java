@@ -1,6 +1,6 @@
 package org.dsa.services.authenticationservice.common.utils;
 
-import org.dsa.services.core.servicesstarter.common.properties.JwtProperties;
+import org.dsa.core.sharedstarter.common.properties.JwtProperties;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import io.jsonwebtoken.security.SignatureAlgorithm;

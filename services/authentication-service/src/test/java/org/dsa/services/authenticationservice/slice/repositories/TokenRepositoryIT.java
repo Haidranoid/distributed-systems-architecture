@@ -2,7 +2,7 @@ package org.dsa.services.authenticationservice.slice.repositories;
 
 import org.dsa.services.authenticationservice.common.fixtures.AuthenticationEntityFixtures;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
-import org.dsa.services.core.servicesstarter.testing.integration.DataJpaIntegrationTest;
+import org.dsa.core.sharedstarter.testing.integration.DataJpaIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

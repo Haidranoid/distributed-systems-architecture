@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.slice.contexts;
 
-import org.dsa.services.core.servicesstarter.autoconfig.SecurityAutoConfig;
-import org.dsa.services.core.servicesstarter.autoconfig.ServicesStarterAutoConfig;
+import org.dsa.core.sharedstarter.autoconfig.SecurityAutoConfig;
+import org.dsa.core.sharedstarter.autoconfig.ServicesStarterAutoConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
