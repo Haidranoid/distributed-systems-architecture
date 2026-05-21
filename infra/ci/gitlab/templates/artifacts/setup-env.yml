@@ -1,5 +1,6 @@
 .setup-gradle:
   variables:
+    GRADLE_USER_HOME: "$CI_PROJECT_DIR/.gradle"
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
@@ -7,8 +8,8 @@
 
   cache:
     paths:
-      - .gradle/wrapper
-      - .gradle/caches
+      - "$CI_PROJECT_DIR/.gradle/wrapper"
+      - "$CI_PROJECT_DIR/.gradle/caches"
 
   before_script:
     - echo "Loads environment"

@@ -9,10 +9,11 @@ test:
 
   script:
     - cd services/services-starter
+
     - chmod +x ./gradlew
+
     - ./gradlew test --build-cache --parallel
-    - echo "inside test script...."
-    - echo "$AWS_CODEARTIFACT_AUTH_TOKEN"
+
   artifacts:
     when: always
     paths:
