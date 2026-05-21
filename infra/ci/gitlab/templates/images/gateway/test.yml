@@ -3,12 +3,15 @@ include:
 
 gateway-test:
   stage: test
+  variables:
+    GRADLE_USER_HOME: "$GATEWAY_DIR/.gradle"
   extends:
     - .setup-gradle
     - .setup-credentials
     - .setup-image
 
   script:
+    - echo "GRADLE_USER_HOME => $GRADLE_USER_HOME"
     - cd $GATEWAY_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
@@ -16,7 +19,7 @@ gateway-test:
   artifacts:
     when: always
     paths:
-      - $GATEWAY_DIR/build/reports/tests/test
+      - "$GATEWAY_DIR/build/reports/tests/test"
     reports:
       junit:
-        - $GATEWAY_DIR/build/test-results/test/*.xml
+        - services/gateway/build/test-results/test/*.xml

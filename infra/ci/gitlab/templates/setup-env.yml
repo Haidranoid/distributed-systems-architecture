@@ -1,6 +1,5 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: /cache/gradle
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
