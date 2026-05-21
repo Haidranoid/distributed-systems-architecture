@@ -12,13 +12,13 @@
 
   before_script:
     - echo "Loads environment"
-    - sh ./infra/env.sh
+    - . infra/env.sh
 
     - echo "Installs aws-cli"
     - apk add --no-cache aws-cli
 
     - echo "Authenticate aws credentials"
-    - sh "$AWS_SCRIPTS_DIR/utils.sh"
+    - . "$AWS_SCRIPTS_DIR/utils.sh"
     - setup_aws_env v1
 
     - echo "Validate aws credentials"
