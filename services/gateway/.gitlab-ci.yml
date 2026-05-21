@@ -8,7 +8,7 @@ default:
 
 variables:
   SERVICE_NAME: gateway
-  SERVICE_DIR: /services/gateway
+  SERVICE_DIR: services/$SERVICE_NAME
   SERVICE_FULL_PATH_DIR: $CI_PROJECT_DIR/$SERVICE_DIR
 
   GRADLE_USER_HOME: $SERVICE_FULL_PATH_DIR/.gradle
