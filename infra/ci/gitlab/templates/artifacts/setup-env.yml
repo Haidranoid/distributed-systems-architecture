@@ -25,6 +25,4 @@
     - echo "Validate aws credentials"
     - aws configure list
 
-    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> .env
-    - echo "inside setup-env before_script...."
-    - echo "$AWS_CODEARTIFACT_AUTH_TOKEN"
+    - cd ../
