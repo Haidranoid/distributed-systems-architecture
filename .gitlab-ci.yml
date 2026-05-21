@@ -3,15 +3,15 @@ include:
     rules:
       - changes:
           paths:
-            - services/shared-starter/**/*
-            - infra/ci/**/*
+            - artifacts/shared-starter/**/*
+            #- infra/ci/**/*
 
   - local: 'services/config-server/.gitlab-ci.yml'
     rules:
       - changes:
           paths:
             - services/config-server/**/*
-            - infra/ci/**/*
+            #- infra/ci/**/*
 
 stages:
   - test
