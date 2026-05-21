@@ -6,17 +6,12 @@
       -Dorg.gradle.parallel=true
       -Dorg.gradle.caching=true
 
-  #cache:
-  #  paths:
-  #    - .gradle/wrapper
-  #    - .gradle/caches
-
   before_script:
-    - cd infra
+    - cd infra/scripts
     - . env.sh
 
     - echo "Authenticate aws credentials"
     - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
 
-    - cd ../
+    - cd ../../
