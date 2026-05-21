@@ -1,23 +1,6 @@
 include:
-  - local: 'artifacts/shared-starter/.gitlab-ci.yml'
-    rules:
-      - changes:
-          paths:
-            - artifacts/shared-starter/**/*
-            - infra/ci/**/*
-
-  - local: 'services/config-server/.gitlab-ci.yml'
-    rules:
-      - changes:
-          paths:
-            - services/config-server/**/*
-            - infra/ci/**/*
-
-stages:
-  - test
-  - publish
-  - publish-image
-  - deploy
+  - local: '/artifacts/shared-starter/.gitlab-ci.yml'
+  - local: '/services/config-server/.gitlab-ci.yml'
 
 default:
   tags:

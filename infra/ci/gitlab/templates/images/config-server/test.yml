@@ -1,6 +1,5 @@
 include:
   - local: '/infra/ci/gitlab/templates/setup-env.yml'
-  - local: '/infra/ci/gitlab/templates/stages-rules.yml'
 
 config-server-test:
   stage: test
