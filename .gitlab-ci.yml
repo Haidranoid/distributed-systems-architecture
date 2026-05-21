@@ -2,6 +2,11 @@ include:
   - local: '/artifacts/shared-starter/.gitlab-ci.yml'
   - local: '/services/config-server/.gitlab-ci.yml'
 
+stages:
+  - test
+  - publish
+  - deploy
+
 default:
   tags:
     - local

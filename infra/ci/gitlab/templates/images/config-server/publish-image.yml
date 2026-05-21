@@ -2,7 +2,7 @@ include:
   - local: '/infra/ci/gitlab/templates/setup-env.yml'
 
 config-server-publish-image:
-  stage: publish-image
+  stage: publish
   extends:
     - .setup-gradle
   needs:
