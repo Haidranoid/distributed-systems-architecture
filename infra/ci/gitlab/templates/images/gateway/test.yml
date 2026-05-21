@@ -1,0 +1,22 @@
+include:
+  - local: '/infra/ci/gitlab/templates/setup-env.yml'
+
+gateway-test:
+  stage: test
+  extends:
+    - .setup-gradle
+    - .setup-credentials
+    - .setup-image
+
+  script:
+    - cd $GATEWAY_DIR
+    - chmod +x ./gradlew
+    - ./gradlew test --build-cache --parallel
+
+  artifacts:
+    when: always
+    paths:
+      - $GATEWAY_DIR/build/reports/tests/test
+    reports:
+      junit:
+        - $GATEWAY_DIR/build/test-results/test/*.xml

@@ -1,0 +1,21 @@
+include:
+  - local: '/infra/ci/gitlab/templates/setup-env.yml'
+
+authentication-service-deploy:
+  stage: deploy
+  extends:
+    - .setup-gradle
+    - .setup-credentials
+    - .setup-image
+  needs:
+    - job: authentication-service-publish-image
+      artifacts: true
+  variables:
+    SERVICE_NAME: authentication-service
+
+  script:
+    - cd $K8S_DIR/overlays/dev-k8s/authentication-service
+
+    - kustomize edit set image $SERVICE_NAME=$IMAGE_ECR_TAG
+
+    - kubectl apply -k .

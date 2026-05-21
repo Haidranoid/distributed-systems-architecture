@@ -1,0 +1,34 @@
+include:
+  - local: '/infra/ci/gitlab/templates/setup-env.yml'
+
+accounts-service-publish-image:
+  stage: publish
+  extends:
+    - .setup-gradle
+    - .setup-credentials
+    - .setup-image
+  needs:
+    - job: accounts-service-test
+  variables:
+    SERVICE_NAME: accounts-service
+
+  script:
+    - export IMAGE_TAG=$ECR_TAG_PREFIX/$SERVICE_NAME
+    - export IMAGE_ECR_TAG=$AWS_ECR_REPOSITORY_URL/$IMAGE_TAG
+
+    - cd $ACCOUNTS_SERVICE_DIR
+
+    - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY_URL
+
+    - docker build -t $IMAGE_TAG .
+
+    - docker tag $IMAGE_TAG:latest $IMAGE_ECR_TAG:latest
+
+    - docker push $IMAGE_ECR_TAG:latest
+
+    - echo "IMAGE_ECR_TAG=$IMAGE_ECR_TAG" >> image.env
+
+  artifacts:
+    reports:
+      dotenv:
+        - $ACCOUNTS_SERVICE_DIR/image.env

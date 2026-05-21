@@ -1,0 +1,22 @@
+include:
+  - local: '/infra/ci/gitlab/templates/setup-env.yml'
+
+authentication-service-test:
+  stage: test
+  extends:
+    - .setup-gradle
+    - .setup-credentials
+    - .setup-image
+
+  script:
+    - cd $AUTHENTICATION_SERVICE_DIR
+    - chmod +x ./gradlew
+    - ./gradlew test --build-cache --parallel
+
+  artifacts:
+    when: always
+    paths:
+      - $AUTHENTICATION_SERVICE_DIR/build/reports/tests/test
+    reports:
+      junit:
+        - $AUTHENTICATION_SERVICE_DIR/build/test-results/test/*.xml
