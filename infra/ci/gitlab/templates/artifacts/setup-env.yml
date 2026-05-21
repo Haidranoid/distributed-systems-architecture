@@ -1,15 +1,15 @@
 .setup-gradle:
   variables:
-    GRADLE_USER_HOME: .gradle
+    GRADLE_USER_HOME: /cache/gradle
     GRADLE_OPTS: >-
       -Dorg.gradle.daemon=false
       -Dorg.gradle.parallel=true
       -Dorg.gradle.caching=true
 
-  cache:
-    paths:
-      - .gradle/wrapper
-      - .gradle/caches
+  #cache:
+  #  paths:
+  #    - .gradle/wrapper
+  #    - .gradle/caches
 
   before_script:
     - cd infra
