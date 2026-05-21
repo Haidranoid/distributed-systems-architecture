@@ -1,0 +1,11 @@
+include:
+  - local: '/infra/ci/gitlab/templates/images/config-server/test.yml'
+  - local: '/infra/ci/gitlab/templates/images/config-server/publish.yml'
+
+default:
+  tags:
+    - local
+
+stages:
+  - test
+  - publish
