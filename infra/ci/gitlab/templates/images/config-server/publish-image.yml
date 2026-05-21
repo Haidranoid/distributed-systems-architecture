@@ -6,7 +6,7 @@ publish-image:
   stage: publish-image
   extends:
     - .setup-gradle
-    - .stages-rules-config-server
+    #- .stages-rules-config-server
   needs:
     - job: test
   variables:

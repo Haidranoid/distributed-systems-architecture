@@ -6,7 +6,7 @@ deploy:
   stage: deploy
   extends:
     - .setup-gradle
-    - .stages-rules-config-server
+    #- .stages-rules-config-server
   needs:
     - job: publish-image
       artifacts: true

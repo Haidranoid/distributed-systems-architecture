@@ -6,7 +6,7 @@ publish:
   stage: publish
   extends:
     - .setup-gradle
-    - .stages-rules-shared-starter
+    #- .stages-rules-shared-starter
   needs:
     - job: test
       artifacts: true
