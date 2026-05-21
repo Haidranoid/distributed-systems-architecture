@@ -2,6 +2,13 @@ include:
   - local: '/artifacts/shared-starter/.gitlab-ci.yml'
   - local: '/services/config-server/.gitlab-ci.yml'
 
+workflow:
+  name: distributed-systems-architecture-workflow
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - infra/ci/**/*
+
 default:
   tags:
     - local
