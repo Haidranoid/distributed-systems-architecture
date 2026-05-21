@@ -2,15 +2,12 @@ include:
   - local: '/infra/ci/gitlab/templates/artifacts/setup-env.yml'
 
 build:
+  stage: build
+  image: amazoncorretto:21-alpine3.23-jdk
   extends:
     - .setup-gradle
-
-  stage: build
-
   needs:
     - test
-
-  image: amazoncorretto:21-alpine3.23-jdk
 
   script:
     - ./gradlew assemble -x test --build-cache --parallel
@@ -18,4 +15,4 @@ build:
   artifacts:
     when: on_success
     paths:
-      - "$CI_PROJECT_DIR/services/services-starter/build/libs/*.jar"
+      - build/libs/*.jar

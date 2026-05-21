@@ -9,3 +9,15 @@
     paths:
       - .gradle/wrapper
       - .gradle/caches
+
+  before_script:
+    - echo "Installing aws-cli..."
+    - apk add --no-cache aws-cli
+
+    - echo "Setting aws credentials..."
+    - source ./infra/env.sh
+    - source "$AWS_SCRIPTS_DIR/utils.sh"
+    - setup_aws_env v1
+
+    - echo "Validating AWS credentials..."
+    - aws configure list

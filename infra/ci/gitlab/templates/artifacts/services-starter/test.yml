@@ -1,36 +1,15 @@
-variables:
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
-
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
+include:
+  - local: '/infra/ci/gitlab/templates/artifacts/setup-env.yml'
 
 test:
   stage: test
   image: amazoncorretto:21-alpine3.23-jdk
+  extends:
+    - .setup-gradle
 
   script:
-    - echo "Installing aws-cli..."
-    - apk add --no-cache aws-cli
-
-    - echo "Setting aws credentials..."
-    - aws configure set region $AWS_DEFAULT_REGION
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-
-    - echo "Validating AWS credentials..."
-    - aws configure list
-
-    - export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain artifacts --query authorizationToken --output text)
-
     - cd services/services-starter
-
     - chmod +x ./gradlew
-
     - ./gradlew test --build-cache --parallel
 
   artifacts:
