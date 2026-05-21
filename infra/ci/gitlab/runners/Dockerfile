@@ -4,6 +4,7 @@ RUN apk add --no-cache \
     bash \
     aws-cli \
     docker-cli \
+    docker-cli-buildx \
     jq \
     curl \
     git

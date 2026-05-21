@@ -20,7 +20,7 @@ config-server-publish-image:
   script:
     - cd $CONFIG_SERVER_DIR
 
-    - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin "$AWS_ECR_REPOSITORY_URL"
+    - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY_URL
 
     - docker build -t $IMAGE_TAG .
 
