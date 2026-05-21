@@ -2,11 +2,11 @@ trigger-shared-starter-workflow:
   trigger:
     include:
       - local: '/artifacts/shared-starter/.gitlab-ci.yml'
-    rules:
-      - if: "$CI_COMMIT_BRANCH == 'master'"
-        changes:
-          - artifacts/shared-starter/**/*
-          - infra/ci/**/*
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - artifacts/shared-starter/**/*
+        - infra/ci/**/*
 
 trigger-config-server-workflow:
   trigger:
