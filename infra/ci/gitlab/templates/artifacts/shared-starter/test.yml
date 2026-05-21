@@ -5,7 +5,9 @@ shared-starter-test:
   stage: test
   extends:
     - .setup-gradle
-  image: haidranoid/gitlab-ci-java21:latest
+  image:
+    name: haidranoid/gitlab-ci-java21:latest
+    pull_policy: if-not-present
 
   script:
     - cd $SHARED_STARTER_ARTIFACT_DIR
