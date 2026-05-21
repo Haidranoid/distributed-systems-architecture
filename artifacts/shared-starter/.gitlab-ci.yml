@@ -8,6 +8,7 @@ workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - artifacts/shared-starter/**/*
+        - infra/ci/**/*
 
 stages:
   - test

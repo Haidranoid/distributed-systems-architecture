@@ -8,6 +8,7 @@ workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - services/config-server/**/*
+        - infra/ci/**/*
 
 stages:
   - test
