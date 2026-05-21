@@ -1,15 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-export INFRA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export INFRA_DIR="$(pwd)"
+export DSA_ROOT_DIR="$(cd "$INFRA_DIR/../" && pwd)"
+export DSA_SERVICES_DIR="$DSA_ROOT_DIR/services"
 
 export CI_DIR="$INFRA_DIR/ci"
 export DOCKER_COMPOSES_DIR="$INFRA_DIR/docker-composes"
 export K8S_DIR="$INFRA_DIR/k8s"
 export SCRIPTS_DIR="$INFRA_DIR/scripts"
 export AWS_SCRIPTS_DIR="$SCRIPTS_DIR/aws"
-
-export DSA_ROOT_DIR="$INFRA_DIR/../.."
-export DSA_SERVICES_DIR="$DSA_ROOT_DIR/services"
 
 export ACCOUNTS_SERVICE_DIR="$DSA_SERVICES_DIR/accounts-service"
 export AUTHENTICATION_SERVICE_DIR="$DSA_SERVICES_DIR/accounts-service"
