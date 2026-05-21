@@ -13,6 +13,6 @@ publish:
     pull_policy: if-not-present
 
   script:
-    - cd $SERVICES_STARTER_ARTIFACT_DIR
+    - cd $SHARED_STARTER_ARTIFACT_DIR
     - chmod +x ./gradlew
     - ./gradlew publish --build-cache --parallel

@@ -10,15 +10,15 @@ test:
     pull_policy: if-not-present
 
   script:
-    - cd $SERVICES_STARTER_ARTIFACT_DIR
+    - cd $SHARED_STARTER_ARTIFACT_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
 
   artifacts:
     when: always
     paths:
-      - $SERVICES_STARTER_ARTIFACT_DIR/build/libs/*.jar
-      - $SERVICES_STARTER_ARTIFACT_DIR/build/reports/tests/test
+      - $SHARED_STARTER_ARTIFACT_DIR/build/libs/*.jar
+      - $SHARED_STARTER_ARTIFACT_DIR/build/reports/tests/test
     reports:
       junit:
-        - $SERVICES_STARTER_ARTIFACT_DIR/build/test-results/test/*.xml
+        - $SHARED_STARTER_ARTIFACT_DIR/build/test-results/test/*.xml

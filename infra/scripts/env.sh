@@ -7,7 +7,7 @@ export DSA_ARTIFACTS_DIR="$DSA_ROOT_DIR/artifacts"
 export DSA_INFRA_DIR="$DSA_ROOT_DIR/infra"
 export DSA_SERVICES_DIR="$DSA_ROOT_DIR/services"
 
-export SERVICES_STARTER_ARTIFACT_DIR="$DSA_ARTIFACTS_DIR/services-starter"
+export SHARED_STARTER_ARTIFACT_DIR="$DSA_ARTIFACTS_DIR/shared-starter"
 
 export ACCOUNTS_SERVICE_DIR="$DSA_SERVICES_DIR/accounts-service"
 export AUTHENTICATION_SERVICE_DIR="$DSA_SERVICES_DIR/authentication-service"

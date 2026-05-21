@@ -1,6 +1,6 @@
 include:
-  - local: 'infra/ci/gitlab/templates/artifacts/services-starter/test.yml'
-  - local: 'infra/ci/gitlab/templates/artifacts/services-starter/publish.yml'
+  - local: 'infra/ci/gitlab/templates/artifacts/shared-starter/test.yml'
+  - local: 'infra/ci/gitlab/templates/artifacts/shared-starter/publish.yml'
 
 stages:
   - test
