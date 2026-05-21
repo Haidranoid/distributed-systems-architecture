@@ -18,7 +18,6 @@ java {
 
 jar {
     enabled = true
-
 }
 
 repositories {
