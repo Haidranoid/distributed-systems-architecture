@@ -5,7 +5,6 @@ include:
 stages:
   - test
   - publish
-  - deploy
 
 default:
   tags:
