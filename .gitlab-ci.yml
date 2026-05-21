@@ -1,4 +1,6 @@
 trigger-shared-starter-workflow:
+  tags:
+    - local
   trigger:
     include:
       - local: '/artifacts/shared-starter/.gitlab-ci.yml'
@@ -9,6 +11,8 @@ trigger-shared-starter-workflow:
         - infra/ci/**/*
 
 trigger-config-server-workflow:
+  tags:
+    - local
   trigger:
     include:
       - local: '/services/config-server/.gitlab-ci.yml'
@@ -17,10 +21,6 @@ trigger-config-server-workflow:
       changes:
         - services/config-server/**/*
         - infra/ci/**/*
-
-default:
-  tags:
-    - local
 
 variables:
   GIT_DEPTH: 0
