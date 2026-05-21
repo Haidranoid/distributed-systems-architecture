@@ -18,9 +18,5 @@ trigger-config-server-workflow:
         - services/config-server/**/*
         - infra/ci/**/*
 
-default: 
-  tags:
-    - local
-
 variables:
   GIT_DEPTH: 0
