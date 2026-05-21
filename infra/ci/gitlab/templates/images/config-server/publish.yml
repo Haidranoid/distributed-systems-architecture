@@ -9,9 +9,8 @@ config-server-publish-image:
     - job: config-server-test
   variables:
     SERVICE_NAME: config-server
-  image:
-    name: haidranoid/gitlab-ci-java21:latest
-    pull_policy: if-not-present
+  image: haidranoid/gitlab-ci-java21:latest
+
 
   script:
     - export IMAGE_TAG=$ECR_TAG_PREFIX/$SERVICE_NAME

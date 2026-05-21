@@ -7,7 +7,6 @@ shared-starter-test:
     - .setup-gradle
   image: haidranoid/gitlab-ci-java21:latest
 
-
   script:
     - cd $SHARED_STARTER_ARTIFACT_DIR
     - chmod +x ./gradlew
