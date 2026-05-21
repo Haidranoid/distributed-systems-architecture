@@ -31,4 +31,5 @@ config-server-publish-image:
 
   artifacts:
     reports:
-      dotenv: image.env
+      dotenv:
+        - $CONFIG_SERVER_DIR/image.env
