@@ -1,6 +1,6 @@
 include:
-  - local: '/infra/ci/gitlab/templates/images/config-server/test.yml'
-  - local: '/infra/ci/gitlab/templates/images/config-server/publish.yml'
+  - local: '/infra/ci/gitlab/templates/images/accounts-service/test.yml'
+  - local: '/infra/ci/gitlab/templates/images/accounts-service/publish.yml'
 
 default:
   tags:
