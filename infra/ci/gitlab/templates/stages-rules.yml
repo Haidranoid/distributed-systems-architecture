@@ -1,0 +1,11 @@
+.stages-rules-config-server:
+  rules:
+    - changes:
+        - services/config-server/**/*
+        - infra/ci/**/*
+
+.stages-rules-shared-starter:
+  rules:
+    - changes:
+        - services/shared-starter/**/*
+        - infra/ci/**/*

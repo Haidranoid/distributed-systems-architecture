@@ -1,14 +1,10 @@
 include:
-  - local: 'infra/ci/gitlab/templates/artifacts/shared-starter/test.yml'
-  - local: 'infra/ci/gitlab/templates/artifacts/shared-starter/publish.yml'
-
-stages:
-  - test
-  - publish
+  - local: '/artifacts/shared-starter/.gitlab-ci.yml'
+  - local: '/services/config-server/.gitlab-ci.yml'
 
 default:
   tags:
     - local
-  
+
 variables:
   GIT_DEPTH: 0

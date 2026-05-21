@@ -18,3 +18,5 @@ export CI_DIR="$DSA_INFRA_DIR/ci"
 export DOCKER_COMPOSES_DIR="$DSA_INFRA_DIR/docker-composes"
 export K8S_DIR="$DSA_INFRA_DIR/k8s"
 export AWS_SCRIPTS_DIR="$DSA_SCRIPTS_DIR/aws"
+
+export ECR_TAG_PREFIX="dsa"
