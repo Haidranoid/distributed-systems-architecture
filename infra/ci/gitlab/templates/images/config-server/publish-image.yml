@@ -2,13 +2,12 @@ include:
   - local: '/infra/ci/gitlab/templates/setup-env.yml'
   - local: '/infra/ci/gitlab/templates/stages-rules.yml'
 
-publish-image:
+config-server-publish-image:
   stage: publish-image
   extends:
     - .setup-gradle
-    #- .stages-rules-config-server
   needs:
-    - job: test
+    - job: config-server-test
   variables:
     SERVICE_NAME: config-server
     IMAGE_TAG: $ECR_TAG_PREFIX/$SERVICE_NAME

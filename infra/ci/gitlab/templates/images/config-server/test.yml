@@ -2,11 +2,10 @@ include:
   - local: '/infra/ci/gitlab/templates/setup-env.yml'
   - local: '/infra/ci/gitlab/templates/stages-rules.yml'
 
-test:
+config-server-test:
   stage: test
   extends:
     - .setup-gradle
-    #- .stages-rules-config-server
   image:
     name: haidranoid/gitlab-ci-java21:latest
     pull_policy: if-not-present

@@ -2,13 +2,12 @@ include:
   - local: '/infra/ci/gitlab/templates/setup-env.yml'
   - local: '/infra/ci/gitlab/templates/stages-rules.yml'
 
-publish:
+shared-starter-publish:
   stage: publish
   extends:
     - .setup-gradle
-    #- .stages-rules-shared-starter
   needs:
-    - job: test
+    - job: shared-starter-test
       artifacts: true
   image:
     name: haidranoid/gitlab-ci-java21:latest
