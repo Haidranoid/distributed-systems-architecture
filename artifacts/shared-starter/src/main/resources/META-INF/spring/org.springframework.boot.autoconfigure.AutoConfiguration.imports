@@ -1,0 +1,2 @@
+org.dsa.core.sharedstarter.autoconfig.SecurityAutoConfig
+org.dsa.core.sharedstarter.autoconfig.ServicesStarterAutoConfig
