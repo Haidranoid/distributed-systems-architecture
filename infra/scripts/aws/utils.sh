@@ -2,7 +2,7 @@
 
 set -eu
 
-. ../../env.sh
+#. ../../env.sh
 
 is_logged() {
   aws sts get-caller-identity > /dev/null 2>&1
