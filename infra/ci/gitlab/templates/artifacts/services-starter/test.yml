@@ -17,6 +17,7 @@ test:
   artifacts:
     when: always
     paths:
+      - services/services-starter/build/libs/*.jar
       - services/services-starter/build/reports/tests/test
     reports:
       junit:

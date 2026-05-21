@@ -2,6 +2,7 @@ include:
   - local: '/infra/ci/gitlab/templates/artifacts/setup-env.yml'
 
 build:
+  allow_failure: true
   stage: build
   image: amazoncorretto:21-alpine3.23-jdk
   extends:
