@@ -4,14 +4,11 @@ include:
 config-server-deploy:
   stage: deploy
   extends:
-    - .setup-gradle
     - .setup-credentials
     - .setup-image
   needs:
     - job: config-server-publish-image
       artifacts: true
-  variables:
-    SERVICE_NAME: config-server
 
   script:
     - cd $K8S_DIR/overlays/dev-k8s/config-server

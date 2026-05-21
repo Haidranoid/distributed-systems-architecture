@@ -4,7 +4,6 @@ include:
 config-server-test:
   stage: test
   extends:
-    - .setup-gradle
     - .setup-credentials
     - .setup-image
 
@@ -16,7 +15,7 @@ config-server-test:
   artifacts:
     when: always
     paths:
-      - $CONFIG_SERVER_DIR/build/reports/tests/test
+      - $SERVICE_FULL_PATH_DIR/build/reports/tests/test
     reports:
       junit:
-        - $CONFIG_SERVER_DIR/build/test-results/test/*.xml
+        - $SERVICE_FULL_PATH_DIR/build/test-results/test/*.xml

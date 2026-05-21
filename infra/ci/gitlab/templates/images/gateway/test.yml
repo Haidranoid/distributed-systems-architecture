@@ -4,7 +4,6 @@ include:
 gateway-test:
   stage: test
   extends:
-    - .setup-gradle
     - .setup-credentials
     - .setup-image
 

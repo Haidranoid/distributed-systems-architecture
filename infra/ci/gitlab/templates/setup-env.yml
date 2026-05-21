@@ -1,10 +1,3 @@
-.setup-gradle:
-  variables:
-    GRADLE_OPTS: >-
-      -Dorg.gradle.daemon=false
-      -Dorg.gradle.parallel=true
-      -Dorg.gradle.caching=true
-
 .setup-credentials:
   before_script:
     - cd infra/scripts
@@ -15,6 +8,15 @@
     - setup_aws_env v1
 
     - cd ../../
+
+  after_script:
+    - echo "AWS_ECR_REPOSITORY_URL=$AWS_ECR_REPOSITORY_URL" >> aws.env
+    - echo "AWS_ECR_AUTH_PASSWORD=$AWS_ECR_AUTH_PASSWORD" >> aws.env
+    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> aws.env
+
+  artifacts:
+    reports:
+      dotenv: $SERVICE_FULL_PATH_DIR/aws.env
 
 .setup-image:
   image:

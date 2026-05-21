@@ -12,6 +12,10 @@ variables:
   SERVICE_FULL_PATH_DIR: $CI_PROJECT_DIR/$SERVICE_DIR
 
   GRADLE_USER_HOME: $SERVICE_FULL_PATH_DIR/.gradle
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=true
+    -Dorg.gradle.caching=true
 
 stages:
   - test

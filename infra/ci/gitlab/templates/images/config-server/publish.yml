@@ -4,13 +4,10 @@ include:
 config-server-publish-image:
   stage: publish
   extends:
-    - .setup-gradle
     - .setup-credentials
     - .setup-image
   needs:
     - job: config-server-test
-  variables:
-    SERVICE_NAME: config-server
 
   script:
     - export IMAGE_TAG=$ECR_TAG_PREFIX/$SERVICE_NAME
@@ -20,7 +17,7 @@ config-server-publish-image:
 
     - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY_URL
 
-    - docker build -t $IMAGE_TAG .
+    - docker build --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN -t $IMAGE_TAG .
 
     - docker tag $IMAGE_TAG:latest $IMAGE_ECR_TAG:latest
 
@@ -30,5 +27,4 @@ config-server-publish-image:
 
   artifacts:
     reports:
-      dotenv:
-        - $CONFIG_SERVER_DIR/image.env
+      dotenv: $SERVICE_FULL_PATH_DIR/image.env

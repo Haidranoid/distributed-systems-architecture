@@ -4,11 +4,11 @@ include:
 gateway-deploy:
   stage: deploy
   extends:
-    - .setup-gradle
-    - .setup-credentials
     - .setup-image
   needs:
     - job: gateway-publish-image
+      artifacts: true
+    - job: gateway-test
       artifacts: true
 
   script:
