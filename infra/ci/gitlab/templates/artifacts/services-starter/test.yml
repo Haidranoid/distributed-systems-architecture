@@ -15,9 +15,6 @@ test:
     - echo "$AWS_CODEARTIFACT_AUTH_TOKEN"
   artifacts:
     when: always
-    artifacts:
-      reports:
-        dotenv: .env
     paths:
       - services/services-starter/build/reports/tests/test
     reports:
