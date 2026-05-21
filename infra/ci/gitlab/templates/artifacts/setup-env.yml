@@ -18,7 +18,7 @@
     - apk add --no-cache aws-cli
 
     - echo "Authenticate aws credentials"
-    - . "$AWS_SCRIPTS_DIR/utils.sh"
+    - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
 
     - echo "Validate aws credentials"
@@ -27,7 +27,3 @@
     - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> .env
     - echo "inside setup-env before_script...."
     - echo "$AWS_CODEARTIFACT_AUTH_TOKEN"
-
-  artifacts:
-    reports:
-      dotenv: .env

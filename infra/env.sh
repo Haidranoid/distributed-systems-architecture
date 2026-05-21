@@ -1,7 +1,8 @@
 #!/bin/sh
 
 export INFRA_DIR="$(pwd)"
-export DSA_ROOT_DIR="$(cd "$INFRA_DIR/../" && pwd)"
+
+export DSA_ROOT_DIR="$(cd "$INFRA_DIR/.." && pwd)"
 export DSA_SERVICES_DIR="$DSA_ROOT_DIR/services"
 
 export CI_DIR="$INFRA_DIR/ci"
