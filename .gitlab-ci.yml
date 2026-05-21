@@ -18,5 +18,35 @@ trigger-config-server-workflow:
         - services/config-server/**/*
         - infra/ci/**/*
 
+trigger-accounts-service-workflow:
+  trigger:
+    include:
+      - local: '/services/accounts-service/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/accounts-service/**/*
+        - infra/ci/**/*
+
+trigger-authentication-service-workflow:
+  trigger:
+    include:
+      - local: '/services/authentication-service/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/authentication-service/**/*
+        - infra/ci/**/*
+
+trigger-gateway-workflow:
+  trigger:
+    include:
+      - local: '/services/gateway/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/gateway/**/*
+        - infra/ci/**/*
+
 variables:
   GIT_DEPTH: 0
