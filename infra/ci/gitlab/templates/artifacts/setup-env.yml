@@ -18,7 +18,7 @@
     - apk add --no-cache aws-cli
 
     - echo "Authenticate aws credentials"
-    - source "$AWS_SCRIPTS_DIR/utils.sh"
+    - source $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
 
     - echo "Validate aws credentials"
