@@ -9,21 +9,6 @@ gateway-test:
     - .setup-image
 
   script:
-    - echo "GRADLE_USER_HOME => $GRADLE_USER_HOME"
-    - echo $GRADLE_USER_HOME
-
-    - echo "SERVICE_NAME => $SERVICE_NAME"
-    - echo $SERVICE_NAME
-
-    - echo "SERVICE_DIR => $SERVICE_DIR"
-    - echo $SERVICE_DIR
-
-    - echo "SERVICE_DIR_TEST => $SERVICE_DIR_TEST"
-    - echo $SERVICE_DIR_TEST
-
-    - echo "SERVICE_DIR_TEST_2 => $SERVICE_DIR_TEST_2"
-    - echo $SERVICE_DIR_TEST_2
-
     - cd $GATEWAY_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
@@ -31,7 +16,7 @@ gateway-test:
   artifacts:
     when: always
     paths:
-      - services/gateway/build/reports/tests/test
+      - $SERVICE_FULL_PATH_DIR/build/reports/tests/test
     reports:
       junit:
-        - services/gateway/build/test-results/test/*.xml
+        - $SERVICE_FULL_PATH_DIR/build/test-results/test/*.xml

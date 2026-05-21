@@ -9,8 +9,6 @@ gateway-publish-image:
     - .setup-image
   needs:
     - job: gateway-test
-  variables:
-    SERVICE_NAME: gateway
 
   script:
     - export IMAGE_TAG=$ECR_TAG_PREFIX/$SERVICE_NAME
@@ -30,5 +28,4 @@ gateway-publish-image:
 
   artifacts:
     reports:
-      dotenv:
-        - $GATEWAY_DIR/image.env
+      dotenv: $SERVICE_FULL_PATH_DIR/image.env

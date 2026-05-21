@@ -10,8 +10,6 @@ gateway-deploy:
   needs:
     - job: gateway-publish-image
       artifacts: true
-  variables:
-    SERVICE_NAME: gateway
 
   script:
     - cd $K8S_DIR/overlays/dev-k8s/gateway
