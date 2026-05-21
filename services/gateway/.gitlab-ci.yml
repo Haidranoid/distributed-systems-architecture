@@ -6,6 +6,11 @@ default:
   tags:
     - local
 
+variables:
+  SERVICE_NAME: "gateway"
+  SERVICE_DIR: "/services/gateway"
+  GRADLE_USER_HOME: "/services/gateway/.gradle"
+
 stages:
   - test
   - publish

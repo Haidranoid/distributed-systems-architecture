@@ -3,14 +3,21 @@ include:
 
 gateway-test:
   stage: test
-  variables:
-    GRADLE_USER_HOME: "$CI_PROJECT_DIR/services/gateway/.gradle"
   extends:
     - .setup-gradle
     - .setup-credentials
     - .setup-image
 
   script:
+    - echo "GRADLE_USER_HOME => $GRADLE_USER_HOME"
+    - echo $GRADLE_USER_HOME
+
+    - echo "SERVICE_NAME => $SERVICE_NAME"
+    - echo $SERVICE_NAME
+
+    - echo "SERVICE_DIR => $SERVICE_DIR"
+    - echo $SERVICE_DIR
+
     - cd $GATEWAY_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
