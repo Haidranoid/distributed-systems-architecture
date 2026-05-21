@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source ../../env.sh
+
+is_logged() {
+  aws sts get-caller-identity > /dev/null 2>&1
+}
+
+validate_aws_version() {
+  local aws_version="${1:-}"
+
+  [[ "$aws_version" == "v1" || "$aws_version" == "v2" ]]
+}
+
+aws_login() {
+  local aws_version="${1:-}"
+
+  if [[ "$aws_version" == "v2" ]]; then
+    aws login
+  elif [[ "$aws_version" == "v1" ]]; then
+    aws configure set region "$AWS_DEFAULT_REGION"
+    aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+    aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+  else
+    echo "ERROR: invalid aws version" >&2
+    return 1
+  fi
+}
+
+load_env_vars() {
+  export AWS_ECR_REPOSITORY_URL="314812911342.dkr.ecr.us-east-1.amazonaws.com"
+  export AWS_ECR_AUTH_PASSWORD="$(
+    aws ecr get-login-password --output text
+  )"
+  export AWS_CODEARTIFACT_AUTH_TOKEN="$(
+    aws codeartifact get-authorization-token \
+      --domain artifacts \
+      --query authorizationToken \
+      --output text
+  )"
+}
+
+setup_aws_env() {
+  local aws_version="${1:-}"
+
+  if ! validate_aws_version "$aws_version"; then
+    echo "ERROR: unsupported aws version: $aws_version" >&2
+    return 1
+  fi
+
+  if ! is_logged; then
+    aws_login "$aws_version" || return 1
+  fi
+
+  load_env_vars
+}
