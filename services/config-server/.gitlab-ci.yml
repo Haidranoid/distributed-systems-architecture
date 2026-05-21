@@ -3,11 +3,11 @@ include:
   - local: '/infra/ci/gitlab/templates/images/config-server/publish-image.yml'
 
 workflow:
-  name: shared-starter-workflow
+  name: config-server-workflow
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - artifacts/shared-starter/**/*
+        - services/config-server/**/*
 
 stages:
   - test
