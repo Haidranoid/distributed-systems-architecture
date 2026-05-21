@@ -3,7 +3,7 @@ package org.dsa.services.gateway.config;
 import lombok.RequiredArgsConstructor;
 import org.dsa.services.gateway.handlers.CustomAccessDeniedHandler;
 import org.dsa.services.gateway.handlers.CustomAuthenticationEntryPoint;
-import org.dsa.services.core.servicesstarter.utils.JwtAuthenticationConverter;
+import org.dsa.core.sharedstarter.utils.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
