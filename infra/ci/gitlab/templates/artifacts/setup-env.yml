@@ -12,14 +12,19 @@
 
   before_script:
     - echo "Loads environment"
-    - source ./infra/env.sh
+    - sh ./infra/env.sh
 
     - echo "Installs aws-cli"
     - apk add --no-cache aws-cli
 
     - echo "Authenticate aws credentials"
-    - source $AWS_SCRIPTS_DIR/utils.sh
+    - sh "$AWS_SCRIPTS_DIR/utils.sh"
     - setup_aws_env v1
 
     - echo "Validate aws credentials"
     - aws configure list
+
+    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> .env
+  artifacts:
+    reports:
+      dotenv: .env
