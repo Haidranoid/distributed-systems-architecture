@@ -9,6 +9,8 @@ default:
 variables:
   SERVICE_NAME: "gateway"
   SERVICE_DIR: "/services/gateway"
+  SERVICE_DIR_TEST: "$SERVICE_DIR/$SERVICE_NAME"
+  SERVICE_DIR_TEST_2: $SERVICE_DIR/$SERVICE_NAME
   GRADLE_USER_HOME: "/services/gateway/.gradle"
 
 stages:

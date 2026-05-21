@@ -18,6 +18,12 @@ gateway-test:
     - echo "SERVICE_DIR => $SERVICE_DIR"
     - echo $SERVICE_DIR
 
+    - echo "SERVICE_DIR_TEST => $SERVICE_DIR_TEST"
+    - echo $SERVICE_DIR_TEST
+
+    - echo "SERVICE_DIR_TEST_2 => $SERVICE_DIR_TEST_2"
+    - echo $SERVICE_DIR_TEST_2
+
     - cd $GATEWAY_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
