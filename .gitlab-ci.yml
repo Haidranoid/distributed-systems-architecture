@@ -4,14 +4,14 @@ include:
       - changes:
           paths:
             - artifacts/shared-starter/**/*
-            #- infra/ci/**/*
+            - infra/ci/**/*
 
   - local: 'services/config-server/.gitlab-ci.yml'
     rules:
       - changes:
           paths:
             - services/config-server/**/*
-            #- infra/ci/**/*
+            - infra/ci/**/*
 
 stages:
   - test
