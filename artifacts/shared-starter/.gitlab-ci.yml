@@ -12,5 +12,5 @@ default:
     - local
 
 variables:
-  PROJECT_NAME: gateway
-  PROJECT_DIR: services
+  PROJECT_NAME: shared-starter
+  PROJECT_DIR: artifacts/$PROJECT_NAME
