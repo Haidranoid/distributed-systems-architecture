@@ -13,4 +13,4 @@ default:
 
 variables:
   PROJECT_NAME: config-server
-  PROJECT_DIR: services
+  PROJECT_DIR: services/$PROJECT_NAME
