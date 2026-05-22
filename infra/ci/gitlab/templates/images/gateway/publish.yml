@@ -23,7 +23,7 @@ gateway-publish-image:
 
     - docker push $IMAGE_ECR_TAG:latest
 
-    - echo "IMAGE_ECR_TAG=$IMAGE_ECR_TAG" >> image.env
+    - echo "IMAGE_ECR_TAG=$IMAGE_ECR_TAG" >> $PROJECT_RELATIVE_PATH_DIR/image.env
 
   artifacts:
     reports:

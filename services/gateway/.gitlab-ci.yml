@@ -14,4 +14,4 @@ default:
 
 variables:
   PROJECT_NAME: gateway
-  PROJECT_DIR: services
+  PROJECT_DIR: services/$PROJECT_NAME
