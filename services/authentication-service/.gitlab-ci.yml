@@ -1,22 +1,16 @@
 include:
+  - local: '/infra/ci/gitlab/templates/before-script.yml'
   - local: '/infra/ci/gitlab/templates/images/authentication-service/test.yml'
   - local: '/infra/ci/gitlab/templates/images/authentication-service/publish.yml'
+
+stages:
+  - test
+  - publish
 
 default:
   tags:
     - local
 
 variables:
-  SERVICE_NAME: authentication-service
-  SERVICE_DIR: services/$SERVICE_NAME
-  SERVICE_RELATIVE_PATH_DIR: /$SERVICE_DIR/$SERVICE_DIR
-
-  GRADLE_USER_HOME: $SERVICE_RELATIVE_PATH_DIR/.gradle
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
-
-stages:
-  - test
-  - publish
+  PROJECT_NAME: authentication-service
+  PROJECT_DIR: services

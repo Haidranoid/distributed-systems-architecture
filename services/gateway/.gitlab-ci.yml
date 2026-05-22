@@ -12,11 +12,5 @@ default:
     - local
 
 variables:
-  SERVICE_NAME: gateway
-  SERVICE_RELATIVE_PATH_DIR: services/$SERVICE_NAME
-
-  GRADLE_USER_HOME: /cache/gradle/$SERVICE_NAME
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
+  PROJECT_NAME: gateway
+  PROJECT_DIR: services

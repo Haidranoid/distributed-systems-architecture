@@ -27,4 +27,4 @@ accounts-service-publish-image:
 
   artifacts:
     reports:
-      dotenv: $SERVICE_RELATIVE_PATH_DIR/image.env
+      dotenv: $PROJECT_RELATIVE_PATH_DIR/image.env

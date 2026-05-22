@@ -1,22 +1,16 @@
 include:
+  - local: '/infra/ci/gitlab/templates/before-script.yml'
   - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/test.yml'
   - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/publish.yml'
+
+stages:
+  - test
+  - publish
 
 default:
   tags:
     - local
 
 variables:
-  ARTIFACT_NAME: shared-starter
-  ARTIFACT_DIR: artifacts/$ARTIFACT_NAME
-
-  ARTIFACT_RELATIVE_PATH_DIR: $CI_PROJECT_DIR/$ARTIFACT_DIR
-  GRADLE_USER_HOME: $ARTIFACT_RELATIVE_PATH_DIR/.gradle
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
-
-stages:
-  - test
-  - publish
+  PROJECT_NAME: gateway
+  PROJECT_DIR: services
