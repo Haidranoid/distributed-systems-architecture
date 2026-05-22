@@ -1,63 +1,66 @@
+# syntax=docker/dockerfile:1.7
+
 # -------- Stage 1: Dependencies --------
 FROM amazoncorretto:21-alpine3.23-jdk AS dependencies
 
-# Accept build-time args and pass them to env vars
+# Install required tools
+RUN apk add --no-cache bash curl unzip
+
+# Accept build-time args
 ARG CODEARTIFACT_AUTH_TOKEN
 ENV CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN
 
-# Create working directory
 WORKDIR /app
 
-# Copy Gradle wrapper and build config
+# Copy ONLY files affecting dependency resolution
 COPY gradlew .
 COPY gradle ./gradle
-COPY build.gradle settings.gradle ./
+COPY build.gradle .
+COPY settings.gradle .
 
-# Make wrapper executable
 RUN chmod +x gradlew
 
-# Pre-download/cache dependencies
-RUN ./gradlew assemble \
-    -x test \
-    --no-daemon || true
-
+# Cache Gradle dependencies
+RUN --mount=type=cache,target=/root/.gradle \
+    ./gradlew dependencies \
+      --no-daemon
 
 # -------- Stage 2: Build --------
 FROM amazoncorretto:21-alpine3.23-jdk AS build
 
-# Accept build-time args and pass them to env vars
+RUN apk add --no-cache bash curl unzip
+
 ARG CODEARTIFACT_AUTH_TOKEN
 ENV CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN
 
 WORKDIR /app
 
-# Reuse cached Gradle artifacts/wrapper
-COPY --from=dependencies /root/.gradle /root/.gradle
-COPY --from=dependencies /app /app
+# Reuse wrapper/config
+COPY gradlew .
+COPY gradle ./gradle
+COPY build.gradle .
+COPY settings.gradle .
 
-# Copy source code
+RUN chmod +x gradlew
+
+# Copy source LAST
 COPY src ./src
 
-# Build application
-RUN ./gradlew bootJar \
-    -x test \
-    --no-daemon
-
+# Build application using cached Gradle home
+RUN --mount=type=cache,target=/root/.gradle \
+    ./gradlew bootJar \
+      -x test \
+      --no-daemon
 
 # -------- Stage 3: Runtime --------
 FROM eclipse-temurin:21-jre-alpine-3.23
 
-# Create working directory
 WORKDIR /app
 
-# Runtime profile
 ENV SPRING_PROFILES_ACTIVE=dev-docker
 
-# Copy generated jar
 COPY --from=build /app/build/libs/*.jar app.jar
 
-# Expose application port
 EXPOSE 8222
 
-# Run application
 ENTRYPOINT ["java", "-jar", "app.jar"]
