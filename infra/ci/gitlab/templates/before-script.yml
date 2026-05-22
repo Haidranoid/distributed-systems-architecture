@@ -1,5 +1,5 @@
 variables:
-  PROJECT_RELATIVE_PATH_DIR: $PROJECT_DIR/$PROJECT_NAME
+  PROJECT_RELATIVE_PATH_DIR: /$PROJECT_DIR/$PROJECT_NAME
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
@@ -23,4 +23,4 @@ default:
 
   artifacts:
     reports:
-      dotenv: aws.env
+      dotenv: $PROJECT_RELATIVE_PATH_DIR/aws.env
