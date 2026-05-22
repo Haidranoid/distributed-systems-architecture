@@ -5,7 +5,6 @@ plugins {
     id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
     id 'jacoco'
-    id 'com.gorylenko.gradle-git-properties' version '2.5.7'
 }
 
 group = 'org.dsa.services'
@@ -24,10 +23,6 @@ jar {
 
 bootJar {
     archiveFileName = "${project.name}.jar"
-}
-
-springBoot {
-    buildInfo()
 }
 
 repositories {

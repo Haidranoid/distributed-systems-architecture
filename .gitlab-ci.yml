@@ -6,6 +6,7 @@ trigger-shared-starter-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - artifacts/shared-starter/**/*
+        - infra/ci/gitlab/templates/artifacts/shared-starter/**/*
 
 trigger-config-server-workflow:
   trigger:
@@ -15,6 +16,7 @@ trigger-config-server-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - services/config-server/**/*
+        - infra/ci/gitlab/templates/images/config-server/**/*
 
 trigger-accounts-service-workflow:
   trigger:
@@ -24,6 +26,7 @@ trigger-accounts-service-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - services/accounts-service/**/*
+        - infra/ci/gitlab/templates/images/accounts-service/**/*
 
 trigger-authentication-service-workflow:
   trigger:
@@ -33,6 +36,7 @@ trigger-authentication-service-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - services/authentication-service/**/*
+        - infra/ci/gitlab/templates/images/authentication-service/**/*
 
 trigger-gateway-workflow:
   trigger:
@@ -42,6 +46,7 @@ trigger-gateway-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - services/gateway/**/*
+        - infra/ci/gitlab/templates/images/gateway/**/*
 
 variables:
   GIT_DEPTH: 0
