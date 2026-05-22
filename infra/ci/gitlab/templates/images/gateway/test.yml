@@ -15,7 +15,7 @@ gateway-test:
   artifacts:
     when: always
     paths:
-      - $SERVICE_FULL_PATH_DIR/build/reports/tests/test
+      - SERVICE_RELATIVE_PATH_DIR/build/reports/tests/test
     reports:
       junit:
-        - $SERVICE_FULL_PATH_DIR/build/test-results/test/*.xml
+        - SERVICE_RELATIVE_PATH_DIR/build/test-results/test/*.xml
