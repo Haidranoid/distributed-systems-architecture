@@ -15,12 +15,12 @@ default:
     - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
 
-    - echo "AWS_ECR_REPOSITORY_URL=$AWS_ECR_REPOSITORY_URL" >> /$PROJECT_DIR/aws.env
-    - echo "AWS_ECR_AUTH_PASSWORD=$AWS_ECR_AUTH_PASSWORD" >> /$PROJECT_DIR/aws.env
-    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> /$PROJECT_DIR/aws.env
+    - echo "AWS_ECR_REPOSITORY_URL=$AWS_ECR_REPOSITORY_URL" >> aws.env
+    - echo "AWS_ECR_AUTH_PASSWORD=$AWS_ECR_AUTH_PASSWORD" >> aws.env
+    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> aws.env
 
     - cd ../../
 
   artifacts:
     reports:
-      dotenv: /$PROJECT_DIR/aws.env
+      dotenv: $PROJECT_RELATIVE_PATH_DIR/aws.env
