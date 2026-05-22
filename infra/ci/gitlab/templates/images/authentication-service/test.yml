@@ -3,10 +3,6 @@ include:
 
 authentication-service-test:
   stage: test
-  extends:
-    - .setup-credentials
-    - .setup-image
-
   script:
     - cd $AUTHENTICATION_SERVICE_DIR
     - chmod +x ./gradlew

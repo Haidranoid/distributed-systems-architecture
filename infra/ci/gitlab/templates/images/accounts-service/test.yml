@@ -3,10 +3,6 @@ include:
 
 accounts-service-test:
   stage: test
-  extends:
-    - .setup-credentials
-    - .setup-image
-
   script:
     - cd $ACCOUNTS_SERVICE_DIR
     - chmod +x ./gradlew

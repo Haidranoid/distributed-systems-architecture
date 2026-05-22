@@ -3,9 +3,6 @@ include:
 
 shared-starter-publish-artifact:
   stage: publish
-  extends:
-    - .setup-credentials
-    - .setup-image
   needs:
     - job: shared-starter-test
       artifacts: true

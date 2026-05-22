@@ -3,27 +3,22 @@ include:
 
 config-server-publish-image:
   stage: publish
-  extends:
-    - .setup-credentials
-    - .setup-image
   needs:
     - job: config-server-test
+      artifacts: true
 
   script:
-    - export IMAGE_TAG=$ECR_TAG_PREFIX/$PROJECT_NAME
-    - export IMAGE_ECR_TAG=$AWS_ECR_REPOSITORY_URL/$IMAGE_TAG
-
     - cd $CONFIG_SERVER_DIR
 
     - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REPOSITORY_URL
 
-    - docker build --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN -t $IMAGE_TAG .
+    - docker build --build-arg CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN -t $PROJECT_IMAGE_TAG .
 
-    - docker tag $IMAGE_TAG:latest $IMAGE_ECR_TAG:latest
+    - docker tag $PROJECT_IMAGE_TAG:latest $PROJECT_IMAGE_ECR_TAG:latest
 
-    - docker push $IMAGE_ECR_TAG:latest
+    - docker push $PROJECT_IMAGE_ECR_TAG:latest
 
-    - echo "IMAGE_ECR_TAG=$IMAGE_ECR_TAG" >> image.env
+    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> image.env
 
   artifacts:
     reports:

@@ -3,10 +3,6 @@ include:
 
 config-server-test:
   stage: test
-  extends:
-    - .setup-credentials
-    - .setup-image
-
   script:
     - cd $CONFIG_SERVER_DIR
     - chmod +x ./gradlew

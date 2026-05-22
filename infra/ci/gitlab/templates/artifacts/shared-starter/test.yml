@@ -3,10 +3,6 @@ include:
 
 shared-starter-test:
   stage: test
-  extends:
-    - .setup-credentials
-    - .setup-image
-
   script:
     - cd $SHARED_STARTER_ARTIFACT_DIR
     - chmod +x ./gradlew
@@ -15,8 +11,8 @@ shared-starter-test:
   artifacts:
     when: always
     paths:
-      - $ARTIFACT_RELATIVE_PATH_DIR/build/libs/*.jar
-      - $ARTIFACT_RELATIVE_PATH_DIR/build/reports/tests/test
+      - $PROJECT_RELATIVE_PATH_DIR/build/libs/*.jar
+      - $PROJECT_RELATIVE_PATH_DIR/build/reports/tests/test
     reports:
       junit:
-        - $ARTIFACT_RELATIVE_PATH_DIR/build/test-results/test/*.xml
+        - $PROJECT_RELATIVE_PATH_DIR/build/test-results/test/*.xml
