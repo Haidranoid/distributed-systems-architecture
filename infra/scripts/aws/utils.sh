@@ -31,6 +31,7 @@ aws_login() {
 
 load_env_vars() {
   export AWS_ECR_REPOSITORY_URL="314812911342.dkr.ecr.us-east-1.amazonaws.com"
+  export PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REPOSITORY_URL/$PROJECT_IMAGE_TAG"
   export AWS_ECR_AUTH_PASSWORD="$(
     aws ecr get-login-password --output text
   )"

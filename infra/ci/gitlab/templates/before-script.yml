@@ -16,10 +16,6 @@ default:
     - cd infra/scripts
     - . env.sh
 
-    - echo "ECR_TAG_PREFIX=$ECR_TAG_PREFIX" >> .env
-    - echo "PROJECT_IMAGE_TAG=$PROJECT_IMAGE_TAG" >> .env
-    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> .env
-
     - echo "Authenticate aws credentials"
     - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
@@ -27,6 +23,8 @@ default:
     - echo "AWS_ECR_REPOSITORY_URL=$AWS_ECR_REPOSITORY_URL" >> env
     - echo "AWS_ECR_AUTH_PASSWORD=$AWS_ECR_AUTH_PASSWORD" >> .env
     - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> .env
+    - echo "PROJECT_IMAGE_TAG=$PROJECT_IMAGE_TAG" >> .env
+    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> .env
 
     - cd ../../
 
