@@ -4,9 +4,7 @@ include:
 gateway-test:
   stage: test
   extends:
-    - .setup-credentials
     - .setup-image
-
   script:
     - cd $GATEWAY_DIR
     - chmod +x ./gradlew

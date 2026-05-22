@@ -1,6 +1,11 @@
 include:
+  - local: '/infra/ci/gitlab/templates/before-script.yml'
   - local: '/infra/ci/gitlab/templates/images/gateway/test.yml'
   - local: '/infra/ci/gitlab/templates/images/gateway/publish.yml'
+
+stages:
+  - test
+  - publish
 
 default:
   tags:
@@ -9,14 +14,11 @@ default:
 variables:
   SERVICE_NAME: gateway
   SERVICE_DIR: services/$SERVICE_NAME
+
   SERVICE_RELATIVE_PATH_DIR: $CI_PROJECT_DIR/$SERVICE_DIR
 
-  GRADLE_USER_HOME: $SERVICE_RELATIVE_PATH_DIR/.gradle
+  GRADLE_USER_HOME: /cache/gradle/$SERVICE_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
-
-stages:
-  - test
-  - publish
