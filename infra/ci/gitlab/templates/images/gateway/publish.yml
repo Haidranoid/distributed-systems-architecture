@@ -27,4 +27,4 @@ gateway-publish-image:
 
   artifacts:
     reports:
-      dotenv: SERVICE_RELATIVE_PATH_DIR/image.env
+      dotenv: $SERVICE_RELATIVE_PATH_DIR/image.env

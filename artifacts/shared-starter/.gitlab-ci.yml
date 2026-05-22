@@ -6,6 +6,17 @@ default:
   tags:
     - local
 
+variables:
+  ARTIFACT_NAME: shared-starter
+  ARTIFACT_DIR: artifacts/$ARTIFACT_NAME
+  ARTIFACT_RELATIVE_PATH_DIR: /$ARTIFACT_DIR/$ARTIFACT_DIR
+
+  GRADLE_USER_HOME: $ARTIFACT_RELATIVE_PATH_DIR/.gradle
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=true
+    -Dorg.gradle.caching=true
+
 stages:
   - test
   - publish
