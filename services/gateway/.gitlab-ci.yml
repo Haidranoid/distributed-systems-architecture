@@ -11,6 +11,7 @@ default:
   tags:
     - local
 
+
 variables:
   PROJECT_NAME: gateway
   PROJECT_DIR: services
