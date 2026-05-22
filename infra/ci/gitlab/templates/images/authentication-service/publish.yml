@@ -10,7 +10,7 @@ authentication-service-publish-image:
     - job: authentication-service-test
 
   script:
-    - export IMAGE_TAG=$ECR_TAG_PREFIX/$SERVICE_NAME
+    - export IMAGE_TAG=$ECR_TAG_PREFIX/$PROJECT_NAME
     - export IMAGE_ECR_TAG=$AWS_ECR_REPOSITORY_URL/$IMAGE_TAG
 
     - cd $AUTHENTICATION_SERVICE_DIR

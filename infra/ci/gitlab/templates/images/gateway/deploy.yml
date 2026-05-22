@@ -14,6 +14,6 @@ gateway-deploy:
   script:
     - cd $K8S_DIR/overlays/dev-k8s/gateway
 
-    - kustomize edit set image $SERVICE_NAME=$IMAGE_ECR_TAG
+    - kustomize edit set image $PROJECT_NAME=$IMAGE_ECR_TAG
 
     - kubectl apply -k .

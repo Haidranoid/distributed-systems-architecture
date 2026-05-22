@@ -13,6 +13,6 @@ config-server-deploy:
   script:
     - cd $K8S_DIR/overlays/dev-k8s/config-server
 
-    - kustomize edit set image $SERVICE_NAME=$IMAGE_ECR_TAG
+    - kustomize edit set image $PROJECT_NAME=$IMAGE_ECR_TAG
 
     - kubectl apply -k .
