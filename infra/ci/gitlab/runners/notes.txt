@@ -1,0 +1,1 @@
+docker build -t haidranoid/gitlab-ci-java21:latest .
