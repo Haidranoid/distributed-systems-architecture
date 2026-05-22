@@ -19,6 +19,7 @@ java {
 
 jar {
     enabled = false
+
 }
 
 bootJar {
