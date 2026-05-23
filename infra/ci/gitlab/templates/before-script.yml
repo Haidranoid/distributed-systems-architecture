@@ -1,6 +1,5 @@
 variables:
   PROJECT_RELATIVE_PATH_DIR: $CI_PROJECT_DIR/$PROJECT_DIR
-
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
@@ -13,21 +12,10 @@ default:
     pull_policy: if-not-present
 
   before_script:
-    - cd infra/scripts
+    - cd $INFRA_DIR
     - . env.sh
 
     - echo "Authenticate aws credentials"
-    - . $AWS_SCRIPTS_DIR/utils.sh
     - setup_aws_env v1
 
-    - echo "AWS_ECR_REPOSITORY_URL=$AWS_ECR_REPOSITORY_URL" >> .env
-    - echo "AWS_ECR_AUTH_PASSWORD=$AWS_ECR_AUTH_PASSWORD" >> .env
-    - echo "AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN" >> .env
-    - echo "PROJECT_IMAGE_TAG=$PROJECT_IMAGE_TAG" >> .env
-    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> .env
-
     - cd ../../
-
-  artifacts:
-    reports:
-      dotenv: $PROJECT_RELATIVE_PATH_DIR/.env
