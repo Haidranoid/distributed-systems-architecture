@@ -45,6 +45,7 @@ publishing {
 
         def codeArtifactAuthToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
 
+
         if (!codeArtifactAuthToken) {
             codeArtifactAuthToken = providers.exec {
                 commandLine 'aws', 'codeartifact', 'get-authorization-token',
