@@ -12,7 +12,7 @@ default:
     pull_policy: if-not-present
 
   before_script:
-    - cd $INFRA_DIR
+    - cd $SCRIPTS_DIR
     - . env.sh
 
     - echo "Authenticate aws credentials"
