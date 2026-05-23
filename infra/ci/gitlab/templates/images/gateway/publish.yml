@@ -1,6 +1,3 @@
-include:
-  - local: '/infra/ci/gitlab/templates/setup-env.yml'
-
 gateway-publish-image:
   stage: publish
   needs:

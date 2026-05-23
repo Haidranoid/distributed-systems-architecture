@@ -1,6 +1,3 @@
-include:
-  - local: '/infra/ci/gitlab/templates/setup-env.yml'
-
 shared-starter-publish-artifact:
   stage: publish
   needs:

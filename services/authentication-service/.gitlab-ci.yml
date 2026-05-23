@@ -1,5 +1,4 @@
 include:
-  - local: '/infra/ci/gitlab/templates/before-script.yml'
   - local: '/infra/ci/gitlab/templates/images/authentication-service/test.yml'
   - local: '/infra/ci/gitlab/templates/images/authentication-service/publish.yml'
 

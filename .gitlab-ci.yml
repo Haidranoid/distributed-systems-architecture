@@ -7,7 +7,6 @@ trigger-shared-starter-workflow:
       changes:
         - artifacts/shared-starter/**/*
         - infra/ci/gitlab/templates/artifacts/shared-starter/**/*
-        - infra/ci/gitlab/templates/setup-env.yml
 
 trigger-config-server-workflow:
   trigger:
@@ -18,7 +17,6 @@ trigger-config-server-workflow:
       changes:
         - services/config-server/**/*
         - infra/ci/gitlab/templates/images/config-server/**/*
-        - infra/ci/gitlab/templates/setup-env.yml
 
 trigger-accounts-service-workflow:
   trigger:
@@ -29,7 +27,6 @@ trigger-accounts-service-workflow:
       changes:
         - services/accounts-service/**/*
         - infra/ci/gitlab/templates/images/accounts-service/**/*
-        - infra/ci/gitlab/templates/setup-env.yml
 
 trigger-authentication-service-workflow:
   trigger:
@@ -40,7 +37,6 @@ trigger-authentication-service-workflow:
       changes:
         - services/authentication-service/**/*
         - infra/ci/gitlab/templates/images/authentication-service/**/*
-        - infra/ci/gitlab/templates/setup-env.yml
 
 trigger-gateway-workflow:
   trigger:
@@ -51,7 +47,6 @@ trigger-gateway-workflow:
       changes:
         - services/gateway/**/*
         - infra/ci/gitlab/templates/images/gateway/**/*
-        - infra/ci/gitlab/templates/setup-env.yml
 
 variables:
   GIT_DEPTH: 0
