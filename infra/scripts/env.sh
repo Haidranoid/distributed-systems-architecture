@@ -6,6 +6,6 @@ SCRIPTS_DIR="$(pwd)"
 
 export SCRIPTS_DIR
 
-. env-vars/setup.sh
-. aws/setup.sh
-. images/setup.sh
+. "$SCRIPTS_DIR/env-vars/setup.sh"
+. "$SCRIPTS_DIR/aws/setup.sh"
+. "$SCRIPTS_DIR/images/setup.sh"
