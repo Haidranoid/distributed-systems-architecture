@@ -8,8 +8,8 @@ test:
   artifacts:
     when: always
     paths:
-      - /$PROJECT_DIR/build/libs/*.jar
-      - /$PROJECT_DIR/build/reports/tests/test
+      - $PROJECT_DIR/build/libs/*.jar
+      - $PROJECT_DIR/build/reports/tests/test
     reports:
       junit:
-        - /$PROJECT_DIR/build/test-results/test/*.xml
+        - $PROJECT_DIR/build/test-results/test/*.xml
