@@ -7,3 +7,7 @@ RUN apk add --no-cache \
     git \
     jq \
     curl
+
+COPY --from=bitnami/kubectl:latest \
+    /opt/bitnami/kubectl/bin/kubectl \
+    /usr/local/bin/kubectl

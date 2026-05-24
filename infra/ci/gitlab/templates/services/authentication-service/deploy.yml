@@ -11,4 +11,4 @@ deploy:
     - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_TAG:latest
     #- kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
 
-    - kustomize build . | kubectl apply -f -
+    - kubectl apply -k .
