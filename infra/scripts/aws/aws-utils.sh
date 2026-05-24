@@ -17,6 +17,31 @@ setup_aws_env() {
   load_env_vars
 }
 
+load_env_vars() {
+  load_ecr_vars
+  load_codeartifact_vars
+}
+
+load_ecr_vars(){
+    AWS_ECR_AUTH_PASSWORD="$(
+      aws ecr get-login-password --output text
+    )"
+
+    export AWS_ECR_AUTH_PASSWORD
+}
+
+
+load_codeartifact_vars(){
+    AWS_CODEARTIFACT_AUTH_TOKEN="$(
+      aws codeartifact get-authorization-token \
+        --domain artifacts \
+        --query authorizationToken \
+        --output text
+    )"
+
+    export AWS_CODEARTIFACT_AUTH_TOKEN
+}
+
 validate_aws_version() {
   aws_version="${1:-}"
 
@@ -40,8 +65,4 @@ aws_login() {
     echo "ERROR: invalid aws version" >&2
     return 1
   fi
-}
-
-load_env_vars() {
-  . "$AWS_SCRIPTS_DIR/aws-env-vars.sh"
 }
