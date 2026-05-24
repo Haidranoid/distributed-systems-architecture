@@ -13,7 +13,12 @@ variables:
   GITLAB_DIR: $INFRA_DIR/ci/gitlab
   GITLAB_TEMPLATES_DIR: $INFRA_DIR/ci/gitlab/templates
 
-trigger-shared-starter-workflow:
+stages:
+  - artifacts
+  - services
+
+trigger-shared-starter:
+  stage: artifacts
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
@@ -26,7 +31,8 @@ trigger-shared-starter-workflow:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
-config-server-workflow:
+trigger-config-server:
+  stage: services
   variables:
     PROJECT_NAME: config-server
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
@@ -39,7 +45,8 @@ config-server-workflow:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
-accounts-service-workflow:
+trigger-accounts-service:
+  stage: services
   variables:
     PROJECT_NAME: accounts-service
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
@@ -52,7 +59,8 @@ accounts-service-workflow:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
-authentication-service-workflow:
+trigger-authentication-service:
+  stage: services
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
@@ -65,7 +73,8 @@ authentication-service-workflow:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
-gateway-workflow:
+trigger-gateway:
+  stage: services
   variables:
     PROJECT_NAME: gateway
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
