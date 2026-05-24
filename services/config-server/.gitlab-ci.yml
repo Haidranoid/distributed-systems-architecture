@@ -1,6 +1,7 @@
 include:
-  - local: '/infra/ci/gitlab/templates/images/config-server/test.yml'
-  - local: '/infra/ci/gitlab/templates/images/config-server/publish.yml'
+  - local: '$GITLAB_DIR/setup-env.yml'
+  - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/test.yml'
+  - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/publish.yml'
 
 stages:
   - test
@@ -9,7 +10,3 @@ stages:
 default:
   tags:
     - local
-
-variables:
-  PROJECT_NAME: config-server
-  PROJECT_DIR: services/$PROJECT_NAME

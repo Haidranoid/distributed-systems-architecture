@@ -1,5 +1,7 @@
 variables:
   GIT_DEPTH: 0
+  
+  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
@@ -15,6 +17,58 @@ trigger-shared-starter-workflow:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
+  trigger:
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
+config-server-workflow:
+  variables:
+    PROJECT_NAME: config-server
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+  trigger:
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
+accounts-service-workflow:
+  variables:
+    PROJECT_NAME: accounts-service
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+  trigger:
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
+authentication-service-workflow:
+  variables:
+    PROJECT_NAME: authentication-service
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+  trigger:
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
+gateway-workflow:
+  variables:
+    PROJECT_NAME: gateway
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
   trigger:
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml

@@ -7,7 +7,6 @@ stages:
   - test
   - publish
 
-
 default:
   tags:
     - local
