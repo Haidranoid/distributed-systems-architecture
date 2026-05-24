@@ -3,7 +3,7 @@
 set -eu
 
 if [ -n "${CI_PIPELINE_ID+x}" ]; then
-  export GRADLE_USER_HOME="cache/gradle/$PROJECT_NAME"
+  #export GRADLE_USER_HOME="/cache/gradle/$PROJECT_NAME"
   export PROJECT_IMAGE_TAG="$AWS_ECR_DSA_REPOSITORY_NAME/$PROJECT_NAME"
   export PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REGISTRY_URL/$PROJECT_IMAGE_TAG"
 fi
