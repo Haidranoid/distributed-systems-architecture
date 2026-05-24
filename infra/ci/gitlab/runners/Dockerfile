@@ -6,7 +6,8 @@ RUN apk add --no-cache \
     docker-cli-buildx \
     git \
     jq \
-    curl
+    curl \
+    gettext
 
 COPY --from=bitnami/kubectl:latest \
     /opt/bitnami/kubectl/bin/kubectl \

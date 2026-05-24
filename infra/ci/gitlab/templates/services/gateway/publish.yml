@@ -11,16 +11,9 @@ publish:
 
     - |
       docker build \
-      --load \
+      --push \
       --platform linux/amd64 \
       --build-arg CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN \
-      -t $PROJECT_IMAGE_TAG:latest .
-      #-t $PROJECT_IMAGE_ECR_TAG:latest \
-      #-t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
-
-    - echo "PROJECT_IMAGE_TAG=$PROJECT_IMAGE_TAG" >> image.env
-    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> image.env
-
-  artifacts:
-    reports:
-      dotenv: $PROJECT_DIR/image.env
+      -t $PROJECT_IMAGE_ECR_TAG:latest \
+      -t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
+      .
