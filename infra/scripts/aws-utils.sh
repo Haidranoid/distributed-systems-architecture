@@ -21,7 +21,7 @@ aws_login() {
   if [ "$aws_version" = "v2" ]; then
     aws login
   elif [ "$aws_version" = "v1" ]; then
-    aws configure set region "$AWS_DEFAULT_REGION"
+    aws configure set region "$AWS_REGION"
     aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
     aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
   fi
@@ -54,12 +54,15 @@ load_ecr_vars() {
     echo "ERROR: project_dir argument is required" >&2
   else
     AWS_ECR_REGISTRY_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+    AWS_ECR_DSA_REPOSITORY_URL="$AWS_ECR_REGISTRY_URL/dsa"
+
     AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
 
     PROJECT_IMAGE_TAG="$project_dir"
-    PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REGISTRY_URL/$PROJECT_IMAGE_TAG"
+    PROJECT_IMAGE_ECR_TAG="$AWS_ECR_DSA_REPOSITORY_URL/$PROJECT_IMAGE_TAG"
 
     export AWS_ECR_REGISTRY_URL
+    export AWS_ECR_DSA_REPOSITORY_URL
     export AWS_ECR_AUTH_PASSWORD
     export PROJECT_IMAGE_TAG
     export PROJECT_IMAGE_ECR_TAG
