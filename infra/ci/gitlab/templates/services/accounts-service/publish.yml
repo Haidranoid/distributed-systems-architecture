@@ -22,8 +22,6 @@ publish:
     - echo "PROJECT_IMAGE_TAG=$PROJECT_IMAGE_TAG" >> image.env
     - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> image.env
 
-    - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> image.env
-
   artifacts:
     reports:
       dotenv: $PROJECT_DIR/image.env
