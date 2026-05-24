@@ -7,6 +7,8 @@ default:
     - cd infra/scripts
     - . env.sh
 
+    - echo "$GRADLE_USER_HOME"
+
     - echo "Authenticate aws credentials"
     - setup_aws_env v1
 
