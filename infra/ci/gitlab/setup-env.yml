@@ -6,4 +6,4 @@ default:
     - cd infra/scripts
     - . setup-env.sh
     - setup_aws_env v1
-    - cd ..
+    - cd ../../
