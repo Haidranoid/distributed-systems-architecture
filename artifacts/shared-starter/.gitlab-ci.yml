@@ -1,6 +1,6 @@
 include:
-  - local: '$GITLAB_DIR/setup-env.yml'
-  - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/test.yml'
+  - local: '$INFRA_DIR/ci/gitlab/setup-env.yml'
+  - local: '$INFRA_DIR/ci/gitlab/templates/test.yml'
   - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/publish.yml'
 
 stages:
