@@ -8,6 +8,7 @@ deploy:
     - cd $INFRA_DIR/k8s/overlays/dev-k8s
 
     - kubectl config set-context --current --namespace=dev-k8s
-    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
+    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_TAG:latest
+    #- kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
 
     - kustomize build . | kubectl apply -f -
