@@ -8,6 +8,4 @@ default:
 
     - . setup-env.sh
 
-    - echo "GRADLE_USER_HOME:$GRADLE_USER_HOME"
-
     - cd ../../

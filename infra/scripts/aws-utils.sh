@@ -51,6 +51,15 @@ is_logged() {
   aws sts get-caller-identity > /dev/null 2>&1
 }
 
+show_aws_session() {
+  if is_logged; then
+     aws configure list
+  else
+     echo "ERROR: Unauthenticated" >&2
+     return 1
+  fi
+}
+
 aws_login() {
   aws_version="${1:-}"
 
