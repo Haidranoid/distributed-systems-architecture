@@ -1,18 +1,17 @@
 variables:
   GIT_DEPTH: 0
-
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
-  
+
   INFRA_DIR: infra
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
   
-  GITLAB_DIR: $INFRA_DIR/ci/gitlab
-  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
+  GITLAB_DIR: /$INFRA_DIR/ci/gitlab
+  GITLAB_TEMPLATES_DIR: /$GITLAB_DIR/templates
     
 shared-starter-trigger:
   variables:
