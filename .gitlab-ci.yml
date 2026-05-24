@@ -1,7 +1,16 @@
+variables:
+  GIT_DEPTH: 0
+  INFRA_DIR: /infra
+  ARTIFACTS_DIR: /artifacts
+  SERVICES_DIR: /services
+
 trigger-shared-starter-workflow:
+  variables:
+    PROJECT_NAME: shared-starter
+    PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
   trigger:
     include:
-      - local: '/artifacts/shared-starter/.gitlab-ci.yml'
+      - local: '/$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
@@ -47,6 +56,3 @@ trigger-gateway-workflow:
       changes:
         - services/gateway/**/*
         - infra/ci/gitlab/templates/images/gateway/**/*
-
-variables:
-  GIT_DEPTH: 0
