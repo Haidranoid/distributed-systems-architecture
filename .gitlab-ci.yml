@@ -7,12 +7,12 @@ variables:
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
   
+  
   INFRA_DIR: infra
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
-
-  GITLAB_DIR: "$INFRA_DIR/ci/gitlab"
-  GITLAB_TEMPLATES_DIR: "$GITLAB_DIR/templates"
+  GITLAB_DIR: $INFRA_DIR/ci/gitlab
+  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
 
 shared-starter-workflow:
   variables:
@@ -25,7 +25,7 @@ shared-starter-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
 
 config-server-workflow:
   variables:
