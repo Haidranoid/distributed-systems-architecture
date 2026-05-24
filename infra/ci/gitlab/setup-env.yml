@@ -9,5 +9,6 @@ default:
 
     - echo "Authenticate aws credentials"
     - setup_aws_env v1
+    - aws configure list
 
-    - cd ../../
+    - echo "GRADLE_USER_HOME:$GRADLE_USER_HOME"
