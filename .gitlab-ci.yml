@@ -11,6 +11,9 @@ variables:
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
 
+  GITLAB_DIR: $INFRA_DIR/ci/gitlab
+  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
+
 shared-starter-workflow:
   variables:
     PROJECT_NAME: shared-starter
@@ -22,44 +25,56 @@ shared-starter-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - $PROJECT_DIR/**/*
-        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 config-server-workflow:
+  variables:
+    PROJECT_NAME: config-server
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
   trigger:
     include:
-      - local: '/services/config-server/.gitlab-ci.yml'
+      - local: '$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - services/config-server/**/*
-        - infra/ci/gitlab/templates/images/config-server/**/*
+        - $PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
 
 accounts-service-workflow:
+  variables:
+    PROJECT_NAME: accounts-service
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
   trigger:
     include:
-      - local: '/services/accounts-service/.gitlab-ci.yml'
+      - local: '$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - services/accounts-service/**/*
-        - infra/ci/gitlab/templates/images/accounts-service/**/*
+        - $PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
 
 authentication-service-workflow:
+  variables:
+    PROJECT_NAME: authentication-service
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
   trigger:
     include:
-      - local: '/services/authentication-service/.gitlab-ci.yml'
+      - local: '$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - services/authentication-service/**/*
-        - infra/ci/gitlab/templates/images/authentication-service/**/*
+        - $PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
 
 gateway-workflow:
+  variables:
+    PROJECT_NAME: gateway
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
   trigger:
     include:
-      - local: '/services/gateway/.gitlab-ci.yml'
+      - local: '$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - services/gateway/**/*
-        - infra/ci/gitlab/templates/images/gateway/**/*
+        - $PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
