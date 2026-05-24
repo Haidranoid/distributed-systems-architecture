@@ -7,7 +7,7 @@ deploy:
   script:
     - cd $INFRA_DIR/k8s/overlays/k8s-local
 
-    - kubectl config set-context --current --namespace=k8s-local
+    #- kubectl config set-context --current --namespace=k8s-local
     #- kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_TAG:latest
     #- kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
 
