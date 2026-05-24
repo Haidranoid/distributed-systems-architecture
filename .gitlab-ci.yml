@@ -8,10 +8,6 @@ variables:
 include: 
   local: 'infra/ci/gitlab/setup-env.yml'
 
-stages:
-  - prepare
-  - trigger-downstream
-
 default: 
   before_script:
     - cd infra/scripts
@@ -19,7 +15,7 @@ default:
     - setup_aws_env v1
     - cd ../../
 
-trigger-shared-starter:
+shared-starter-trigger:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
