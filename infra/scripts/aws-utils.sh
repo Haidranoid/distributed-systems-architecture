@@ -54,12 +54,10 @@ load_ecr_vars() {
     echo "ERROR: project_dir argument is required" >&2
   else
     AWS_ECR_REGISTRY_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-    AWS_ECR_REGISTRY_URL="$AWS_ECR_REGISTRY_URL/dsa"
+    AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
 
     PROJECT_IMAGE_TAG="$project_dir"
     PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REGISTRY_URL/$PROJECT_IMAGE_TAG"
-
-    AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
 
     export AWS_ECR_REGISTRY_URL
     export AWS_ECR_AUTH_PASSWORD
@@ -83,9 +81,11 @@ load_codeartifact_vars() {
   )"
 
   export AWS_CODEARTIFACT_DOMAIN_NAME
-  export AWS_CODEARTIFACT_AUTH_TOKEN
-  export AWS_CODEARTIFACT_MAVEN_URL
+  export AWS_CODEARTIFACT_SHARED_STARTER_REPOSITORY_NAME
+  export AWS_CODEARTIFACT_URL
   export AWS_CODEARTIFACT_SHARED_STARTER_URL
+  export AWS_CODEARTIFACT_MAVEN_URL
+  export AWS_CODEARTIFACT_AUTH_TOKEN
 }
 
 is_logged() {
