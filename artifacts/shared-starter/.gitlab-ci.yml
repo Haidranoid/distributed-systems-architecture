@@ -1,5 +1,5 @@
 include:
-  - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/test.yml'
+  - local: '/$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/test.yml'
   - local: '$GITLAB_TEMPLATES_DIR/$PROJECT_DIR/publish.yml'
 
 stages:
