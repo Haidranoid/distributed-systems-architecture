@@ -27,16 +27,16 @@ wait_for_image "dsa/gateway"
 
 echo "Restarting deployments..."
 
-kubectl rollout restart deployment/config-server -n dev-k8s
-kubectl rollout restart deployment/accounts-service -n dev-k8s
-kubectl rollout restart deployment/authentication-service -n dev-k8s
-kubectl rollout restart deployment/gateway -n dev-k8s
+kubectl rollout restart deployment/config-server -n k8s-local
+kubectl rollout restart deployment/accounts-service -n k8s-local
+kubectl rollout restart deployment/authentication-service -n k8s-local
+kubectl rollout restart deployment/gateway -n k8s-local
 
 echo "Waiting for rollouts..."
 
-kubectl rollout status deployment/config-server -n dev-k8s --timeout=180s
-kubectl rollout status deployment/accounts-service -n dev-k8s --timeout=180s
-kubectl rollout status deployment/authentication-service -n dev-k8s --timeout=180s
-kubectl rollout status deployment/gateway -n dev-k8s --timeout=180s
+kubectl rollout status deployment/config-server -n k8s-local --timeout=180s
+kubectl rollout status deployment/accounts-service -n k8s-local --timeout=180s
+kubectl rollout status deployment/authentication-service -n k8s-local --timeout=180s
+kubectl rollout status deployment/gateway -n k8s-local --timeout=180s
 
 echo "All deployments updated successfully."

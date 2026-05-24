@@ -8,5 +8,5 @@ spec:
     spec:
       containers:
         - name: config-server
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           

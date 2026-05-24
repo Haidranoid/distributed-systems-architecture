@@ -8,10 +8,10 @@ spec:
     spec:
       containers:
         - name: authentication-service
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env:
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:
-                  name: dev-k8s-configmap
+                  name: k8s-local-configmap
                   key: SPRING_PROFILES_ACTIVE

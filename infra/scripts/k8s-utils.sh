@@ -21,20 +21,20 @@ k3s_sync_images() {
 }
 
 restart_deployments_v1() {
-  kubectl rollout restart deployment -n dev-k8s accounts-service
-  kubectl rollout restart deployment -n dev-k8s authentication-service
-  kubectl rollout restart deployment -n dev-k8s config-server
-  kubectl rollout restart deployment -n dev-k8s gateway
+  kubectl rollout restart deployment -n k8s-local accounts-service
+  kubectl rollout restart deployment -n k8s-local authentication-service
+  kubectl rollout restart deployment -n k8s-local config-server
+  kubectl rollout restart deployment -n k8s-local gateway
 
-  kubectl rollout status deployment/accounts-service -n dev-k8s
-  kubectl rollout status deployment/authentication-service -n dev-k8s
-  kubectl rollout status deployment/config-server -n dev-k8s
-  kubectl rollout status deployment/gateway -n dev-k8s
+  kubectl rollout status deployment/accounts-service -n k8s-local
+  kubectl rollout status deployment/authentication-service -n k8s-local
+  kubectl rollout status deployment/config-server -n k8s-local
+  kubectl rollout status deployment/gateway -n k8s-local
 }
 
 restart_deployments_v2() {
-  kubectl rollout restart deployment -n dev-k8s
-  kubectl rollout status deployment -n dev-k8s
+  kubectl rollout restart deployment -n k8s-local
+  kubectl rollout status deployment -n k8s-local
 }
 
 wait_for_image() {
