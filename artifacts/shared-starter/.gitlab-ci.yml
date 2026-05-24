@@ -10,7 +10,3 @@ stages:
 default:
   tags:
     - local
-
-variables:
-  PROJECT_NAME: shared-starter
-  PROJECT_DIR: artifacts/$PROJECT_NAME
