@@ -5,19 +5,25 @@ variables:
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
 
-#include: 
-#  local: 'infra/ci/gitlab/setup-env.yml'
-default:
-  image:
-    name: haidranoid/gitlab-ci-java21:latest
-    pull_policy: if-not-present
+include: 
+  local: 'infra/ci/gitlab/setup-env.yml'
+
+stages:
+  - prepare
+  - trigger-downstream
+
+pre-trigger-logic:
+  stage: prepare
   before_script:
     - cd infra/scripts
     - . setup-env.sh
     - setup_aws_env v1
-    - cd ..
+    - cd ../../
 
-shared-starter-workflow:
+trigger-shared-starter:
+  stage: trigger-downstream
+  needs:
+    - pre-trigger-logic
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
@@ -29,6 +35,7 @@ shared-starter-workflow:
       changes:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
 
 config-server-workflow:
   variables:
