@@ -1,11 +1,3 @@
-variables:
-  PROJECT_RELATIVE_PATH_DIR: $CI_PROJECT_DIR/$PROJECT_DIR
-  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
-
 default:
   image:
     name: haidranoid/gitlab-ci-java21:latest
