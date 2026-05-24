@@ -2,14 +2,29 @@
 
 set -eu
 
-is_logged() {
-  aws sts get-caller-identity > /dev/null 2>&1
+setup_aws_env() {
+  aws_version="${1:-}"
+
+  if ! validate_aws_version "$aws_version"; then
+    echo "ERROR: unsupported aws version: $aws_version" >&2
+    return 1
+  fi
+
+  if ! is_logged; then
+    aws_login "$aws_version" || return 1
+  fi
+
+  load_env_vars
 }
 
 validate_aws_version() {
   aws_version="${1:-}"
 
   [ "$aws_version" = "v1" ] || [ "$aws_version" = "v2" ]
+}
+
+is_logged() {
+  aws sts get-caller-identity > /dev/null 2>&1
 }
 
 aws_login() {
@@ -27,17 +42,6 @@ aws_login() {
   fi
 }
 
-setup_aws_env() {
-  aws_version="${1:-}"
-
-  if ! validate_aws_version "$aws_version"; then
-    echo "ERROR: unsupported aws version: $aws_version" >&2
-    return 1
-  fi
-
-  if ! is_logged; then
-    aws_login "$aws_version" || return 1
-  fi
-
-  . aws-env-vars.sh
+load_env_vars() {
+  . "$AWS_SCRIPTS_DIR/aws-env-vars.sh"
 }
