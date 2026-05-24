@@ -21,10 +21,10 @@ shared-starter-workflow:
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
-        - $PROJECT_DIR/**/*
-        - infra/ci/gitlab/templates/artifacts/shared-starter/**/*
+        - /$PROJECT_DIR/**/*
+        - /$INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
 
-trigger-config-server-workflow:
+config-server-workflow:
   trigger:
     include:
       - local: '/services/config-server/.gitlab-ci.yml'
@@ -34,7 +34,7 @@ trigger-config-server-workflow:
         - services/config-server/**/*
         - infra/ci/gitlab/templates/images/config-server/**/*
 
-trigger-accounts-service-workflow:
+accounts-service-workflow:
   trigger:
     include:
       - local: '/services/accounts-service/.gitlab-ci.yml'
@@ -44,7 +44,7 @@ trigger-accounts-service-workflow:
         - services/accounts-service/**/*
         - infra/ci/gitlab/templates/images/accounts-service/**/*
 
-trigger-authentication-service-workflow:
+authentication-service-workflow:
   trigger:
     include:
       - local: '/services/authentication-service/.gitlab-ci.yml'
@@ -54,7 +54,7 @@ trigger-authentication-service-workflow:
         - services/authentication-service/**/*
         - infra/ci/gitlab/templates/images/authentication-service/**/*
 
-trigger-gateway-workflow:
+gateway-workflow:
   trigger:
     include:
       - local: '/services/gateway/.gitlab-ci.yml'

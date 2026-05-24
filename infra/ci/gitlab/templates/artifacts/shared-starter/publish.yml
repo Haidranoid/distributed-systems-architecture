@@ -1,10 +1,10 @@
-shared-starter-publish-artifact:
+publish:
   stage: publish
   needs:
-    - job: shared-starter-test
+    - job: test
       artifacts: true
 
   script:
-    - cd $SHARED_STARTER_ARTIFACT_DIR
+    - cd $PROJECT_DIR
     - chmod +x ./gradlew
     - ./gradlew publish --build-cache --parallel

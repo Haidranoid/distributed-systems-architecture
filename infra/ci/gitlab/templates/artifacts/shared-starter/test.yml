@@ -1,15 +1,15 @@
-shared-starter-test:
+test:
   stage: test
   script:
-    - cd $SHARED_STARTER_ARTIFACT_DIR
+    - cd $PROJECT_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
 
   artifacts:
     when: always
     paths:
-      - $PROJECT_DIR/build/libs/*.jar
-      - $PROJECT_DIR/build/reports/tests/test
+      - /$PROJECT_DIR/build/libs/*.jar
+      - /$PROJECT_DIR/build/reports/tests/test
     reports:
       junit:
-        - $PROJECT_DIR/build/test-results/test/*.xml
+        - /$PROJECT_DIR/build/test-results/test/*.xml
