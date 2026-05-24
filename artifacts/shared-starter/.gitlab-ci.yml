@@ -1,7 +1,7 @@
 include:
-  - local: '/infra/ci/gitlab/templates/setup-env.yml'
-  - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/test.yml'
-  - local: '/infra/ci/gitlab/templates/artifacts/shared-starter/publish.yml'
+  - local: '$INFRA_DIR/ci/gitlab/templates/setup-env.yml'
+  - local: '$INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/test.yml'
+  - local: '$INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/publish.yml'
 
 stages:
   - test
