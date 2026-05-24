@@ -3,9 +3,4 @@ kind: Service
 metadata:
   name: gateway-srv
 spec:
-  type: LoadBalancer
-  selector:
-    app: gateway
-  ports:
-    - port: 8222
-      targetPort: 8222
+  type: ClusterIP

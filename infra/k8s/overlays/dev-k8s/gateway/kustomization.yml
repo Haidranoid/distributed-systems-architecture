@@ -1,9 +1,0 @@
-resources:
-  - ../namespace.yml
-  - ../configmap.yml
-  - ../../../base/gateway
-
-patches:
-  - path: deployment-patch.yml
-  - path: service-patch.yml
-  - path: initcontainer-patch.yml

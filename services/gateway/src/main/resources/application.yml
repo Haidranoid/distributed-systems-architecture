@@ -5,6 +5,11 @@ spring:
     name: gateway
   config:
     import: optional:configserver:http://config-server-srv:8888
+    fail-fast: true
+    retry:
+      initial-interval: 2000
+      max-attempts: 10
+      max-interval: 5000
   threads:
     virtual:
       enabled: true
