@@ -5,15 +5,19 @@ resources:
 
 images:
   - name: config-server
+    newName: dsa/config-server
     newTag: latest
 
   - name: accounts-service
+    newName: dsa/accounts-service
     newTag: latest
 
   - name: authentication-service
+    newName: dsa/authentication-service
     newTag: latest
 
   - name: gateway
+    newName: dsa/gateway
     newTag: latest
 
 

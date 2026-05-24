@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: authentication-service
-          imagePullPolicy: Always
+          imagePullPolicy: Never
           env:
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
