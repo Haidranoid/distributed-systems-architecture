@@ -1,14 +1,11 @@
-include:
-  - local: '/infra/ci/gitlab/templates/setup-env.yml'
-
-accounts-service-publish-image:
+publish:
   stage: publish
   needs:
-    - job: accounts-service-test
+    - job: test
       artifacts: true
 
   script:
-    - cd $ACCOUNTS_SERVICE_DIR
+    - cd $PROJECT_DIR
 
     - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY_URL
 

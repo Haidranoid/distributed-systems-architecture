@@ -1,17 +1,14 @@
-include:
-  - local: '/infra/ci/gitlab/templates/setup-env.yml'
-
-config-server-test:
+test:
   stage: test
   script:
-    - cd $CONFIG_SERVER_DIR
+    - cd $PROJECT_DIR
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
 
   artifacts:
     when: always
     paths:
-      - $PROJECT_RELATIVE_PATH_DIR/build/reports/tests/test
+      - $PROJECT_DIR/build/reports/tests/test
     reports:
       junit:
-        - $PROJECT_RELATIVE_PATH_DIR/build/test-results/test/*.xml
+        - $PROJECT_DIR/build/test-results/test/*.xml

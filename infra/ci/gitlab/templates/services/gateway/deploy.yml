@@ -1,16 +1,12 @@
-gateway-deploy:
+deploy:
   stage: deploy
-  extends:
-    - .setup-image
   needs:
-    - job: gateway-publish-image
-      artifacts: true
-    - job: gateway-test
+    - job: publish
       artifacts: true
 
   script:
     - cd $K8S_DIR/overlays/dev-k8s/gateway
 
-    - kustomize edit set image $PROJECT_NAME=$IMAGE_ECR_TAG
+    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG
 
     - kubectl apply -k .
