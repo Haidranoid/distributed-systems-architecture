@@ -1,14 +1,12 @@
 variables:
-  GIT_DEPTH: 0  
-  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
+  GIT_DEPTH: 0
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
-  
-  INFRA_DIR: infra
-  ARTIFACTS_DIR: artifacts
-  SERVICES_DIR: services
+
+include: 
+  local: 'infra/ci/gitlab/setup-env.yml'
 
 shared-starter-workflow:
   variables:
@@ -21,7 +19,7 @@ shared-starter-workflow:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - $PROJECT_DIR/**/*
-        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 config-server-workflow:
   variables:
