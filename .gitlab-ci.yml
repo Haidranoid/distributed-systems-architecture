@@ -1,19 +1,17 @@
 variables:
   GIT_DEPTH: 0
+  
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
-
-  INFRA_DIR: /infra
-  ARTIFACTS_DIR: /artifacts
-  SERVICES_DIR: /services
   
-  GITLAB_DIR: $INFRA_DIR/ci/gitlab
-  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
-    
-shared-starter-trigger:
+  INFRA_DIR: infra
+  ARTIFACTS_DIR: artifacts
+  SERVICES_DIR: services
+
+shared-starter-workflow:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
@@ -24,4 +22,44 @@ shared-starter-trigger:
     - if: "$CI_COMMIT_BRANCH == 'master'"
       changes:
         - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+        - $INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/**/*
+
+config-server-workflow:
+  trigger:
+    include:
+      - local: '/services/config-server/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/config-server/**/*
+        - infra/ci/gitlab/templates/images/config-server/**/*
+
+accounts-service-workflow:
+  trigger:
+    include:
+      - local: '/services/accounts-service/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/accounts-service/**/*
+        - infra/ci/gitlab/templates/images/accounts-service/**/*
+
+authentication-service-workflow:
+  trigger:
+    include:
+      - local: '/services/authentication-service/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/authentication-service/**/*
+        - infra/ci/gitlab/templates/images/authentication-service/**/*
+
+gateway-workflow:
+  trigger:
+    include:
+      - local: '/services/gateway/.gitlab-ci.yml'
+  rules:
+    - if: "$CI_COMMIT_BRANCH == 'master'"
+      changes:
+        - services/gateway/**/*
+        - infra/ci/gitlab/templates/images/gateway/**/*
