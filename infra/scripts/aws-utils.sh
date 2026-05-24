@@ -1,67 +1,22 @@
 #!/bin/sh
 
-set -eu
-
-setup_aws_env() {
+aws_login() {
   aws_version="${1:-}"
+
+  if [ -z "$aws_version" ]; then
+    echo "ERROR: aws version argument is required (v1|v2)" >&2
+    return 1
+  fi
+
+  if is_logged; then
+    echo "SUCCESS: already logged with aws version: $aws_version"
+    return 0
+  fi
 
   if ! validate_aws_version "$aws_version"; then
     echo "ERROR: unsupported aws version: $aws_version" >&2
     return 1
   fi
-
-  if ! is_logged; then
-    aws_login "$aws_version" || return 1
-  fi
-
-  load_env_vars
-}
-
-load_env_vars() {
-  load_ecr_vars
-  load_codeartifact_vars
-}
-
-load_ecr_vars(){
-    AWS_ECR_AUTH_PASSWORD="$(
-      aws ecr get-login-password --output text
-    )"
-
-    export AWS_ECR_AUTH_PASSWORD
-}
-
-load_codeartifact_vars(){
-    AWS_CODEARTIFACT_AUTH_TOKEN="$(
-      aws codeartifact get-authorization-token \
-        --domain artifacts \
-        --query authorizationToken \
-        --output text
-    )"
-
-    export AWS_CODEARTIFACT_AUTH_TOKEN
-}
-
-validate_aws_version() {
-  aws_version="${1:-}"
-
-  [ "$aws_version" = "v1" ] || [ "$aws_version" = "v2" ]
-}
-
-is_logged() {
-  aws sts get-caller-identity > /dev/null 2>&1
-}
-
-show_aws_session() {
-  if is_logged; then
-     aws configure list
-  else
-     echo "ERROR: Unauthenticated" >&2
-     return 1
-  fi
-}
-
-aws_login() {
-  aws_version="${1:-}"
 
   if [ "$aws_version" = "v2" ]; then
     aws login
@@ -69,8 +24,71 @@ aws_login() {
     aws configure set region "$AWS_DEFAULT_REGION"
     aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
     aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
-  else
-    echo "ERROR: invalid aws version" >&2
-    return 1
   fi
+}
+
+load_env_vars() {
+  project_dir="${1:-}"
+
+  if [ -z "$project_dir" ]; then
+    echo "ERROR: project_dir argument is required" >&2
+  else
+    load_account_vars
+    load_ecr_vars "$project_dir"
+    load_codeartifact_vars
+  fi
+}
+
+load_account_vars() {
+  AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+  AWS_REGION="$(aws configure get region)"
+
+  export AWS_ACCOUNT_ID
+  export AWS_REGION
+}
+
+load_ecr_vars() {
+  project_dir="${1:-}"
+
+  if [ -z "$project_dir" ]; then
+    echo "ERROR: project_dir argument is required" >&2
+  else
+    AWS_ECR_REGISTRY_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+    AWS_ECR_REGISTRY_URL="$AWS_ECR_REGISTRY_URL/dsa"
+
+    PROJECT_IMAGE_TAG="$project_dir"
+    PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REGISTRY_URL/$PROJECT_IMAGE_TAG"
+
+    AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
+
+    export AWS_ECR_REGISTRY_URL
+    export AWS_ECR_AUTH_PASSWORD
+    export PROJECT_IMAGE_TAG
+    export PROJECT_IMAGE_ECR_TAG
+  fi
+}
+
+load_codeartifact_vars() {
+  AWS_CODEARTIFACT_AUTH_TOKEN="$(
+    aws codeartifact get-authorization-token \
+      --domain artifacts \
+      --query authorizationToken \
+      --output text
+  )"
+
+  export AWS_CODEARTIFACT_AUTH_TOKEN
+}
+
+is_logged() {
+  aws sts get-caller-identity >/dev/null 2>&1
+}
+
+show_aws_session() {
+  aws configure list
+}
+
+validate_aws_version() {
+  aws_version="${1:-}"
+
+  [ "$aws_version" = "v1" ] || [ "$aws_version" = "v2" ]
 }
