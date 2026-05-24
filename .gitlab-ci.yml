@@ -11,8 +11,8 @@ variables:
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
   
-  GITLAB_DIR: '$INFRA_DIR/ci/gitlab'
-  GITLAB_TEMPLATES_DIR: '$GITLAB_DIR/templates'
+  GITLAB_DIR: $INFRA_DIR/ci/gitlab
+  GITLAB_TEMPLATES_DIR: $INFRA_DIR/templates
 
 shared-starter-workflow:
   variables:
