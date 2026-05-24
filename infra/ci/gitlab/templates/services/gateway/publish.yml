@@ -9,16 +9,15 @@ publish:
 
     - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY_URL
 
-    - docker build \
+    - |
+      docker build \
+      --load \
       --platform linux/amd64 \
       --build-arg CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN \
-      -t $PROJECT_IMAGE_TAG:latest .
-
-    - docker tag $PROJECT_IMAGE_TAG:latest $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA
-    - docker tag $PROJECT_IMAGE_TAG:latest $PROJECT_IMAGE_ECR_TAG:latest
-
-    - docker push $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA
-    - docker push $PROJECT_IMAGE_ECR_TAG:latest
+      -t $PROJECT_IMAGE_TAG:latest \
+      -t $PROJECT_IMAGE_ECR_TAG:latest \
+      -t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
+      .
 
     - echo "PROJECT_IMAGE_ECR_TAG=$PROJECT_IMAGE_ECR_TAG" >> image.env
 
