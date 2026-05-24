@@ -2,5 +2,11 @@
 
 set -eu
 
-. env-vars.sh
 . aws-utils.sh
+
+if [ -n "${CI_PIPELINE_ID+x}" ]; then
+  setup_aws_env v1
+
+  export PROJECT_IMAGE_TAG="$AWS_ECR_DSA_REPOSITORY_NAME/$PROJECT_NAME"
+  export PROJECT_IMAGE_ECR_TAG="$AWS_ECR_REGISTRY_URL/$PROJECT_IMAGE_TAG"
+fi

@@ -5,10 +5,9 @@ default:
 
   before_script:
     - cd infra/scripts
+
     - . setup-env.sh
 
-    - echo "Authenticate aws credentials"
-    - setup_aws_env v1
-    - aws configure list
-
     - echo "GRADLE_USER_HOME:$GRADLE_USER_HOME"
+
+    - cd ../../
