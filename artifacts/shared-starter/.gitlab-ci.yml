@@ -1,5 +1,4 @@
 include:
-  - local: '$INFRA_DIR/ci/gitlab/templates/setup-env.yml'
   - local: '$INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/test.yml'
   - local: '$INFRA_DIR/ci/gitlab/templates/$PROJECT_DIR/publish.yml'
 
