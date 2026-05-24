@@ -5,8 +5,8 @@ deploy:
       artifacts: true
 
   script:
-    - cd $K8S_DIR/overlays/dev-k8s/gateway
+    - cd $INFRA_DIR/k8s/overlays/dev-k8s
 
-    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG
+    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
 
-    - kubectl apply -k .
+    - kustomize build . | kubectl apply -f -
