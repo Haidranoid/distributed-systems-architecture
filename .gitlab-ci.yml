@@ -8,6 +8,7 @@ variables:
   INFRA_DIR: infra
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
+  
   GITLAB_DIR: infra/ci/gitlab
   GITLAB_TEMPLATES_DIR: infra/ci/gitlab/templates
 
@@ -15,6 +16,7 @@ trigger-shared-starter-workflow:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
+    TEST: $GITLAB_TEMPLATES_DIR/$PROJECT_DIR
   trigger:
     include:
       - local: '$PROJECT_DIR/.gitlab-ci.yml'
