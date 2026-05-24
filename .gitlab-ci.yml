@@ -12,8 +12,7 @@ stages:
   - prepare
   - trigger-downstream
 
-pre-trigger-logic:
-  stage: prepare
+default: 
   before_script:
     - cd infra/scripts
     - . setup-env.sh
@@ -21,9 +20,6 @@ pre-trigger-logic:
     - cd ../../
 
 trigger-shared-starter:
-  stage: trigger-downstream
-  needs:
-    - pre-trigger-logic
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
