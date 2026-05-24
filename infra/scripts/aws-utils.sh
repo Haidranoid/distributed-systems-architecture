@@ -69,14 +69,23 @@ load_ecr_vars() {
 }
 
 load_codeartifact_vars() {
+  AWS_CODEARTIFACT_DOMAIN_NAME="artifacts"
+  AWS_CODEARTIFACT_SHARED_STARTER_REPOSITORY_NAME="shared-starter"
+
+  AWS_CODEARTIFACT_URL="https://$AWS_CODEARTIFACT_DOMAIN_NAME-$AWS_ACCOUNT_ID.d.codeartifact.$AWS_REGION.amazonaws.com/maven"
+  AWS_CODEARTIFACT_SHARED_STARTER_URL="$AWS_CODEARTIFACT_URL/$AWS_CODEARTIFACT_SHARED_STARTER_REPOSITORY_NAME"
+
   AWS_CODEARTIFACT_AUTH_TOKEN="$(
     aws codeartifact get-authorization-token \
-      --domain artifacts \
+      --domain "$AWS_CODEARTIFACT_DOMAIN_NAME" \
       --query authorizationToken \
       --output text
   )"
 
+  export AWS_CODEARTIFACT_DOMAIN_NAME
   export AWS_CODEARTIFACT_AUTH_TOKEN
+  export AWS_CODEARTIFACT_MAVEN_URL
+  export AWS_CODEARTIFACT_SHARED_STARTER_URL
 }
 
 is_logged() {

@@ -28,10 +28,15 @@ bootJar {
 repositories {
     mavenLocal()
 
-    def codeArtifactAuthToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+    def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
 
     try {
         if (!codeArtifactAuthToken) {
+
+            providers.exec {
+                commandLine 'aws', 'login'
+            }
+
             codeArtifactAuthToken = providers.exec {
                 commandLine 'aws', 'codeartifact', 'get-authorization-token',
                         '--domain', 'artifacts',
