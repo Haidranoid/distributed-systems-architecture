@@ -5,7 +5,7 @@ default:
 
   before_script:
     - cd infra/scripts
-    - . env.sh
+    - . setup-env.sh
 
     - echo "Authenticate aws credentials"
     - setup_aws_env v1
