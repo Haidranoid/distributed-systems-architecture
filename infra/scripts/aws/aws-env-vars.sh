@@ -2,4 +2,6 @@
 
 set -eu
 
-export AWS_SCRIPTS_DIR="$SCRIPTS_DIR/aws"
+AWS_SCRIPTS_DIR="$SCRIPTS_DIR/aws"
+
+export AWS_SCRIPTS_DIR
