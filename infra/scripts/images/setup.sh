@@ -4,6 +4,6 @@ set -eu
 
 cd "$SCRIPTS_DIR/images"
 
-. images-env-vars.sh
+. images-utils.sh
 
 cd "$SCRIPTS_DIR"

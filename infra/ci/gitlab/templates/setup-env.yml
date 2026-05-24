@@ -18,4 +18,7 @@ default:
     - echo "Authenticate aws credentials"
     - setup_aws_env v1
 
+    - echo "Assigns docker image tags"
+    - setup_images_env
+
     - cd ../../

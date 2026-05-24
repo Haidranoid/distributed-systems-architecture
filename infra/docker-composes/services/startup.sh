@@ -3,7 +3,7 @@
 set -euo pipefail
 
 source ../../env.sh
-source "$AWS_SCRIPTS_DIR/utils.sh"
+source "$AWS_SCRIPTS_DIR/aws-utils.sh"
 
 setup_aws_env v2
 
