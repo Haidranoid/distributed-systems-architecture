@@ -5,22 +5,13 @@ variables:
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
 
-include: 
-  local: 'infra/ci/gitlab/setup-env.yml'
-
-default: 
-  before_script:
-    - cd infra/scripts
-    - . setup-env.sh
-    - setup_aws_env v1
-    - cd ../../
-
 shared-starter-trigger:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
   trigger:
     include:
+      - local: 'infra/ci/gitlab/setup-env.yml'
       - local: '$PROJECT_DIR/.gitlab-ci.yml'
   rules:
     - if: "$CI_COMMIT_BRANCH == 'master'"
