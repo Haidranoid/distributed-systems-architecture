@@ -21,4 +21,4 @@ publish:
 
   artifacts:
     reports:
-      dotenv: $PROJECT_RELATIVE_PATH_DIR/image.env
+      dotenv: $PROJECT_DIR/image.env
