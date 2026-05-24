@@ -14,7 +14,7 @@ stages:
 
 pre-trigger-logic:
   stage: prepare
-  before_script:
+  script:
     - cd infra/scripts
     - . setup-env.sh
     - setup_aws_env v1
