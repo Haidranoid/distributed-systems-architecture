@@ -7,6 +7,7 @@ default:
     - cd infra/scripts
 
     - . setup-env.sh
-    - load_env_vars $PROJECT_DIR
+    - echo $PROJECT_DIR
+    - load_env_vars "$PROJECT_DIR"
 
     - cd ../../
