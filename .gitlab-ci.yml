@@ -14,9 +14,9 @@ variables:
 
 trigger-shared-starter-workflow:
   variables:
-    PROJECT_NAME: shared-starter
-    PROJECT_DIR: ${ARTIFACTS_DIR}/${PROJECT_NAME}
-    PROJECT_TEMPLATES_DIR: ${GITLAB_TEMPLATES_DIR}/${PROJECT_DIR}
+    PROJECT_NAME: "shared-starter"
+    PROJECT_DIR: "${ARTIFACTS_DIR}/${PROJECT_NAME}"
+    PROJECT_TEMPLATES_DIR: "${GITLAB_TEMPLATES_DIR}/${PROJECT_DIR}"
   trigger:
     include:
       - local: '$PROJECT_DIR/.gitlab-ci.yml'
