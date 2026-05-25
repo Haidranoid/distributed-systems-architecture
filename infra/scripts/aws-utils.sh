@@ -21,22 +21,16 @@ aws_login() {
   if [ "$aws_version" = "v2" ]; then
     aws login
   elif [ "$aws_version" = "v1" ]; then
-    aws configure set region "$AWS_REGION"
-    aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
-    aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+    aws configure set region "$CI_AWS_DEFAULT_REGION"
+    aws configure set aws_access_key_id "$CI_AWS_ACCESS_KEY_ID"
+    aws configure set aws_secret_access_key "$CI_AWS_SECRET_ACCESS_KEY"
   fi
 }
 
 load_env_vars() {
-  project_dir="${1:-}"
-
-  if [ -z "$project_dir" ]; then
-    echo "ERROR: project_dir argument is required" >&2
-  else
-    load_account_vars
-    load_ecr_vars "$project_dir"
-    load_codeartifact_vars
-  fi
+  load_account_vars
+  load_ecr_vars
+  load_codeartifact_vars
 }
 
 load_account_vars() {
@@ -48,25 +42,23 @@ load_account_vars() {
 }
 
 load_ecr_vars() {
-  project_dir="${1:-}"
+  AWS_ECR_REGISTRY_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
+  AWS_ECR_DSA_REPOSITORY_URL="$AWS_ECR_REGISTRY_URL/dsa"
+  AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
 
-  if [ -z "$project_dir" ]; then
-    echo "ERROR: project_dir argument is required" >&2
-  else
-    AWS_ECR_REGISTRY_URL="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com"
-    AWS_ECR_DSA_REPOSITORY_URL="$AWS_ECR_REGISTRY_URL/dsa"
-
-    AWS_ECR_AUTH_PASSWORD="$(aws ecr get-login-password --output text)"
-
-    PROJECT_IMAGE_TAG="$project_dir"
+  if [ -n "${PROJECT_DIR+x}" ]; then
+    PROJECT_IMAGE_TAG="$PROJECT_DIR"
     PROJECT_IMAGE_ECR_TAG="$AWS_ECR_DSA_REPOSITORY_URL/$PROJECT_IMAGE_TAG"
-
-    export AWS_ECR_REGISTRY_URL
-    export AWS_ECR_DSA_REPOSITORY_URL
-    export AWS_ECR_AUTH_PASSWORD
-    export PROJECT_IMAGE_TAG
-    export PROJECT_IMAGE_ECR_TAG
+  else
+    PROJECT_IMAGE_TAG="undefined_project_image_tag"
+    PROJECT_IMAGE_ECR_TAG="undefined_project_image_ecr_tag"
   fi
+
+  export AWS_ECR_REGISTRY_URL
+  export AWS_ECR_DSA_REPOSITORY_URL
+  export AWS_ECR_AUTH_PASSWORD
+  export PROJECT_IMAGE_TAG
+  export PROJECT_IMAGE_ECR_TAG
 }
 
 load_codeartifact_vars() {

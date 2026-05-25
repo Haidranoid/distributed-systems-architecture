@@ -8,4 +8,7 @@ default:
 
     - . setup-env.sh
 
+    - aws_login v1
+    - load_env_vars
+
     - cd ../../
