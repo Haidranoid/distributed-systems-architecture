@@ -15,7 +15,7 @@ services:
     environment:
       AGENT_NAME: "teamcity-agent-1"
       SERVER_URL: "http://host.docker.internal:8111"
-      CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+      AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
       ECR_REPOSITORY_URL: "${ECR_REPOSITORY_URL}"
       ECR_AUTH_PASSWORD: "${ECR_AUTH_PASSWORD}"
 
@@ -47,7 +47,7 @@ services:
     environment:
       AGENT_NAME: "teamcity-agent-2"
       SERVER_URL: "http://host.docker.internal:8111"
-      CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+      AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
       ECR_REPOSITORY_URL: "${ECR_REPOSITORY_URL}"
       ECR_AUTH_PASSWORD: "${ECR_AUTH_PASSWORD}"
 

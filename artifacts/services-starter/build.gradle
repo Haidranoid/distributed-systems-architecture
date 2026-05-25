@@ -42,7 +42,7 @@ publishing {
 
     repositories {
 
-        def codeArtifactAuthToken = System.getenv("CODEARTIFACT_AUTH_TOKEN")
+        def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
 
         if (!codeArtifactAuthToken) {
             codeArtifactAuthToken = providers.exec {

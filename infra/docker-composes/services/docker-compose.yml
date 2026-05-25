@@ -16,7 +16,7 @@ services:
       context: ../../../services/authentication-service
       dockerfile: Dockerfile
       args:
-        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
     ports:
@@ -32,7 +32,7 @@ services:
       context: ../../../services/accounts-service
       dockerfile: Dockerfile
       args:
-        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
     ports:
@@ -48,7 +48,7 @@ services:
       context: ../../../services/gateway
       dockerfile: Dockerfile
       args:
-        CODEARTIFACT_AUTH_TOKEN: "${CODEARTIFACT_AUTH_TOKEN}"
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
     ports:

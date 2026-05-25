@@ -13,7 +13,7 @@ publish:
       docker build \
       --push \
       --platform linux/amd64 \
-      --build-arg CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN \
+      --build-arg AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN \
       -t $PROJECT_IMAGE_ECR_TAG:latest \
       -t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
       .
