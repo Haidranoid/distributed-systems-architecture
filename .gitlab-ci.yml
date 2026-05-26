@@ -11,8 +11,8 @@ variables:
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
 
-  GITLAB_DIR: $INFRA_DIR/ci/gitlab
-  GITLAB_TEMPLATES_DIR: $INFRA_DIR/ci/gitlab/templates
+  GITLAB_DIR: infra/ci/gitlab
+  GITLAB_TEMPLATES_DIR: infra/ci/gitlab/templates
 
 workflow:
   rules:
