@@ -1,88 +1,80 @@
 variables:
   GIT_DEPTH: 0
-  
+
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
-  
+
   INFRA_DIR: infra
   ARTIFACTS_DIR: artifacts
   SERVICES_DIR: services
+
   GITLAB_DIR: $INFRA_DIR/ci/gitlab
-  GITLAB_TEMPLATES_DIR: $INFRA_DIR/ci/gitlab/templates
+  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    # Everything else -> no pipeline
+    - when: never
 
 stages:
   - artifacts
   - services
 
+# trigger template
+.trigger-template:
+  trigger:
+    strategy: depend
+    
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml    
+
+  rules:
+    - $PROJECT_DIR/**/*
+    - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
+# artifacts
 trigger-shared-starter:
+  extends: .trigger-template
   stage: artifacts
+
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
-  trigger:
-    include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
+# services
 trigger-config-server:
+  extends: .trigger-template
   stage: services
+
   variables:
     PROJECT_NAME: config-server
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-  trigger:
-    include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 trigger-accounts-service:
+  extends: .trigger-template
   stage: services
+
   variables:
     PROJECT_NAME: accounts-service
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-  trigger:
-    include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 trigger-authentication-service:
+  extends: .trigger-template
   stage: services
+
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-  trigger:
-    include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 trigger-gateway:
+  extends: .trigger-template
   stage: services
+
   variables:
     PROJECT_NAME: gateway
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-  trigger:
-    include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-  rules:
-    - if: "$CI_COMMIT_BRANCH == 'master'"
-      changes:
-        - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
