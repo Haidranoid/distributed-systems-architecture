@@ -29,23 +29,24 @@ stages:
 .trigger-template:
   trigger:
     strategy: depend
-    
+
     include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml    
+      - local: $PROJECT_DIR/.gitlab-ci.yml
 
   rules:
-    - $PROJECT_DIR/**/*
-    - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
 # artifacts
 trigger-shared-starter:
+  extends: .trigger-template
   stage: artifacts
 
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
-  
-  extends: .trigger-template
 
 # services
 trigger-config-server:
