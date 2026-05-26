@@ -39,12 +39,13 @@ stages:
 
 # artifacts
 trigger-shared-starter:
-  extends: .trigger-template
   stage: artifacts
 
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
+  
+  extends: .trigger-template
 
 # services
 trigger-config-server:
