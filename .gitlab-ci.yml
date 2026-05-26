@@ -12,11 +12,13 @@ variables:
   SERVICES_DIR: services
 
   GITLAB_DIR: $INFRA_DIR/ci/gitlab
-  GITLAB_TEMPLATES_DIR: $GITLAB_DIR/templates
+  GITLAB_TEMPLATES_DIR: $INFRA_DIR/ci/gitlab/templates
 
 workflow:
   rules:
+      # Merge Requests
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      # Default branch (master/main)
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     # Everything else -> no pipeline
     - when: never
