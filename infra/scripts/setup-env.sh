@@ -3,3 +3,4 @@
 set -eu
 
 . aws-utils.sh
+. docker-utils.sh

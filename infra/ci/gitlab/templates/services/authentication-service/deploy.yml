@@ -1,5 +1,6 @@
 deploy:
   stage: deploy
+  when: manual
   needs:
     - job: publish
       artifacts: true

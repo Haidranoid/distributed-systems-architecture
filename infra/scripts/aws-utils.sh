@@ -8,7 +8,7 @@ aws_login() {
     return 1
   fi
 
-  if is_logged; then
+  if verify_aws_session; then
     echo "SUCCESS: already logged with aws version: $aws_version"
     return 0
   fi
@@ -84,7 +84,7 @@ load_codeartifact_vars() {
   export AWS_CODEARTIFACT_AUTH_TOKEN
 }
 
-is_logged() {
+verify_aws_session() {
   aws sts get-caller-identity >/dev/null 2>&1
 }
 

@@ -1,10 +1,18 @@
 deploy:
   stage: deploy
+  when: manual
   needs:
     - job: publish
       artifacts: true
 
   script:
     - cd $INFRA_DIR/k8s/overlays/k8s-local
+
+    - |
+      kubectl create secret docker-registry ecr-creds \
+      --docker-server=$AWS_ECR_URI \
+      --docker-username=AWS \
+      --docker-password=$ECR_LOGIN_PASSWORD \
+      --dry-run=client -o yaml | kubectl apply -f -
 
     - kubectl kustomize . | envsubst | kubectl apply -f - -n k8s-local
