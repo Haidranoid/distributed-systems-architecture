@@ -34,6 +34,7 @@ stages:
 
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
+      - local: $GITLAB_DIR/setup-env.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -46,6 +47,11 @@ trigger-shared-starter:
   extends: .trigger-template
   stage: artifacts
 
+  trigger:
+    include: 
+      - local: $GITLAB_TEMPLATES_DIR/artifacts/test.yml
+      - local: $GITLAB_TEMPLATES_DIR/artifacts/publish.yml
+
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
@@ -55,6 +61,12 @@ trigger-config-server:
   extends: .trigger-template
   stage: services
 
+  trigger:
+    include:
+      - local: $GITLAB_TEMPLATES_DIR/services/test.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/publish.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/deploy.yml
+
   variables:
     PROJECT_NAME: config-server
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
@@ -62,6 +74,12 @@ trigger-config-server:
 trigger-accounts-service:
   extends: .trigger-template
   stage: services
+
+  trigger:
+    include:
+      - local: $GITLAB_TEMPLATES_DIR/services/test.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/publish.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/deploy.yml
 
   variables:
     PROJECT_NAME: accounts-service
@@ -71,6 +89,12 @@ trigger-authentication-service:
   extends: .trigger-template
   stage: services
 
+  trigger:
+    include:
+      - local: $GITLAB_TEMPLATES_DIR/services/test.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/publish.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/deploy.yml
+
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
@@ -78,6 +102,12 @@ trigger-authentication-service:
 trigger-gateway:
   extends: .trigger-template
   stage: services
+
+  trigger:
+    include:
+      - local: $GITLAB_TEMPLATES_DIR/services/test.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/publish.yml
+      - local: $GITLAB_TEMPLATES_DIR/services/deploy.yml
 
   variables:
     PROJECT_NAME: gateway

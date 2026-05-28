@@ -1,0 +1,6 @@
+resources:
+  - ../
+
+patches:
+  - path: deployment-patch.yml
+
