@@ -10,8 +10,8 @@ deploy:
 
     - |
       kubectl create secret docker-registry ecr-creds \
-      --docker-server=$AWS_ECR_REGISTRY_URL \
       --docker-username=AWS \
+      --docker-server=$AWS_ECR_REGISTRY_URL \
       --docker-password=$AWS_ECR_AUTH_PASSWORD \
       --dry-run=client -o yaml | kubectl apply -f -
 
