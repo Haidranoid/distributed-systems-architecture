@@ -1,7 +1,0 @@
-namespace: k8s-local
-
-resources:
-  - namespace.yml
-  - configmap.yml
-  - ../../base
-
