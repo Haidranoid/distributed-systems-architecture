@@ -15,7 +15,6 @@ deploy:
       --docker-password=$AWS_ECR_AUTH_PASSWORD \
       --dry-run=client -o yaml | kubectl apply -f -
 
-    #- kubectl kustomize . | envsubst | kubectl apply -f - -n k8s-local
-    - kubectl kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
+    - kubectl kustomize . | envsubst | kubectl apply -f -
 
-    - kubectl rollout status deployment/$PROJECT_IMAGE_ECR_TAG
+    - kubectl rollout status deployment/$PROJECT_NAME -n k8s-local

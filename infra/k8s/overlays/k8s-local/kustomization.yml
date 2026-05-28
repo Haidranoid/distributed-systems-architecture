@@ -5,22 +5,22 @@ resources:
   - configmap.yml
   - ../../base
 
-#images:
-#  - name: config-server
-#    newName: ${PROJECT_IMAGE_ECR_TAG}
-#    newTag: latest
+images:
+  - name: config-server
+    newName: ${PROJECT_IMAGE_ECR_TAG}
+    newTag: latest
 
-#  - name: accounts-service
-#    newName: ${PROJECT_IMAGE_ECR_TAG}
-#    newTag: latest
+  - name: accounts-service
+    newName: ${PROJECT_IMAGE_ECR_TAG}
+    newTag: latest
 
-#  - name: authentication-service
-#    newName: ${PROJECT_IMAGE_ECR_TAG}
-#    newTag: latest
+  - name: authentication-service
+    newName: ${PROJECT_IMAGE_ECR_TAG}
+    newTag: latest
 
-#  - name: gateway
-#    newName: ${PROJECT_IMAGE_ECR_TAG}
-#    newTag: latest
+  - name: gateway
+    newName: ${PROJECT_IMAGE_ECR_TAG}
+    newTag: latest
 
 
 patches:
