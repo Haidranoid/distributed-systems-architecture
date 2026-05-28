@@ -10,10 +10,11 @@ deploy:
 
     - |
       kubectl create secret docker-registry ecr-credentials \
+      -n k8s-local \
+      --docker-password=$AWS_ECR_AUTH_PASSWORD \
       --docker-username=AWS \
       --docker-server=$AWS_ECR_REGISTRY_URL \
-      --docker-password=$AWS_ECR_AUTH_PASSWORD \
-      --dry-run=client -o yaml | kubectl apply -f -
+      --dry-run=client -o yaml | kubectl apply -n k8s-local -f -
 
     - kubectl kustomize . | envsubst | kubectl apply -f -
 
