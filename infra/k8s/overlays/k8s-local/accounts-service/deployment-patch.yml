@@ -6,6 +6,8 @@ spec:
   replicas: 1
   template:
     spec:
+      imagePullSecrets:
+        - name: ecr-credentials
       containers:
         - name: accounts-service
           imagePullPolicy: Always

@@ -10,9 +10,12 @@ deploy:
 
     - |
       kubectl create secret docker-registry ecr-creds \
-      --docker-server=$AWS_ECR_URI \
+      --docker-server=$AWS_ECR_REGISTRY_URL \
       --docker-username=AWS \
-      --docker-password=$ECR_LOGIN_PASSWORD \
+      --docker-password=$AWS_ECR_AUTH_PASSWORD \
       --dry-run=client -o yaml | kubectl apply -f -
 
-    - kubectl kustomize . | envsubst | kubectl apply -f - -n k8s-local
+    #- kubectl kustomize . | envsubst | kubectl apply -f - -n k8s-local
+    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
+
+    - kubectl rollout status deployment/$PROJECT_IMAGE_ECR_TAG

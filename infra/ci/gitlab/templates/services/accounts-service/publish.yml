@@ -7,7 +7,7 @@ publish:
   script:
     - cd $PROJECT_DIR
 
-    - echo $AWS_ECR_AUTH_PASSWORD | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY_URL
+    - docker_login
 
     - |
       docker build \
