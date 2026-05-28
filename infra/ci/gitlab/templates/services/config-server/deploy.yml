@@ -9,7 +9,7 @@ deploy:
     - cd $INFRA_DIR/k8s/overlays/k8s-local
 
     - |
-      kubectl create secret docker-registry ecr-creds \
+      kubectl create secret docker-registry ecr-credentials \
       --docker-username=AWS \
       --docker-server=$AWS_ECR_REGISTRY_URL \
       --docker-password=$AWS_ECR_AUTH_PASSWORD \
