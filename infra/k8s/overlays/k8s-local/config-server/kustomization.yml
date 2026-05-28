@@ -1,8 +1,7 @@
 namespace: k8s-local
 
 resources:
-  - ../namespace.yml
-  - ../configmap.yml
+  - ../common
   - ../../../base/config-server
 
 patches:

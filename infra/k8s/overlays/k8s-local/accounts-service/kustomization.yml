@@ -1,9 +1,8 @@
 namespace: k8s-local
 
 resources:
-  - ../../../base/accounts-service
-  - ../namespace.yml
-  - ../configmap.yml
+  - ../common
+  - ../../../base/config-server
 
 patches:
   - path: deployment-patch.yml

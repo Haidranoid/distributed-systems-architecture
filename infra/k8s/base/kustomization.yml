@@ -1,5 +1,0 @@
-resources:
-  - accounts-service
-  - authentication-service
-  - config-server
-  - gateway
