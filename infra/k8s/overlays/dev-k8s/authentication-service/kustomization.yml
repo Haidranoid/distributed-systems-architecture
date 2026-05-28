@@ -1,8 +1,8 @@
-namespace: k8s-local
+namespace: dev-k8s
 
 resources:
   - ../common
-  - ../../../base/gateway
+  - ../../../base/authentication-service
 
 patches:
   - path: deployment-patch.yml

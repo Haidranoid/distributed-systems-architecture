@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: k8s-local-configmap
-data:
-  SPRING_PROFILES_ACTIVE: k8s-local

@@ -16,5 +16,5 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:
-                  name: k8s-local-configmap
+                  name: dev-k8s-configmap
                   key: SPRING_PROFILES_ACTIVE
