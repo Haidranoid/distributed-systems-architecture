@@ -10,6 +10,7 @@ spec:
         - name: ecr-credentials
       containers:
         - name: accounts-service
+          image: ${PROJECT_IMAGE_ECR_TAG}
           imagePullPolicy: Always
           env:
             - name: SPRING_PROFILES_ACTIVE

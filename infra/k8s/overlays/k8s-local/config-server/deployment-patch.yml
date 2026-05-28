@@ -10,4 +10,5 @@ spec:
         - name: ecr-credentials
       containers:
         - name: config-server
+          image: ${PROJECT_IMAGE_ECR_TAG}
           imagePullPolicy: Always
