@@ -16,6 +16,6 @@ deploy:
       --dry-run=client -o yaml | kubectl apply -f -
 
     #- kubectl kustomize . | envsubst | kubectl apply -f - -n k8s-local
-    - kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
+    - kubectl kustomize edit set image $PROJECT_NAME=$PROJECT_IMAGE_ECR_TAG:latest
 
     - kubectl rollout status deployment/$PROJECT_IMAGE_ECR_TAG
