@@ -1,0 +1,8 @@
+namespace: k8s-local
+
+resources:
+  - ../
+
+patches:
+  - path: deployment-patch.yml
+

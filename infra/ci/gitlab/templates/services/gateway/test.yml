@@ -2,6 +2,8 @@ test:
   stage: test
   script:
     - cd $PROJECT_DIR
+    - echo $PROJECT_DIR
+    - echo $PROJECT_NAME
     - chmod +x ./gradlew
     - ./gradlew test --build-cache --parallel
 

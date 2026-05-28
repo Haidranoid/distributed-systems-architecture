@@ -6,7 +6,6 @@ default:
   before_script:
     - cd infra/scripts
 
-    - echo "$CI_CONFIG_PATH"
     - . setup-env.sh
 
     - aws_login v1
