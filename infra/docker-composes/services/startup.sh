@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+set -eu
 
-source ../../env.sh
-source "$AWS_SCRIPTS_DIR/aws-utils.sh"
+. ../../scripts/aws-utils.sh
 
-setup_aws_env v2
+aws_login v2
+load_env_vars
 
 echo "Stopping existing DSA-services containers if present..."
 docker compose down || true

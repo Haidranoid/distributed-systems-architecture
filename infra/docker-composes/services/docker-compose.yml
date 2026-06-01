@@ -6,9 +6,14 @@ services:
       context: ../../../services/config-server
       dockerfile: Dockerfile
     environment:
-      SPRING_PROFILES_ACTIVE: dev-compose
+      SPRING_PROFILES_ACTIVE: default
     ports:
       - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://localhost:8888/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   authentication-service-srv:
     image: authentication-service:dev-compose
@@ -22,7 +27,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - config-server-srv
+      config-server-srv:
+        condition: service_healthy
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -38,7 +44,8 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - config-server-srv
+      config-server-srv:
+        condition: service_healthy
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
@@ -54,9 +61,12 @@ services:
     ports:
       - "8222:8222"
     depends_on:
-      - config-server-srv
-      - authentication-service-srv
-      - accounts-service-srv
+      config-server-srv:
+        condition: service_healthy
+      authentication-service-srv:
+        condition: service_started
+      accounts-service-srv:
+        condition: service_started
 
 networks:
   default:

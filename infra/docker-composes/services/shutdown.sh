@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-set -euo pipefail
+set -eu
 
 echo "Stopping existing DSA-services containers if present..."
 docker compose down || true
