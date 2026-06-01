@@ -9,7 +9,7 @@ spring:
         git:
           uri: https://github.com/Haidranoid/distributed-systems-architecture-properties.git
           default-label: master
-          clone-on-start: true
+          clone-on-start: false
           #skipSslValidation: true
 management:
   endpoints:
