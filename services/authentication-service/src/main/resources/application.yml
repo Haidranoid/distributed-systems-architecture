@@ -4,7 +4,7 @@ spring:
   application:
     name: authentication-service
   config:
-    import: optional:configserver:http://config-server-srv:8888
+    import: ${CONFIG_IMPORT:}
   datasource:
     driver-class-name: org.postgresql.Driver
   jpa:
