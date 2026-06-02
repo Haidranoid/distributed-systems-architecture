@@ -1,6 +1,7 @@
 spring:
-  config:
-    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/accounts_service_dev
     username: postgres
