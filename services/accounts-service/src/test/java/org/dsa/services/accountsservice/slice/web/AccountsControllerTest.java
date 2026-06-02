@@ -36,7 +36,7 @@ public class AccountsControllerTest {
     private AccountServiceImpl accountService;
 
     @Test
-    @DisplayName("GET /api/v1/accounts/me returns 200 when there user has a session")
+    @DisplayName("GET /api/v1/accounts/me returns 200 when user has a session")
     public void me_whenIsThereASessionActive_shouldReturn202() throws Exception {
         var session = AccountDtoFixtures.meAccountResponseDto(1L);
 
@@ -48,6 +48,22 @@ public class AccountsControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.username").value("ronald"))
                 .andExpect(jsonPath("$.role").value(Role.USER.name()));
+    }
+
+    @Test
+    @DisplayName("PATCH /api/v1/accounts/me/change-password returns 200 when user has a session")
+    public void meChangePassword_whenAccountExists_shouldReturn200() throws Exception {
+        var changePasswordDto = AccountDtoFixtures.changePasswordAccountDto();
+
+        mvc.perform(
+                        patch("/api/v1/accounts/me/change-password")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(changePasswordDto))
+                )
+                .andExpect(status().isNoContent());
+
+        //verify(accountService)
+        //       .changePassword(any());
     }
 
     //@WithMockUser(Role = "ADMIN")

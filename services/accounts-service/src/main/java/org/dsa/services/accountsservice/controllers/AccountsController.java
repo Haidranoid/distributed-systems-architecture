@@ -35,6 +35,16 @@ public class AccountsController {
         return currentSession;
     }
 
+    @PatchMapping("/me/change-password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void meChangePassword(@RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
+        log.info("changePassword request: {}", updateAccountPasswordDto);
+
+        //accountService.changePassword(changePasswordAccountDto);
+
+        log.info("changePassword response: {}", "success");
+    }
+
     @GetMapping
     public List<AccountDto> getAllAccounts() {
         log.info("getAllAccounts request started");
