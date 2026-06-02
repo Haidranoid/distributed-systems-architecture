@@ -1,7 +1,7 @@
 spring:
-  config:
-    import: optional:configserver:http://host.docker.internal:8888
   cloud:
+    config:
+      enabled: false
     gateway:
       server:
         webmvc:

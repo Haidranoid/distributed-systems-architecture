@@ -84,3 +84,8 @@ tasks.named('test') {
     //jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }}", '-Xshare:off'
     jvmArgs "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('mockito-core') }.absolutePath}"
 }
+
+test {
+    systemProperty "spring.cloud.config.enabled", "false"
+    systemProperty "spring.cloud.config.import-check.enabled", "false"
+}
