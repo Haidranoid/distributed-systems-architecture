@@ -24,6 +24,7 @@ services:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8080:8080"
     depends_on:
@@ -41,6 +42,7 @@ services:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8081:8081"
     depends_on:
@@ -58,6 +60,7 @@ services:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
       SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8222:8222"
     depends_on:
