@@ -1,10 +1,9 @@
 package org.dsa.services.accountsservice.slice.web;
 
 import org.dsa.services.accountsservice.controllers.AccountsController;
-import org.dsa.services.accountsservice.controllers.GlobalControllerAdvice;
+import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
-import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(AccountsController.class)
-@Import(GlobalControllerAdvice.class)
+@Import(AccountsControllerAdvice.class)
 public class AccountsControllerTest {
 
     @Autowired
@@ -34,37 +33,6 @@ public class AccountsControllerTest {
 
     @MockitoBean
     private AccountServiceImpl accountService;
-
-    @Test
-    @DisplayName("GET /api/v1/accounts/me returns 200 when user has a session")
-    public void me_whenIsThereASessionActive_shouldReturn202() throws Exception {
-        var session = AccountDtoFixtures.meAccountResponseDto(1L);
-
-        when(accountService.me())
-                .thenReturn(session);
-
-        mvc.perform(get("/api/v1/accounts/me"))
-                .andExpect(status().isAccepted())
-                .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.username").value("ronald"))
-                .andExpect(jsonPath("$.role").value(Role.USER.name()));
-    }
-
-    @Test
-    @DisplayName("PATCH /api/v1/accounts/me/change-password returns 200 when user has a session")
-    public void meChangePassword_whenAccountExists_shouldReturn200() throws Exception {
-        var changePasswordDto = AccountDtoFixtures.changePasswordAccountDto();
-
-        mvc.perform(
-                        patch("/api/v1/accounts/me/change-password")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(changePasswordDto))
-                )
-                .andExpect(status().isNoContent());
-
-        //verify(accountService)
-        //       .changePassword(any());
-    }
 
     //@WithMockUser(Role = "ADMIN")
     @Test
@@ -96,7 +64,7 @@ public class AccountsControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/v1/accounts/{id} returns 200 when account exists")
+    @DisplayName("GET /api/v1/accounts/{userId} returns 200 when account exists")
     public void getAccountById_whenAccountExists_shouldReturn200() throws Exception {
         // Arrange
         var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
@@ -110,7 +78,7 @@ public class AccountsControllerTest {
     }
 
     @Test
-    @DisplayName("GET /api/v1/accounts/{id} returns 404 when account was not found")
+    @DisplayName("GET /api/v1/accounts/{userId} returns 404 when account was not found")
     public void getAccountById_whenAccountDoesNotExist_shouldReturn404() throws Exception {
         var userId = 1L;
         when(accountService.findById(userId))
@@ -206,12 +174,12 @@ public class AccountsControllerTest {
     }
 
     @Test
-    @DisplayName("PATCH /api/v1/accounts/change-password returns 200 when account exists")
+    @DisplayName("PATCH /api/v1/accounts/{userId}/change-password returns 200 when account exists")
     public void changePassword_whenAccountExists_shouldReturn200() throws Exception {
         var changePasswordDto = AccountDtoFixtures.changePasswordAccountDto();
 
         mvc.perform(
-                        patch("/api/v1/accounts/change-password")
+                        patch("/api/v1/accounts/{userId}/change-password", 1L)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(changePasswordDto))
                 )

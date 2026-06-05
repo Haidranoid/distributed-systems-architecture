@@ -1,6 +1,6 @@
 package org.dsa.services.accountsservice.slice.web;
 
-import org.dsa.services.accountsservice.controllers.GlobalControllerAdvice;
+import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
 import org.dsa.services.accountsservice.controllers.InternalAccountsController;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(InternalAccountsController.class)
-@Import(GlobalControllerAdvice.class)
+@Import(AccountsControllerAdvice.class)
 public class InternalAccountsControllerTest {
 
     @Autowired

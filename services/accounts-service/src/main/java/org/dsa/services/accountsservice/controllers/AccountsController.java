@@ -1,7 +1,6 @@
 package org.dsa.services.accountsservice.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,29 +22,8 @@ public class AccountsController {
 
     private final AccountServiceImpl accountService;
 
-    @GetMapping("/me")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    @SecurityRequirement(name = "bearerAuth")
-    public AccountDto getMe() {
-        log.info("getMe request started");
-
-        var currentSession = accountService.me();
-
-        log.info("getMe request response: {}", currentSession);
-        return currentSession;
-    }
-
-    @PatchMapping("/me/change-password")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void meChangePassword(@RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
-        log.info("changePassword request: {}", updateAccountPasswordDto);
-
-        //accountService.changePassword(changePasswordAccountDto);
-
-        log.info("changePassword response: {}", "success");
-    }
-
     @GetMapping
+    @Operation(summary = "Get all accounts")
     public List<AccountDto> getAllAccounts() {
         log.info("getAllAccounts request started");
 
@@ -67,6 +45,7 @@ public class AccountsController {
     }
 
     @PatchMapping("/{userId}")
+    @Operation(summary = "Update an account by id")
     public AccountDto updateAccount(
             @PathVariable Long userId,
             @RequestBody UpdateAccountDto updateAccountDto
@@ -81,6 +60,7 @@ public class AccountsController {
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete an account by id")
     public void deleteAccount(@PathVariable Long userId) {
         log.info("deleteAccount request: {}", userId);
 
@@ -89,9 +69,13 @@ public class AccountsController {
         log.info("deleteAccount request response: {}", userId);
     }
 
-    @PatchMapping("/change-password")
+    @PatchMapping("/{userId}/change-password")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void changePassword(@RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
+    @Operation(summary = "Change password of an account by id")
+    public void changePassword(
+            @PathVariable Long userId,
+            @RequestBody UpdateAccountPasswordDto updateAccountPasswordDto
+    ) {
         log.info("changePassword request: {}", updateAccountPasswordDto);
 
         //accountService.changePassword(changePasswordAccountDto);

@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AccountServiceTest {
+public class AccountServiceImplTest {
 
     @Mock
     private AccountsRepository accountsRepository;
@@ -66,6 +66,21 @@ public class AccountServiceTest {
                 () -> accountService.me());
 
         assertEquals(UnauthorizedException.class, exception.getClass());
+    }
+
+    @Test
+    void me_whenThereIsASessionButIsNotFoundInDB_shouldThrowException() {
+        var username = "ronald";
+
+        when(sessionService.getCurrentUsername())
+                .thenReturn(username);
+        when(accountsRepository.findByUsername(username))
+                .thenReturn(Optional.empty());
+
+        var exception = assertThrows(AccountNotFoundException.class,
+                () -> accountService.me());
+
+        assertEquals(AccountNotFoundException.class, exception.getClass());
     }
 
     @Test

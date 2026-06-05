@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @RestControllerAdvice
-public class GlobalControllerAdvice {
+public class AccountsControllerAdvice {
 
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ApiError> handleBaseException(BaseException ex) {
