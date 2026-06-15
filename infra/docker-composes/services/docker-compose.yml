@@ -5,8 +5,10 @@ services:
     build:
       context: ../../../services/config-server
       dockerfile: Dockerfile
+    volumes:
+      - ../../../../distributed-systems-architecture-properties:/dsa-properties-repository
     environment:
-      SPRING_PROFILES_ACTIVE: default
+      SPRING_PROFILES_ACTIVE: native
     ports:
       - "8888:8888"
     healthcheck:
@@ -73,4 +75,5 @@ services:
 
 networks:
   default:
+    external: true
     name: distributed-systems
