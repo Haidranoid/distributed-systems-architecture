@@ -1,10 +1,12 @@
 package org.dsa.services.authenticationservice.messaging.topics;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class KafkaTopics {
+public enum KafkTopics {
 
-    public static final String ACCOUNT_CREATED = "account-created";
+    ACCOUNT_CREATED("account-created");
 }

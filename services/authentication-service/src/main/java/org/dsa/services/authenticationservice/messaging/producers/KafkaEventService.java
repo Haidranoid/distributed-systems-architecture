@@ -1,15 +1,15 @@
-package org.dsa.services.authenticationservice.messaging.publishers;
+package org.dsa.services.authenticationservice.messaging.producers;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessagePublisherService {
+public class KafkaProducerService {
 
     // Spring Boot auto-wires this matching your serialized data types
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public MessagePublisherService(KafkaTemplate<String, Object> kafkaTemplate) {
+    public KafkaProducerService(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 

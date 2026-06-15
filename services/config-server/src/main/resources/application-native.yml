@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///dsa-properties-repository
