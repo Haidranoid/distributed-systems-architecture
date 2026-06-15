@@ -1,4 +1,6 @@
 spring:
+  kafka:
+    bootstrap-servers: host.docker.internal:9092
   cloud:
     config:
       enabled: false

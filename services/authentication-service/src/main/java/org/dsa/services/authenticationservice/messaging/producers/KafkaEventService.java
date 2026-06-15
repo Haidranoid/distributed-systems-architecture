@@ -1,20 +1,31 @@
 package org.dsa.services.authenticationservice.messaging.producers;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.dsa.services.authenticationservice.messaging.topics.KafkaTopics;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
-public class KafkaProducerService {
+@RequiredArgsConstructor
+public class KafkaEventService {
 
-    // Spring Boot auto-wires this matching your serialized data types
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public KafkaProducerService(KafkaTemplate<String, Object> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
+    public void publishEvent(
+            KafkaTopics topic,
+            String key,
+            Object payload
+    ) {
+        log.info("Publishing event to {}", topic.getTopic());
 
-    public void publishEvent(String topic, String key, Object payload) {
-        // Asynchronously sends payload to the desired topic partition
-        this.kafkaTemplate.send(topic, key, payload);
+        kafkaTemplate.send(
+                topic.getTopic(),
+                key,
+                payload
+        );
+
+        log.info("Publish invoked");
     }
 }

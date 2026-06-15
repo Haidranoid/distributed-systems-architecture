@@ -1,9 +1,10 @@
 package org.dsa.services.authenticationservice.messaging.events;
 
-import java.util.UUID;
+import lombok.Builder;
 
+@Builder
 public record AccountCreatedEvent(
-        UUID accountId,
+        Long accountId,
         String email
 ) {
 }

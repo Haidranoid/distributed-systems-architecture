@@ -3,16 +3,11 @@ server:
 spring:
   application:
     name: authentication-service
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   config:
     import: ${CONFIG_IMPORT:}
-  kafka:
-    bootstrap-servers: localhost:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        enable.idempotence: true
-        acks: all
   datasource:
     driver-class-name: org.postgresql.Driver
   jpa:

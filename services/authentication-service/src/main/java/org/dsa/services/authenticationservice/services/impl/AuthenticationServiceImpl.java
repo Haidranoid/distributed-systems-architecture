@@ -7,6 +7,9 @@ import org.dsa.services.authenticationservice.common.dtos.SignupDto;
 import org.dsa.services.authenticationservice.common.utils.JwtSignerService;
 import org.dsa.services.authenticationservice.mappers.impl.AuthenticationMapperImpl;
 import org.dsa.services.authenticationservice.common.properties.Endpoints;
+import org.dsa.services.authenticationservice.messaging.events.AccountCreatedEvent;
+import org.dsa.services.authenticationservice.messaging.producers.KafkaEventService;
+import org.dsa.services.authenticationservice.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
 import org.dsa.services.authenticationservice.services.AuthenticationService;
 import org.dsa.services.authenticationservice.common.constants.TokenType;
@@ -34,6 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final Endpoints endpoints;
     private final TokensRepository tokensRepository;
     private final AuthenticationMapperImpl authMapper;
+    private final KafkaEventService kafkaEventService;
 
     @Override
     public AuthResponseDto login(LoginDto loginDto) {
@@ -90,7 +94,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         saveAccountToken(accountCreated.id(), accessToken);
 
-        return authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
+        var authResponseDto = authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
+
+        kafkaEventService.publishEvent(
+                KafkaTopics.ACCOUNT_CREATED,
+                accountCreated.id().toString(),
+                AccountCreatedEvent.builder()
+                        .accountId(accountCreated.id())
+                        .email(accountCreated.email())
+                        .build()
+        );
+
+        return authResponseDto;
     }
 
     /*
