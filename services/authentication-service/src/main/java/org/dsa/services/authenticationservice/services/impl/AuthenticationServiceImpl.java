@@ -1,5 +1,7 @@
 package org.dsa.services.authenticationservice.services.impl;
 
+import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
+import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
 import org.dsa.services.authenticationservice.common.dtos.AuthResponseDto;
 import org.dsa.services.authenticationservice.common.dtos.LoginDto;
@@ -7,9 +9,7 @@ import org.dsa.services.authenticationservice.common.dtos.SignupDto;
 import org.dsa.services.authenticationservice.common.utils.JwtSignerService;
 import org.dsa.services.authenticationservice.mappers.impl.AuthenticationMapperImpl;
 import org.dsa.services.authenticationservice.common.properties.Endpoints;
-import org.dsa.services.authenticationservice.messaging.events.AccountCreatedEvent;
-import org.dsa.services.authenticationservice.messaging.producers.KafkaEventService;
-import org.dsa.services.authenticationservice.messaging.topics.KafkaTopics;
+import org.dsa.services.authenticationservice.messaging.producers.KafkaEventPublisher;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
 import org.dsa.services.authenticationservice.services.AuthenticationService;
 import org.dsa.services.authenticationservice.common.constants.TokenType;
@@ -37,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final Endpoints endpoints;
     private final TokensRepository tokensRepository;
     private final AuthenticationMapperImpl authMapper;
-    private final KafkaEventService kafkaEventService;
+    private final KafkaEventPublisher kafkaEventPublisher;
 
     @Override
     public AuthResponseDto login(LoginDto loginDto) {
@@ -96,7 +96,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var authResponseDto = authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
 
-        kafkaEventService.publishEvent(
+        kafkaEventPublisher.publishEvent(
                 KafkaTopics.ACCOUNT_CREATED,
                 accountCreated.id().toString(),
                 AccountCreatedEvent.builder()
