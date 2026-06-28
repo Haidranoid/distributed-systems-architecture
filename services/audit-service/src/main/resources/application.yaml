@@ -1,0 +1,37 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: audit-service
+  kafka:
+    consumer:
+      group-id: audit-service
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        spring.json.trusted.packages: org.dsa.core.sharedstarter.messaging.events
+      #  spring.json.trusted.packages: "*"
+      #  spring.json.value.default.type: org.dsa.services.auditservice.messaging.events.AccountCreatedEvent
+      #  spring.json.use.type.headers: false
+  config:
+    import: ${CONFIG_IMPORT:}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+application:
+  security:
+    jwt:
+      algorithm: RS256
+      public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5uD98RhaZcg9x9W8yXufSceb4hyRbuZg4pcCGfiag4ucnxZ8yglcQMPqUrdGm7q1tFPRhMomAtQhwSXlbH33zeL8Coe4qQ4mOCGS5ZsltY5rLapS41QYlsFLrQ6liw98ZFOBDorJcyMxdr1ABsmke3TUR2AyKIciJJ9BAhHwL6kIsQVln3DDltG+ZiEWWVCH9haFQ5ScutD2i+MK82gVpw0MKR+rdXLwKm3DF8Y0PuLM/EXesM5QuZ53IWT+S8NOlAvI3Ze9ZZp3RVEFYF6/nOAecQdr0tRIE4+pcRaPArMhEAUJWuGHL/jWEy/eXlNN5FS3HEmj2g9L3TtQCUtzWQIDAQAB
+      issuer: ${spring.application.name}
