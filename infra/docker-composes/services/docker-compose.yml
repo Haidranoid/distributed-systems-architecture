@@ -53,6 +53,24 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
+  audit-service-srv:
+    image: audit-service:dev-compose
+    build:
+      context: ../../../services/audit-service
+      dockerfile: Dockerfile
+      args:
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
+    ports:
+      - "8082:8082"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
   gateway-srv:
     image: gateway:dev-compose
     build:
@@ -71,6 +89,8 @@ services:
       authentication-service-srv:
         condition: service_started
       accounts-service-srv:
+        condition: service_started
+      audit-service-srv:
         condition: service_started
 
 networks:
