@@ -1,7 +1,7 @@
 #!/bin/sh
 
-set -eu
+#set -eu
 
 . aws-utils.sh
 . docker-utils.sh
-. compose-utils.sh
+. composes-utils.sh
