@@ -3,8 +3,8 @@ services:
   config-server-srv:
     image: config-server:dev-compose
     build:
-      context: ../../../services/config-server
-      dockerfile: Dockerfile
+      context: ../../services/config-server
+      dockerfile: ../../services/config-server/Dockerfile
     volumes:
       - ../../../../distributed-systems-architecture-properties:/dsa-properties-repository
     environment:
@@ -20,8 +20,8 @@ services:
   authentication-service-srv:
     image: authentication-service:dev-compose
     build:
-      context: ../../../services/authentication-service
-      dockerfile: Dockerfile
+      context: ../../services/authentication-service
+      dockerfile: ../../services/authentication-service/Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -38,8 +38,8 @@ services:
   accounts-service-srv:
     image: accounts-service:dev-compose
     build:
-      context: ../../../services/accounts-service
-      dockerfile: Dockerfile
+      context: ../../services/accounts-service
+      dockerfile: ../../services/accounts-service/Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -56,8 +56,8 @@ services:
   audit-service-srv:
     image: audit-service:dev-compose
     build:
-      context: ../../../services/audit-service
-      dockerfile: Dockerfile
+      context: ../../services/audit-service
+      dockerfile: ../../services/audit-service/Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -74,8 +74,8 @@ services:
   gateway-srv:
     image: gateway:dev-compose
     build:
-      context: ../../../services/gateway
-      dockerfile: Dockerfile
+      context: ../../services/gateway
+      dockerfile: ../../services/gateway/Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
