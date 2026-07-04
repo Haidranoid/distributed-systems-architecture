@@ -1,10 +1,13 @@
 package org.dsa.services.authenticationservice.unit.services;
 
+import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
+import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
 import org.dsa.services.authenticationservice.common.utils.JwtSignerService;
 import org.dsa.services.authenticationservice.common.fixtures.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mappers.impl.AuthenticationMapperImpl;
 import org.dsa.services.authenticationservice.common.properties.Endpoints;
+import org.dsa.services.authenticationservice.messaging.producers.KafkaEventPublisher;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
 import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
 import org.dsa.core.sharedstarter.common.constants.Permission;
@@ -14,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
@@ -41,6 +45,8 @@ class AuthenticationServiceImplTest {
     private TokensRepository tokensRepository;
     @Mock
     private AuthenticationMapperImpl authMapper;
+    @Mock
+    private KafkaEventPublisher kafkaEventPublisher;
 
     @InjectMocks
     private AuthenticationServiceImpl authenticationService;
@@ -130,7 +136,7 @@ class AuthenticationServiceImplTest {
         ).thenReturn(accountCreated);
 
 
-        when(jwtSignerService.generateAccessToken(accountCreated.username(),new HashMap<>()))
+        when(jwtSignerService.generateAccessToken(accountCreated.username(), new HashMap<>()))
                 .thenReturn(accessToken);
 
         when(jwtSignerService.generateRefreshToken(accountCreated.username()))
@@ -138,6 +144,18 @@ class AuthenticationServiceImplTest {
 
         when(authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken))
                 .thenReturn(authResponseDto);
+
+        //TODO: verify method params
+        Mockito.doNothing()
+                .when(kafkaEventPublisher)
+                .publishEvent(
+                        KafkaTopics.ACCOUNT_CREATED,
+                        accountCreated.id().toString(),
+                        AccountCreatedEvent.builder()
+                                .accountId(accountCreated.id())
+                                .email(accountCreated.email())
+                                .build()
+                );
 
         var authResponse = authenticationService.signup(signupDto);
 
@@ -161,7 +179,7 @@ class AuthenticationServiceImplTest {
         ).thenReturn(accountCreated);
 
 
-        when(jwtSignerService.generateAccessToken(accountCreated.username(),new HashMap<>()))
+        when(jwtSignerService.generateAccessToken(accountCreated.username(), new HashMap<>()))
                 .thenReturn(accessToken);
 
         when(jwtSignerService.generateRefreshToken(accountCreated.username()))
@@ -170,15 +188,27 @@ class AuthenticationServiceImplTest {
         when(authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken))
                 .thenReturn(authResponseDto);
 
+        //TODO: verify method params
+        Mockito.doNothing()
+                .when(kafkaEventPublisher)
+                .publishEvent(
+                        KafkaTopics.ACCOUNT_CREATED,
+                        accountCreated.id().toString(),
+                        AccountCreatedEvent.builder()
+                                .accountId(accountCreated.id())
+                                .email(accountCreated.email())
+                                .build()
+                );
+
         authenticationService.signup(signupDto);
 
         verify(tokensRepository).save(argThat(tokenEntity ->
-                        tokenEntity.getAccountId().equals(accountCreated.id())
+                tokenEntity.getAccountId().equals(accountCreated.id())
                         && tokenEntity.getToken().equals(accessToken)
                         && tokenEntity.getTokenType().equals(TokenType.BEARER)
                         && !tokenEntity.isExpired()
                         && !tokenEntity.isRevoked()
-                ));
+        ));
     }
 
     @Test
