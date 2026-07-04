@@ -123,7 +123,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation(testFixtures('org.dsa.core:shared-starter:1.0.0'))
+    testImplementation(testFixtures('org.dsa.core:shared-starter:1.1.0'))
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'net.datafaker:datafaker:2.5.3'
 }
