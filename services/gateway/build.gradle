@@ -32,9 +32,9 @@ repositories {
     try {
         if (!codeArtifactAuthToken) {
 
-            providers.exec {
-                commandLine 'aws', 'login'
-            }
+            //providers.exec {
+            //    commandLine 'aws', 'login'
+            //}
 
             codeArtifactAuthToken = providers.exec {
                 commandLine 'aws', 'codeartifact', 'get-authorization-token',
