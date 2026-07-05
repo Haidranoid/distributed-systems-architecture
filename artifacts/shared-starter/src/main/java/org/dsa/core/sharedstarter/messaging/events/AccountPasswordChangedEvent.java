@@ -4,7 +4,7 @@ import lombok.Builder;
 import org.dsa.core.sharedstarter.messaging.contracts.KafkaEvent;
 
 @Builder
-public record PasswordChangedEvent(
+public record AccountPasswordChangedEvent(
 
 ) implements KafkaEvent {
 }
