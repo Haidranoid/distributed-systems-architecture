@@ -1,6 +1,7 @@
 package org.dsa.services.authenticationservice.services.impl;
 
 import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
+import org.dsa.core.sharedstarter.messaging.events.UserLoggedInEvent;
 import org.dsa.core.sharedstarter.messaging.producers.KafkaEventPublisher;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
@@ -41,7 +42,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthResponseDto login(LoginDto loginDto) {
-
         var accountAuthenticated = restTemplate.postForObject(
                 endpoints.accountsServiceInternalEndpoint() + "/authenticate-login",
                 loginDto,
@@ -73,12 +73,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 accountAuthenticated.username()
         );
 
-        return authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
+        var authResponseDto = authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
+
+        kafkaEventPublisher.publishEvent(
+                KafkaTopics.USER_LOGGED_IN,
+                accountAuthenticated.id().toString(),
+                UserLoggedInEvent.builder()
+                        .accountId(accountAuthenticated.id())
+                        .username(accountAuthenticated.username())
+                        .email(accountAuthenticated.email())
+                        .build()
+        );
+
+        return authResponseDto;
     }
 
     @Override
     public AuthResponseDto signup(SignupDto signupDto) {
-
         var accountCreated = restTemplate.postForObject(
                 endpoints.accountsServiceInternalEndpoint(),
                 signupDto,
@@ -101,6 +112,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 accountCreated.id().toString(),
                 AccountCreatedEvent.builder()
                         .accountId(accountCreated.id())
+                        .username(accountCreated.username())
                         .email(accountCreated.email())
                         .build()
         );
