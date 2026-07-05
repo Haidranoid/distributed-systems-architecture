@@ -1,6 +1,7 @@
 package org.dsa.services.authenticationservice.services.impl;
 
 import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
+import org.dsa.core.sharedstarter.messaging.producers.KafkaEventPublisher;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
 import org.dsa.services.authenticationservice.common.dtos.AuthResponseDto;
@@ -9,7 +10,6 @@ import org.dsa.services.authenticationservice.common.dtos.SignupDto;
 import org.dsa.services.authenticationservice.common.utils.JwtSignerService;
 import org.dsa.services.authenticationservice.mappers.impl.AuthenticationMapperImpl;
 import org.dsa.services.authenticationservice.common.properties.Endpoints;
-import org.dsa.services.authenticationservice.messaging.producers.KafkaEventPublisher;
 import org.dsa.services.authenticationservice.repositories.TokensRepository;
 import org.dsa.services.authenticationservice.services.AuthenticationService;
 import org.dsa.services.authenticationservice.common.constants.TokenType;
