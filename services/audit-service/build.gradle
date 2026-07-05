@@ -62,8 +62,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.core:shared-starter:1.1.0'
-    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+    implementation 'org.dsa.core:shared-starter:1.2.1'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
