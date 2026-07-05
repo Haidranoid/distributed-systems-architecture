@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'org.dsa.core'
-version = '1.2.2'
+version = '1.3.0'
 description = 'shared-starter'
 
 java {
