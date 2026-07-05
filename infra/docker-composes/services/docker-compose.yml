@@ -1,6 +1,7 @@
 services:
   config-server-srv:
     image: config-server:dev-compose
+    container_name: config-server
     build:
       context: ../../../services/config-server
       dockerfile: ../../../services/config-server/Dockerfile
@@ -18,6 +19,7 @@ services:
 
   authentication-service-srv:
     image: authentication-service:dev-compose
+    container_name: authentication-service
     build:
       context: ../../../services/authentication-service
       dockerfile: ../../../services/authentication-service/Dockerfile
@@ -36,6 +38,7 @@ services:
 
   accounts-service-srv:
     image: accounts-service:dev-compose
+    container_name: accounts-service
     build:
       context: ../../../services/accounts-service
       dockerfile: ../../../services/accounts-service/Dockerfile
@@ -54,6 +57,7 @@ services:
 
   audit-service-srv:
     image: audit-service:dev-compose
+    container_name: audit-service
     build:
       context: ../../../services/audit-service
       dockerfile: ../../../services/audit-service/Dockerfile
@@ -72,6 +76,7 @@ services:
 
   gateway-srv:
     image: gateway:dev-compose
+    container_name: gateway
     build:
       context: ../../../services/gateway
       dockerfile: ../../../services/gateway/Dockerfile
