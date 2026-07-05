@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'org.dsa.core'
-version = '1.1.0'
+version = '1.2.1'
 description = 'shared-starter'
 
 java {
@@ -83,9 +83,10 @@ dependencyManagement {
 
 dependencies {
     api 'io.jsonwebtoken:jjwt-api:0.13.0'
-    api 'org.springframework.security:spring-security-oauth2-jose'
+    api 'org.springframework.boot:spring-boot-starter-kafka'
     api 'org.springframework.boot:spring-boot-starter-security-oauth2-client'
     api 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
+    api 'org.springframework.security:spring-security-oauth2-jose'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
