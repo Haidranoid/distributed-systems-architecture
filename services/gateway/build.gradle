@@ -67,13 +67,13 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.core:shared-starter:1.0.0'
+    implementation 'org.dsa.core:shared-starter:1.2.1'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-gateway-server-webmvc'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    //testImplementation(testFixtures('org.dsa.core:shared-starter:1.0.0'))
+    //testImplementation(testFixtures('org.dsa.core:shared-starter:1.2.1'))
     testImplementation 'org.springframework.boot:spring-boot-starter-actuator-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
