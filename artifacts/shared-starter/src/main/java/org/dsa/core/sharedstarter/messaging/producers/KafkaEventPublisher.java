@@ -1,14 +1,11 @@
-package org.dsa.services.authenticationservice.messaging.producers;
+package org.dsa.core.sharedstarter.messaging.producers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.core.sharedstarter.messaging.contracts.KafkaEvent;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
 
-//TODO: create unit test
 @Slf4j
-@Service
 @RequiredArgsConstructor
 public class KafkaEventPublisher {
 
