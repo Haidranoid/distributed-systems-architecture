@@ -72,17 +72,20 @@ startup_services_compose() {
 
   echo "Stopping existing DSA-services containers if present..."
   docker compose \
-    -f ../docker-composes/services/docker-compose.yml \
+    --project-directory "$SERVICES_COMPOSE_DIR" \
+    -f "$SERVICES_COMPOSE_FILE" \
     down || true
 
   echo "Building DSA-services images..."
   docker compose \
-    -f ../docker-composes/services/docker-compose.yml \
+    --project-directory "$SERVICES_COMPOSE_DIR" \
+    -f "$SERVICES_COMPOSE_FILE" \
     build
 
   echo "Starting DSA-services infrastructure..."
   docker compose \
-    -f ../docker-composes/services/docker-compose.yml \
+    --project-directory "$SERVICES_COMPOSE_DIR" \
+    -f "$SERVICES_COMPOSE_FILE" \
     up -d
 }
 
@@ -90,7 +93,8 @@ shutdown_services_compose() {
 
   echo "Stopping DSA-services containers..."
   docker compose \
-    -f ../docker-composes/services/docker-compose.yml \
+    --project-directory "$SERVICES_COMPOSE_DIR" \
+    -f "$SERVICES_COMPOSE_FILE" \
     down || true
 }
 
@@ -98,12 +102,14 @@ startup_kafka_compose() {
 
   echo "Stopping existing Kafka containers if present..."
   docker compose \
-    -f ../docker-composes/kafka/docker-compose.yml \
+    --project-directory "$KAFKA_COMPOSE_DIR" \
+    -f "$KAFKA_COMPOSE_FILE" \
     down || true
 
   echo "Starting Kafka infrastructure..."
   docker compose \
-    -f ../docker-composes/kafka/docker-compose.yml \
+    --project-directory "$KAFKA_COMPOSE_DIR" \
+    -f "$KAFKA_COMPOSE_FILE" \
     up -d
 }
 
@@ -111,6 +117,7 @@ shutdown_kafka_compose() {
 
   echo "Stopping Kafka containers..."
   docker compose \
-    -f ../docker-composes/kafka/docker-compose.yml \
+    --project-directory "$KAFKA_COMPOSE_DIR" \
+    -f "$KAFKA_COMPOSE_FILE" \
     down || true
 }
