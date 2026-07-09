@@ -30,11 +30,11 @@ services:
       CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       config-server-srv:
         condition: service_healthy
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   accounts-service-srv:
     image: accounts-service:dev-compose
@@ -49,11 +49,11 @@ services:
       CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8081:8081"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       config-server-srv:
         condition: service_healthy
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   audit-service-srv:
     image: audit-service:dev-compose
@@ -68,11 +68,11 @@ services:
       CONFIG_IMPORT: configserver:http://config-server-srv:8888
     ports:
       - "8082:8082"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       config-server-srv:
         condition: service_healthy
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   gateway-srv:
     image: gateway:dev-compose
