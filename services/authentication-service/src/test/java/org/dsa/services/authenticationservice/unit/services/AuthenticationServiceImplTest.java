@@ -1,6 +1,7 @@
 package org.dsa.services.authenticationservice.unit.services;
 
 import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
+import org.dsa.core.sharedstarter.messaging.events.UserLoggedInEvent;
 import org.dsa.core.sharedstarter.messaging.producers.KafkaEventPublisher;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
@@ -82,6 +83,18 @@ class AuthenticationServiceImplTest {
         when(authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken))
                 .thenReturn(authResponseDto);
 
+        Mockito.doNothing()
+                .when(kafkaEventPublisher)
+                .publishEvent(
+                        KafkaTopics.USER_LOGGED_IN,
+                        accountAuthenticated.id().toString(),
+                        UserLoggedInEvent.builder()
+                                .accountId(accountAuthenticated.id())
+                                .username(accountAuthenticated.username())
+                                .email(accountAuthenticated.email())
+                                .build()
+                );
+
         var session = authenticationService.login(loginDto);
 
         assertEquals(accessToken, session.accessToken());
@@ -153,6 +166,7 @@ class AuthenticationServiceImplTest {
                         accountCreated.id().toString(),
                         AccountCreatedEvent.builder()
                                 .accountId(accountCreated.id())
+                                .username(accountCreated.username())
                                 .email(accountCreated.email())
                                 .build()
                 );
@@ -196,6 +210,7 @@ class AuthenticationServiceImplTest {
                         accountCreated.id().toString(),
                         AccountCreatedEvent.builder()
                                 .accountId(accountCreated.id())
+                                .username(accountCreated.username())
                                 .email(accountCreated.email())
                                 .build()
                 );
