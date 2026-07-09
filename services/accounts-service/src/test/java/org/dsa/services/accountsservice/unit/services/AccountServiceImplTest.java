@@ -1,14 +1,11 @@
 package org.dsa.services.accountsservice.unit.services;
 
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
-import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
 import org.dsa.services.accountsservice.mappers.impl.AccountMapperImpl;
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
-import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.core.sharedstarter.utils.SessionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
@@ -29,59 +26,9 @@ public class AccountServiceImplTest {
     private AccountsRepository accountsRepository;
     @Mock
     private AccountMapperImpl accountsMapper;
-    @Mock
-    private SessionService sessionService;
 
     @InjectMocks
     private AccountServiceImpl accountService;
-
-    @Test
-    void me_whenThereIsASession_shouldReturnAuthAccountDto() {
-        var username = "ronald";
-        var currentSessionDto = AccountDtoFixtures.currentSessionDto(1L);
-        var currentSession = AccountEntityFixtures.currentSessionAccount(1L);
-
-        when(sessionService.getCurrentUsername())
-                .thenReturn(username);
-        when(accountsRepository.findByUsername(username))
-                .thenReturn(Optional.of(currentSession));
-        when(accountsMapper.toDto(currentSession))
-                .thenReturn(currentSessionDto);
-
-        var session = accountService.me();
-
-        assertNotNull(session);
-        assertEquals(1L, session.id());
-        assertEquals("ronald", session.username());
-        assertEquals("ronald@email.com", session.email());
-        assertEquals(Role.USER, session.role());
-    }
-
-    @Test
-    void me_whenThereIsNotASession_shouldThrowException() {
-        when(sessionService.getCurrentUsername())
-                .thenReturn(null);
-
-        var exception = assertThrows(UnauthorizedException.class,
-                () -> accountService.me());
-
-        assertEquals(UnauthorizedException.class, exception.getClass());
-    }
-
-    @Test
-    void me_whenThereIsASessionButIsNotFoundInDB_shouldThrowException() {
-        var username = "ronald";
-
-        when(sessionService.getCurrentUsername())
-                .thenReturn(username);
-        when(accountsRepository.findByUsername(username))
-                .thenReturn(Optional.empty());
-
-        var exception = assertThrows(AccountNotFoundException.class,
-                () -> accountService.me());
-
-        assertEquals(AccountNotFoundException.class, exception.getClass());
-    }
 
     @Test
     void findAll_whenNoAccounts_shouldReturnAnEmptyList() {

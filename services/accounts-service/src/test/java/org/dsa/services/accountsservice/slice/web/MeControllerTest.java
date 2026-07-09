@@ -5,7 +5,7 @@ import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
 import org.dsa.services.accountsservice.controllers.MeController;
-import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
+import org.dsa.services.accountsservice.services.impl.MeServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +30,14 @@ public class MeControllerTest {
     private ObjectMapper objectMapper;
 
     @MockitoBean
-    private AccountServiceImpl accountService;
+    private MeServiceImpl meService;
 
     @Test
     @DisplayName("GET /api/v1/accounts/me returns 200 when user has a session")
     public void me_whenIsThereASessionActive_shouldReturn202() throws Exception {
         var session = AccountDtoFixtures.meAccountResponseDto(1L);
 
-        when(accountService.me())
+        when(meService.me())
                 .thenReturn(session);
 
         mvc.perform(get("/api/v1/accounts/me"))
@@ -59,7 +59,7 @@ public class MeControllerTest {
                 )
                 .andExpect(status().isNoContent());
 
-        //verify(accountService)
+        //verify(meService)
         //       .changePassword(any());
     }
 }

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
 import org.dsa.services.accountsservice.common.dtos.UpdateAccountPasswordDto;
-import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
+import org.dsa.services.accountsservice.services.impl.MeServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MeController {
 
-    private final AccountServiceImpl accountService;
+    private final MeServiceImpl meService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public AccountDto getMe() {
         log.info("getMe request started");
 
-        var currentSession = accountService.me();
+        var currentSession = meService.me();
 
         log.info("getMe request response: {}", currentSession);
         return currentSession;

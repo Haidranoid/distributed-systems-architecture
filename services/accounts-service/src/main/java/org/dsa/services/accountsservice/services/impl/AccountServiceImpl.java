@@ -7,11 +7,9 @@ import org.dsa.services.accountsservice.common.dtos.VerifyAccountCredentialsDto;
 import org.dsa.services.accountsservice.common.dtos.CreateAccountDto;
 import org.dsa.services.accountsservice.common.dtos.UpdateAccountDto;
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
-import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
 import org.dsa.services.accountsservice.mappers.AccountMapper;
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
 import org.dsa.services.accountsservice.services.AccountService;
-import org.dsa.core.sharedstarter.utils.SessionService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,24 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
 
-    
     private final AccountsRepository accountsRepository;
     private final AccountMapper accountMapper;
-    private final SessionService sessionService;
-
-    public AccountDto me() {
-        var username = sessionService.getCurrentUsername();
-
-         
-        if (username == null) {
-            throw new UnauthorizedException();
-        }
-
-        var account = accountsRepository.findByUsername(username)
-                .orElseThrow(() -> new AccountNotFoundException("username " + username));
-
-        return accountMapper.toDto(account);
-    }
 
     public AccountDto verifyCredentials(VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
         var account = accountsRepository.findByUsername(verifyAccountCredentialsDto.username())
@@ -57,14 +39,6 @@ public class AccountServiceImpl implements AccountService {
         var accountSaved = accountsRepository.save(accountEntity);
 
         return accountMapper.toDto(accountSaved);
-    }
-
-    @Override
-    public void delete(Long userId) {
-        var account = accountsRepository.findById(userId)
-                .orElseThrow(() -> new AccountNotFoundException("id " + userId));
-
-        accountsRepository.delete(account);
     }
 
     @Override
@@ -93,5 +67,13 @@ public class AccountServiceImpl implements AccountService {
         var accountUpdated = accountsRepository.save(account);
 
         return accountMapper.toDto(accountUpdated);
+    }
+
+    @Override
+    public void delete(Long userId) {
+        var account = accountsRepository.findById(userId)
+                .orElseThrow(() -> new AccountNotFoundException("id " + userId));
+
+        accountsRepository.delete(account);
     }
 }
