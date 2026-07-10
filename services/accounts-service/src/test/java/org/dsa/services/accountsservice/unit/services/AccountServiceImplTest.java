@@ -1,23 +1,23 @@
 package org.dsa.services.accountsservice.unit.services;
 
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
+import org.dsa.services.accountsservice.common.entities.AccountEntity;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
 import org.dsa.services.accountsservice.mappers.impl.AccountMapperImpl;
 import org.dsa.services.accountsservice.repositories.AccountsRepository;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceImplTest {
@@ -31,43 +31,26 @@ public class AccountServiceImplTest {
     private AccountServiceImpl accountService;
 
     @Test
-    void findAll_whenNoAccounts_shouldReturnAnEmptyList() {
-        // Arrange
-        var emptyAccountList = AccountEntityFixtures.emptyAccountsList();
+    void create_whenAccountIsCreated_shouldReturnAccountResponseDto() {
+        var createAccountDto = AccountDtoFixtures.createAdminAccountDto();
+        var accountEntity = AccountEntityFixtures.adminAccount();
+        var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
+        var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
-        when(accountsRepository.findAll())
-                .thenReturn(emptyAccountList);
+        Mockito.when(accountsMapper.toEntity(createAccountDto))
+                .thenReturn(accountEntity);
+        Mockito.when(accountsRepository.save(accountEntity))
+                .thenReturn(accountPersisted);
+        Mockito.when(accountsMapper.toDto(accountPersisted))
+                .thenReturn(accountDto);
 
-        // Act
-        var accounts = accountService.findAll();
+        var accountCreated = accountService.create(createAccountDto);
 
-        // Assert
-        assertNotNull(accounts);
-        assertEquals(0, accounts.size());
-    }
+        Assertions.assertNotNull(accountCreated);
 
-    @Test
-    void findAll_whenAccountsAreEqualToTwo_shouldReturnTwoAccountResponseDto() {
-        var accountsPersisted = AccountEntityFixtures.twoAccountsPersisted();
-
-        when(accountsRepository.findAll())
-                .thenReturn(accountsPersisted);
-        when(accountsMapper.toDto(accountsPersisted.get(0)))
-                .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
-        when(accountsMapper.toDto(accountsPersisted.get(1)))
-                .thenReturn(AccountDtoFixtures.adminAccountResponseDto(2L));
-        /*
-        mockedAccounts.forEach(account -> {
-            when(accountsMapper.toDto(account))
-                    .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
-        });
-        */
-
-        var accounts = accountService.findAll();
-
-        assertEquals(2, accounts.size());
-        assertEquals(1L, accounts.get(0).id());
-        assertEquals(2L, accounts.get(1).id());
+        Mockito.verify(accountsMapper).toEntity(createAccountDto);
+        Mockito.verify(accountsRepository).save(accountEntity);
+        Mockito.verify(accountsMapper).toDto(accountPersisted);
     }
 
     @Test
@@ -75,49 +58,79 @@ public class AccountServiceImplTest {
         var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
         var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.of(accountPersisted));
-        when(accountsMapper.toDto(accountPersisted))
+        Mockito.when(accountsMapper.toDto(accountPersisted))
                 .thenReturn(accountDto);
 
         var accountFound = accountService.findById(1L);
 
-        assertEquals(1L, accountFound.id());
-        assertEquals("admin", accountFound.username());
+        Assertions.assertEquals(1L, accountFound.id());
+        Assertions.assertEquals("admin", accountFound.username());
+        Assertions.assertEquals(accountDto, accountFound);
+
+        Mockito.verify(accountsRepository).findById(1L);
+        Mockito.verify(accountsMapper).toDto(accountPersisted);
     }
 
     @Test
     void findById_whenAccountDoesNotExist_shouldThrowException() {
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
-        var exception = assertThrows(AccountNotFoundException.class,
+        var exception = Assertions.assertThrows(AccountNotFoundException.class,
                 () -> accountService.findById(1L));
 
-        assertEquals("Account not found: id " + 1L, exception.getMessage());
-        verify(accountsMapper,never()).toDto(any());
+        Assertions.assertEquals("Account not found: id " + 1L, exception.getMessage());
+
+        Mockito.verify(accountsRepository).findById(1L);
+        Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any());
     }
 
     @Test
-    void create_whenAccountIsCreated_shouldReturnAccountResponseDto() {
-        var createAccountDto = AccountDtoFixtures.createAdminAccountDto();
-        var accountEntity = AccountEntityFixtures.adminAccount();
-        var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
-        var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
+    void findAll_whenNoAccounts_shouldReturnAnEmptyList() {
+        // Arrange
+        var emptyAccountList = AccountEntityFixtures.emptyAccountsList();
 
-        when(accountsMapper.toEntity(createAccountDto))
-                .thenReturn(accountEntity);
-        when(accountsRepository.save(accountEntity))
-                .thenReturn(accountPersisted);
-        when(accountsMapper.toDto(accountPersisted))
-                .thenReturn(accountDto);
+        Mockito.when(accountsRepository.findAll())
+                .thenReturn(emptyAccountList);
 
-        var accountCreated = accountService.create(createAccountDto);
+        // Act
+        var accounts = accountService.findAll();
 
-        assertNotNull(accountCreated);
-        verify(accountsMapper).toEntity(createAccountDto);
-        verify(accountsRepository).save(accountEntity);
-        verify(accountsMapper).toDto(accountPersisted);
+        // assertions
+        Assertions.assertNotNull(accounts);
+        Assertions.assertEquals(0, accounts.size());
+
+        Mockito.verify(accountsRepository, Mockito.times(1))
+                .findAll();
+    }
+
+    @Test
+    void findAll_whenAccountsAreEqualToTwo_shouldReturnTwoAccountResponseDto() {
+        var accountsPersisted = AccountEntityFixtures.twoAccountsPersisted();
+
+        Mockito.when(accountsRepository.findAll())
+                .thenReturn(accountsPersisted);
+        Mockito.when(accountsMapper.toDto(accountsPersisted.get(0)))
+                .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
+        Mockito.when(accountsMapper.toDto(accountsPersisted.get(1)))
+                .thenReturn(AccountDtoFixtures.adminAccountResponseDto(2L));
+        /*
+        mockedAccounts.forEach(account -> {
+            Mockito.when(accountsMapper.toDto(account))
+                    .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
+        });
+        */
+
+        var accounts = accountService.findAll();
+
+        Assertions.assertEquals(2, accounts.size());
+        Assertions.assertEquals(1L, accounts.get(0).id());
+        Assertions.assertEquals(2L, accounts.get(1).id());
+
+        Mockito.verify(accountsRepository, Mockito.times(1))
+                .findAll();
     }
 
     @Test
@@ -126,59 +139,66 @@ public class AccountServiceImplTest {
         var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
         var accountUpdated = AccountEntityFixtures.adminAccountPersisted(1L);
 
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.of(accountPersisted));
-        when(accountsRepository.save(accountPersisted))
+        Mockito.when(accountsRepository.save(accountPersisted))
                 .thenReturn(accountUpdated);
-        when(accountsMapper.toDto(accountUpdated))
+        Mockito.when(accountsMapper.toDto(accountUpdated))
                 .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
 
         var account = accountService.update(1L, updateAccountDto);
 
-        assertEquals(1L, account.id());
-        assertEquals("admin", account.username());
+        Assertions.assertEquals(1L, account.id());
+        Assertions.assertEquals("admin", account.username());
+
+        Mockito.verify(accountsRepository).findById(1L);
+        Mockito.verify(accountsMapper).toDto(accountUpdated);
     }
 
     @Test
     void update_whenAccountDoesNotExist_shouldThrowException() {
         var updateAccountDto = AccountDtoFixtures.updateAccountDtoOne();
 
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
-        var exception = assertThrows(UsernameNotFoundException.class,
+        var exception = Assertions.assertThrows(UsernameNotFoundException.class,
                 () -> accountService.update(1L, updateAccountDto));
 
-        assertEquals("Account not found", exception.getMessage());
-        verify(accountsRepository,never()).save(any());
-        verify(accountsMapper,never()).toDto(any());
+        Assertions.assertEquals("Account not found", exception.getMessage());
+
+        Mockito.verify(accountsRepository, Mockito.never()).save(Mockito.any());
+        Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any());
     }
 
     @Test
     void delete_whenAccountExists_shouldReturnNull() {
-        InOrder inOrder = inOrder(accountsRepository);
+        InOrder inOrder = Mockito.inOrder(accountsRepository);
 
         var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
 
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.of(accountPersisted));
 
         accountService.delete(1L);
 
         inOrder.verify(accountsRepository).findById(1L);
-        inOrder.verify(accountsRepository, times(1)).delete(accountPersisted);
+        inOrder.verify(accountsRepository, Mockito.times(1)).delete(accountPersisted);
     }
 
     @Test
     void delete_whenAccountDoesNotExist_shouldThrowException() {
-        when(accountsRepository.findById(1L))
+        Mockito.when(accountsRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
         //TODO: modify service to use custom exception
-        var exception = assertThrows(RuntimeException.class, () -> accountService.delete(1L));
+        var exception = Assertions.assertThrows(RuntimeException.class,
+                () -> accountService.delete(1L));
 
-        assertEquals("Account not found: id " + 1L, exception.getMessage());
-        verify(accountsRepository, never()).delete(any());
+        Assertions.assertEquals("Account not found: id " + 1L, exception.getMessage());
+
+        Mockito.verify(accountsRepository, Mockito.atMostOnce()).findById(1L);
+        Mockito.verify(accountsRepository, Mockito.never()).delete(Mockito.any(AccountEntity.class));
     }
 
     @Test
@@ -187,29 +207,34 @@ public class AccountServiceImplTest {
         var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
         var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
-        when(accountsRepository.findByUsername(authenticateAccountDto.username()))
+        Mockito.when(accountsRepository.findByUsername(authenticateAccountDto.username()))
                 .thenReturn(Optional.of(accountPersisted));
-        when(accountsMapper.toDto(accountPersisted))
+        Mockito.when(accountsMapper.toDto(accountPersisted))
                 .thenReturn(accountDto);
 
         var accountFound = accountService.verifyCredentials(authenticateAccountDto);
 
-        assertEquals(1L, accountFound.id());
-        assertEquals("admin", accountFound.username());
+        Assertions.assertEquals(1L, accountFound.id());
+        Assertions.assertEquals("admin", accountFound.username());
+        Assertions.assertEquals(accountDto, accountFound);
+
+        Mockito.verify(accountsRepository).findByUsername("admin");
+        Mockito.verify(accountsMapper).toDto(accountPersisted);
     }
 
     @Test
     void verifyCredentials_whenAccountDoesNotExist_shouldThrowException() {
         var authenticateAccountDto = AccountDtoFixtures.authenticateAdminAccountDto();
 
-        when(accountsRepository.findByUsername(authenticateAccountDto.username()))
+        Mockito.when(accountsRepository.findByUsername(authenticateAccountDto.username()))
                 .thenReturn(Optional.empty());
 
-        var exception = assertThrows(UsernameNotFoundException.class,
+        var exception = Assertions.assertThrows(UsernameNotFoundException.class,
                 () -> accountService.verifyCredentials(authenticateAccountDto));
 
-        assertEquals("Username not found", exception.getMessage());
-        verify(accountsMapper, never()).toDto(any());
-    }
+        Assertions.assertEquals("Username not found", exception.getMessage());
 
+        Mockito.verify(accountsRepository, Mockito.atMostOnce()).findByUsername(authenticateAccountDto.username());
+        Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any(AccountEntity.class));
+    }
 }

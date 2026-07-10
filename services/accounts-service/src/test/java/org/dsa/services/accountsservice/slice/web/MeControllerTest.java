@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.slice.web;
 import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
+import org.dsa.services.accountsservice.controllers.advices.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.controllers.MeController;
 import org.dsa.services.accountsservice.services.impl.MeServiceImpl;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(MeController.class)
-@Import(AccountsControllerAdvice.class)
+@Import(GlobalControllerAdvice.class)
 public class MeControllerTest {
 
     @Autowired
@@ -40,7 +40,9 @@ public class MeControllerTest {
         when(meService.me())
                 .thenReturn(session);
 
-        mvc.perform(get("/api/v1/accounts/me"))
+        mvc.perform(
+                        get("/api/v1/accounts/me")
+                )
                 .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.username").value("ronald"))

@@ -1,7 +1,7 @@
 package org.dsa.services.accountsservice.slice.web;
 
 import org.dsa.services.accountsservice.controllers.AccountsController;
-import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
+import org.dsa.services.accountsservice.controllers.advices.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(AccountsController.class)
-@Import(AccountsControllerAdvice.class)
+@Import(GlobalControllerAdvice.class)
 public class AccountsControllerTest {
 
     @Autowired
@@ -43,7 +43,9 @@ public class AccountsControllerTest {
         when(accountService.findAll())
                 .thenReturn(accountsList);
 
-        mvc.perform(get("/api/v1/accounts"))
+        mvc.perform(
+                        get("/api/v1/accounts")
+                )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$", hasSize(2)));
@@ -57,7 +59,9 @@ public class AccountsControllerTest {
         when(accountService.findAll())
                 .thenReturn(accountsEmptyList);
 
-        mvc.perform(get("/api/v1/accounts"))
+        mvc.perform(
+                        get("/api/v1/accounts")
+                )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$", hasSize(0)));
@@ -73,7 +77,9 @@ public class AccountsControllerTest {
                 .thenReturn(accountDto);
 
         // Act + Assert
-        mvc.perform(get("/api/v1/accounts/{userId}", 1L))
+        mvc.perform(
+                        get("/api/v1/accounts/{userId}", 1L)
+                )
                 .andExpect(status().isOk());
     }
 
@@ -84,7 +90,9 @@ public class AccountsControllerTest {
         when(accountService.findById(userId))
                 .thenThrow(new AccountNotFoundException("id " + userId));
 
-        mvc.perform(get("/api/v1/accounts/{userId}", userId))
+        mvc.perform(
+                        get("/api/v1/accounts/{userId}", userId)
+                )
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("Account not found: id " + userId))
                 .andExpect(jsonPath("$.timestamp").exists());
@@ -127,7 +135,7 @@ public class AccountsControllerTest {
         var userId = 1;
         var updateAccountDto = AccountDtoFixtures.updateAccountDtoOne();
 
-        Mockito.when(accountService.update(1L, updateAccountDto))
+        when(accountService.update(1L, updateAccountDto))
                 .thenThrow(new AccountNotFoundException("id " + userId));
 
 

@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.slice.web;
+package org.dsa.services.accountsservice.slice.web.internal;
 
 import org.dsa.services.accountsservice.controllers.advices.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.controllers.internal.InternalAccountsController;
@@ -32,7 +32,7 @@ public class InternalAccountsControllerTest {
     private AccountServiceImpl accountService;
 
     @Test
-    @DisplayName("POST /api/v1/accounts returns 200 when account is created")
+    @DisplayName("POST /api/v1/internal/accounts returns 200 when account is created")
     public void createAccount_whenAccountIsCreated_shouldReturn200() throws Exception {
         var createAccountDto = AccountDtoFixtures.createAdminAccountDto();
         var accountCreated = AccountDtoFixtures.adminAccountResponseDto(1L);
@@ -53,8 +53,8 @@ public class InternalAccountsControllerTest {
     }
 
     @Test
-    @DisplayName("POST /api/v1/accounts/authenticate-login returns 200 when credentials are valid")
-    public void authenticateLogin_whenCredentialsAreValid_shouldReturn200() throws Exception {
+    @DisplayName("POST /api/v1/internal/accounts/verify-credentials returns 200 when credentials are valid")
+    public void verifyCredentials_whenCredentialsAreValid_shouldReturn200() throws Exception {
         var authenticateAccountDto = AccountDtoFixtures.authenticateAccountDto();
         var accountAuthenticated = AccountDtoFixtures.adminAccountResponseDto(1L);
 
