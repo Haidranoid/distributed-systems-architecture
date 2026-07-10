@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.controllers;
+package org.dsa.services.authenticationservice.controllers.advices;
 
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.core.sharedstarter.common.errors.ApiError;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @RestControllerAdvice
-public class AuthenticationControllerAdvice {
+public class GlobalControllerAdvice {
 
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ApiError> handleBaseException(BaseException ex) {

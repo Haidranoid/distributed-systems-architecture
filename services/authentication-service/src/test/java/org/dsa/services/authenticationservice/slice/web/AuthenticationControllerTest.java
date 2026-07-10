@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.slice.web;
 
 import org.dsa.services.authenticationservice.controllers.AuthenticationController;
-import org.dsa.services.authenticationservice.controllers.AuthenticationControllerAdvice;
+import org.dsa.services.authenticationservice.controllers.advices.GlobalControllerAdvice;
 import org.dsa.services.authenticationservice.common.fixtures.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
 import org.dsa.core.sharedstarter.common.constants.Role;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(AuthenticationController.class)
-@Import(AuthenticationControllerAdvice.class)
+@Import(GlobalControllerAdvice.class)
 public class AuthenticationControllerTest {
 
     @Autowired
