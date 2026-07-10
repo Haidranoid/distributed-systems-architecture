@@ -25,13 +25,6 @@ public class AccountServiceImpl implements AccountService {
     private final AccountsRepository accountsRepository;
     private final AccountMapper accountMapper;
 
-    public AccountDto verifyCredentials(VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
-        var account = accountsRepository.findByUsername(verifyAccountCredentialsDto.username())
-                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-
-        return accountMapper.toDto(account);
-    }
-
     @Override
     public AccountDto create(CreateAccountDto createAccountDto) {
         //TODO: handle the case when the account already exist
@@ -52,7 +45,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional(readOnly = true)
     public List<AccountDto> findAll() {
-        var accountsList = accountsRepository.findAll().stream().map(accountMapper::toDto).toList();
+        var accountsList = accountsRepository.findAll()
+                .stream()
+                .map(accountMapper::toDto)
+                .toList();
 
         return accountsList;
     }
@@ -75,5 +71,12 @@ public class AccountServiceImpl implements AccountService {
                 .orElseThrow(() -> new AccountNotFoundException("id " + userId));
 
         accountsRepository.delete(account);
+    }
+
+    public AccountDto verifyCredentials(VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
+        var account = accountsRepository.findByUsername(verifyAccountCredentialsDto.username())
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+
+        return accountMapper.toDto(account);
     }
 }

@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.controllers;
+package org.dsa.services.accountsservice.controllers.internal;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,8 +34,8 @@ public class InternalAccountsController {
         return account;
     }
 
-    @PostMapping("/authenticate-login")
-    @Operation(summary = "Authenticate if the user exists, if so, return it.")
+    @PostMapping("/verify-credentials")
+    @Operation(summary = "Verify if the accounts exists, if so, return it.")
     public AccountDto verifyAccountCredentials(
             @RequestBody VerifyAccountCredentialsDto verifyAccountCredentialsDto
     ) {
