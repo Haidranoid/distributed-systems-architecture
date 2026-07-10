@@ -3,6 +3,7 @@ package org.dsa.services.accountsservice.controllers.internal;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.common.dtos.AccountDto;
@@ -25,7 +26,9 @@ public class InternalAccountsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Creates an account")
-    public AccountDto createAccount(@RequestBody CreateAccountDto createAccountDto) {
+    public AccountDto createAccount(
+            @Valid @RequestBody CreateAccountDto createAccountDto
+    ) {
         log.info("createAccount request body: {}", createAccountDto);
 
         var account = accountsServiceImpl.create(createAccountDto);
@@ -37,7 +40,7 @@ public class InternalAccountsController {
     @PostMapping("/verify-credentials")
     @Operation(summary = "Verify if the accounts exists, if so, return it.")
     public AccountDto verifyAccountCredentials(
-            @RequestBody VerifyAccountCredentialsDto verifyAccountCredentialsDto
+            @Valid @RequestBody VerifyAccountCredentialsDto verifyAccountCredentialsDto
     ) {
         log.info("verifyAccountCredentials request body: {}", verifyAccountCredentialsDto);
 

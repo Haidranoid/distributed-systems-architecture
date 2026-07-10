@@ -1,28 +1,30 @@
 package org.dsa.services.accountsservice.common.dtos;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import lombok.NonNull;
 import org.dsa.core.sharedstarter.common.constants.Role;
+import org.jspecify.annotations.NonNull;
 
 @Builder
 public record CreateAccountDto(
-        String username,
-        String firstName,
-        String lastName,
-        String email,
-        String password,
-        Role role
+        @NotBlank String username,
+        @NotBlank String firstName,
+        @NotBlank String lastName,
+        @NotBlank @Email String email,
+        @NotBlank String password,
+        @NotNull Role role
 ) {
-    @NonNull
     @Override
-    public String toString() {
+    public @NonNull String toString() {
         return "CreateAccountDto{" +
-                "role=" + role +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + "[password]" + '\'' +
+                "username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + "[PROTECTED]" + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
