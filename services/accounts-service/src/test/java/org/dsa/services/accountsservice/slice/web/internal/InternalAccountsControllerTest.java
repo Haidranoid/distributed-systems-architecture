@@ -1,7 +1,7 @@
 package org.dsa.services.accountsservice.slice.web;
 
-import org.dsa.services.accountsservice.controllers.AccountsControllerAdvice;
-import org.dsa.services.accountsservice.controllers.InternalAccountsController;
+import org.dsa.services.accountsservice.controllers.advices.GlobalControllerAdvice;
+import org.dsa.services.accountsservice.controllers.internal.InternalAccountsController;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.services.impl.AccountServiceImpl;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebSliceEnvironment(InternalAccountsController.class)
-@Import(AccountsControllerAdvice.class)
+@Import(GlobalControllerAdvice.class)
 public class InternalAccountsControllerTest {
 
     @Autowired
@@ -62,7 +62,7 @@ public class InternalAccountsControllerTest {
                 .thenReturn(accountAuthenticated);
 
         mvc.perform(
-                        post("/api/v1/internal/accounts/authenticate-login")
+                        post("/api/v1/internal/accounts/verify-credentials")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(authenticateAccountDto))
