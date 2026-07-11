@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.common.fixtures;
+package org.dsa.services.accountsservice.fixture;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -3,11 +3,11 @@ package org.dsa.services.accountsservice.unit.mapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.accountsservice.common.fixtures.AccountFixtures;
 import org.dsa.services.accountsservice.dto.AccountDto;
 import org.dsa.services.accountsservice.dto.CreateAccountDto;
 import org.dsa.services.accountsservice.entity.Account;
+import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
+import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.junit.jupiter.api.Test;
 

@@ -8,9 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
-import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.controller.AccountsController;
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;
+import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.service.AccountService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

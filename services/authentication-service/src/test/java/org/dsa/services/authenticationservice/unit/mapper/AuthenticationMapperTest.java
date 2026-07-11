@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.dsa.services.authenticationservice.dto.AuthAccountDto;
 import org.dsa.services.authenticationservice.dto.AuthResponseDto;
-import org.dsa.services.authenticationservice.fixtures.AuthenticationDtoFixtures;
+import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
 import org.junit.jupiter.api.Test;
 

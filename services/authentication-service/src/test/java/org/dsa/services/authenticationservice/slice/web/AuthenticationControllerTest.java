@@ -10,7 +10,7 @@ import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.authenticationservice.controller.AuthenticationController;
 import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
-import org.dsa.services.authenticationservice.fixtures.AuthenticationDtoFixtures;
+import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.service.AuthenticationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

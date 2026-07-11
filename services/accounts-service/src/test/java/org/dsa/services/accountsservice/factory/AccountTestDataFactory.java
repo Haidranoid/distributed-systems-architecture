@@ -1,10 +1,10 @@
-package org.dsa.services.accountsservice.common.factories;
+package org.dsa.services.accountsservice.factory;
 
 import net.datafaker.Faker;
 import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.services.accountsservice.entity.Account;
 
-public class AccountsTestDataFactory {
+public class AccountTestDataFactory {
 
   private static final Faker faker = new Faker();
 

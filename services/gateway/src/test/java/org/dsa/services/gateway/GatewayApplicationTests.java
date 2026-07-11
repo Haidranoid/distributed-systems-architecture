@@ -9,9 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("it")
 class GatewayApplicationTests {
 
-    @Test
-    @DisplayName("gateway smoke test")
-    void contextLoads() {
-    }
-
+  @Test
+  @DisplayName("gateway smoke test")
+  void contextLoads() {}
 }

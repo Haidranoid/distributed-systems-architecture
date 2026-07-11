@@ -16,7 +16,7 @@ import org.dsa.core.sharedstarter.messaging.producers.KafkaEventPublisher;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
 import org.dsa.services.authenticationservice.constant.TokenType;
 import org.dsa.services.authenticationservice.dto.AuthAccountDto;
-import org.dsa.services.authenticationservice.fixtures.AuthenticationDtoFixtures;
+import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
 import org.dsa.services.authenticationservice.property.Endpoints;
 import org.dsa.services.authenticationservice.repository.TokenRepository;

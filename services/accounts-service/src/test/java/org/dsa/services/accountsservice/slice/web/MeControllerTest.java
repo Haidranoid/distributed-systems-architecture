@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
-import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
 import org.dsa.services.accountsservice.controller.MeController;
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;
+import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.service.MeService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

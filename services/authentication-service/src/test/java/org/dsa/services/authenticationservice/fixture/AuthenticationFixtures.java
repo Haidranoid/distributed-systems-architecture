@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.fixtures;
+package org.dsa.services.authenticationservice.fixture;
 
 import org.dsa.services.authenticationservice.entity.Token;
 

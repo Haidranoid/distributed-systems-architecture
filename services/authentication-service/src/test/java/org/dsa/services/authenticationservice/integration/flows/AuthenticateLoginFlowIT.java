@@ -4,7 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.dsa.core.sharedstarter.testing.integration.SpringBootIntegrationTest;
-import org.dsa.services.authenticationservice.fixtures.AuthenticationDtoFixtures;
+import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;

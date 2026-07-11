@@ -3,7 +3,7 @@ package org.dsa.services.auditservice.messaging.consumers;
 import lombok.RequiredArgsConstructor;
 import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
-import org.dsa.services.auditservice.services.AuditService;
+import org.dsa.services.auditservice.service.AuditService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AccountCreatedConsumer {
 
-    private final AuditService auditService;
+  private final AuditService auditService;
 
-    @KafkaListener(topics = KafkaTopics.ACCOUNT_CREATED)
-    public void consume(AccountCreatedEvent accountCreatedEvent) {
-        auditService.register(accountCreatedEvent);
-    }
+  @KafkaListener(topics = KafkaTopics.ACCOUNT_CREATED)
+  public void consume(AccountCreatedEvent accountCreatedEvent) {
+    auditService.register(accountCreatedEvent);
+  }
 }
