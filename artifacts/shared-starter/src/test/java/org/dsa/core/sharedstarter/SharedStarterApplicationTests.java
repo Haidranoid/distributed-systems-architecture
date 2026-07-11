@@ -1,6 +1,6 @@
 package org.dsa.core.sharedstarter;
 
-import org.dsa.core.sharedstarter.autoconfig.ServicesStarterAutoConfig;
+import org.dsa.core.sharedstarter.autoconfig.SharedStarterAutoConfig;
 import org.dsa.core.sharedstarter.utils.JwtAuthenticationConverter;
 import org.dsa.core.sharedstarter.utils.SessionService;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ class SharedStarterApplicationTests {
 
     private final ApplicationContextRunner contextRunner =
             new ApplicationContextRunner()
-                    .withUserConfiguration(ServicesStarterAutoConfig.class);
+                    .withUserConfiguration(SharedStarterAutoConfig.class);
 
     @Test
     void jwtAuthenticationConverterIsConfigured() {
