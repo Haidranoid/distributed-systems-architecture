@@ -1,8 +1,8 @@
 package org.dsa.services.authenticationservice.common.dtos;
 
+import lombok.Builder;
 import lombok.NonNull;
 import org.dsa.core.sharedstarter.common.constants.Role;
-import lombok.Builder;
 
 @Builder
 public record SignupDto(

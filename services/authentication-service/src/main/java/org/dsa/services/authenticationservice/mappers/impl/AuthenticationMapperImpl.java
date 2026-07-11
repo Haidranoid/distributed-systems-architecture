@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationMapperImpl implements AuthenticationMapper {
 
-    @Override
-    public AuthResponseDto toAuthResponseDto(AuthAccountDto accountDto, String accessToken, String refreshToken) {
-        return AuthResponseDto.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .account(accountDto)
-                .build();
-    }
+  @Override
+  public AuthResponseDto toAuthResponseDto(
+      AuthAccountDto accountDto, String accessToken, String refreshToken) {
+    return AuthResponseDto.builder()
+        .accessToken(accessToken)
+        .refreshToken(refreshToken)
+        .account(accountDto)
+        .build();
+  }
 }

@@ -1,9 +1,9 @@
 package org.dsa.services.authenticationservice.common.entities;
 
-import lombok.experimental.SuperBuilder;
-import org.dsa.services.authenticationservice.common.constants.TokenType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.dsa.services.authenticationservice.common.constants.TokenType;
 
 @Table(name = "tokens")
 @Entity

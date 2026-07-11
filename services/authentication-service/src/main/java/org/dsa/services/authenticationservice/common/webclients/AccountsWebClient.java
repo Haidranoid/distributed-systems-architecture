@@ -3,7 +3,6 @@ package org.dsa.services.authenticationservice.common.webclients;
 import lombok.RequiredArgsConstructor;
 import org.dsa.services.authenticationservice.common.dtos.AuthAccountDto;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component

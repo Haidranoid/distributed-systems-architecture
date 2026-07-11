@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.common.dtos;
 
-import org.dsa.core.sharedstarter.common.constants.Role;
 import lombok.Builder;
+import org.dsa.core.sharedstarter.common.constants.Role;
 
 @Builder
 public record AuthAccountDto(

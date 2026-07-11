@@ -8,8 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 public class AuthenticationServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(AuthenticationServiceApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(AuthenticationServiceApplication.class, args);
+  }
 }

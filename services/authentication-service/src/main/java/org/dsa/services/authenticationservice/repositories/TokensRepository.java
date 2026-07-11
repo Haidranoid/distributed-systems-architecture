@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface TokensRepository extends JpaRepository<TokenEntity, Long> {
-    Optional<TokenEntity> findByToken(String token);
-    List<TokenEntity> findAllValidTokensByAccountId(Long accountId);
-}
+  Optional<TokenEntity> findByToken(String token);
 
+  List<TokenEntity> findAllValidTokensByAccountId(Long accountId);
+}

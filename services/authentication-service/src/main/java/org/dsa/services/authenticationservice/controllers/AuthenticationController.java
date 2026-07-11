@@ -1,12 +1,12 @@
 package org.dsa.services.authenticationservice.controllers;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.authenticationservice.common.dtos.AuthResponseDto;
 import org.dsa.services.authenticationservice.common.dtos.LoginDto;
 import org.dsa.services.authenticationservice.common.dtos.SignupDto;
 import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

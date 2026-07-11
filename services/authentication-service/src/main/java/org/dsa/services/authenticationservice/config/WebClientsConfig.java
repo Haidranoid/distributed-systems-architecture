@@ -10,12 +10,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequiredArgsConstructor
 public class WebClientsConfig {
 
-    private final Endpoints endpoints;
+  private final Endpoints endpoints;
 
-    @Bean
-    public WebClient accountsServiceWebClient() {
-        return WebClient.builder()
-                .baseUrl(endpoints.accountsServiceEndpoint())
-                .build();
-    }
+  @Bean
+  public WebClient accountsServiceWebClient() {
+    return WebClient.builder().baseUrl(endpoints.accountsServiceEndpoint()).build();
+  }
 }
