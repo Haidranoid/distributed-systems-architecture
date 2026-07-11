@@ -1,13 +1,13 @@
 package org.dsa.services.accountsservice.repository;
 
 import java.util.Optional;
-import org.dsa.services.accountsservice.entity.AccountEntity;
+import org.dsa.services.accountsservice.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AccountsRepository extends JpaRepository<AccountEntity, Long> {
-  Optional<AccountEntity> findByUsername(String username);
+public interface AccountRepository extends JpaRepository<Account, Long> {
+  Optional<Account> findByUsername(String username);
 
-  Optional<AccountEntity> findByEmail(String email);
+  Optional<Account> findByEmail(String email);
 }

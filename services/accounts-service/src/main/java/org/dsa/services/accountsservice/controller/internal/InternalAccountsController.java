@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.controllers.internal;
+package org.dsa.services.accountsservice.controller.internal;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dtos.AccountDto;
-import org.dsa.services.accountsservice.dtos.CreateAccountDto;
-import org.dsa.services.accountsservice.dtos.VerifyAccountCredentialsDto;
-import org.dsa.services.accountsservice.services.AccountService;
+import org.dsa.services.accountsservice.dto.AccountDto;
+import org.dsa.services.accountsservice.dto.CreateAccountDto;
+import org.dsa.services.accountsservice.dto.VerifyAccountCredentialsDto;
+import org.dsa.services.accountsservice.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

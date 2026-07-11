@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.services;
+package org.dsa.services.accountsservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,7 @@ import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
 import org.dsa.core.sharedstarter.utils.SessionService;
 import org.dsa.services.accountsservice.dto.AccountDto;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
-import org.dsa.services.accountsservice.repository.AccountsRepository;
+import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MeService {
 
-  private final AccountsRepository accountsRepository;
+  private final AccountRepository accountRepository;
   private final AccountMapper accountMapper;
   private final SessionService sessionService;
 
@@ -29,7 +29,7 @@ public class MeService {
     }
 
     var account =
-        accountsRepository
+        accountRepository
             .findByUsername(username)
             .orElseThrow(() -> new AccountNotFoundException("username " + username));
 

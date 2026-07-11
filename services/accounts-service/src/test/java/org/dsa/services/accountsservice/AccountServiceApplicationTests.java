@@ -9,9 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @IntegrationEnvironment
 class AccountServiceApplicationTests {
 
-    @Test
-    @DisplayName("accounts-service smoke test")
-    void contextLoads() {
-    }
-
+  @Test
+  @DisplayName("accounts-service smoke test")
+  void contextLoads() {}
 }

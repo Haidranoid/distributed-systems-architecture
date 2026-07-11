@@ -1,14 +1,14 @@
-package org.dsa.services.accountsservice.controllers;
+package org.dsa.services.accountsservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dtos.AccountDto;
-import org.dsa.services.accountsservice.dtos.UpdateAccountDto;
-import org.dsa.services.accountsservice.dtos.UpdateAccountPasswordDto;
-import org.dsa.services.accountsservice.services.AccountService;
+import org.dsa.services.accountsservice.dto.AccountDto;
+import org.dsa.services.accountsservice.dto.UpdateAccountDto;
+import org.dsa.services.accountsservice.dto.UpdateAccountPasswordDto;
+import org.dsa.services.accountsservice.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

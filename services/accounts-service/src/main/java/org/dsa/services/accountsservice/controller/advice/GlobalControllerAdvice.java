@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.controllers.advices;
+package org.dsa.services.accountsservice.controller.advice;
 
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;

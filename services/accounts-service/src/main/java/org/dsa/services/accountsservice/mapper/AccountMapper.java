@@ -1,15 +1,15 @@
-package org.dsa.services.accountsservice.mappers;
+package org.dsa.services.accountsservice.mapper;
 
-import org.dsa.services.accountsservice.dtos.AccountDto;
-import org.dsa.services.accountsservice.dtos.CreateAccountDto;
-import org.dsa.services.accountsservice.entity.AccountEntity;
+import org.dsa.services.accountsservice.dto.AccountDto;
+import org.dsa.services.accountsservice.dto.CreateAccountDto;
+import org.dsa.services.accountsservice.entity.Account;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountMapper {
 
-  public AccountEntity toEntity(CreateAccountDto dto) {
-    return AccountEntity.builder()
+  public Account toEntity(CreateAccountDto dto) {
+    return Account.builder()
         .username(dto.username())
         .firstName(dto.firstName())
         .lastName(dto.lastName())
@@ -19,7 +19,7 @@ public class AccountMapper {
         .build();
   }
 
-  public AccountDto toDto(AccountEntity account) {
+  public AccountDto toDto(Account account) {
     return AccountDto.builder()
         .id(account.getId())
         .username(account.getUsername())

@@ -1,21 +1,20 @@
-package org.dsa.services.accountsservice.slice.repositories;
+package org.dsa.services.accountsservice.slice.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.dsa.core.sharedstarter.testing.integration.DataJpaIntegrationTest;
-import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
+import org.dsa.services.accountsservice.common.fixtures.AccountFixtures;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
-  @Autowired
-  AccountRepository accountRepository;
+  @Autowired AccountRepository accountRepository;
 
   @Test
   void save_shouldPersistOneAccount() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
+    var accountEntity = AccountFixtures.adminAccount();
 
     accountRepository.save(accountEntity);
     var accounts = accountRepository.findAll();
@@ -25,7 +24,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void delete_shouldPersistAndRemoveOneAccount() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
+    var accountEntity = AccountFixtures.adminAccount();
 
     var accountSaved = accountRepository.save(accountEntity);
     var accounts = accountRepository.findAll();
@@ -41,7 +40,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void findById_shouldReturnAccount() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
+    var accountEntity = AccountFixtures.adminAccount();
 
     var accountSaved = accountRepository.save(accountEntity);
     var account = accountRepository.findById(accountSaved.getId());
@@ -51,7 +50,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void findByUsername_shouldReturnAccount() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
+    var accountEntity = AccountFixtures.adminAccount();
 
     accountRepository.save(accountEntity);
     var account = accountRepository.findByUsername(accountEntity.getUsername());
@@ -61,7 +60,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void findByEmail_shouldReturnAccount() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
+    var accountEntity = AccountFixtures.adminAccount();
 
     accountRepository.save(accountEntity);
     var account = accountRepository.findByEmail(accountEntity.getEmail());
@@ -71,8 +70,8 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void findByAll_shouldReturnTwoAccounts() {
-    var accountEntity = AccountEntityFixtures.adminAccount();
-    var managerAccountFixture = AccountEntityFixtures.managerAccount();
+    var accountEntity = AccountFixtures.adminAccount();
+    var managerAccountFixture = AccountFixtures.managerAccount();
 
     accountRepository.save(accountEntity);
     accountRepository.save(managerAccountFixture);
@@ -84,7 +83,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void findAccountByEmail_shouldReturnAccount() {
-    var adminAccountFixture = AccountEntityFixtures.adminAccount();
+    var adminAccountFixture = AccountFixtures.adminAccount();
     accountRepository.save(adminAccountFixture);
 
     var accountFound = accountRepository.findByEmail(adminAccountFixture.getEmail());
@@ -94,7 +93,7 @@ public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
   @Test
   void save_shouldPersistEntity() {
-    var account = AccountEntityFixtures.adminAccount();
+    var account = AccountFixtures.adminAccount();
     accountRepository.save(account);
 
     var accounts = accountRepository.findAll();

@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.unit.services;
+package org.dsa.services.accountsservice.unit.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -9,7 +9,7 @@ import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
 import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
 import org.dsa.core.sharedstarter.utils.SessionService;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
+import org.dsa.services.accountsservice.common.fixtures.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.dsa.services.accountsservice.service.MeService;
@@ -32,7 +32,7 @@ public class MeServiceTest {
   void me_whenThereIsASession_shouldReturnAuthAccountDto() {
     var username = "ronald";
     var currentSessionDto = AccountDtoFixtures.currentSessionDto(1L);
-    var currentSession = AccountEntityFixtures.currentSessionAccount(1L);
+    var currentSession = AccountFixtures.currentSessionAccount(1L);
 
     when(sessionService.getCurrentUsername()).thenReturn(username);
     when(accountRepository.findByUsername(username)).thenReturn(Optional.of(currentSession));

@@ -1,10 +1,10 @@
-package org.dsa.services.accountsservice.unit.mappers;
+package org.dsa.services.accountsservice.unit.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
+import org.dsa.services.accountsservice.common.fixtures.AccountFixtures;
 import org.dsa.services.accountsservice.dto.AccountDto;
 import org.dsa.services.accountsservice.dto.CreateAccountDto;
 import org.dsa.services.accountsservice.entity.Account;
@@ -31,7 +31,7 @@ public class AccountMapperTest {
 
   @Test
   void toDto_shouldMapAllFields() {
-    Account account = AccountEntityFixtures.adminAccountPersisted(1L);
+    Account account = AccountFixtures.adminAccountPersisted(1L);
 
     AccountDto dto = mapper.toDto(account);
 

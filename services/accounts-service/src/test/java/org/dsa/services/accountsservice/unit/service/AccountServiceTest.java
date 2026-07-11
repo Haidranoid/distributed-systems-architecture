@@ -1,9 +1,9 @@
-package org.dsa.services.accountsservice.unit.services;
+package org.dsa.services.accountsservice.unit.service;
 
 import java.util.Optional;
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
 import org.dsa.services.accountsservice.common.fixtures.AccountDtoFixtures;
-import org.dsa.services.accountsservice.common.fixtures.AccountEntityFixtures;
+import org.dsa.services.accountsservice.common.fixtures.AccountFixtures;
 import org.dsa.services.accountsservice.entity.Account;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.services.accountsservice.repository.AccountRepository;
@@ -29,8 +29,8 @@ public class AccountServiceTest {
   @Test
   void create_whenAccountIsCreated_shouldReturnAccountResponseDto() {
     var createAccountDto = AccountDtoFixtures.createAdminAccountDto();
-    var accountEntity = AccountEntityFixtures.adminAccount();
-    var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
+    var accountEntity = AccountFixtures.adminAccount();
+    var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
     var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
     Mockito.when(accountsMapper.toEntity(createAccountDto)).thenReturn(accountEntity);
@@ -48,7 +48,7 @@ public class AccountServiceTest {
 
   @Test
   void findById_whenAccountExists_shouldReturnAccountResponseDto() {
-    var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
+    var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
     var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
     Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(accountPersisted));
@@ -80,7 +80,7 @@ public class AccountServiceTest {
   @Test
   void findAll_whenNoAccounts_shouldReturnAnEmptyList() {
     // Arrange
-    var emptyAccountList = AccountEntityFixtures.emptyAccountsList();
+    var emptyAccountList = AccountFixtures.emptyAccountsList();
 
     Mockito.when(accountRepository.findAll()).thenReturn(emptyAccountList);
 
@@ -96,7 +96,7 @@ public class AccountServiceTest {
 
   @Test
   void findAll_whenAccountsAreEqualToTwo_shouldReturnTwoAccountResponseDto() {
-    var accountsPersisted = AccountEntityFixtures.twoAccountsPersisted();
+    var accountsPersisted = AccountFixtures.twoAccountsPersisted();
 
     Mockito.when(accountRepository.findAll()).thenReturn(accountsPersisted);
     Mockito.when(accountsMapper.toDto(accountsPersisted.get(0)))
@@ -122,8 +122,8 @@ public class AccountServiceTest {
   @Test
   void update_whenAccountExists_shouldBeUpdatedAndReturnAccountResponseDto() {
     var updateAccountDto = AccountDtoFixtures.updateAccountDtoOne();
-    var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
-    var accountUpdated = AccountEntityFixtures.adminAccountPersisted(1L);
+    var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
+    var accountUpdated = AccountFixtures.adminAccountPersisted(1L);
 
     Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(accountPersisted));
     Mockito.when(accountRepository.save(accountPersisted)).thenReturn(accountUpdated);
@@ -159,7 +159,7 @@ public class AccountServiceTest {
   void delete_whenAccountExists_shouldReturnNull() {
     InOrder inOrder = Mockito.inOrder(accountRepository);
 
-    var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
+    var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
 
     Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(accountPersisted));
 
@@ -186,7 +186,7 @@ public class AccountServiceTest {
   @Test
   void verifyCredentials_whenAccountExists_shouldReturnAccountResponseDto() {
     var authenticateAccountDto = AccountDtoFixtures.authenticateAdminAccountDto();
-    var accountPersisted = AccountEntityFixtures.adminAccountPersisted(1L);
+    var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
     var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
     Mockito.when(accountRepository.findByUsername(authenticateAccountDto.username()))

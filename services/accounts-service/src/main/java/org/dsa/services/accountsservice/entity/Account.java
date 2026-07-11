@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
-public class AccountEntity implements UserDetails {
+public class Account implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
