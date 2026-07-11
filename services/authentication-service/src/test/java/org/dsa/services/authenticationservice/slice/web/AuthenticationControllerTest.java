@@ -8,10 +8,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.dsa.core.sharedstarter.common.constants.Role;
 import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
-import org.dsa.services.authenticationservice.common.fixtures.AuthenticationDtoFixtures;
-import org.dsa.services.authenticationservice.controllers.AuthenticationController;
-import org.dsa.services.authenticationservice.controllers.advices.GlobalControllerAdvice;
-import org.dsa.services.authenticationservice.services.impl.AuthenticationServiceImpl;
+import org.dsa.services.authenticationservice.controller.AuthenticationController;
+import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
+import org.dsa.services.authenticationservice.fixtures.AuthenticationDtoFixtures;
+import org.dsa.services.authenticationservice.service.AuthenticationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class AuthenticationControllerTest {
   @Autowired private MockMvc mockMvc;
   @Autowired private ObjectMapper objectMapper;
 
-  @MockitoBean private AuthenticationServiceImpl authenticationService;
+  @MockitoBean private AuthenticationService authenticationService;
 
   @Test
   @DisplayName("POST /api/v1/auth/login returns 200 when credentials are valid")

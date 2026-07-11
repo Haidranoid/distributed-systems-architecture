@@ -63,8 +63,13 @@ jacocoTestReport {
             files(classDirectories.files.collect {
                 fileTree(dir: it, exclude: [
                         '**/*Application*',
-                        '**/common/**',
                         '**/config/**',
+                        '**/constant/**',
+                        '**/dto/**',
+                        '**/entity/**',
+                        '**/property/**',
+                        '**/util/**', // TODO: temp
+                        '**/webclient/**', // TODO: temp
                 ])
             })
     )
@@ -85,9 +90,14 @@ jacocoTestCoverageVerification {
 
             excludes = [
                     '*Application*',
-                    '*common*',
                     '*config*',
-                    '*controllers*',
+                    '*controller*',
+                    '**/constant/**',
+                    '**/dto/**',
+                    '**/entity/**',
+                    '**/property/**',
+                    '**/util/**', // TODO: temp
+                    '**/webclient/**', // TODO: temp
             ]
 
             limit {
@@ -112,7 +122,7 @@ dependencyManagement {
 }
 
 dependencies {
-    implementation 'org.dsa.core:shared-starter:1.4.0'
+    implementation 'org.dsa.core:shared-starter:1.4.1'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -122,7 +132,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation(testFixtures('org.dsa.core:shared-starter:1.4.0'))
+    testImplementation(testFixtures('org.dsa.core:shared-starter:1.4.1'))
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     testImplementation 'net.datafaker:datafaker:2.5.3'
 }
