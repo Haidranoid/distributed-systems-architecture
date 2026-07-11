@@ -12,7 +12,7 @@ public class KafkaAutoConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    public KafkaEventPublisher kafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate){
+    public KafkaEventPublisher kafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
         return new KafkaEventPublisher(kafkaTemplate);
     }
 }
