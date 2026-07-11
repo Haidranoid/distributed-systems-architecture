@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.util;
+package org.dsa.services.authenticationservice.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SignatureAlgorithm;

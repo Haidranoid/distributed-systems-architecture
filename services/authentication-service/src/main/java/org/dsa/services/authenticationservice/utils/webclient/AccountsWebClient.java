@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.webclient;
+package org.dsa.services.authenticationservice.utils.webclient;
 
 import lombok.RequiredArgsConstructor;
 import org.dsa.services.authenticationservice.dto.AuthAccountDto;

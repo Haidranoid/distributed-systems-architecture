@@ -10,9 +10,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public class ContainersTestConfig {
 
-    @Bean
-    @ServiceConnection
-    PostgreSQLContainer<?> postgresContainer() {
-        return new PostgreSQLContainer<>("postgres:16-alpine");
-    }
+  @Bean
+  @ServiceConnection
+  PostgreSQLContainer<?> postgresContainer() {
+    return new PostgreSQLContainer<>("postgres:16-alpine");
+  }
 }

@@ -7,5 +7,4 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 @SpringBootTest
 @IntegrationEnvironment
 @AutoConfigureMockMvc
-public abstract class SpringBootIntegrationTest {
-}
+public abstract class SpringBootIntegrationTest {}

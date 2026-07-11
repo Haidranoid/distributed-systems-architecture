@@ -4,9 +4,5 @@ import lombok.Builder;
 import org.dsa.core.sharedstarter.messaging.contracts.KafkaEvent;
 
 @Builder
-public record UserLoggedOutEvent(
-        Long accountId,
-        String username,
-        String email
-) implements KafkaEvent {
-}
+public record UserLoggedOutEvent(Long accountId, String username, String email)
+    implements KafkaEvent {}

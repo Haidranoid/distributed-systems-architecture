@@ -5,5 +5,4 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
 @DataJpaTest
 @IntegrationEnvironment
-public abstract class DataJpaIntegrationTest {
-}
+public abstract class DataJpaIntegrationTest {}

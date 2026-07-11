@@ -10,9 +10,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 @AutoConfiguration(after = KafkaAutoConfiguration.class)
 public class KafkaAutoConfig {
 
-    @Bean
-    @ConditionalOnMissingBean
-    public KafkaEventPublisher kafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
-        return new KafkaEventPublisher(kafkaTemplate);
-    }
+  @Bean
+  @ConditionalOnMissingBean
+  public KafkaEventPublisher kafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
+    return new KafkaEventPublisher(kafkaTemplate);
+  }
 }

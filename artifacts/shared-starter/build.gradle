@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'org.dsa.core'
-version = '1.4.1'
+version = '2.0.0'
 description = 'shared-starter'
 
 java {
@@ -44,13 +44,12 @@ publishing {
 
         def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
 
-
         if (!codeArtifactAuthToken) {
-
+            /*
             providers.exec {
                 commandLine 'aws', 'login'
             }
-
+            */
             codeArtifactAuthToken = providers.exec {
                 commandLine 'aws', 'codeartifact', 'get-authorization-token',
                         '--domain', 'artifacts',
