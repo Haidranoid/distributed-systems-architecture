@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.dsa.services'
-version = '1.0.7'
+version = '2.0.0'
 description = 'config-server'
 
 java {
@@ -29,10 +29,12 @@ repositories {
 
 ext {
     set('springCloudVersion', "2025.1.1")
+    set('googleGuavaVersion', "33.6.0-jre")
 }
 
 dependencyManagement {
     imports {
+        mavenBom "com.google.guava:guava-bom:${googleGuavaVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
