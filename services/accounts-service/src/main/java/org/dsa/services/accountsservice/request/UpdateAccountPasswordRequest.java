@@ -1,10 +1,10 @@
-package org.dsa.services.accountsservice.dto;
+package org.dsa.services.accountsservice.request;
 
 import lombok.Builder;
 import lombok.NonNull;
 
 @Builder
-public record UpdateAccountPasswordDto(
+public record UpdateAccountPasswordRequest(
     String currentPassword, String newPassword, String confirmationPassword) {
   @NonNull
   @Override

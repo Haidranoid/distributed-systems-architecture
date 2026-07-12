@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.fixture;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.dsa.core.sharedstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.constants.Role;
 import org.dsa.services.accountsservice.entity.Account;
 
 public class AccountFixtures {

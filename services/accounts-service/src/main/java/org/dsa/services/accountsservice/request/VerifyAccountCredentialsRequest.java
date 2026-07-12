@@ -1,11 +1,12 @@
-package org.dsa.services.accountsservice.dto;
+package org.dsa.services.accountsservice.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.NonNull;
 
 @Builder
-public record VerifyAccountCredentialsDto(@NotBlank String username, @NotBlank String password) {
+public record VerifyAccountCredentialsRequest(
+    @NotBlank String username, @NotBlank String password) {
   @NonNull
   @Override
   public String toString() {

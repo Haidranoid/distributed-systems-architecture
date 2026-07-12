@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Collection;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.dsa.core.sharedstarter.common.constants.Role;
+import org.dsa.core.sharedstarter.constants.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
-import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
-import org.dsa.core.sharedstarter.common.exceptions.UnauthorizedException;
-import org.dsa.core.sharedstarter.utils.SessionService;
+import org.dsa.core.sharedstarter.constants.Role;
+import org.dsa.core.sharedstarter.exception.AccountNotFoundException;
+import org.dsa.core.sharedstarter.exception.UnauthorizedException;
+import org.dsa.core.sharedstarter.utils.CurrentSession;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
@@ -24,7 +24,7 @@ public class MeServiceTest {
 
   @Mock private AccountRepository accountRepository;
   @Mock private AccountMapper accountsMapper;
-  @Mock private SessionService sessionService;
+  @Mock private CurrentSession currentSession;
 
   @InjectMocks private MeService meService;
 
@@ -32,11 +32,11 @@ public class MeServiceTest {
   void me_whenThereIsASession_shouldReturnAuthAccountDto() {
     var username = "ronald";
     var currentSessionDto = AccountDtoFixtures.currentSessionDto(1L);
-    var currentSession = AccountFixtures.currentSessionAccount(1L);
+    var currentSessionAccount = AccountFixtures.currentSessionAccount(1L);
 
-    when(sessionService.getCurrentUsername()).thenReturn(username);
-    when(accountRepository.findByUsername(username)).thenReturn(Optional.of(currentSession));
-    when(accountsMapper.toDto(currentSession)).thenReturn(currentSessionDto);
+    when(currentSession.getCurrentUsername()).thenReturn(username);
+    when(accountRepository.findByUsername(username)).thenReturn(Optional.of(currentSessionAccount));
+    when(accountsMapper.toDto(currentSessionAccount)).thenReturn(currentSessionDto);
 
     var session = meService.me();
 
@@ -49,7 +49,7 @@ public class MeServiceTest {
 
   @Test
   void me_whenThereIsNotASession_shouldThrowException() {
-    when(sessionService.getCurrentUsername()).thenReturn(null);
+    when(currentSession.getCurrentUsername()).thenReturn(null);
 
     var exception = assertThrows(UnauthorizedException.class, () -> meService.me());
 
@@ -60,7 +60,7 @@ public class MeServiceTest {
   void me_whenThereIsASessionButIsNotFoundInDB_shouldThrowException() {
     var username = "ronald";
 
-    when(sessionService.getCurrentUsername()).thenReturn(username);
+    when(currentSession.getCurrentUsername()).thenReturn(username);
     when(accountRepository.findByUsername(username)).thenReturn(Optional.empty());
 
     var exception = assertThrows(AccountNotFoundException.class, () -> meService.me());

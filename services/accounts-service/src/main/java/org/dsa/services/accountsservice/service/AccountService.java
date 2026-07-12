@@ -3,14 +3,14 @@ package org.dsa.services.accountsservice.service;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
-import org.dsa.core.sharedstarter.common.operations.BaseService;
-import org.dsa.services.accountsservice.dto.AccountDto;
-import org.dsa.services.accountsservice.dto.CreateAccountDto;
-import org.dsa.services.accountsservice.dto.UpdateAccountDto;
-import org.dsa.services.accountsservice.dto.VerifyAccountCredentialsDto;
+import org.dsa.core.sharedstarter.contracts.BaseService;
+import org.dsa.core.sharedstarter.exception.AccountNotFoundException;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.services.accountsservice.repository.AccountRepository;
+import org.dsa.services.accountsservice.request.CreateAccountRequest;
+import org.dsa.services.accountsservice.request.UpdateAccountRequest;
+import org.dsa.services.accountsservice.request.VerifyAccountCredentialsRequest;
+import org.dsa.services.accountsservice.response.AccountResponse;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,20 +19,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountService implements BaseService<Long, AccountDto, CreateAccountDto, UpdateAccountDto> {
+public class AccountService
+    implements BaseService<Long, AccountResponse, CreateAccountRequest, UpdateAccountRequest> {
 
   private final AccountRepository accountRepository;
   private final AccountMapper accountMapper;
 
-  public AccountDto create(CreateAccountDto createAccountDto) {
+  public AccountResponse create(CreateAccountRequest createAccountRequest) {
     // TODO: handle the case when the account already exist
-    var accountEntity = accountMapper.toEntity(createAccountDto);
+    var accountEntity = accountMapper.toEntity(createAccountRequest);
     var accountSaved = accountRepository.save(accountEntity);
 
     return accountMapper.toDto(accountSaved);
   }
 
-  public AccountDto findById(Long userId) {
+  public AccountResponse findById(Long userId) {
     var account =
         accountRepository
             .findById(userId)
@@ -42,13 +43,13 @@ public class AccountService implements BaseService<Long, AccountDto, CreateAccou
   }
 
   @Transactional(readOnly = true)
-  public List<AccountDto> findAll() {
+  public List<AccountResponse> findAll() {
     var accountsList = accountRepository.findAll().stream().map(accountMapper::toDto).toList();
 
     return accountsList;
   }
 
-  public AccountDto update(Long userId, UpdateAccountDto updateAccountDto) {
+  public AccountResponse update(Long userId, UpdateAccountRequest updateAccountRequest) {
     var account =
         accountRepository
             .findById(userId)
@@ -70,10 +71,11 @@ public class AccountService implements BaseService<Long, AccountDto, CreateAccou
     accountRepository.delete(account);
   }
 
-  public AccountDto verifyCredentials(VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
+  public AccountResponse verifyCredentials(
+      VerifyAccountCredentialsRequest verifyAccountCredentialsRequest) {
     var account =
         accountRepository
-            .findByUsername(verifyAccountCredentialsDto.username())
+            .findByUsername(verifyAccountCredentialsRequest.username())
             .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
     return accountMapper.toDto(account);

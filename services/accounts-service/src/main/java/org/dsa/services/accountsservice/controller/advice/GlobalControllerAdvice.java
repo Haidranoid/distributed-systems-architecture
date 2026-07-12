@@ -2,8 +2,8 @@ package org.dsa.services.accountsservice.controller.advice;
 
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.core.sharedstarter.common.errors.ApiError;
-import org.dsa.core.sharedstarter.common.exceptions.BaseException;
+import org.dsa.core.sharedstarter.error.ApiError;
+import org.dsa.core.sharedstarter.exception.BaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

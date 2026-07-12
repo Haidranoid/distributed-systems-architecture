@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dto.AccountDto;
-import org.dsa.services.accountsservice.dto.UpdateAccountPasswordDto;
+import org.dsa.services.accountsservice.request.UpdateAccountPasswordRequest;
+import org.dsa.services.accountsservice.response.AccountResponse;
 import org.dsa.services.accountsservice.service.MeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class MeController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public AccountDto getMe() {
+  public AccountResponse getMe() {
     log.info("getMe request started");
 
     var currentSession = meService.me();
@@ -33,8 +33,9 @@ public class MeController {
 
   @PatchMapping("/change-password")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void meChangePassword(@RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
-    log.info("changePassword request: {}", updateAccountPasswordDto);
+  public void meChangePassword(
+      @RequestBody UpdateAccountPasswordRequest updateAccountPasswordRequest) {
+    log.info("changePassword request: {}", updateAccountPasswordRequest);
 
     // accountService.changePassword(changePasswordAccountDto);
 

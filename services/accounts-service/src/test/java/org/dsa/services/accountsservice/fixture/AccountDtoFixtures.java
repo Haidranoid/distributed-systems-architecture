@@ -3,13 +3,17 @@ package org.dsa.services.accountsservice.fixture;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.services.accountsservice.dto.*;
+import org.dsa.core.sharedstarter.constants.Role;
+import org.dsa.services.accountsservice.request.CreateAccountRequest;
+import org.dsa.services.accountsservice.request.UpdateAccountPasswordRequest;
+import org.dsa.services.accountsservice.request.UpdateAccountRequest;
+import org.dsa.services.accountsservice.request.VerifyAccountCredentialsRequest;
+import org.dsa.services.accountsservice.response.AccountResponse;
 
 public class AccountDtoFixtures {
 
-  public static AccountDto meAccountResponseDto(Long id) {
-    return AccountDto.builder()
+  public static AccountResponse meAccountResponseDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("ronald")
         .email("ronald@email.com")
@@ -19,8 +23,8 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static AccountDto currentSessionDto(Long id) {
-    return AccountDto.builder()
+  public static AccountResponse currentSessionDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("ronald")
         .email("ronald@email.com")
@@ -30,12 +34,12 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static List<AccountDto> emptyAccountResponseDtoList() {
+  public static List<AccountResponse> emptyAccountResponseDtoList() {
     return Collections.emptyList();
   }
 
-  public static AccountDto adminAccountResponseDto(Long id) {
-    return AccountDto.builder()
+  public static AccountResponse adminAccountResponseDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("admin")
         .email("admin@email.com")
@@ -45,8 +49,8 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static CreateAccountDto createAdminAccountDto() {
-    return CreateAccountDto.builder()
+  public static CreateAccountRequest createAdminAccountDto() {
+    return CreateAccountRequest.builder()
         .username("admin")
         .firstName("Steve")
         .lastName("Rogers")
@@ -56,12 +60,15 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static VerifyAccountCredentialsDto authenticateAccountDto() {
-    return VerifyAccountCredentialsDto.builder().username("admin").password("<PASSWORD>").build();
+  public static VerifyAccountCredentialsRequest authenticateAccountDto() {
+    return VerifyAccountCredentialsRequest.builder()
+        .username("admin")
+        .password("<PASSWORD>")
+        .build();
   }
 
-  public static CreateAccountDto createManagerAccountDto() {
-    return CreateAccountDto.builder()
+  public static CreateAccountRequest createManagerAccountDto() {
+    return CreateAccountRequest.builder()
         .username("manager")
         .firstName("Black")
         .lastName("Widow")
@@ -71,8 +78,8 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static UpdateAccountDto updateAccountDtoOne() {
-    return UpdateAccountDto.builder()
+  public static UpdateAccountRequest updateAccountDtoOne() {
+    return UpdateAccountRequest.builder()
         .firstName("Steve")
         .lastName("Rogers")
         .email("manager@email.com")
@@ -81,8 +88,8 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static AccountDto updatedAccountDtoOne(Long id) {
-    return AccountDto.builder()
+  public static AccountResponse updatedAccountDtoOne(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("updatedAccount")
         .firstName("Steve")
@@ -92,20 +99,23 @@ public class AccountDtoFixtures {
         .build();
   }
 
-  public static UpdateAccountPasswordDto changePasswordAccountDto() {
-    return UpdateAccountPasswordDto.builder()
+  public static UpdateAccountPasswordRequest changePasswordAccountDto() {
+    return UpdateAccountPasswordRequest.builder()
         .currentPassword("<PASSWORD>")
         .confirmationPassword("<PASSWORD>")
         .newPassword("<NEW-PASSWORD>")
         .build();
   }
 
-  public static VerifyAccountCredentialsDto authenticateAdminAccountDto() {
-    return VerifyAccountCredentialsDto.builder().username("admin").password("<PASSWORD>").build();
+  public static VerifyAccountCredentialsRequest authenticateAdminAccountDto() {
+    return VerifyAccountCredentialsRequest.builder()
+        .username("admin")
+        .password("<PASSWORD>")
+        .build();
   }
 
-  public static List<AccountDto> twoAccountResponseDto() {
-    List<AccountDto> accountsDto = new ArrayList<>();
+  public static List<AccountResponse> twoAccountResponseDto() {
+    List<AccountResponse> accountsDto = new ArrayList<>();
 
     accountsDto.add(AccountDtoFixtures.adminAccountResponseDto(1L));
     accountsDto.add(AccountDtoFixtures.adminAccountResponseDto(2L));

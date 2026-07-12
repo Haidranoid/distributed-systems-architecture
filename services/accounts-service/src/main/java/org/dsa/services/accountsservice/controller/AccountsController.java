@@ -5,9 +5,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dto.AccountDto;
-import org.dsa.services.accountsservice.dto.UpdateAccountDto;
-import org.dsa.services.accountsservice.dto.UpdateAccountPasswordDto;
+import org.dsa.services.accountsservice.request.UpdateAccountPasswordRequest;
+import org.dsa.services.accountsservice.request.UpdateAccountRequest;
+import org.dsa.services.accountsservice.response.AccountResponse;
 import org.dsa.services.accountsservice.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class AccountsController {
 
   @GetMapping
   @Operation(summary = "Get all accounts")
-  public List<AccountDto> getAllAccounts() {
+  public List<AccountResponse> getAllAccounts() {
     log.info("getAllAccounts request started");
 
     var accountList = accountService.findAll();
@@ -34,7 +34,7 @@ public class AccountsController {
 
   @GetMapping("/{userId}")
   @Operation(summary = "Get an account by id")
-  public AccountDto getAccountById(@PathVariable Long userId) {
+  public AccountResponse getAccountById(@PathVariable Long userId) {
     log.info("getAccountById request: {}", userId);
 
     var account = accountService.findById(userId);
@@ -45,11 +45,11 @@ public class AccountsController {
 
   @PatchMapping("/{userId}")
   @Operation(summary = "Update an account by id")
-  public AccountDto updateAccount(
-      @PathVariable Long userId, @RequestBody UpdateAccountDto updateAccountDto) {
-    log.info("updateAccount request body: {}", updateAccountDto);
+  public AccountResponse updateAccount(
+      @PathVariable Long userId, @RequestBody UpdateAccountRequest updateAccountRequest) {
+    log.info("updateAccount request body: {}", updateAccountRequest);
 
-    var accountUpdated = accountService.update(userId, updateAccountDto);
+    var accountUpdated = accountService.update(userId, updateAccountRequest);
 
     log.info("updateAccount request response: {}", accountUpdated);
     return accountUpdated;
@@ -70,8 +70,9 @@ public class AccountsController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @Operation(summary = "Change password of an account by id")
   public void changePassword(
-      @PathVariable Long userId, @RequestBody UpdateAccountPasswordDto updateAccountPasswordDto) {
-    log.info("changePassword request: {}", updateAccountPasswordDto);
+      @PathVariable Long userId,
+      @RequestBody UpdateAccountPasswordRequest updateAccountPasswordRequest) {
+    log.info("changePassword request: {}", updateAccountPasswordRequest);
 
     // accountService.changePassword(changePasswordAccountDto);
 

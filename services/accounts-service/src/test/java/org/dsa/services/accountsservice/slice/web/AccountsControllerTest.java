@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
+import org.dsa.core.sharedstarter.exception.AccountNotFoundException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.accountsservice.controller.AccountsController;
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;

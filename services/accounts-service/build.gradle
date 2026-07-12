@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'org.dsa.services'
-version = '1.0.0'
+version = '2.0.0'
 description = 'accounts-service'
 
 java {
@@ -69,8 +69,12 @@ jacocoTestReport {
                 fileTree(dir: it, exclude: [
                         '**/*Application*',
                         '**/config/**',
-                        '**/dto/**',
+                        '**/constants/**',
                         '**/entity/**',
+                        '**/properties/**',
+                        '**/request/**',
+                        '**/response/**',
+                        '**/utils/**',
                 ])
             })
     )
@@ -93,8 +97,12 @@ jacocoTestCoverageVerification {
                     '*Application*',
                     '*config*',
                     '*controller*',
-                    '*dto*',
+                    '*constants*',
                     '*entity*',
+                    '*properties*',
+                    '*request*',
+                    '*response*',
+                    '*utils*',
             ]
 
             limit {

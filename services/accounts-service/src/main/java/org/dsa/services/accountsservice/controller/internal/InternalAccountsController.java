@@ -6,9 +6,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dto.AccountDto;
-import org.dsa.services.accountsservice.dto.CreateAccountDto;
-import org.dsa.services.accountsservice.dto.VerifyAccountCredentialsDto;
+import org.dsa.services.accountsservice.request.CreateAccountRequest;
+import org.dsa.services.accountsservice.request.VerifyAccountCredentialsRequest;
+import org.dsa.services.accountsservice.response.AccountResponse;
 import org.dsa.services.accountsservice.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +28,11 @@ public class InternalAccountsController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   @Operation(summary = "Creates an account")
-  public AccountDto createAccount(@Valid @RequestBody CreateAccountDto createAccountDto) {
-    log.info("createAccount request body: {}", createAccountDto);
+  public AccountResponse createAccount(
+      @Valid @RequestBody CreateAccountRequest createAccountRequest) {
+    log.info("createAccount request body: {}", createAccountRequest);
 
-    var account = accountService.create(createAccountDto);
+    var account = accountService.create(createAccountRequest);
 
     log.info("createAccount request response: {}", account);
     return account;
@@ -39,11 +40,11 @@ public class InternalAccountsController {
 
   @PostMapping("/verify-credentials")
   @Operation(summary = "Verify if the accounts exists, if so, return it.")
-  public AccountDto verifyAccountCredentials(
-      @Valid @RequestBody VerifyAccountCredentialsDto verifyAccountCredentialsDto) {
-    log.info("verifyAccountCredentials request body: {}", verifyAccountCredentialsDto);
+  public AccountResponse verifyAccountCredentials(
+      @Valid @RequestBody VerifyAccountCredentialsRequest verifyAccountCredentialsRequest) {
+    log.info("verifyAccountCredentials request body: {}", verifyAccountCredentialsRequest);
 
-    var account = accountService.verifyCredentials(verifyAccountCredentialsDto);
+    var account = accountService.verifyCredentials(verifyAccountCredentialsRequest);
 
     log.info("verifyAccountCredentials request response: {}", account);
     return account;
