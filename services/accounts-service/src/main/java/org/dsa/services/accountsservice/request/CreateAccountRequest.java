@@ -1,5 +1,6 @@
 package org.dsa.services.accountsservice.request;
 
+import com.google.common.base.MoreObjects;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,24 +18,13 @@ public record CreateAccountRequest(
     @NotNull Role role) {
   @Override
   public @NonNull String toString() {
-    return "CreateAccountDto{"
-        + "username='"
-        + username
-        + '\''
-        + ", firstName='"
-        + firstName
-        + '\''
-        + ", lastName='"
-        + lastName
-        + '\''
-        + ", email='"
-        + email
-        + '\''
-        + ", password='"
-        + "[PROTECTED]"
-        + '\''
-        + ", role="
-        + role
-        + '}';
+    return MoreObjects.toStringHelper(this)
+        .add("username", username)
+        .add("firstName", firstName)
+        .add("lastName", lastName)
+        .add("email", email)
+        .add("password", "[PROTECTED]")
+        .add("role", role)
+        .toString();
   }
 }

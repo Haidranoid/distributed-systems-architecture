@@ -1,22 +1,18 @@
 package org.dsa.services.accountsservice.request;
 
+import com.google.common.base.MoreObjects;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 
 @Builder
 public record VerifyAccountCredentialsRequest(
     @NotBlank String username, @NotBlank String password) {
-  @NonNull
   @Override
-  public String toString() {
-    return "VerifyAccountCredentialsDto{"
-        + "username='"
-        + username
-        + '\''
-        + ", password='"
-        + "[password]"
-        + '\''
-        + '}';
+  public @NonNull String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("username", username)
+        .add("password", "[PROTECTED]")
+        .toString();
   }
 }
