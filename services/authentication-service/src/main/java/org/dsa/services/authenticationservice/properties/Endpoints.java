@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.property;
+package org.dsa.services.authenticationservice.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

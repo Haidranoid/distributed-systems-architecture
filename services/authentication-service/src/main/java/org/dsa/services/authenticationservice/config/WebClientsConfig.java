@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.config;
 
 import lombok.RequiredArgsConstructor;
-import org.dsa.services.authenticationservice.property.Endpoints;
+import org.dsa.services.authenticationservice.properties.Endpoints;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -6,7 +6,7 @@ import java.security.PrivateKey;
 import java.util.Date;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.dsa.core.sharedstarter.common.properties.JwtProperties;
+import org.dsa.core.sharedstarter.properties.JwtProperties;
 import org.springframework.stereotype.Service;
 
 @Service

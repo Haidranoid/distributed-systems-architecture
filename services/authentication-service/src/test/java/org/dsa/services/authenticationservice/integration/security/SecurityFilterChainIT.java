@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 public class SecurityFilterChainIT extends SpringBootIntegrationTest {
 
-
   @Autowired MockMvc mvc;
 
   @Test

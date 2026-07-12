@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.factory;
 
 import net.datafaker.Faker;
-import org.dsa.services.authenticationservice.constant.TokenType;
+import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.entity.Token;
 
 public class TokenTestDataFactory {

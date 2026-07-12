@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'org.dsa.services'
-version = '1.0.0'
+version = '2.0.0'
 description = 'authentication-service'
 
 java {
@@ -64,12 +64,12 @@ jacocoTestReport {
                 fileTree(dir: it, exclude: [
                         '**/*Application*',
                         '**/config/**',
-                        '**/constant/**',
-                        '**/dto/**',
+                        '**/constants/**',
                         '**/entity/**',
-                        '**/property/**',
-                        '**/util/**', // TODO: temp
-                        '**/webclient/**', // TODO: temp
+                        '**/properties/**',
+                        '**/request/**',
+                        '**/response/**',
+                        '**/utils/**',
                 ])
             })
     )
@@ -92,12 +92,12 @@ jacocoTestCoverageVerification {
                     '*Application*',
                     '*config*',
                     '*controller*',
-                    '**/constant/**',
-                    '**/dto/**',
-                    '**/entity/**',
-                    '**/property/**',
-                    '**/util/**', // TODO: temp
-                    '**/webclient/**', // TODO: temp
+                    '*constants*',
+                    '*entity*',
+                    '*properties*',
+                    '*request*',
+                    '*response*',
+                    '*utils*',
             ]
 
             limit {
@@ -113,16 +113,19 @@ check.dependsOn jacocoTestCoverageVerification
 
 ext {
     set('springCloudVersion', "2025.1.1")
+    set('googleGuavaVersion', "33.6.0-jre")
 }
 
 dependencyManagement {
     imports {
+        mavenBom "com.google.guava:guava-bom:${googleGuavaVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
 dependencies {
-    implementation 'org.dsa.core:shared-starter:1.4.1'
+    implementation 'com.google.guava:guava'
+    implementation 'org.dsa.core:shared-starter:2.0.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -132,9 +135,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     runtimeOnly 'org.postgresql:postgresql'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    testImplementation(testFixtures('org.dsa.core:shared-starter:1.4.1'))
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'com.google.guava:guava-testlib'
     testImplementation 'net.datafaker:datafaker:2.5.3'
+    testImplementation(testFixtures('org.dsa.core:shared-starter:2.0.0'))
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {

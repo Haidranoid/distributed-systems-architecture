@@ -1,11 +1,12 @@
 package org.dsa.services.authenticationservice.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.authenticationservice.dto.AuthResponseDto;
-import org.dsa.services.authenticationservice.dto.LoginDto;
-import org.dsa.services.authenticationservice.dto.SignupDto;
+import org.dsa.services.authenticationservice.request.LoginRequest;
+import org.dsa.services.authenticationservice.request.SignupRequest;
+import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 import org.dsa.services.authenticationservice.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,10 @@ public class AuthenticationController {
 
   @PostMapping("/login")
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public AuthResponseDto login(@RequestBody LoginDto loginDto) {
-    log.info("login request body: {}", loginDto);
+  public AuthenticationResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+    log.info("login request body: {}", loginRequest);
 
-    var loginResponse = authenticationService.login(loginDto);
+    var loginResponse = authenticationService.login(loginRequest);
 
     log.info("login request response: {}", loginResponse);
     return loginResponse;
@@ -32,10 +33,10 @@ public class AuthenticationController {
 
   @PostMapping("/signup")
   @ResponseStatus(HttpStatus.CREATED)
-  public AuthResponseDto signup(@RequestBody SignupDto signupDto) {
-    log.info("signup request body: {}", signupDto);
+  public AuthenticationResponse signup(@Valid @RequestBody SignupRequest signupRequest) {
+    log.info("signup request body: {}", signupRequest);
 
-    var signupResponse = authenticationService.signup(signupDto);
+    var signupResponse = authenticationService.signup(signupRequest);
 
     log.info("signup request response: {}", signupResponse);
     return signupResponse;

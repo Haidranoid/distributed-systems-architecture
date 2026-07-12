@@ -1,17 +1,17 @@
 package org.dsa.services.authenticationservice.fixture;
 
-import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.services.authenticationservice.constant.TokenType;
-import org.dsa.services.authenticationservice.dto.AuthAccountDto;
-import org.dsa.services.authenticationservice.dto.AuthResponseDto;
-import org.dsa.services.authenticationservice.dto.LoginDto;
-import org.dsa.services.authenticationservice.dto.SignupDto;
+import org.dsa.core.sharedstarter.constants.Role;
+import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.entity.Token;
+import org.dsa.services.authenticationservice.request.LoginRequest;
+import org.dsa.services.authenticationservice.request.SignupRequest;
+import org.dsa.services.authenticationservice.response.AccountResponse;
+import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 
 public class AuthenticationDtoFixtures {
 
-  public static AuthAccountDto authAccountDto(Long id) {
-    return AuthAccountDto.builder()
+  public static AccountResponse authAccountDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("admin")
         .email("admin@email.com")
@@ -21,8 +21,8 @@ public class AuthenticationDtoFixtures {
         .build();
   }
 
-  public static AuthAccountDto loginAuthAccountDto(Long id) {
-    return AuthAccountDto.builder()
+  public static AccountResponse loginAuthAccountDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("admin")
         .email("admin@email.com")
@@ -32,8 +32,8 @@ public class AuthenticationDtoFixtures {
         .build();
   }
 
-  public static AuthAccountDto signupAuthAccountDto(Long id) {
-    return AuthAccountDto.builder()
+  public static AccountResponse signupAuthAccountDto(Long id) {
+    return AccountResponse.builder()
         .id(id)
         .username("manager")
         .firstName("Pedro")
@@ -53,12 +53,12 @@ public class AuthenticationDtoFixtures {
         .build();
   }
 
-  public static LoginDto loginWithUsernameAndPassword() {
-    return LoginDto.builder().username("admin").password("<PASSWORD>").build();
+  public static LoginRequest loginWithUsernameAndPassword() {
+    return LoginRequest.builder().username("admin").password("<PASSWORD>").build();
   }
 
-  public static SignupDto managerSignupDto() {
-    return SignupDto.builder()
+  public static SignupRequest managerSignupDto() {
+    return SignupRequest.builder()
         .username("manager")
         .firstName("Pedro")
         .lastName("Pascal")
@@ -78,12 +78,12 @@ public class AuthenticationDtoFixtures {
     return "refresh-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj";
   }
 
-  public static AuthResponseDto loginAuthResponseDto(Long id) {
-    return AuthResponseDto.builder()
+  public static AuthenticationResponse loginAuthResponseDto(Long id) {
+    return AuthenticationResponse.builder()
         .accessToken("access-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj")
         .refreshToken("refresh-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj")
-        .account(
-            AuthAccountDto.builder()
+        .accountResponse(
+            AccountResponse.builder()
                 .id(id)
                 .username("admin")
                 .email("admin@email.com")
@@ -94,12 +94,12 @@ public class AuthenticationDtoFixtures {
         .build();
   }
 
-  public static AuthResponseDto signupAuthResponseDto(Long id) {
-    return AuthResponseDto.builder()
+  public static AuthenticationResponse signupAuthResponseDto(Long id) {
+    return AuthenticationResponse.builder()
         .accessToken("access-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj")
         .refreshToken("refresh-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj")
-        .account(
-            AuthAccountDto.builder()
+        .accountResponse(
+            AccountResponse.builder()
                 .id(id)
                 .username("manager")
                 .email("manager@email.com")

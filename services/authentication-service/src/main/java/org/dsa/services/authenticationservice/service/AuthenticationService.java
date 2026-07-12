@@ -3,22 +3,21 @@ package org.dsa.services.authenticationservice.service;
 import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.core.sharedstarter.common.constants.Permission;
-import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
+import org.dsa.core.sharedstarter.constants.Permission;
+import org.dsa.core.sharedstarter.exception.InvalidCredentialsException;
 import org.dsa.core.sharedstarter.messaging.events.AccountCreatedEvent;
 import org.dsa.core.sharedstarter.messaging.events.UserLoggedInEvent;
 import org.dsa.core.sharedstarter.messaging.producers.KafkaEventPublisher;
 import org.dsa.core.sharedstarter.messaging.topics.KafkaTopics;
-import org.dsa.services.authenticationservice.constant.TokenType;
-import org.dsa.services.authenticationservice.dto.AuthAccountDto;
-import org.dsa.services.authenticationservice.dto.AuthResponseDto;
-import org.dsa.services.authenticationservice.dto.LoginDto;
-import org.dsa.services.authenticationservice.dto.SignupDto;
+import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.entity.Token;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
-import org.dsa.services.authenticationservice.property.Endpoints;
+import org.dsa.services.authenticationservice.properties.Endpoints;
 import org.dsa.services.authenticationservice.repository.TokenRepository;
-import org.dsa.services.authenticationservice.util.JwtSignerService;
+import org.dsa.services.authenticationservice.request.LoginRequest;
+import org.dsa.services.authenticationservice.request.SignupRequest;
+import org.dsa.services.authenticationservice.response.AccountResponse;
+import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +37,12 @@ public class AuthenticationService {
   private final AuthenticationMapper authMapper;
   private final KafkaEventPublisher kafkaEventPublisher;
 
-  public AuthResponseDto login(LoginDto loginDto) {
+  public AuthenticationResponse login(LoginRequest loginRequest) {
     var accountAuthenticated =
         restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint() + "/authenticate-login",
-            loginDto,
-            AuthAccountDto.class);
+            endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
+            loginRequest,
+            AccountResponse.class);
 
     if (accountAuthenticated == null) {
       throw new InvalidCredentialsException();
@@ -79,10 +78,10 @@ public class AuthenticationService {
     return authResponseDto;
   }
 
-  public AuthResponseDto signup(SignupDto signupDto) {
+  public AuthenticationResponse signup(SignupRequest signupRequest) {
     var accountCreated =
         restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint(), signupDto, AuthAccountDto.class);
+            endpoints.accountsServiceInternalEndpoint(), signupRequest, AccountResponse.class);
 
     if (accountCreated == null) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request body");
@@ -150,7 +149,7 @@ public class AuthenticationService {
       var refreshTokenRequestResponse = AuthResponseDto.builder()
               .accessToken(accessToken)
               .refreshToken(refreshToken)
-              .account(account)
+              .accountResponse(account)
               .build();
 
       new ObjectMapper().writeValue(response.getOutputStream(), refreshTokenRequestResponse);

@@ -5,8 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.core.sharedstarter.common.constants.Role;
-import org.dsa.core.sharedstarter.common.exceptions.InvalidCredentialsException;
+import org.dsa.core.sharedstarter.constants.Role;
+import org.dsa.core.sharedstarter.exception.InvalidCredentialsException;
 import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.authenticationservice.controller.AuthenticationController;
 import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
@@ -51,9 +51,9 @@ public class AuthenticationControllerTest {
         .andExpect(
             jsonPath("$.refreshToken")
                 .value("refresh-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj"))
-        .andExpect(jsonPath("$.account.id").value(1L))
-        .andExpect(jsonPath("$.account.email").value("admin@email.com"))
-        .andExpect(jsonPath("$.account.role").value(Role.ADMIN.name()));
+        .andExpect(jsonPath("$.accountResponse.id").value(1L))
+        .andExpect(jsonPath("$.accountResponse.email").value("admin@email.com"))
+        .andExpect(jsonPath("$.accountResponse.role").value(Role.ADMIN.name()));
   }
 
   @Test
@@ -93,8 +93,8 @@ public class AuthenticationControllerTest {
         .andExpect(
             jsonPath("$.refreshToken")
                 .value("refresh-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj"))
-        .andExpect(jsonPath("$.account.id").value(1L))
-        .andExpect(jsonPath("$.account.email").value("manager@email.com"))
-        .andExpect(jsonPath("$.account.role").value(Role.MANAGER.name()));
+        .andExpect(jsonPath("$.accountResponse.id").value(1L))
+        .andExpect(jsonPath("$.accountResponse.email").value("manager@email.com"))
+        .andExpect(jsonPath("$.accountResponse.role").value(Role.MANAGER.name()));
   }
 }
