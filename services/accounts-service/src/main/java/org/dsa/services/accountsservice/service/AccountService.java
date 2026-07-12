@@ -4,6 +4,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.core.sharedstarter.common.exceptions.AccountNotFoundException;
+import org.dsa.core.sharedstarter.common.operations.BaseService;
 import org.dsa.services.accountsservice.dto.AccountDto;
 import org.dsa.services.accountsservice.dto.CreateAccountDto;
 import org.dsa.services.accountsservice.dto.UpdateAccountDto;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountService {
+public class AccountService implements BaseService<Long, AccountDto, CreateAccountDto, UpdateAccountDto> {
 
   private final AccountRepository accountRepository;
   private final AccountMapper accountMapper;
