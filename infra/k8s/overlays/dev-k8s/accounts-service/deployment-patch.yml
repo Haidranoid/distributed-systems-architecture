@@ -18,3 +18,8 @@ spec:
                 configMapKeyRef:
                   name: dev-k8s-configmap
                   key: SPRING_PROFILES_ACTIVE
+            - name: CONFIG_IMPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-k8s-configmap
+                  key: CONFIG_IMPORT

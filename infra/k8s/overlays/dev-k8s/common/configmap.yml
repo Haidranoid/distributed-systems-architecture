@@ -4,3 +4,4 @@ metadata:
   name: dev-k8s-configmap
 data:
   SPRING_PROFILES_ACTIVE: dev-k8s
+  CONFIG_IMPORT: configserver:http://config-server-srv:8888
