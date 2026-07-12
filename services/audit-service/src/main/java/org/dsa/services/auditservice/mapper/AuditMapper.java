@@ -12,17 +12,17 @@ import tools.jackson.databind.ObjectMapper;
 @RequiredArgsConstructor
 public class AuditMapper {
 
-    private final ObjectMapper objectMapper;
+  private final ObjectMapper objectMapper;
 
-    public AuditEvent toEntity(KafkaEvent event) {
-        try {
-            return AuditEvent.builder()
-                    .eventType(event.getClass().getSimpleName())
-                    .occurredAt(Instant.now())
-                    .payload(objectMapper.writeValueAsString(event))
-                    .build();
-        } catch (JacksonException e) {
-            throw new IllegalStateException("Unable to serialize audit event", e);
-        }
+  public AuditEvent toEntity(KafkaEvent event) {
+    try {
+      return AuditEvent.builder()
+          .eventType(event.getClass().getSimpleName())
+          .occurredAt(Instant.now())
+          .payload(objectMapper.writeValueAsString(event))
+          .build();
+    } catch (JacksonException e) {
+      throw new IllegalStateException("Unable to serialize audit event", e);
     }
+  }
 }
