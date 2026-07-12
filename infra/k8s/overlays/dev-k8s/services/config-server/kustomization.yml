@@ -2,7 +2,7 @@ namespace: dev-k8s
 
 resources:
   - ../common
-  - ../../../base/gateway
+  - ../../../../base/services/config-server
 
 patches:
   - path: deployment-patch.yml

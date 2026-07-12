@@ -2,7 +2,7 @@ namespace: dev-k8s
 
 resources:
   - ../common
-  - ../../../base/accounts-service
+  - ../../../../base/services/accounts-service
 
 patches:
   - path: deployment-patch.yml

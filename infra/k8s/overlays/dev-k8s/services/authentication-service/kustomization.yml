@@ -2,7 +2,7 @@ namespace: dev-k8s
 
 resources:
   - ../common
-  - ../../../base/config-server
+  - ../../../../base/services/authentication-service
 
 patches:
   - path: deployment-patch.yml
