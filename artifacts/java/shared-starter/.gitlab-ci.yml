@@ -1,6 +1,6 @@
 include:
-  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/test.yml
-  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/publish.yml
+  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_TYPE/test.yml
+  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_TYPE/publish.yml
 
 stages:
   - test
