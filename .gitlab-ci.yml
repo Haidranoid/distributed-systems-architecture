@@ -53,7 +53,7 @@ trigger-shared-starter:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_TYPE: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA
-    PROJECT_DIR: $PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_DIR: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA/$PROJECT_NAME
 
 # services
 trigger-config-server:
