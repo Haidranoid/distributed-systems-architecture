@@ -1,7 +1,7 @@
 include:
-  - local: $GITLAB_TEMPLATES_DIR/services/test.yml
-  - local: $GITLAB_TEMPLATES_DIR/services/publish.yml
-  - local: $GITLAB_TEMPLATES_DIR/services/deploy.yml
+  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_TYPE/test.yml
+  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_TYPE/publish.yml
+  - local: $GITLAB_TEMPLATES_DIR/$PROJECT_TYPE/deploy.yml
 
 stages:
   - test
