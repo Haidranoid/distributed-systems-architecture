@@ -14,6 +14,9 @@ variables:
   GITLAB_DIR: infra/ci
   GITLAB_TEMPLATES_DIR: infra/ci/templates
 
+  ARTIFACT_TYPE_JAVA: java
+  ARTIFACT_TYPE_NET: net
+
 workflow:
   rules:
       # Merge Requests
@@ -49,7 +52,7 @@ trigger-shared-starter:
 
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_DIR: $ARTIFACTS_DIR/$PROJECT_NAME
+    PROJECT_DIR: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA/$PROJECT_NAME
 
 # services
 trigger-config-server:
