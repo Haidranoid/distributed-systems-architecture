@@ -66,7 +66,8 @@ trigger-config-server:
   variables:
     PROJECT_NAME: config-server
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
-    PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
 
 trigger-accounts-service:
   extends: .trigger-template
@@ -75,7 +76,8 @@ trigger-accounts-service:
   variables:
     PROJECT_NAME: accounts-service
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
-    PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
 
 trigger-authentication-service:
   extends: .trigger-template
@@ -84,7 +86,8 @@ trigger-authentication-service:
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
-    PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
 
 trigger-gateway:
   extends: .trigger-template
@@ -93,4 +96,5 @@ trigger-gateway:
   variables:
     PROJECT_NAME: gateway
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
-    PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
