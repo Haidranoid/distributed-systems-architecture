@@ -1,7 +1,8 @@
 package org.dsa.services.authenticationservice.response;
 
-import com.google.common.base.MoreObjects;
 import lombok.Builder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.dsa.core.sharedstarter.constants.Role;
 import org.jspecify.annotations.NonNull;
 
@@ -10,13 +11,13 @@ public record AccountResponse(
     Long id, String username, String firstName, String lastName, String email, Role role) {
   @Override
   public @NonNull String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("id", id)
-        .add("username", username)
-        .add("firstName", firstName)
-        .add("lastName", lastName)
-        .add("email", email)
-        .add("role", role)
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .append("id", id)
+        .append("username", username)
+        .append("firstName", firstName)
+        .append("lastName", lastName)
+        .append("email", email)
+        .append("role", role)
         .toString();
   }
 }
