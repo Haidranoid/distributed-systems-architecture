@@ -14,6 +14,7 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
 management:
   endpoints:
     web:
@@ -21,11 +22,19 @@ management:
         include: health, info
 logging:
   level:
+    # Kafka
     org.apache.kafka.common.config.AbstractConfig: WARN
     org.apache.kafka.common.utils.AppInfoParser: WARN
     org.apache.kafka.clients.producer.KafkaProducer: WARN
 
+    # Hibernate
     org.hibernate.orm.connections.pooling: WARN
+
+    # MVC
+    org.springframework.web.servlet.DispatcherServlet: WARN
+
+    # SpringDoc
+    org.springdoc.core.events.SpringDocAppInitializer: ERROR
 application:
   security:
     jwt:
