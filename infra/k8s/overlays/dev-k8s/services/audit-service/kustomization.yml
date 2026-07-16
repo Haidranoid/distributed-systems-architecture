@@ -1,0 +1,8 @@
+namespace: dev-k8s
+
+resources:
+  - ../common
+  - ../../../../base/services/audit-service
+
+patches:
+  - path: deployment-patch.yml
