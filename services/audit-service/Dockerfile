@@ -61,6 +61,6 @@ ENV SPRING_PROFILES_ACTIVE=dev-docker
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8083
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
