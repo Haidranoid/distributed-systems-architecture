@@ -6,11 +6,11 @@ namespace MediaGenerationService.Controllers;
 
 [ApiController]
 [Route("/api/v1/media-queries")]
-public class MediaQueryController : ControllerBase
+public class MediaQueriesController : ControllerBase
 {
     private readonly IMediaQueryService _service;
 
-    public MediaQueryController(IMediaQueryService service)
+    public MediaQueriesController(IMediaQueryService service)
     {
         _service = service;
     }
