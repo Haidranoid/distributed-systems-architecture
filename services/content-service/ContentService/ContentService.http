@@ -1,4 +1,4 @@
-@ContentService_HostAddress = http://localhost:8084
+@ContentService_HostAddress = http://localhost:8085
 
 GET {{ContentService_HostAddress}}/api/v1/posts/
 Accept: application/json
