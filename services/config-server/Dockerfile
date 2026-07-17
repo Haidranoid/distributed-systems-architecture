@@ -61,6 +61,6 @@ ENV SPRING_PROFILES_ACTIVE=default
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8888
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
