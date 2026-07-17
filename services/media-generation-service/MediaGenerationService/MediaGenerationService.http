@@ -1,4 +1,4 @@
-@MediaGenerationService_HostAddress = http://localhost:8083
+@MediaGenerationService_HostAddress = http://localhost:8084
 
 GET {{MediaGenerationService_HostAddress}}/api/v1/media-queries/
 Accept: application/json
