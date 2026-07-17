@@ -14,3 +14,11 @@ spring:
               uri: http://localhost:8081
               predicates:
                 - Path=/api/v1/accounts/**
+            - id: media-generation-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v1/media-generation/**
+            - id: content-service
+              uri: http://localhost:8084
+              predicates:
+                - Path=/api/v1/content/**
