@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediaGenerationService.Controllers;
 
 [ApiController]
-[Route("/api/v1/media-queries")]
+[Route("/api/v1/media-generation/queries")]
 public class MediaQueriesController : ControllerBase
 {
     private readonly IMediaQueryService _service;
