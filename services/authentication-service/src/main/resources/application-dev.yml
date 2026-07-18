@@ -13,5 +13,5 @@ spring:
       ddl-auto: update
 application:
   endpoints:
-    accounts-service-endpoint: http://localhost:8081/api/v1/accounts
-    accounts-service-internal-endpoint: http://localhost:8081/api/v1/internal/accounts
+    accounts-service-endpoint: http://localhost:8082/api/v1/accounts
+    accounts-service-internal-endpoint: http://localhost:8082/api/v1/internal/accounts
