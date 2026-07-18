@@ -15,10 +15,10 @@ variables:
   GITLAB_TEMPLATES_DIR: infra/ci/templates
 
   ARTIFACT_TYPE_JAVA: java
-  ARTIFACT_TYPE_NET: net
+  ARTIFACT_TYPE_DOTNET: dotnet
 
-  SERVICE_TYPE_JAVA: java
-  SERVICE_TYPE_NET: net
+  SERVICE_TYPE_SPRING_BOOT: spring-boot
+  SERVICE_TYPE_ASP_DOTNET_NET: asp-dotnet-core
 
 workflow:
   rules:
@@ -33,14 +33,15 @@ stages:
   - artifacts
   - services
 
-# trigger template
-.trigger-template:
+
+# trigger templates
+.trigger-template-java:
   trigger:
     strategy: depend
 
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_DIR/bootstrap/setup-env.yml
+      - local: $GITLAB_DIR/bootstrap/java/setup-env.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -48,9 +49,10 @@ stages:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
+
 # artifacts
 trigger-shared-starter:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: artifacts
 
   variables:
@@ -60,51 +62,51 @@ trigger-shared-starter:
 
 # services
 trigger-config-server:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: services
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+
 
 trigger-authentication-service:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: services
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
-    
+
+
 trigger-accounts-service:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: services
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+
 
 trigger-audit-service:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: services
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+
 
 trigger-gateway:
-  extends: .trigger-template
+  extends: .trigger-template-java
   stage: services
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_JAVA
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-    #PROJECT_DIR: $SERVICES_DIR/$SERVICE_TYPE_JAVA/$PROJECT_NAME
+    
