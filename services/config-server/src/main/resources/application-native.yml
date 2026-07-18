@@ -3,4 +3,6 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///dsa-properties-repository
+          search-locations:
+          - "file://${user.home:./}/MyProjects/distributed-systems-architecture-properties"
+          - file:///dsa-properties-repository
