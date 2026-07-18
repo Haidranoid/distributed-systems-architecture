@@ -16,4 +16,4 @@ spec:
         - name: authentication-service
           image: authentication-service
           ports:
-            - containerPort: 8080
+            - containerPort: 8081

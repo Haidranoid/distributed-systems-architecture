@@ -16,4 +16,4 @@ spec:
         - name: audit-service
           image: audit-service
           ports:
-            - containerPort: 8082
+            - containerPort: 8083

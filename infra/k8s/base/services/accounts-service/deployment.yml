@@ -16,4 +16,4 @@ spec:
         - name: accounts-service
           image: accounts-service
           ports:
-            - containerPort: 8081
+            - containerPort: 8082
