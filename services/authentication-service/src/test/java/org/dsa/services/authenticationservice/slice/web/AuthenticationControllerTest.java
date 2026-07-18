@@ -31,7 +31,7 @@ public class AuthenticationControllerTest {
   @MockitoBean private AuthenticationService authenticationService;
 
   @Test
-  @DisplayName("POST /api/v1/auth/login returns 200 when credentials are valid")
+  @DisplayName("POST /api/v1/authentication/login returns 200 when credentials are valid")
   public void login_whenCredentialsAreValid_shouldReturn202() throws Exception {
     var loginDto = AuthenticationDtoFixtures.loginWithUsernameAndPassword();
     var accountLoggedIn = AuthenticationDtoFixtures.loginAuthResponseDto(1L);
@@ -40,7 +40,7 @@ public class AuthenticationControllerTest {
 
     mockMvc
         .perform(
-            post("/api/v1/auth/login")
+            post("/api/v1/authentication/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginDto)))
@@ -57,7 +57,7 @@ public class AuthenticationControllerTest {
   }
 
   @Test
-  @DisplayName("POST /api/v1/auth/login returns 400 when credentials are invalid")
+  @DisplayName("POST /api/v1/authentication/login returns 400 when credentials are invalid")
   void login_whenCredentialsAreInvalid_shouldReturn400() throws Exception {
     var loginDto = AuthenticationDtoFixtures.loginWithUsernameAndPassword();
 
@@ -65,7 +65,7 @@ public class AuthenticationControllerTest {
 
     mockMvc
         .perform(
-            post("/api/v1/auth/login")
+            post("/api/v1/authentication/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginDto)))
@@ -73,7 +73,7 @@ public class AuthenticationControllerTest {
   }
 
   @Test
-  @DisplayName("POST /api/v1/auth/signup returns 201 when account was created successfully")
+  @DisplayName("POST /api/v1/authentication/signup returns 201 when account was created successfully")
   public void signup_whenAccountWasCreated_shouldReturn200() throws Exception {
     var signupDto = AuthenticationDtoFixtures.managerSignupDto();
     var accountCreated = AuthenticationDtoFixtures.signupAuthResponseDto(1L);
@@ -82,7 +82,7 @@ public class AuthenticationControllerTest {
 
     mockMvc
         .perform(
-            post("/api/v1/auth/signup")
+            post("/api/v1/authentication/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(signupDto)))

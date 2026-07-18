@@ -14,6 +14,6 @@ public class SecurityFilterChainIT extends SpringBootIntegrationTest {
 
   @Test
   void unauthenticatedUser_shouldReceive401() throws Exception {
-    mvc.perform(get("/api/v1/auth/me")).andExpect(status().isInternalServerError());
+    mvc.perform(get("/api/v1/authentication/me")).andExpect(status().isInternalServerError());
   }
 }

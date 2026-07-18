@@ -20,7 +20,7 @@ public class AuthenticateLoginFlowIT extends SpringBootIntegrationTest {
     var loginDto = AuthenticationDtoFixtures.loginWithUsernameAndPassword();
 
     mvc.perform(
-            post("/api/v1/auth/login")
+            post("/api/v1/authentication/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(loginDto)))
         .andExpect(status().isAccepted());

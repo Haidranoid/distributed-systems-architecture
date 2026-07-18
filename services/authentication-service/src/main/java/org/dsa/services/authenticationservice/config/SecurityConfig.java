@@ -34,7 +34,7 @@ public class SecurityConfig {
   };
 
   private static final String[] WHITE_LIST_URL = {
-    "/actuator/**", "/api/v1/auth/**",
+    "/actuator/**", "/api/v1/authentication/**",
   };
 
   @Bean
