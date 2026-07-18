@@ -1,3 +1,4 @@
+using ContentService.Configurations;
 using ContentService.Data;
 using ContentService.Repositories;
 using ContentService.Services;
@@ -11,6 +12,14 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Add configuration to the container.
+        builder.Configuration.AddSpringCloud(options =>
+        {
+            options.Url = "http://localhost:8888";
+            options.Application = "content-service";
+            options.Profile = "dev-compose";
+        });
+        
         // Add services to the container.
         builder.Services.AddControllers();
         
@@ -27,7 +36,7 @@ public class Program
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
+        if (app.Environment.EnvironmentName.StartsWith("Development"))
         {
             // Maps the native JSON endpoint (defaults to /openapi/v1.json)
             app.MapOpenApi();
