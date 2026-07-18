@@ -1,123 +1,188 @@
 # Distributed Systems Architecture
 
-A backend engineering project that explores modern distributed systems architecture using independently managed Spring Boot microservices, event-driven communication, cloud-native infrastructure, and automated deployment workflows.
+A backend engineering project that explores modern distributed systems
+architecture through independently managed microservices, reusable
+platform libraries, cloud-native infrastructure, and automated
+deployment workflows.
 
-Rather than focusing on business complexity, this repository serves as a long-term reference implementation for backend architecture, infrastructure, and distributed systems concepts commonly found in production environments.
+The platform is primarily built with Spring Boot while also exploring
+interoperability with ASP.NET Core and other technologies commonly found
+in polyglot distributed systems.
 
----
+Rather than focusing on business complexity, this repository serves as a
+long-term reference implementation for backend architecture,
+infrastructure, and distributed systems concepts commonly found in
+production environments.
+
+------------------------------------------------------------------------
 
 # Project Goals
 
-This repository explores the design and implementation of modern backend platforms through practical engineering.
+This repository explores the design and implementation of modern backend
+platforms through practical engineering.
 
 Current objectives include:
 
-- Build independently deployable microservices
-- Promote clear service boundaries through domain ownership
-- Share reusable infrastructure without tightly coupling services
-- Introduce asynchronous communication using Apache Kafka
-- Containerize local development environments
-- Deploy applications using Kubernetes
-- Standardize CI/CD pipelines
-- Continuously expand the platform with production-oriented architectural patterns
+-   Build independently deployable microservices
+-   Promote clear service boundaries through domain ownership
+-   Share reusable infrastructure without tightly coupling services
+-   Introduce asynchronous communication using Apache Kafka
+-   Containerize local development environments
+-   Deploy applications using Kubernetes
+-   Standardize CI/CD pipelines
+-   Continuously expand the platform with production-oriented
+    architectural patterns
 
-The repository evolves incrementally as new distributed systems concepts are implemented and validated.
+The repository evolves incrementally as new distributed systems concepts
+are implemented and validated.
 
----
+------------------------------------------------------------------------
 
 # Repository Organization
 
-The project adopts a **monorepo strategy** while keeping every component independently managed.
+The repository adopts a **monorepo strategy** while keeping every
+project independently managed.
 
-Each service, shared library, and infrastructure module owns its own build lifecycle, Gradle configuration, Docker image, and deployment process, allowing components to evolve independently without requiring a centralized workspace.
+Rather than using a centralized build workspace, every service, shared
+library, and infrastructure module owns its own lifecycle, build
+configuration, Docker image, and deployment process.
 
-```txt
+This approach allows individual projects to evolve independently while
+still benefiting from a shared Git history, coordinated cross-project
+changes, and reusable platform components.
+
+``` txt
 artifacts/
 │
-├── shared-starter/
+├── java/
+│   └── shared-starter/
+├── net/
+│   └── shared-core/
 │
 infra/
 │
 ├── ci/
+│   ├── bootstrap/
+│   ├── runners/
+│   └── templates/
 ├── docker-composes/
+│   ├── kafka/
+│   └── services/
 ├── k8s/
+│   ├── base/
+│   └── overlays/
 └── scripts/
 │
 services/
 │
+├── config-server/
+├── gateway/
 ├── authentication-service/
 ├── accounts-service/
 ├── audit-service/
-├── config-server/
-└── gateway/
+├── media-generation-service/
+└── content-service/
 ```
 
-Repository responsibilities are intentionally separated:
+  -----------------------------------------------------------------------
+Directory                               Purpose
+  --------------------------------------- -------------------------------
+**artifacts/**                          Reusable platform libraries and
+shared components consumed
+across multiple services and
+technologies.
 
-| Directory | Purpose |
-|-----------|---------|
-| **services/** | Independently deployable Spring Boot microservices. |
-| **artifacts/** | Shared libraries consumed across multiple services. |
-| **infra/** | Infrastructure, deployment manifests, CI/CD, Docker Compose environments, and automation scripts. |
+**infra/**                              CI/CD, container orchestration,
+deployment manifests,
+infrastructure automation, and
+local development environments.
 
-This separation allows platform infrastructure to evolve independently from application code while keeping reusable components isolated.
+**services/**                           Independently deployable
+microservices implemented using
+Spring Boot and ASP.NET Core.
+  -----------------------------------------------------------------------
 
----
+This separation allows platform infrastructure to evolve independently
+from application code while keeping reusable components isolated.
+
+------------------------------------------------------------------------
 
 # Platform Overview
 
-Current services include:
+The platform currently consists of multiple independently deployable
+services.
 
-| Service | Responsibility |
-|----------|----------------|
-| Authentication Service | Authentication, authorization and identity management. |
-| Accounts Service | Account domain and business operations. |
-| Audit Service | Event consumers responsible for asynchronous processing. |
-| Config Server | Centralized configuration management. |
-| Gateway | Single entry point for client requests. |
+Some services provide platform infrastructure, while others implement
+business capabilities.
 
-Each service owns its own persistence, configuration, deployment lifecycle, and business logic.
+-----------------------------------------------------------------------
+Service                     Responsibility
+--------------------------- -------------------------------------------
+Gateway                     Single entry point for client applications.
 
----
+Config Server               Centralized configuration management.
+
+Authentication Service      Identity management, authentication, and
+authorization.
+
+Accounts Service            Account domain and business operations.
+
+Audit Service               Asynchronous event processing and audit
+logging.
+
+Media Generation Service    Media generation workflows.
+
+Content Service             Content management and business operations.
+
+-----------------------------------------------------------------------
+
+Each service owns its own persistence, deployment lifecycle,
+configuration, and business logic.
+
+------------------------------------------------------------------------
 
 # Shared Libraries
 
-The repository currently provides a reusable platform library:
+Reusable libraries are grouped under the `artifacts` directory.
 
-## shared-starter
+These libraries provide common infrastructure that can be consumed by
+multiple services while keeping business logic isolated.
 
-The shared starter centralizes infrastructure that should remain consistent across services.
+  -----------------------------------------------------------------------
+Artifact                       Description
+  ------------------------------ ----------------------------------------
+**shared-starter**             Spring Boot shared infrastructure,
+messaging, common configuration, and
+reusable platform components.
 
-Examples include:
+**shared-core**                Shared .NET infrastructure intended to
+provide equivalent platform capabilities
+for ASP.NET Core services.
+  -----------------------------------------------------------------------
 
-- Shared event contracts
-- Kafka topics
-- Common DTOs
-- Messaging abstractions
-- Shared utilities
-- Cross-service infrastructure
+The long-term objective is to provide consistent infrastructure across
+technologies while allowing services to remain independently deployable.
 
-The objective is to reduce duplication without introducing unnecessary coupling between service implementations.
-
----
+------------------------------------------------------------------------
 
 # Event-Driven Architecture
 
-The platform combines synchronous and asynchronous communication depending on the use case.
+The platform combines synchronous and asynchronous communication
+depending on the use case.
 
 REST APIs remain appropriate for request-response interactions.
 
-Apache Kafka is introduced for domain events that should be processed independently by multiple services.
+Apache Kafka is introduced for domain events that should be processed
+independently by multiple services.
 
-Current events include:
+Examples of published domain events include account lifecycle events,
+media processing events, and other business notifications exchanged
+asynchronously between services.
 
-- Account Created
-- Account Updated
-- Password Changed
+This architecture enables services to react to business events without
+creating direct runtime dependencies between them.
 
-This architecture enables services to react to business events without creating direct runtime dependencies between them.
-
----
+------------------------------------------------------------------------
 
 # Infrastructure
 
@@ -125,68 +190,87 @@ Infrastructure resources are centralized under the `infra` directory.
 
 Current platform capabilities include:
 
-- Docker Compose environments
-- Kubernetes manifests
-- Kustomize overlays
-- GitLab CI/CD templates
-- Development automation scripts
+-   Docker Compose environments
+-   Kubernetes manifests
+-   Kustomize overlays
+-   GitLab CI/CD templates
+-   Development automation scripts
 
-Infrastructure remains independent from application code, making deployment strategies easier to evolve over time.
+Infrastructure remains independent from application code, making
+deployment strategies easier to evolve over time.
 
----
+------------------------------------------------------------------------
 
 # Technology Stack
 
-The repository currently explores technologies including:
+-   Java
+-   Spring Boot
+-   ASP.NET Core
+-   Spring Security
+-   Spring Cloud Gateway
+-   Spring Cloud Config
+-   Apache Kafka
+-   PostgreSQL
+-   Docker
+-   Kubernetes
+-   Kustomize
+-   GitLab CI/CD
+-   Gradle
+-   .NET
 
-- Java
-- Spring Boot
-- Spring Security
-- Spring Cloud Gateway
-- Spring Cloud Config
-- Apache Kafka
-- PostgreSQL
-- Docker
-- Kubernetes
-- Kustomize
-- GitLab CI/CD
-- Gradle
+------------------------------------------------------------------------
 
-The technology stack continues expanding as additional distributed systems patterns are incorporated.
+# Polyglot Architecture
 
----
+Although Spring Boot is currently the primary application framework, the
+repository intentionally explores a polyglot architecture.
+
+Different services may be implemented using different technologies
+whenever they better demonstrate a particular architectural concept.
+
+Shared platform components aim to provide equivalent capabilities across
+ecosystems while preserving a consistent developer experience.
+
+------------------------------------------------------------------------
 
 # Architectural Principles
 
-Several engineering principles guide the repository:
+-   Services own their business domains.
+-   Infrastructure remains reusable.
+-   Shared libraries expose contracts instead of business logic.
+-   Platform concerns remain separated from application code.
+-   Components should remain independently deployable.
+-   Service communication should remain explicit.
+-   Architecture should evolve incrementally as new capabilities are
+    introduced.
 
-- Services own their business domains.
-- Infrastructure remains reusable.
-- Shared libraries expose contracts instead of business logic.
-- Platform concerns remain separated from application code.
-- Components should remain independently deployable.
-- Service communication should remain explicit.
-- Architecture should evolve incrementally as new capabilities are introduced.
-
----
+------------------------------------------------------------------------
 
 # Roadmap
 
 This repository is continuously evolving.
 
-Future areas of exploration include:
+Planned areas of exploration include:
 
-- Service Discovery
-- Distributed Tracing
-- Centralized Observability
-- Circuit Breakers
-- Resilience Patterns
-- API Versioning
-- Outbox Pattern
-- Saga Pattern
-- Event Replay
-- Dead Letter Queues
-- Multi-environment deployments
-- Additional business services
+-   Service Discovery
+-   Distributed Configuration
+-   Polyglot Configuration Providers
+-   OAuth2 Authorization Server
+-   Distributed Tracing
+-   Centralized Observability
+-   Circuit Breakers
+-   Resilience Patterns
+-   API Versioning
+-   Outbox Pattern
+-   Saga Pattern
+-   CQRS
+-   Contract Testing
+-   Event Replay
+-   Dead Letter Queues
+-   Distributed Caching
+-   Secret Management
+-   Multi-environment deployments
+-   Additional business services
 
-Each new component is intended to demonstrate a real architectural concept commonly encountered in modern distributed systems.
+Each new component is intended to demonstrate a real architectural
+concept commonly encountered in modern distributed systems.
