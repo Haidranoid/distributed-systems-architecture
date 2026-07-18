@@ -84,26 +84,20 @@ services/
 └── content-service/
 ```
 
-  -----------------------------------------------------------------------
-Directory                               Purpose
-  --------------------------------------- -------------------------------
-**artifacts/**                          Reusable platform libraries and
-shared components consumed
-across multiple services and
-technologies.
 
-**infra/**                              CI/CD, container orchestration,
-deployment manifests,
-infrastructure automation, and
-local development environments.
 
-**services/**                           Independently deployable
-microservices implemented using
-Spring Boot and ASP.NET Core.
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
+| Directory      | Purpose                                                                                                              |
+|----------------|----------------------------------------------------------------------------------------------------------------------|
+| **artifacts/** | Reusable platform libraries and shared components consumed across multiple services and technologies.                |
+| **infra/**     | CI/CD, container orchestration, deployment manifests, infrastructure automation, and local development environments. |
+| **services/**  | Independently deployable microservices implemented using Spring Boot and ASP.NET Core.                               |
+-----------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 This separation allows platform infrastructure to evolve independently
-from application code while keeping reusable components isolated.
+of application code while keeping reusable components isolated.
 
 ------------------------------------------------------------------------
 
@@ -115,24 +109,18 @@ services.
 Some services provide platform infrastructure, while others implement
 business capabilities.
 
+
 -----------------------------------------------------------------------
-Service                     Responsibility
---------------------------- -------------------------------------------
-Gateway                     Single entry point for client applications.
-
-Config Server               Centralized configuration management.
-
-Authentication Service      Identity management, authentication, and
-authorization.
-
-Accounts Service            Account domain and business operations.
-
-Audit Service               Asynchronous event processing and audit
-logging.
-
-Media Generation Service    Media generation workflows.
-
-Content Service             Content management and business operations.
+| Service                      | Responsibility                                          |
+|------------------------------|---------------------------------------------------------|
+| **Gateway**                  | Single entry point for client applications.             |
+| **Config Server**            | Centralized configuration management.                   |
+| **Authentication Service**   | Identity management, authentication, and authorization. |
+| **Accounts Service**         | Account domain and business operations.                 |
+| **Audit Service**            | Asynchronous event processing and audit logging.        |
+| **Media Generation Service** | Media generation workflows.                             |
+| **Content Service**          | Content management and business operations.             |
+-----------------------------------------------------------------------
 
 -----------------------------------------------------------------------
 
@@ -148,17 +136,15 @@ Reusable libraries are grouped under the `artifacts` directory.
 These libraries provide common infrastructure that can be consumed by
 multiple services while keeping business logic isolated.
 
-  -----------------------------------------------------------------------
-Artifact                       Description
-  ------------------------------ ----------------------------------------
-**shared-starter**             Spring Boot shared infrastructure,
-messaging, common configuration, and
-reusable platform components.
 
-**shared-core**                Shared .NET infrastructure intended to
-provide equivalent platform capabilities
-for ASP.NET Core services.
-  -----------------------------------------------------------------------
+-----------------------------------------------------------------------
+| Artifact           | Description                                                                                                |
+|--------------------|------------------------------------------------------------------------------------------------------------|
+| **shared-starter** | Spring Boot shared infrastructure, messaging, common configuration, and reusable platform components.      |
+| **shared-core**    | Shared .NET infrastructure intended to provide equivalent platform capabilities for ASP.NET Core services. |
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
 
 The long-term objective is to provide consistent infrastructure across
 technologies while allowing services to remain independently deployable.
@@ -196,7 +182,7 @@ Current platform capabilities include:
 -   GitLab CI/CD templates
 -   Development automation scripts
 
-Infrastructure remains independent from application code, making
+Infrastructure remains independent of application code, making
 deployment strategies easier to evolve over time.
 
 ------------------------------------------------------------------------
