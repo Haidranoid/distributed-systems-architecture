@@ -13,5 +13,6 @@ publish:
       docker build \
       --push \
       --platform linux/amd64 \
+      -f $PROJECT_NAME_SOLUTION/Dockerfile \
       -t $PROJECT_IMAGE_ECR_TAG:latest \
       .

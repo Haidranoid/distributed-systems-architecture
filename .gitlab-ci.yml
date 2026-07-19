@@ -127,6 +127,7 @@ trigger-media-generation-service:
 
   variables:
     PROJECT_NAME: media-generation-service
+    PROJECT_NAME_SOLUTION: MediaGenerationService
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
 
@@ -136,6 +137,7 @@ trigger-content-service:
 
   variables:
     PROJECT_NAME: content-service
+    PROJECT_NAME_SOLUTION: ContentService
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
     
