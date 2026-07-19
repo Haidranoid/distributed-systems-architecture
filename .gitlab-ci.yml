@@ -49,6 +49,20 @@ stages:
         - $PROJECT_DIR/**/*
         - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
 
+.trigger-template-dotnet:
+  trigger:
+    strategy: depend
+
+    include:
+      - local: $PROJECT_DIR/.gitlab-ci.yml
+      - local: $GITLAB_DIR/bootstrap/dotnet/setup-env.yml
+
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      changes:
+        - $PROJECT_DIR/**/*
+        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+
 
 # artifacts
 trigger-shared-starter:
@@ -60,6 +74,7 @@ trigger-shared-starter:
     PROJECT_TYPE: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA
     PROJECT_DIR: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA/$PROJECT_NAME
 
+
 # services
 trigger-config-server:
   extends: .trigger-template-java
@@ -70,6 +85,14 @@ trigger-config-server:
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
 
+trigger-gateway:
+  extends: .trigger-template-java
+  stage: services
+
+  variables:
+    PROJECT_NAME: gateway
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
 
 trigger-authentication-service:
   extends: .trigger-template-java
@@ -80,7 +103,6 @@ trigger-authentication-service:
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
 
-
 trigger-accounts-service:
   extends: .trigger-template-java
   stage: services
@@ -89,7 +111,6 @@ trigger-accounts-service:
     PROJECT_NAME: accounts-service
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
-
 
 trigger-audit-service:
   extends: .trigger-template-java
@@ -100,13 +121,21 @@ trigger-audit-service:
     PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
 
-
-trigger-gateway:
-  extends: .trigger-template-java
+trigger-media-generation-service:
+  extends: .trigger-template-dotnet
   stage: services
 
   variables:
-    PROJECT_NAME: gateway
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
+    PROJECT_NAME: media-generation-service
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
+    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+
+trigger-content-service:
+  extends: .trigger-template-dotnet
+  stage: services
+
+  variables:
+    PROJECT_NAME: content-service
+    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
     PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
     
