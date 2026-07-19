@@ -1,7 +1,6 @@
 #!/bin/sh
 
 docker_login() {
-
   if ! require_ecr_env; then
     return 1
   fi
@@ -14,7 +13,6 @@ docker_login() {
 }
 
 require_ecr_env() {
-
   if [ -z "${AWS_ECR_AUTH_PASSWORD:-}" ]; then
     echo "ERROR: AWS_ECR_AUTH_PASSWORD is required" >&2
     return 1

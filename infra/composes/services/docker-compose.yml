@@ -109,11 +109,15 @@ services:
       context: ../../../services/media-generation-service
       dockerfile: MediaGenerationService/Dockerfile
     environment:
-      ASPNETCORE_ENVIRONMENT: Development.Compose
+      ASPNETCORE_ENVIRONMENT: dev-compose
+      SPRING_CLOUD_URL: http://config-server-srv:8888
     ports:
       - "8084:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
 
   content-service-srv:
     image: content-service:dev-compose
@@ -122,11 +126,15 @@ services:
       context: ../../../services/content-service
       dockerfile: ContentService/Dockerfile
     environment:
-      ASPNETCORE_ENVIRONMENT: Development.Compose
+      ASPNETCORE_ENVIRONMENT: dev-compose
+      SPRING_CLOUD_URL: http://config-server-srv:8888
     ports:
       - "8085:8080"
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
 
 
 networks:

@@ -27,7 +27,21 @@ aws_login() {
   fi
 }
 
-load_env_vars() {
+verify_aws_session() {
+  aws sts get-caller-identity >/dev/null 2>&1
+}
+
+show_aws_session() {
+  aws configure list
+}
+
+validate_aws_version() {
+  aws_version="${1:-}"
+
+  [ "$aws_version" = "v1" ] || [ "$aws_version" = "v2" ]
+}
+
+load_aws_env_vars() {
   load_account_vars
   load_ecr_vars
   load_codeartifact_vars
@@ -82,18 +96,4 @@ load_codeartifact_vars() {
   export AWS_CODEARTIFACT_URL
   export AWS_CODEARTIFACT_SHARED_STARTER_URL
   export AWS_CODEARTIFACT_AUTH_TOKEN
-}
-
-verify_aws_session() {
-  aws sts get-caller-identity >/dev/null 2>&1
-}
-
-show_aws_session() {
-  aws configure list
-}
-
-validate_aws_version() {
-  aws_version="${1:-}"
-
-  [ "$aws_version" = "v1" ] || [ "$aws_version" = "v2" ]
 }
