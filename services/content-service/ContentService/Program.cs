@@ -12,24 +12,33 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add configuration to the container.
-        builder.Configuration.AddSpringCloud(options =>
+        // Configure the configuration environment.
+        if (Environment.GetEnvironmentVariable("SPRING_CLOUD_URL") is not null)
         {
-            options.Url = "http://localhost:8888";
-            options.Application = "content-service";
-            options.Profile = "dev-compose";
-        });
-        
+            var springCloudUrl = Environment.GetEnvironmentVariable("SPRING_CLOUD_URL");
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            Console.WriteLine(environmentName);
+            Console.WriteLine(springCloudUrl);
+
+            builder.Configuration.AddSpringCloud(options =>
+            {
+                options.Application = "content-service";
+                options.Url = springCloudUrl!;
+                options.Profile = environmentName!;
+            });
+        }
+
         // Add services to the container.
         builder.Services.AddControllers();
-        
+
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("PostgresConnection")));
-        
+
         builder.Services.AddScoped<IPostRepository, PostRepository>();
         builder.Services.AddScoped<IPostService, PostService>();
-        
+
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
@@ -40,7 +49,7 @@ public class Program
         {
             // Maps the native JSON endpoint (defaults to /openapi/v1.json)
             app.MapOpenApi();
-            
+
             // Serve the interactive Swagger UI
             app.UseSwaggerUI(options =>
             {

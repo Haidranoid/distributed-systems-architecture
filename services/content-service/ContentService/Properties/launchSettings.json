@@ -10,15 +10,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "http-dev-compose": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "applicationUrl": "http://localhost:8085",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development.Compose"
-      }
-    },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
