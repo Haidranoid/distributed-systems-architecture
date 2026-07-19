@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: content-service-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: content-service
+  ports:
+    - port: 8080
+      targetPort: 8080

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-generation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media-generation-service
+  template:
+    metadata:
+      labels:
+        app: media-generation-service
+    spec:
+      containers:
+        - name: media-generation-service
+          image: media-generation-service
+          ports:
+            - containerPort: 8080

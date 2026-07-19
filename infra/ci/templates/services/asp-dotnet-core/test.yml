@@ -1,0 +1,13 @@
+test:
+  stage: test
+  script:
+    - cd $PROJECT_DIR
+    - echo "running tests..."
+
+  #artifacts:
+  #  when: always
+  #  paths:
+  #    - $PROJECT_DIR/build/reports/tests/test
+  #  reports:
+  #    junit:
+  #      - $PROJECT_DIR/build/test-results/test/*.xml

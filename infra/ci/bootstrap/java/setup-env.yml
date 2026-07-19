@@ -1,6 +1,6 @@
 default:
   image:
-    name: haidranoid/gitlab-ci-java21:latest
+    name: haidranoid/gitlab-ci-runner-java21:latest
     pull_policy: if-not-present
 
   before_script:

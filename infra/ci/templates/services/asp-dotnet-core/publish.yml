@@ -1,0 +1,17 @@
+publish:
+  stage: publish
+  needs:
+    - job: test
+      artifacts: true
+
+  script:
+    - cd $PROJECT_DIR
+
+    - docker_login
+
+    - |
+      docker build \
+      --push \
+      --platform linux/amd64 \
+      -t $PROJECT_IMAGE_ECR_TAG:latest \
+      .

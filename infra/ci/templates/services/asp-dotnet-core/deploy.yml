@@ -1,0 +1,21 @@
+deploy:
+  stage: deploy
+  when: manual
+  needs:
+    - job: publish
+      artifacts: true
+
+  script:
+    - cd $INFRA_DIR/k8s/overlays/dev-k8s/services/$PROJECT_NAME
+
+    - |
+      kubectl create secret docker-registry ecr-credentials \
+      -n dev-k8s \
+      --docker-password=$AWS_ECR_AUTH_PASSWORD \
+      --docker-username=AWS \
+      --docker-server=$AWS_ECR_REGISTRY_URL \
+      --dry-run=client -o yaml | kubectl apply -n dev-k8s -f -
+
+    - kubectl kustomize . | envsubst | kubectl apply -f -
+
+    - kubectl rollout status deployment/$PROJECT_NAME -n dev-k8s

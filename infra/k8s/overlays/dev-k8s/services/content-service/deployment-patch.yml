@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: content-service
+spec:
+  replicas: 1
+  template:
+    spec:
+      imagePullSecrets:
+        - name: ecr-credentials
+      containers:
+        - name: content-service
+          image: ${PROJECT_IMAGE_ECR_TAG}:latest
+          imagePullPolicy: Always
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-k8s-configmap
+                  key: ASPNETCORE_ENVIRONMENT
+            - name: SPRING_CLOUD_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-k8s-configmap
+                  key: SPRING_CLOUD_URL

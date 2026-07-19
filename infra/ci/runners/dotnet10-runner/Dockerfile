@@ -1,6 +1,6 @@
 FROM docker:29.2.1-cli AS docker-cli
 
-FROM amd64/eclipse-temurin:21-jdk-alpine
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine-amd64
 
 COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
 COPY --from=docker-cli /usr/local/libexec/docker/cli-plugins /usr/local/libexec/docker/cli-plugins
