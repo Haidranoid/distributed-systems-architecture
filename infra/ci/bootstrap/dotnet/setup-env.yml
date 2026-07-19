@@ -1,0 +1,14 @@
+default:
+  image:
+    name: haidranoid/gitlab-ci-java21:latest
+    pull_policy: if-not-present
+
+  before_script:
+    - cd infra/scripts
+
+    - . setup-env.sh
+
+    - aws_login v1
+    - load_aws_env_vars
+
+    - cd ../../
