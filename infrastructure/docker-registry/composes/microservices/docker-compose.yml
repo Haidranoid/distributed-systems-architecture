@@ -1,0 +1,143 @@
+services:
+  config-server-srv:
+    image: config-server:dev-compose
+    container_name: config-server
+    build:
+      context: ../../../../artifacts/microservices/java/config-server
+      dockerfile: ../../platform/api/services/config-server/Dockerfile
+    volumes:
+      - ../../../../distributed-systems-architecture-properties:/dsa-properties-repository
+    environment:
+      SPRING_PROFILES_ACTIVE: native
+    ports:
+      - "8888:8888"
+    healthcheck:
+      test: [ "CMD", "wget", "-qO-", "http://localhost:8888/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  gateway-srv:
+    image: gateway:dev-compose
+    container_name: gateway
+    build:
+      context: ../../../../artifacts/microservices/java/gateway
+      dockerfile: ../../platform/api/services/gateway/Dockerfile
+      args:
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
+    ports:
+      - "8222:8222"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+      authentication-service-srv:
+        condition: service_started
+      accounts-service-srv:
+        condition: service_started
+      audit-service-srv:
+        condition: service_started
+      media-generation-service-srv:
+        condition: service_started
+      content-service-srv:
+        condition: service_started
+
+
+  authentication-service-srv:
+    image: authentication-service:dev-compose
+    container_name: authentication-service
+    build:
+      context: ../../../../artifacts/microservices/java/authentication-service
+      dockerfile: ../../platform/api/services/authentication-service/Dockerfile
+      args:
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
+    ports:
+      - "8081:8081"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+
+  accounts-service-srv:
+    image: accounts-service:dev-compose
+    container_name: accounts-service
+    build:
+      context: ../../../../artifacts/microservices/java/accounts-service
+      dockerfile: ../../platform/api/services/accounts-service/Dockerfile
+      args:
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
+    ports:
+      - "8082:8082"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+
+  audit-service-srv:
+    image: audit-service:dev-compose
+    container_name: audit-service
+    build:
+      context: ../../../../artifacts/microservices/java/audit-service
+      dockerfile: ../../platform/api/services/audit-service/Dockerfile
+      args:
+        AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev-compose
+      CONFIG_IMPORT: configserver:http://config-server-srv:8888
+    ports:
+      - "8083:8083"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+
+  media-generation-service-srv:
+    image: media-generation-service:dev-compose
+    container_name: media-generation-service
+    build:
+      context: ../../../../artifacts/microservices/dotnet-core/MediaGenerationService
+      dockerfile: ../../platform/api/services/media-generation-service/MediaGenerationService/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: dev-compose
+      SPRING_CLOUD_URL: http://config-server-srv:8888
+    ports:
+      - "8084:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+
+  content-service-srv:
+    image: content-service:dev-compose
+    container_name: content-service
+    build:
+      context: ../../../../artifacts/microservices/dotnet-core/ContentService
+      dockerfile: ../../platform/api/services/content-service/ContentService/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: dev-compose
+      SPRING_CLOUD_URL: http://config-server-srv:8888
+    ports:
+      - "8085:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      config-server-srv:
+        condition: service_healthy
+
+
+networks:
+  default:
+    external: true
+    name: distributed-systems

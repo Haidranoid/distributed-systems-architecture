@@ -1,0 +1,8 @@
+namespace: dev-k8s
+
+resources:
+  - ../../java/common
+  - ../../../../base/microservices/dotnet-core/ContentService
+
+patches:
+  - path: deployment-patch.yml

@@ -1,0 +1,9 @@
+docker build -t haidranoid/gitlab-runner-java21:latest .
+
+~$ docker run --rm haidranoid/gitlab-runner-java21:latest docker version
+~$ docker run --rm haidranoid/gitlab-runner-java21:latest docker buildx version
+~$ docker run --rm haidranoid/gitlab-runner-java21:latest kubectl version
+
+~$ docker exec -it runner-wuuutfunq-project-82386085-concurrent-2-27bad744884633ff-build sh
+   /# docker version
+   /# docker buildx version

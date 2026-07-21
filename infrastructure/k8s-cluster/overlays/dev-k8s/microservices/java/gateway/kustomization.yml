@@ -1,0 +1,8 @@
+namespace: dev-k8s
+
+resources:
+  - ../common
+  - ../../../../base/microservices/java/gateway
+
+patches:
+  - path: deployment-patch.yml

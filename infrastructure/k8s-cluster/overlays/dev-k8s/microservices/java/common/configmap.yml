@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-k8s-configmap
+data:
+  SPRING_PROFILES_ACTIVE: dev-k8s
+  ASPNETCORE_ENVIRONMENT: dev-k8s
+  CONFIG_IMPORT: configserver:http://config-server-srv:8888
+  SPRING_CLOUD_URL: http://config-server-srv:8888

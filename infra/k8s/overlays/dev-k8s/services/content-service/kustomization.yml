@@ -1,8 +1,0 @@
-namespace: dev-k8s
-
-resources:
-  - ../common
-  - ../../../../base/services/content-service
-
-patches:
-  - path: deployment-patch.yml
