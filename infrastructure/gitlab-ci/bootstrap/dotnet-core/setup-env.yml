@@ -4,7 +4,7 @@ default:
     pull_policy: if-not-present
 
   before_script:
-    - cd infra/scripts
+    - cd infrastructure/scripts
 
     - . setup-env.sh
 
