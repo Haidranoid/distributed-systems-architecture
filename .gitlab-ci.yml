@@ -57,7 +57,7 @@ stages:
 
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_DIR/bootstrap/dotnet/setup-env.yml
+      - local: $GITLAB_DIR/bootstrap/dotnet-core/setup-env.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
