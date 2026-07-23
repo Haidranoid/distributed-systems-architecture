@@ -14,7 +14,6 @@ publish:
       --push \
       --platform linux/amd64 \
       --build-arg AWS_CODEARTIFACT_AUTH_TOKEN=$AWS_CODEARTIFACT_AUTH_TOKEN \
+      -t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
       -t $PROJECT_IMAGE_ECR_TAG:latest \
       .
-      
-      #-t $PROJECT_IMAGE_ECR_TAG:$CI_COMMIT_SHORT_SHA \
