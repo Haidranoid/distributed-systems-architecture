@@ -106,7 +106,7 @@ services:
     image: media-generation-service:dev-compose
     container_name: media-generation-service
     build:
-      context: ../../../../artifacts/microservices/dotnet-core/MediaGenerationService
+      context: ../../../../artifacts/microservices/dotnet-core/media-generation-service
       dockerfile: ../../platform/api/services/media-generation-service/MediaGenerationService/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: dev-compose
@@ -123,7 +123,7 @@ services:
     image: content-service:dev-compose
     container_name: content-service
     build:
-      context: ../../../../artifacts/microservices/dotnet-core/ContentService
+      context: ../../../../artifacts/microservices/dotnet-core/content-service
       dockerfile: ../../platform/api/services/content-service/ContentService/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: dev-compose

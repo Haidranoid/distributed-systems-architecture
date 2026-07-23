@@ -9,11 +9,6 @@ publish:
 
     - docker_login
 
-    - echo "$(pwd)"
-    - echo "$PROJECT_NAME_SOLUTION/Dockerfile"
-    - echo "$PROJECT_DIR"
-
-
     - |
       docker build \
       --push \

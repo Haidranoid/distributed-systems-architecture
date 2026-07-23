@@ -2,7 +2,7 @@ namespace: dev-k8s
 
 resources:
   - ../../java/common
-  - ../../../../base/microservices/dotnet-core/MediaGenerationService
+  - ../../../../base/microservices/dotnet-core/content-service
 
 patches:
   - path: deployment-patch.yml

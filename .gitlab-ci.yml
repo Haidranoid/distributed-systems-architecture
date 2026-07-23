@@ -128,7 +128,7 @@ trigger-media-generation-service:
   stage: microservices
 
   variables:
-    PROJECT_NAME: MediaGenerationService
+    PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
     PROJECT_DIR: $MICROSERVICES_DIR/$MICROSERVICE_TYPE_DOTNET/$PROJECT_NAME
     PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$MICROSERVICE_TYPE_DOTNET
@@ -138,7 +138,7 @@ trigger-content-service:
   stage: microservices
 
   variables:
-    PROJECT_NAME: ContentService
+    PROJECT_NAME: content-service
     PROJECT_NAME_SOLUTION: ContentService
     PROJECT_DIR: $MICROSERVICES_DIR/$MICROSERVICE_TYPE_DOTNET/$PROJECT_NAME
     PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$MICROSERVICE_TYPE_DOTNET
