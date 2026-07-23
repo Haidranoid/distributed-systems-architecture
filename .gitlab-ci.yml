@@ -7,18 +7,20 @@ variables:
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
 
-  INFRA_DIR: infra
+  INFRASTRUCTURE_DIR: infrastructure
   ARTIFACTS_DIR: artifacts
-  SERVICES_DIR: services
+  
+  LIBRARIES_DIR: artifacts/libraries
+  MICROSERVICES_DIR: artifacts/microservices
 
-  GITLAB_DIR: infra/ci
-  GITLAB_TEMPLATES_DIR: infra/ci/templates
+  GITLAB_DIR: infrastructure/gitlab-ci
+  GITLAB_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
-  ARTIFACT_TYPE_JAVA: java
-  ARTIFACT_TYPE_DOTNET: dotnet
+  LIBRARY_TYPE_JAVA: java
+  LIBRARY_TYPE_DOTNET: dotnet-core
 
-  SERVICE_TYPE_SPRING_BOOT: spring-boot
-  SERVICE_TYPE_ASP_DOTNET_NET: asp-dotnet-core
+  MICROSERVICE_TYPE_JAVA: java
+  MICROSERVICE_TYPE_DOTNET: dotnet-core
 
 workflow:
   rules:
@@ -30,8 +32,8 @@ workflow:
     - when: never
 
 stages:
-  - artifacts
-  - services
+  - libraries
+  - microservices
 
 
 # trigger templates
@@ -47,7 +49,7 @@ stages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+        - $PROJECT_TEMPLATES_DIR/**/*
 
 .trigger-template-dotnet:
   trigger:
@@ -61,83 +63,90 @@ stages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
-        - $GITLAB_TEMPLATES_DIR/$PROJECT_DIR/**/*
+        - $PROJECT_TEMPLATES_DIR/**/*
 
 
-# artifacts
+# libraries
 trigger-shared-starter:
   extends: .trigger-template-java
-  stage: artifacts
+  stage: libraries
 
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_TYPE: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA
-    PROJECT_DIR: $ARTIFACTS_DIR/$ARTIFACT_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_TYPE: $LIBRARY_TYPE_JAVA
+    PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/libraries/$PROJECT_TYPE
 
 
-# services
+# microservices
 trigger-config-server:
   extends: .trigger-template-java
-  stage: services
+  stage: microservices
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_JAVA
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
 
 trigger-gateway:
   extends: .trigger-template-java
-  stage: services
+  stage: microservices
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICES_DIR/$MICROSERVICE_TYPE_JAVA
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
 
 trigger-authentication-service:
   extends: .trigger-template-java
-  stage: services
+  stage: microservices
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_JAVA
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
 
 trigger-accounts-service:
   extends: .trigger-template-java
-  stage: services
+  stage: microservices
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_JAVA
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
 
 trigger-audit-service:
   extends: .trigger-template-java
-  stage: services
+  stage: microservices
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_SPRING_BOOT
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_JAVA
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
 
 trigger-media-generation-service:
   extends: .trigger-template-dotnet
-  stage: services
+  stage: microservices
 
   variables:
-    PROJECT_NAME: media-generation-service
+    PROJECT_NAME: MediaGenerationService
     PROJECT_NAME_SOLUTION: MediaGenerationService
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_DOTNET
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
 
 trigger-content-service:
   extends: .trigger-template-dotnet
-  stage: services
+  stage: microservices
 
   variables:
-    PROJECT_NAME: content-service
+    PROJECT_NAME: ContentService
     PROJECT_NAME_SOLUTION: ContentService
-    PROJECT_TYPE: $SERVICES_DIR/$SERVICE_TYPE_ASP_DOTNET_NET
-    PROJECT_DIR: $SERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $MICROSERVICE_TYPE_DOTNET
+    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_TYPE/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_TEMPLATES_DIR/microservices/$PROJECT_TYPE
     
