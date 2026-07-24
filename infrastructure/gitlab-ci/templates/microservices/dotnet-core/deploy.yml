@@ -6,7 +6,7 @@ deploy:
       artifacts: true
 
   script:
-    - cd $K8S_TEMPLATES_DIR/overlays/dev-local/microservices/$PROJECT_TYPE/$PROJECT_NAME
+    - cd $K8S_OVERLAYS_TEMPLATES_DIR/dev-local/microservices/$PROJECT_TYPE/$PROJECT_NAME
 
     - |
       kubectl create secret docker-registry ecr-credentials \
