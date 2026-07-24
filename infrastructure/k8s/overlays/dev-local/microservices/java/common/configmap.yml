@@ -5,3 +5,5 @@ metadata:
 data:
   SPRING_PROFILES_ACTIVE: dev-local
   CONFIG_IMPORT: configserver:http://config-server-srv:8888
+  ASPNETCORE_ENVIRONMENT: dev-local
+  SPRING_CLOUD_URL: http://config-server-srv:8888
