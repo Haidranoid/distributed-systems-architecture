@@ -46,28 +46,28 @@ stages:
     strategy: depend
 
     include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/java/setup-env.yml
+      - local: "$PROJECT_DIR/.gitlab-ci.yml"
+      - local: "$GITLAB_CI_BOOTSTRAP_DIR/java/setup-env.yml"
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
-        - $PROJECT_DIR/**/*
-        - $PROJECT_TEMPLATES_DIR/**/*
+        - "$PROJECT_DIR/**/*"
+        - "$PROJECT_TEMPLATES_DIR/**/*"
 
 .trigger-template-dotnet:
   trigger:
     strategy: depend
 
     include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/dotnet-core/setup-env.yml
+      - local: "$PROJECT_DIR/.gitlab-ci.yml"
+      - local: "$GITLAB_CI_BOOTSTRAP_DIR/dotnet-core/setup-env.yml"
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
-        - $PROJECT_DIR/**/*
-        - $PROJECT_TEMPLATES_DIR/**/*
+        - "$PROJECT_DIR/**/*"
+        - "$PROJECT_TEMPLATES_DIR/**/*"
 
 
 # libraries
