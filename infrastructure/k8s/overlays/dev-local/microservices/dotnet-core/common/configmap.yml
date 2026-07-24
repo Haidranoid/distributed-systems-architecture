@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-local-configmap
+data:
+  ASPNETCORE_ENVIRONMENT: dev-local
+  SPRING_CLOUD_URL: http://config-server-srv:8888

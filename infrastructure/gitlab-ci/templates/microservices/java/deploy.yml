@@ -6,16 +6,16 @@ deploy:
       artifacts: true
 
   script:
-    - cd $INFRASTRUCTURE_K8S_CLUSTER_DIR/overlays/dev-k8s/microservices/$PROJECT_TYPE/$PROJECT_NAME
+    - cd $K8S_OVERLAYS_TEMPLATES_DIR/dev-local/microservices/$PROJECT_TYPE/$PROJECT_NAME
 
     - |
       kubectl create secret docker-registry ecr-credentials \
-      -n dev-k8s \
+      -n dev-local \
       --docker-password=$AWS_ECR_AUTH_PASSWORD \
       --docker-username=AWS \
       --docker-server=$AWS_ECR_REGISTRY_URL \
-      --dry-run=client -o yaml | kubectl apply -n dev-k8s -f -
+      --dry-run=client -o yaml | kubectl apply -n dev-local -f -
 
     - kubectl kustomize . | envsubst | kubectl apply -f -
 
-    - kubectl rollout status deployment/$PROJECT_NAME -n dev-k8s
+    - kubectl rollout status deployment/$PROJECT_NAME -n dev-local
