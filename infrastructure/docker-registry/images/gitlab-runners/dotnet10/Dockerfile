@@ -8,13 +8,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY --from=docker-cli /usr/local/bin/docker /usr/local/bin/docker
 COPY --from=docker-cli /usr/local/libexec/docker/cli-plugins /usr/local/libexec/docker/cli-plugins
 
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
       git \
       curl \
       unzip \
       jq \
       gettext \
+      libgssapi-krb5-2 \
       && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
       && unzip awscliv2.zip \
       && ./aws/install \
