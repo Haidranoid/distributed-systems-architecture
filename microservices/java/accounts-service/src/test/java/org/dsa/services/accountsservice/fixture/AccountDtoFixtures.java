@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.fixture;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.dsa.core.sharedstarter.constants.Role;
+import org.dsa.shared.starter.constants.Role;
 import org.dsa.services.accountsservice.request.CreateAccountRequest;
 import org.dsa.services.accountsservice.request.UpdateAccountPasswordRequest;
 import org.dsa.services.accountsservice.request.UpdateAccountRequest;

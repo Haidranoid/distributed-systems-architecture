@@ -1,7 +1,7 @@
 namespace: dev-local
 
 resources:
-  - ../../java/common
+  - ../../../common
   - ../../../../../base/microservices/dotnet-core/content-service
 
 patches:

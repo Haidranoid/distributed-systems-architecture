@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.integration.security;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.core.sharedstarter.testing.integration.SpringBootIntegrationTest;
+import org.dsa.shared.starter.testing.integration.SpringBootIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;

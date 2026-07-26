@@ -2,7 +2,7 @@ package org.dsa.services.accountsservice.slice.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dsa.core.sharedstarter.testing.integration.DataJpaIntegrationTest;
+import org.dsa.shared.starter.testing.integration.DataJpaIntegrationTest;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.junit.jupiter.api.Test;

@@ -2,8 +2,8 @@ package org.dsa.services.auditservice.slice.context;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dsa.core.sharedstarter.autoconfig.SecurityAutoConfig;
-import org.dsa.core.sharedstarter.autoconfig.SharedStarterAutoConfig;
+import org.dsa.shared.starter.autoconfig.SecurityAutoConfig;
+import org.dsa.shared.starter.autoconfig.SharedStarterAutoConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;

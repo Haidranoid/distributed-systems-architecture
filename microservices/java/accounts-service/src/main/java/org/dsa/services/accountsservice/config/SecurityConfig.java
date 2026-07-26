@@ -3,7 +3,7 @@ package org.dsa.services.accountsservice.config;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import lombok.RequiredArgsConstructor;
-import org.dsa.core.sharedstarter.utils.JwtAuthenticationConverter;
+import org.dsa.shared.starter.utils.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

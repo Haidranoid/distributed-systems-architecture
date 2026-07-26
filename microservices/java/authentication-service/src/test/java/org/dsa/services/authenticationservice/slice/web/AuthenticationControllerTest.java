@@ -5,9 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.core.sharedstarter.constants.Role;
-import org.dsa.core.sharedstarter.exception.InvalidCredentialsException;
-import org.dsa.core.sharedstarter.testing.annotations.WebSliceEnvironment;
+import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.starter.exception.InvalidCredentialsException;
+import org.dsa.shared.starter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.authenticationservice.controller.AuthenticationController;
 import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;

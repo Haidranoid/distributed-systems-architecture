@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Optional;
-import org.dsa.core.sharedstarter.constants.Role;
-import org.dsa.core.sharedstarter.exception.AccountNotFoundException;
-import org.dsa.core.sharedstarter.exception.UnauthorizedException;
-import org.dsa.core.sharedstarter.utils.CurrentSession;
+import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.starter.exception.AccountNotFoundException;
+import org.dsa.shared.starter.exception.UnauthorizedException;
+import org.dsa.shared.starter.utils.CurrentSession;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
