@@ -41,7 +41,7 @@ repositories {
         }
 
         maven {
-            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared-starter/'
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
             credentials {
                 username "aws"
                 password codeArtifactAuthToken
