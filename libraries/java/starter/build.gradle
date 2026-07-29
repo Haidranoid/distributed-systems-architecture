@@ -20,13 +20,41 @@ jar {
     enabled = true
 }
 
-repositories {
-    mavenCentral()
-}
-
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenLocal()
+
+    def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
+
+    try {
+        if (!codeArtifactAuthToken) {
+
+            providers.exec {
+                commandLine 'aws', 'login'
+            }
+
+            codeArtifactAuthToken = providers.exec {
+                commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                        '--domain', 'artifacts',
+                        '--query', 'authorizationToken',
+                        '--output', 'text'
+            }.standardOutput.asText.get().trim()
+        }
+
+        maven {
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
+            credentials {
+                username "aws"
+                password codeArtifactAuthToken
+            }
+        }
+    } catch (Exception ignored) {
+        mavenCentral()
     }
 }
 
@@ -81,13 +109,7 @@ dependencyManagement {
 }
 
 dependencies {
-    api 'io.jsonwebtoken:jjwt-api:0.13.0'
-    api 'org.springframework.boot:spring-boot-starter-kafka'
-    api 'org.springframework.boot:spring-boot-starter-security-oauth2-client'
-    api 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
-    api 'org.springframework.security:spring-security-oauth2-jose'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
+    api 'org.dsa.shared:core:1.0.0'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     //implementation 'jakarta.persistence:jakarta.persistence-api'
 

@@ -1,6 +1,6 @@
 package org.dsa.shared.starter.autoconfig;
 
-import org.dsa.shared.starter.messaging.producers.KafkaEventPublisher;
+import org.dsa.shared.core.messaging.producers.KafkaEventPublisher;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.kafka.autoconfigure.KafkaAutoConfiguration;

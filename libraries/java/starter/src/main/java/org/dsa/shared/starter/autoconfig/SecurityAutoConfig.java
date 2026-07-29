@@ -10,7 +10,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import lombok.RequiredArgsConstructor;
-import org.dsa.shared.starter.properties.JwtProperties;
+import org.dsa.shared.core.properties.JwtProperties;
 import org.jspecify.annotations.Nullable;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

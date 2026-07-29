@@ -1,0 +1,11 @@
+include:
+  - local: $PROJECT_TEMPLATES_DIR/test.yml
+  - local: $PROJECT_TEMPLATES_DIR/publish.yml
+
+stages:
+  - test
+  - publish
+
+default:
+  tags:
+    - local
