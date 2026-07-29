@@ -1,6 +1,6 @@
 package org.dsa.services.authenticationservice.fixture;
 
-import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.core.constants.Role;
 import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.entity.Token;
 import org.dsa.services.authenticationservice.request.LoginRequest;

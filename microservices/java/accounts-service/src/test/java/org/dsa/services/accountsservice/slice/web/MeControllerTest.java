@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.core.constants.Role;
 import org.dsa.shared.starter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.accountsservice.controller.MeController;
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;

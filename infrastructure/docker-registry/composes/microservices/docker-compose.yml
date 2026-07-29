@@ -4,9 +4,9 @@ services:
     container_name: config-server
     build:
       context: ../../../../microservices/java/config-server
-      dockerfile: ../../platform/api/services/config-server/Dockerfile
+      dockerfile: Dockerfile
     volumes:
-      - ../../../../distributed-systems-architecture-properties:/dsa-properties-repository
+      - ../../../../../distributed-systems-architecture-properties:/dsa-properties-repository
     environment:
       SPRING_PROFILES_ACTIVE: native
     ports:
@@ -22,7 +22,7 @@ services:
     container_name: gateway
     build:
       context: ../../../../microservices/java/gateway
-      dockerfile: ../../platform/api/services/gateway/Dockerfile
+      dockerfile: Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -50,7 +50,7 @@ services:
     container_name: authentication-service
     build:
       context: ../../../../microservices/java/authentication-service
-      dockerfile: ../../platform/api/services/authentication-service/Dockerfile
+      dockerfile: Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -69,7 +69,7 @@ services:
     container_name: accounts-service
     build:
       context: ../../../../microservices/java/accounts-service
-      dockerfile: ../../platform/api/services/accounts-service/Dockerfile
+      dockerfile: Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -88,7 +88,7 @@ services:
     container_name: audit-service
     build:
       context: ../../../../microservices/java/audit-service
-      dockerfile: ../../platform/api/services/audit-service/Dockerfile
+      dockerfile: Dockerfile
       args:
         AWS_CODEARTIFACT_AUTH_TOKEN: "${AWS_CODEARTIFACT_AUTH_TOKEN}"
     environment:
@@ -107,7 +107,7 @@ services:
     container_name: media-generation-service
     build:
       context: ../../../../microservices/dotnet-core/media-generation-service
-      dockerfile: ../../platform/api/services/media-generation-service/MediaGenerationService/Dockerfile
+      dockerfile: MediaGenerationService/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: dev-compose
       SPRING_CLOUD_URL: http://config-server-srv:8888
@@ -124,7 +124,7 @@ services:
     container_name: content-service
     build:
       context: ../../../../microservices/dotnet-core/content-service
-      dockerfile: ../../platform/api/services/content-service/ContentService/Dockerfile
+      dockerfile: ContentService/Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: dev-compose
       SPRING_CLOUD_URL: http://config-server-srv:8888

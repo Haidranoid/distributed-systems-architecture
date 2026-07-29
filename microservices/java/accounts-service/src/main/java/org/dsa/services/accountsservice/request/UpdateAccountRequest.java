@@ -2,7 +2,7 @@ package org.dsa.services.accountsservice.request;
 
 import com.google.common.base.MoreObjects;
 import lombok.Builder;
-import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.core.constants.Role;
 import org.jspecify.annotations.NonNull;
 
 @Builder

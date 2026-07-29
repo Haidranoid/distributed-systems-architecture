@@ -1,7 +1,7 @@
 package org.dsa.services.accountsservice.unit.service;
 
 import java.util.Optional;
-import org.dsa.shared.starter.exception.AccountNotFoundException;
+import org.dsa.shared.core.exception.AccountNotFoundException;
 import org.dsa.services.accountsservice.entity.Account;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;

@@ -9,7 +9,7 @@ spring:
       auto-offset-reset: earliest
       value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
       properties:
-        spring.json.trusted.packages: org.dsa.shared.starter.messaging.events
+        spring.json.trusted.packages: org.dsa.shared.core.messaging.events
       #  spring.json.trusted.packages: "*"
       #  spring.json.value.default.type: org.dsa.services.auditservice.messaging.events.AccountCreatedEvent
       #  spring.json.use.type.headers: false

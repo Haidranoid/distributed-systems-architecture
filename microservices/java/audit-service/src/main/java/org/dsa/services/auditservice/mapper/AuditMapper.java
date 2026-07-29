@@ -2,7 +2,7 @@ package org.dsa.services.auditservice.mapper;
 
 import java.time.Instant;
 import lombok.RequiredArgsConstructor;
-import org.dsa.shared.starter.messaging.contracts.KafkaEvent;
+import org.dsa.shared.core.messaging.contracts.KafkaEvent;
 import org.dsa.services.auditservice.entity.AuditEvent;
 import org.springframework.stereotype.Component;
 import tools.jackson.core.JacksonException;

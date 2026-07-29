@@ -3,7 +3,7 @@ package org.dsa.services.authenticationservice.response;
 import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.core.constants.Role;
 import org.jspecify.annotations.NonNull;
 
 @Builder

@@ -2,7 +2,7 @@ package org.dsa.services.auditservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.shared.starter.messaging.contracts.KafkaEvent;
+import org.dsa.shared.core.messaging.contracts.KafkaEvent;
 import org.dsa.services.auditservice.entity.AuditEvent;
 import org.dsa.services.auditservice.mapper.AuditMapper;
 import org.dsa.services.auditservice.repository.AuditRepository;

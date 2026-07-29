@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
-import org.dsa.shared.starter.constants.Role;
+import org.dsa.shared.core.constants.Role;
 import org.jspecify.annotations.NonNull;
 
 @Builder
