@@ -21,10 +21,10 @@ variables:
   K8S_OVERLAYS_TEMPLATES_DIR: infrastructure/k8s/overlays
 
   LIBRARY_TYPE_JAVA: java
-  LIBRARY_TYPE_DOTNET: dotnet-core
+  LIBRARY_TYPE_DOTNET: dotnet
 
   MICROSERVICE_TYPE_JAVA: java
-  MICROSERVICE_TYPE_DOTNET: dotnet-core
+  MICROSERVICE_TYPE_DOTNET: dotnet
 
 workflow:
   rules:
@@ -61,7 +61,7 @@ stages:
 
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/dotnet-core/setup-env.yml
+      - local: $GITLAB_CI_BOOTSTRAP_DIR/dotnet/setup-env.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

@@ -4,11 +4,7 @@ default:
     pull_policy: if-not-present
 
   before_script:
-    - cd infrastructure/scripts
-
-    - . setup-env.sh
+    - . bootstrap.sh
 
     - aws_login v1
-    - load_aws_env_vars
-
-    - cd ../../
+    - aws_load_env_vars
