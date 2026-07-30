@@ -1,0 +1,8 @@
+namespace: dev-local
+
+resources:
+  - ../../common
+  - ../../../../base/microservices/audit-service
+
+patches:
+  - path: deployment-patch.yml

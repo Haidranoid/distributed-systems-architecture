@@ -1,8 +1,0 @@
-namespace: dev-local
-
-resources:
-  - ../../../common
-  - ../../../../../base/microservices/java/config-server
-
-patches:
-  - path: deployment-patch.yml

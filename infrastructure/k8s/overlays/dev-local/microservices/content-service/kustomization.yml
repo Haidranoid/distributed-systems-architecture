@@ -1,8 +1,8 @@
 namespace: dev-local
 
 resources:
-  - ../../../common
-  - ../../../../../base/microservices/java/gateway
+  - ../../common
+  - ../../../../base/microservices/content-service
 
 patches:
   - path: deployment-patch.yml

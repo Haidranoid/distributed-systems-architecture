@@ -1,4 +1,4 @@
-test:
+test-java:
   stage: test
   script:
     - cd $PROJECT_DIR
@@ -8,6 +8,7 @@ test:
   artifacts:
     when: always
     paths:
+      - $PROJECT_DIR/build/libs/*.jar
       - $PROJECT_DIR/build/reports/tests/test
     reports:
       junit:

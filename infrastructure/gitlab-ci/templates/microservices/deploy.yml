@@ -1,0 +1,44 @@
+deploy-java:
+  stage: deploy
+  when: manual
+  needs:
+    - job: publish-java
+      artifacts: true
+
+  script:
+    - cd $K8S_OVERLAYS_TEMPLATES_DIR/dev-local/microservices/$PROJECT_TYPE/$PROJECT_NAME
+
+    - |
+      kubectl create secret docker-registry ecr-credentials \
+      -n dev-local \
+      --docker-password=$AWS_ECR_AUTH_PASSWORD \
+      --docker-username=AWS \
+      --docker-server=$AWS_ECR_REGISTRY_URL \
+      --dry-run=client -o yaml | kubectl apply -n dev-local -f -
+
+    - kubectl kustomize . | envsubst | kubectl apply -f -
+
+    - kubectl rollout status deployment/$PROJECT_NAME -n dev-local
+
+
+deploy-dotnet:
+  stage: deploy
+  when: manual
+  needs:
+    - job: publish-dotnet
+      artifacts: true
+
+  script:
+    - cd $K8S_OVERLAYS_TEMPLATES_DIR/dev-local/microservices/$PROJECT_TYPE/$PROJECT_NAME
+
+    - |
+      kubectl create secret docker-registry ecr-credentials \
+      -n dev-local \
+      --docker-password=$AWS_ECR_AUTH_PASSWORD \
+      --docker-username=AWS \
+      --docker-server=$AWS_ECR_REGISTRY_URL \
+      --dry-run=client -o yaml | kubectl apply -n dev-local -f -
+
+    - kubectl kustomize . | envsubst | kubectl apply -f -
+
+    - kubectl rollout status deployment/$PROJECT_NAME -n dev-local
