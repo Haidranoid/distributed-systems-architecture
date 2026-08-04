@@ -34,9 +34,9 @@ repositories {
     try {
         if (!codeArtifactAuthToken) {
 
-            providers.exec {
-                commandLine 'aws', 'login'
-            }
+            //providers.exec {
+            //    commandLine 'aws', 'login'
+            //}
 
             codeArtifactAuthToken = providers.exec {
                 commandLine 'aws', 'codeartifact', 'get-authorization-token',
@@ -109,7 +109,7 @@ dependencyManagement {
 }
 
 dependencies {
-    api 'org.dsa.shared:core:1.0.0'
+    api 'org.dsa.shared:shared-core:1.0.0'
     implementation 'org.springframework.boot:spring-boot-autoconfigure'
     //implementation 'jakarta.persistence:jakarta.persistence-api'
 

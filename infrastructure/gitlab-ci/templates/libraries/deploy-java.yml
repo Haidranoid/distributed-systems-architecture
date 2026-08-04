@@ -1,0 +1,5 @@
+deploy:
+  stage: deploy
+  script:
+    - cd $PROJECT_DIR
+    - echo "running deployment..."

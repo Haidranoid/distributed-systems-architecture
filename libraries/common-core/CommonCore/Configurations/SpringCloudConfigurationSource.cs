@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Configurations;
+namespace CommonCore.Configurations;
 
 public sealed class SpringCloudConfigurationSource: IConfigurationSource
 {

@@ -1,3 +1,20 @@
+
+# 1. Define global environment variables using a YAML anchor (&)
+x-shared-env: &global-env
+  environment:
+    APP_ENV: production
+    API_TIMEOUT: 5000
+    LOG_LEVEL: debug
+
+x-shared-docker-args-env: &docker-args-env
+  #BUILDKIT_INLINE_CACHE: 1
+  DOCKER_BUILDKIT: 1
+  GRADLE_USER_HOME: /cache/gradle
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=false
+    -Dorg.gradle.caching=true
+
 services:
   config-server-srv:
     image: config-server:dev-compose
@@ -5,10 +22,10 @@ services:
     build:
       context: ../../../../microservices/config-server
       dockerfile: Dockerfile
-    volumes:
-      - ../../../../../distributed-systems-architecture-properties:/dsa-properties-repository
     environment:
       SPRING_PROFILES_ACTIVE: native
+    volumes:
+      - ../../../../../distributed-systems-architecture-properties:/dsa-properties-repository
     ports:
       - "8888:8888"
     healthcheck:

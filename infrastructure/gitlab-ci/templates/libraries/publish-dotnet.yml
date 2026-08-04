@@ -1,7 +1,7 @@
-publish-java:
+publish:
   stage: publish
   needs:
-    - job: test-java
+    - job: test
       artifacts: true
 
   script:

@@ -1,4 +1,4 @@
-namespace Core.Configurations;
+namespace CommonCore.Configurations;
 
 public sealed class ConfigResponse
 {

@@ -1,7 +1,7 @@
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Configurations;
+namespace CommonCore.Configurations;
 
 public sealed class SpringCloudConfigurationProvider : ConfigurationProvider
 {

@@ -65,7 +65,7 @@ dependencyManagement {
 
 dependencies {
     implementation 'com.google.guava:guava'
-    implementation 'org.dsa.shared:starter:1.0.0'
+    implementation 'org.dsa.shared:shared-starter:1.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'

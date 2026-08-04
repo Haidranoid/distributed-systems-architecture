@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\libraries\dotnet\core\Core\Core.csproj" />
+      <ProjectReference Include=".\..\..\..\libraries\common-core\CommonCore\CommonCore.csproj" />
     </ItemGroup>
 
 </Project>

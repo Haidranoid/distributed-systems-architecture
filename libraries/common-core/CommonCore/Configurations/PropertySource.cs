@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Core.Configurations;
+namespace CommonCore.Configurations;
 
 public sealed class PropertySource
 {

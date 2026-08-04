@@ -1,0 +1,10 @@
+publish:
+  stage: publish
+  needs:
+    - job: test
+      artifacts: true
+
+  script:
+    - cd $PROJECT_DIR
+    - chmod +x ./gradlew
+    - ./gradlew publish --build-cache --parallel
