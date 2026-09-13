@@ -10,6 +10,10 @@ variables:
   GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
+  INFRASTRUCTURE_DIR: infrastructure #TODO
+  LIBRARIES_DIR: libraries
+  MICROSERVICES_DIR: microservices
+
   TARGET_TYPE_JAVA: java
   TARGET_TYPE_DOTNET: dotnet
 

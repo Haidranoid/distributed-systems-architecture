@@ -1,8 +1,3 @@
-include:
-  - local: $PROJECT_TEMPLATES_DIR/test.yml
-  - local: $PROJECT_TEMPLATES_DIR/publish.yml
-  - local: $PROJECT_TEMPLATES_DIR/deploy.yml
-
 stages:
   - test
   - publish
