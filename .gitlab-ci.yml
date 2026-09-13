@@ -65,12 +65,6 @@ stages:
 .trigger-template-java:
   extends: .trigger-template-base-java
 
-  script:
-    - echo "$PROJECT_TEMPLATES_DIR"
-    - echo "$GITLAB_CI_BOOTSTRAP_DIR"
-    - echo "$GITLAB_CI_TEMPLATES_DIR"
-    - echo "$PROJECT_DIR"
-
   trigger:
     include:
       - local: $PROJECT_TEMPLATES_DIR/test-java.yml

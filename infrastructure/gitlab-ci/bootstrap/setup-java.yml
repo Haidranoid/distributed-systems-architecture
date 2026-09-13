@@ -6,5 +6,9 @@ default:
   before_script:
     - . bootstrap.sh
 
+    - echo "$PROJECT_TEMPLATES_DIR"
+    - echo "$GITLAB_CI_BOOTSTRAP_DIR"
+    - echo "$GITLAB_CI_TEMPLATES_DIR"
+    - echo "$PROJECT_DIR"
     - aws_login v1
     - aws_load_env_vars
