@@ -65,6 +65,12 @@ stages:
 .trigger-template-java:
   extends: .trigger-template-base-java
 
+  script:
+    - echo "$PROJECT_TEMPLATES_DIR"
+    - echo "$GITLAB_CI_BOOTSTRAP_DIR"
+    - echo "$GITLAB_CI_TEMPLATES_DIR"
+    - echo "$PROJECT_DIR"
+
   trigger:
     include:
       - local: $PROJECT_TEMPLATES_DIR/test-java.yml
@@ -85,12 +91,6 @@ stages:
 trigger-shared-core:
   extends: .trigger-template-java
   stage: libraries
-
-  trigger:
-    include:
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
   variables:
     PROJECT_NAME: shared-core
@@ -116,12 +116,6 @@ trigger-shared-starter:
 trigger-config-server:
   extends: .trigger-template-java
   stage: microservices
-
-  trigger:
-    include:
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
   variables:
     PROJECT_NAME: config-server
