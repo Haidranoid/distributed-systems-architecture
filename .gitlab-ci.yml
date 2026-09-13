@@ -32,7 +32,7 @@ stages:
 
 
 # trigger templates base ==============================================================
-trigger-template-base:
+.trigger-template-base:
   trigger:
     strategy: depend
 
@@ -45,8 +45,8 @@ trigger-template-base:
         - $PROJECT_DIR/**/*
         - $PROJECT_TEMPLATES_DIR/**/*
 
-trigger-template-base-java:
-  extends: trigger-template-base
+.trigger-template-base-java:
+  extends: .trigger-template-base
 
   trigger:
     include:
@@ -62,8 +62,14 @@ trigger-template-base-dotnet:
 
 
 # trigger lang templates ==============================================================
-trigger-template-java:
-  extends: trigger-template-base-java
+.trigger-template-java:
+  extends: .trigger-template-base-java
+
+  trigger:
+    include:
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
 trigger-template-dotnet:
   extends: trigger-template-base-dotnet
@@ -77,7 +83,7 @@ trigger-template-dotnet:
 
 # trigger libraries ==============================================================
 trigger-shared-core:
-  extends: trigger-template-java
+  extends: .trigger-template-java
   stage: libraries
 
   variables:
@@ -87,7 +93,7 @@ trigger-shared-core:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 trigger-shared-starter:
-  extends: trigger-template-java
+  extends: .trigger-template-java
   stage: libraries
 
   needs:
