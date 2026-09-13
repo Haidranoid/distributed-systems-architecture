@@ -1,3 +1,8 @@
+include:
+  - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
+  - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
+  - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
+
 stages:
   - test
   - publish
