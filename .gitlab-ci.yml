@@ -65,12 +65,6 @@ stages:
 .trigger-template-java:
   extends: .trigger-template-base-java
 
-  trigger:
-    include:
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
-
 .trigger-template-dotnet:
   extends: .trigger-template-base-dotnet
 
@@ -85,6 +79,12 @@ stages:
 trigger-shared-core:
   extends: .trigger-template-java
   stage: libraries
+
+  trigger:
+    include:
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
   variables:
     PROJECT_NAME: shared-core
