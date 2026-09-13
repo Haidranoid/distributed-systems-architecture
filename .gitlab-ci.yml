@@ -32,7 +32,7 @@ stages:
 
 
 # trigger templates base ==============================================================
-.trigger-template-base:
+trigger-template-base:
   trigger:
     strategy: depend
 
@@ -45,16 +45,16 @@ stages:
         - $PROJECT_DIR/**/*
         - $PROJECT_TEMPLATES_DIR/**/*
 
-.trigger-template-base-java:
-  extends: .trigger-template-base
+trigger-template-base-java:
+  extends: trigger-template-base
 
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
 
-.trigger-template-base-dotnet:
-  extends: .trigger-template-base
+trigger-template-base-dotnet:
+  extends: trigger-template-base
 
   trigger:
     include:
@@ -62,11 +62,11 @@ stages:
 
 
 # trigger lang templates ==============================================================
-.trigger-template-java:
-  extends: .trigger-template-base-java
+trigger-template-java:
+  extends: trigger-template-base-java
 
-.trigger-template-dotnet:
-  extends: .trigger-template-base-dotnet
+trigger-template-dotnet:
+  extends: trigger-template-base-dotnet
 
   trigger:
     include:
@@ -77,7 +77,7 @@ stages:
 
 # trigger libraries ==============================================================
 trigger-shared-core:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: libraries
 
   variables:
@@ -87,7 +87,7 @@ trigger-shared-core:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 trigger-shared-starter:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: libraries
 
   needs:
@@ -102,7 +102,7 @@ trigger-shared-starter:
 
 # trigger microservices ==============================================================
 trigger-config-server:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: microservices
 
   variables:
@@ -112,7 +112,7 @@ trigger-config-server:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-gateway:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: microservices
 
   variables:
@@ -122,7 +122,7 @@ trigger-gateway:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-authentication-service:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: microservices
 
   variables:
@@ -132,7 +132,7 @@ trigger-authentication-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-accounts-service:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: microservices
 
   variables:
@@ -142,7 +142,7 @@ trigger-accounts-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-audit-service:
-  extends: .trigger-template-java
+  extends: trigger-template-java
   stage: microservices
 
   variables:
@@ -152,7 +152,7 @@ trigger-audit-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-media-generation-service:
-  extends: .trigger-template-dotnet
+  extends: trigger-template-dotnet
   stage: microservices
 
   variables:
@@ -163,7 +163,7 @@ trigger-media-generation-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-content-service:
-  extends: .trigger-template-dotnet
+  extends: trigger-template-dotnet
   stage: microservices
 
   variables:
