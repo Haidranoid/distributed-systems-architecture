@@ -1,7 +1,7 @@
-#include:
-#  - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-#  - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-#  - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+include:
+  - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+  - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+  - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
 stages:
   - test
