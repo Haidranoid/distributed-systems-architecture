@@ -27,7 +27,7 @@ stages:
   - microservices
 
 
-# trigger templates
+# trigger templates base ==============================================================
 .trigger-template-base:
   trigger:
     strategy: depend
@@ -41,28 +41,43 @@ stages:
         - $PROJECT_DIR/**/*
         - $PROJECT_TEMPLATES_DIR/**/*
 
-.trigger-template-java:
+.trigger-template-base-java:
   extends: .trigger-template-base
 
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
-.trigger-template-dotnet:
+
+.trigger-template-base-dotnet:
   extends: .trigger-template-base
 
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
+
+
+# trigger lang templates ==============================================================
+.trigger-template-java:
+  extends: .trigger-template-base-java
+
+  trigger:
+    include:
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+
+.trigger-template-dotnet:
+  extends: .trigger-template-base-dotnet
+
+  trigger:
+    include:
       - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
       - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
       - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
 
 
-# libraries
+# trigger libraries ==============================================================
 trigger-shared-core:
   extends: .trigger-template-java
   stage: libraries
@@ -87,7 +102,7 @@ trigger-shared-starter:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 
-# microservices
+# trigger microservices ==============================================================
 trigger-config-server:
   extends: .trigger-template-java
   stage: microservices
