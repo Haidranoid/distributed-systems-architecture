@@ -7,18 +7,8 @@ variables:
     -Dorg.gradle.parallel=true
     -Dorg.gradle.caching=true
 
-  INFRASTRUCTURE_DIR: infrastructure
-  
-  LIBRARIES_DIR: libraries
-  MICROSERVICES_DIR: microservices
-
-  GITLAB_CI_DIR: infrastructure/gitlab-ci
   GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
-
-  K8S_TEMPLATES_DIR: infrastructure/k8s
-  K8S_BASE_TEMPLATES_DIR: infrastructure/k8s/base
-  K8S_OVERLAYS_TEMPLATES_DIR: infrastructure/k8s/overlays
 
   TARGET_TYPE_JAVA: java
   TARGET_TYPE_DOTNET: dotnet
@@ -38,44 +28,62 @@ stages:
 
 
 # trigger templates
-.trigger-template-java:
+.trigger-template-base:
   trigger:
     strategy: depend
 
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
         - $PROJECT_TEMPLATES_DIR/**/*
+
+.trigger-template-java:
+  extends: .trigger-template-base
+
+  trigger:
+    include:
+      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
 .trigger-template-dotnet:
+  extends: .trigger-template-base
+
   trigger:
-    strategy: depend
-
     include:
-      - local: $PROJECT_DIR/.gitlab-ci.yml
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
-
-  rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      changes:
-        - $PROJECT_DIR/**/*
-        - $PROJECT_TEMPLATES_DIR/**/*
+      - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
 
 
 # libraries
-trigger-shared-starter:
+trigger-shared-core:
   extends: .trigger-template-java
   stage: libraries
 
   variables:
-    PROJECT_NAME: starter
+    PROJECT_NAME: shared-core
     PROJECT_TYPE: $TARGET_TYPE_JAVA
-    PROJECT_DIR: $LIBRARIES_DIR/$TARGET_TYPE_JAVA/$PROJECT_NAME
+    PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
+    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
+
+trigger-shared-starter:
+  extends: .trigger-template-java
+  stage: libraries
+
+  needs:
+    - trigger-shared-core
+
+  variables:
+    PROJECT_NAME: shared-starter
+    PROJECT_TYPE: $TARGET_TYPE_JAVA
+    PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 
