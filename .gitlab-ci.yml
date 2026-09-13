@@ -111,6 +111,12 @@ trigger-config-server:
   extends: .trigger-template-java
   stage: microservices
 
+  trigger:
+    include:
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+
   variables:
     PROJECT_NAME: config-server
     PROJECT_TYPE: $TARGET_TYPE_JAVA
