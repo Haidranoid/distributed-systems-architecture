@@ -43,7 +43,7 @@ stages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
-        - $PROJECT_TEMPLATES_DIR/**/*
+        #- $PROJECT_TEMPLATES_DIR/**/*
 
 .trigger-template-base-java:
   extends: .trigger-template-base
