@@ -49,9 +49,6 @@ stages:
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
-        
-  variables:
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND
 
 
 .trigger-template-java-stages:
@@ -61,6 +58,8 @@ stages:
       - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
       - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
+  variables:
+    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND
 #.trigger-template-base-dotnet:
 #  extends: .trigger-template-base
 #
