@@ -50,15 +50,17 @@ trigger-template-base:
 
 
 .trigger-template-java-setup:
-  include:
-   - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+  trigger:
+    include:
+     - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
 
 .trigger-template-java-stages:
-  include:
-    - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
-    - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
-    - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
+  trigger:
+    include:
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
 
 
