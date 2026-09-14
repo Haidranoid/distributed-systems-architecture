@@ -32,7 +32,7 @@ stages:
 
 
 # trigger templates base ==============================================================
-trigger-template-base:
+.trigger-template-base:
   trigger:
     strategy: depend
     include:
@@ -45,15 +45,15 @@ trigger-template-base:
         - $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
 
-trigger-template-java-setup:
-  extends: trigger-template-base
+.trigger-template-java-setup:
+  extends: .trigger-template-base
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
 
 trigger-template-java-stages:
-  extends: trigger-template-java-setup
+  extends: .trigger-template-java-setup
   trigger:
     include:
       - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
