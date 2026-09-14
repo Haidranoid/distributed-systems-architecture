@@ -103,8 +103,9 @@ trigger-shared-starter:
   stage: libraries
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   needs:
     - trigger-shared-core
@@ -121,8 +122,9 @@ trigger-config-server:
   stage: microservices
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: config-server
@@ -134,8 +136,9 @@ trigger-gateway:
   stage: microservices
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: gateway
@@ -147,8 +150,9 @@ trigger-authentication-service:
   stage: microservices
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: authentication-service
@@ -160,8 +164,9 @@ trigger-accounts-service:
   stage: microservices
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: accounts-service
@@ -173,8 +178,9 @@ trigger-audit-service:
   stage: microservices
 
   extends:
+    - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: audit-service
