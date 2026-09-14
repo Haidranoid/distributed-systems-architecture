@@ -46,8 +46,6 @@ stages:
         #- $PROJECT_TEMPLATES_DIR/**/*
 
 .trigger-template-base-java:
-  extends: .trigger-template-base
-
   trigger:
 
     include:
@@ -86,7 +84,9 @@ stages:
 trigger-shared-core:
   stage: libraries
 
-  extends: .trigger-template-base-java
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: shared-core
