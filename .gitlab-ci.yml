@@ -46,9 +46,9 @@ stages:
         #- $PROJECT_TEMPLATES_DIR/**/*
 
 .trigger-template-base-java:
-  extends: .trigger-template-base
-
   trigger:
+    strategy: depend
+
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
@@ -88,6 +88,12 @@ trigger-shared-core:
   extends:
     - .trigger-template-base
     - .trigger-template-base-java
+
+  trigger:
+    include:
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
   variables:
     PROJECT_NAME: shared-core
