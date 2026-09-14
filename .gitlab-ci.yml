@@ -99,8 +99,8 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
+    PROJECT_KIND: libraries
     PROJECT_TYPE: $TARGET_TYPE_JAVA
-    PROJECT_KIND: $LIBRARIES_DIR
     PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
 
 trigger-shared-starter:
