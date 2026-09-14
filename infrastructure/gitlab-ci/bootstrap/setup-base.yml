@@ -1,0 +1,5 @@
+default:
+  before_script:
+    - . bootstrap.sh
+    - aws_login v1
+    - aws_load_env_vars

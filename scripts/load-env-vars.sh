@@ -13,6 +13,7 @@ export DOCKER_COMPOSES_DIR="$DOCKER_DIR/composes"
 export DOCKER_IMAGES_DIR="$DOCKER_DIR/images"
 
 export GITLAB_CI_BOOTSTRAP_DIR="$GITLAB_CI_DIR/bootstrap"
+export GITLAB_CI_PIPELINES_DIR="$GITLAB_CI_DIR/pipelines"
 export GITLAB_CI_TEMPLATES_DIR="$GITLAB_CI_DIR/templates"
 
 export K8S_BASE_DIR="$K8S_DIR/base"

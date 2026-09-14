@@ -1,10 +1,7 @@
+include:
+  local: "$GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml"
+
 default:
   image:
     name: haidranoid/gitlab-runner-dotnet10:latest
     pull_policy: if-not-present
-
-  before_script:
-    - . bootstrap.sh
-
-    - aws_login v1
-    - aws_load_env_vars
