@@ -58,8 +58,6 @@ stages:
       - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
       - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
-  variables:
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND
 #.trigger-template-base-dotnet:
 #  extends: .trigger-template-base
 #
@@ -95,11 +93,17 @@ trigger-shared-core:
   extends:
     - .trigger-template-base
     - .trigger-template-java-setup
-    - .trigger-template-java-stages
+    #- .trigger-template-java-stages
+
+  trigger:
+    include:
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_KIND: libraries
+    PROJECT_KIND: $LIBRARIES_DIR
     PROJECT_TYPE: $TARGET_TYPE_JAVA
     PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
 
