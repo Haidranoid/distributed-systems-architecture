@@ -89,13 +89,6 @@ trigger-shared-core:
     - .trigger-template-base-java
     - .trigger-template-base
 
-
-  trigger:
-    include:
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
-
   variables:
     PROJECT_NAME: shared-core
     PROJECT_TYPE: $TARGET_TYPE_JAVA
