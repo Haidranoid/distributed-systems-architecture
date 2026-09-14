@@ -93,9 +93,9 @@ trigger-shared-core:
   stage: libraries
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: shared-core
