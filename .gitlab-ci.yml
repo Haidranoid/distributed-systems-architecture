@@ -32,7 +32,7 @@ stages:
 
 
 # trigger templates base ==============================================================
-trigger-template-base:
+.trigger-template-base:
   extends:
     - .trigger-template-java-setup
     - .trigger-template-java-stages
@@ -65,7 +65,7 @@ trigger-template-base:
 
 
 #.trigger-template-base-dotnet:
-#  extends: trigger-template-base
+#  extends: .trigger-template-base
 #
 #  trigger:
 #    include:
@@ -74,7 +74,7 @@ trigger-template-base:
 
 # trigger lang templates ==============================================================
 #.trigger-template-java:
-#  extends: trigger-template-base-java
+#  extends: .trigger-template-base-java
 
 #  trigger:
 #    include:
@@ -83,7 +83,7 @@ trigger-template-base:
 #      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
 #.trigger-template-dotnet:
-#  extends: trigger-template-base-dotnet
+#  extends: .trigger-template-base-dotnet
 
 #  trigger:
 #    include:
@@ -96,7 +96,7 @@ trigger-template-base:
 trigger-shared-core:
   stage: libraries
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: shared-core
@@ -107,7 +107,7 @@ trigger-shared-core:
 trigger-shared-starter:
   stage: libraries
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   #needs:
   # - .trigger-shared-core
@@ -123,7 +123,7 @@ trigger-shared-starter:
 trigger-config-server:
   stage: microservices
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: config-server
@@ -134,7 +134,7 @@ trigger-config-server:
 trigger-gateway:
   stage: microservices
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: gateway
@@ -145,7 +145,7 @@ trigger-gateway:
 trigger-authentication-service:
   stage: microservices
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: authentication-service
@@ -156,7 +156,7 @@ trigger-authentication-service:
 trigger-accounts-service:
   stage: microservices
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: accounts-service
@@ -167,7 +167,7 @@ trigger-accounts-service:
 trigger-audit-service:
   stage: microservices
 
-  extends: trigger-template-base
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: audit-service
