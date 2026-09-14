@@ -114,8 +114,11 @@ trigger-shared-starter:
 
 # trigger microservices ==============================================================
 trigger-config-server:
-  extends: .trigger-template-java
   stage: microservices
+
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: config-server
@@ -124,8 +127,11 @@ trigger-config-server:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-gateway:
-  extends: .trigger-template-java
   stage: microservices
+
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: gateway
@@ -134,8 +140,11 @@ trigger-gateway:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-authentication-service:
-  extends: .trigger-template-java
   stage: microservices
+
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: authentication-service
@@ -144,8 +153,11 @@ trigger-authentication-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-accounts-service:
-  extends: .trigger-template-java
   stage: microservices
+
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: accounts-service
@@ -154,8 +166,11 @@ trigger-accounts-service:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
 trigger-audit-service:
-  extends: .trigger-template-java
   stage: microservices
+
+  extends:
+    - .trigger-template-base
+    - .trigger-template-base-java
 
   variables:
     PROJECT_NAME: audit-service
