@@ -33,14 +33,14 @@ stages:
 
 # trigger templates base ==============================================================
 .trigger-template-base:
-  extends:
-    - .trigger-template-java-setup
-    - .trigger-template-java-stages
-
   trigger:
     strategy: depend
     include:
       - local: $PROJECT_DIR/.gitlab-ci.yml
+      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
