@@ -53,36 +53,32 @@ stages:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
 
-.trigger-template-base-dotnet:
-  extends: .trigger-template-base
-
-  trigger:
-    include:
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
+#.trigger-template-base-dotnet:
+#  extends: .trigger-template-base
+#
+#  trigger:
+#    include:
+#      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
 
 
 # trigger lang templates ==============================================================
 .trigger-template-java:
-  extends: .trigger-template-base
+  extends: .trigger-template-base-java
 
   trigger:
     include:
-      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
+      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
 
-  #trigger:
-  #  include:
-  #    - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-  #    - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-  #    - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+#.trigger-template-dotnet:
+#  extends: .trigger-template-base-dotnet
 
-.trigger-template-dotnet:
-  extends: .trigger-template-base-dotnet
-
-  trigger:
-    include:
-      - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
+#  trigger:
+#    include:
+#      - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
+#      - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
+#      - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
 
 
 # trigger libraries ==============================================================
@@ -94,7 +90,7 @@ trigger-shared-core:
     PROJECT_NAME: shared-core
     PROJECT_TYPE: $TARGET_TYPE_JAVA
     PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
-    #PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
+    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 trigger-shared-starter:
   extends: .trigger-template-java
@@ -161,25 +157,25 @@ trigger-audit-service:
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
-trigger-media-generation-service:
-  extends: .trigger-template-dotnet
-  stage: microservices
+#trigger-media-generation-service:
+#  extends: .trigger-template-dotnet
+#  stage: microservices
 
-  variables:
-    PROJECT_NAME: media-generation-service
-    PROJECT_NAME_SOLUTION: MediaGenerationService
-    PROJECT_TYPE: $TARGET_TYPE_DOTNET
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
+#  variables:
+#    PROJECT_NAME: media-generation-service
+#    PROJECT_NAME_SOLUTION: MediaGenerationService
+#    PROJECT_TYPE: $TARGET_TYPE_DOTNET
+#    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+#    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
 
-trigger-content-service:
-  extends: .trigger-template-dotnet
-  stage: microservices
+#trigger-content-service:
+#  extends: .trigger-template-dotnet
+#  stage: microservices
 
-  variables:
-    PROJECT_NAME: content-service
-    PROJECT_NAME_SOLUTION: ContentService
-    PROJECT_TYPE: $TARGET_TYPE_DOTNET
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
+#  variables:
+#    PROJECT_NAME: content-service
+#    PROJECT_NAME_SOLUTION: ContentService
+#    PROJECT_TYPE: $TARGET_TYPE_DOTNET
+#    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+#    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$MICROSERVICES_DIR
     
