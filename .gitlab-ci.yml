@@ -42,7 +42,7 @@ stages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
-        #- $PROJECT_TEMPLATES_DIR/**/*
+        - $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
 
 .trigger-template-java-setup:
@@ -54,9 +54,9 @@ stages:
 .trigger-template-java-stages:
   trigger:
     include:
-      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
+      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
   variables:
     PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND
@@ -74,18 +74,18 @@ stages:
 
 #  trigger:
 #    include:
-#      - local: $PROJECT_TEMPLATES_DIR/test-java.yml
-#      - local: $PROJECT_TEMPLATES_DIR/publish-java.yml
-#      - local: $PROJECT_TEMPLATES_DIR/deploy-java.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
 #.trigger-template-dotnet:
 #  extends: .trigger-template-base-dotnet
 
 #  trigger:
 #    include:
-#      - local: $PROJECT_TEMPLATES_DIR/test-dotnet.yml
-#      - local: $PROJECT_TEMPLATES_DIR/publish-dotnet.yml
-#      - local: $PROJECT_TEMPLATES_DIR/deploy-dotnet.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-dotnet.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-dotnet.yml
+#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-dotnet.yml
 
 
 # trigger libraries ==============================================================
