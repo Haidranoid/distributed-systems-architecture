@@ -86,8 +86,9 @@ trigger-shared-core:
   stage: libraries
 
   extends:
-    - .trigger-template-base
     - .trigger-template-base-java
+    - .trigger-template-base
+
 
   trigger:
     include:
