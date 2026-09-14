@@ -87,19 +87,13 @@ stages:
 
 
 # trigger libraries ==============================================================
-trigger-shared-core:
+.trigger-shared-core:
   stage: libraries
 
   extends:
     - .trigger-template-java-setup
+    - .trigger-template-java-stages
     - .trigger-template-base
-    #- .trigger-template-java-stages
-
-  trigger:
-    include:
-      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
-      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
-      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
 
   variables:
     PROJECT_NAME: shared-core
@@ -116,7 +110,7 @@ trigger-shared-starter:
     - .trigger-template-java-stages
 
   needs:
-    - trigger-shared-core
+    - .trigger-shared-core
 
   variables:
     PROJECT_NAME: shared-starter
