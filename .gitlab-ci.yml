@@ -63,7 +63,11 @@ stages:
 
 # trigger lang templates ==============================================================
 .trigger-template-java:
-  extends: .trigger-template-base-java
+  extends: .trigger-template-base
+
+  trigger:
+    include:
+      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
 
   #trigger:
   #  include:
