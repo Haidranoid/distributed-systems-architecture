@@ -1,6 +1,3 @@
-include:
-  - local: $PROJECT_TEMPLATES_DIR
-
 stages:
   - test
   - publish
