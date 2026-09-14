@@ -44,10 +44,15 @@ stages:
         - $PROJECT_DIR/**/*
         #- $PROJECT_TEMPLATES_DIR/**/*
 
+
 .trigger-template-java-setup:
   trigger:
     include:
       - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+        
+  variables:
+    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND
+
 
 .trigger-template-java-stages:
   trigger:
@@ -89,23 +94,23 @@ trigger-shared-core:
   stage: libraries
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: shared-core
     PROJECT_TYPE: $TARGET_TYPE_JAVA
+    PROJECT_KIND: $LIBRARIES_DIR
     PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_DIR/$LIBRARIES_DIR
 
 trigger-shared-starter:
   stage: libraries
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   needs:
     - trigger-shared-core
@@ -122,9 +127,9 @@ trigger-config-server:
   stage: microservices
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: config-server
@@ -136,9 +141,9 @@ trigger-gateway:
   stage: microservices
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: gateway
@@ -150,9 +155,9 @@ trigger-authentication-service:
   stage: microservices
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: authentication-service
@@ -164,9 +169,9 @@ trigger-accounts-service:
   stage: microservices
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: accounts-service
@@ -178,9 +183,9 @@ trigger-audit-service:
   stage: microservices
 
   extends:
+    - .trigger-template-base
     - .trigger-template-java-setup
     - .trigger-template-java-stages
-    - .trigger-template-base
 
   variables:
     PROJECT_NAME: audit-service
