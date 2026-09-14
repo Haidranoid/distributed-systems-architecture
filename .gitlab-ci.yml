@@ -109,8 +109,8 @@ trigger-shared-starter:
     - .trigger-template-java-setup
     - .trigger-template-java-stages
 
-  needs:
-    - .trigger-shared-core
+  #needs:
+  # - .trigger-shared-core
 
   variables:
     PROJECT_NAME: shared-starter
