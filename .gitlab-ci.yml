@@ -12,7 +12,7 @@ variables:
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
   PROJECT_TYPE_JAVA_LIBRARY: java-library
-  PROJECT_TYPE_JAVA_MICROSERVICE: java-microservice
+  PROJECT_TYPE_JAVA_MICROSERVICE: java-service
   
   LIBRARIES_DIR: libraries
   MICROSERVICES_DIR: microservices
