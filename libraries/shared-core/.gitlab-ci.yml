@@ -1,9 +1,0 @@
-stages:
-  - test
-  - publish
-  - deploy
-
-default:
-  tags:
-    - local
-    - java
