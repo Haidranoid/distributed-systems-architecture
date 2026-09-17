@@ -7,6 +7,7 @@ default:
   tags:
     - local
     - java
+    - library
 
 include:
   - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml

@@ -1,0 +1,16 @@
+stages:
+  - test
+  - publish
+  - deploy
+
+default:
+  tags:
+    - local
+    - java
+    - microservice
+
+include:
+  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/test-java.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/publish-java.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/deploy-java.yml

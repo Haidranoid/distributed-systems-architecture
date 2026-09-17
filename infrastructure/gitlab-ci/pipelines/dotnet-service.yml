@@ -1,0 +1,16 @@
+stages:
+  - test
+  - publish
+  - deploy
+
+default:
+  tags:
+    - local
+    - dotnet
+    - microservice
+
+include:
+  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/test-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/publish-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/deploy-dotnet.yml

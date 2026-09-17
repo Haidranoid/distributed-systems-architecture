@@ -12,7 +12,7 @@ variables:
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
   PROJECT_TYPE_JAVA_LIBRARY: java-library
-  PROJECT_TYPE_JAVA_MICROSERVICES: java-microservice
+  PROJECT_TYPE_JAVA_MICROSERVICE: java-microservice
   
   LIBRARIES_DIR: libraries
   MICROSERVICES_DIR: microservices
@@ -44,33 +44,6 @@ stages:
         - $PROJECT_DIR/**/*
         - $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
-#.trigger-template-base-dotnet:
-#  extends: .trigger-template-base
-#
-#  trigger:
-#    include:
-#      - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
-
-
-# trigger lang templates ==============================================================
-#.trigger-template-java:
-#  extends: .trigger-template-base-java
-
-#  trigger:
-#    include:
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-java.yml
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-java.yml
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-java.yml
-
-#.trigger-template-dotnet:
-#  extends: .trigger-template-base-dotnet
-
-#  trigger:
-#    include:
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/test-dotnet.yml
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/publish-dotnet.yml
-#      - local: $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/deploy-dotnet.yml
-
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -88,10 +61,8 @@ trigger-shared-starter:
   stage: libraries
 
   extends: .trigger-template-base
-
   #needs:
   # - .trigger-shared-core
-
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_KIND: $LIBRARIES_DIR
@@ -107,7 +78,8 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_KIND: $MICROSERVICES_DIR
+    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
 
@@ -118,7 +90,8 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_KIND: $MICROSERVICES_DIR
+    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
 
@@ -129,7 +102,8 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_KIND: $MICROSERVICES_DIR
+    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
 
@@ -140,7 +114,8 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_KIND: $MICROSERVICES_DIR
+    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
 
@@ -151,7 +126,8 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_KIND: $MICROSERVICES_DIR
+    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
 
