@@ -13,7 +13,9 @@ variables:
 
   PROJECT_TYPE_JAVA_LIBRARY: java-library
   PROJECT_TYPE_JAVA_MICROSERVICE: java-service
-  
+  PROJECT_TYPE_DOTNET_LIBRARY: dotnet-library
+  PROJECT_TYPE_DOTNET_MICROSERVICE: dotnet-service
+
   LIBRARIES_DIR: libraries
   MICROSERVICES_DIR: microservices
 
