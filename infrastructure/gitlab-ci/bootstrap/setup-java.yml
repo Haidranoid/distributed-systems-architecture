@@ -2,6 +2,12 @@ include:
   local: "$GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml"
 
 default:
+  before_script:
+    - . bootstrap.sh
+    - aws_login v1
+    - aws_load_env_vars
+    - echo "$GITLAB_CI_TEMPLATES_LIBRARIES_DIR"
+    - echo "$GITLAB_CI_TEMPLATES_DIR"
   image:
     name: haidranoid/gitlab-runner-java21:latest
     pull_policy: if-not-present

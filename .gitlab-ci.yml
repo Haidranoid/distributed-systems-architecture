@@ -41,7 +41,7 @@ stages:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
-        - $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
+        #- $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
 
 # trigger libraries ==============================================================
