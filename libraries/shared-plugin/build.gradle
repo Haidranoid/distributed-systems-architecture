@@ -1,0 +1,88 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'io.freefair.lombok' version '9.5.0'
+}
+
+group = 'org.dsa.shared'
+version = '1.0.0'
+description = 'plugin'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
+            from components.java
+        }
+    }
+
+    repositories {
+
+        def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
+
+        if (!codeArtifactAuthToken) {
+            codeArtifactAuthToken = providers.exec {
+                commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                        '--domain', 'artifacts',
+                        '--query', 'authorizationToken',
+                        '--output', 'text'
+            }.standardOutput.asText.get().trim()
+        }
+
+        maven {
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
+            credentials {
+                username "aws"
+                password codeArtifactAuthToken
+            }
+        }
+    }
+}
+
+ext {
+    set('junitVersion', "5.14.4")
+    set('pluginProjectId', "${project.group}.${project.name}")
+    set('pluginEntryPointClass', "${project.group}.plugin.SharedPlugin")
+}
+
+gradlePlugin {
+    plugins {
+        bootifyPlugin {
+            id = "${pluginProjectId}"
+            implementationClass = "${pluginEntryPointClass}"
+        }
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'org.apache.groovy:groovy:4.0.21'
+    testImplementation platform("org.junit:junit-bom:${junitVersion}")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
