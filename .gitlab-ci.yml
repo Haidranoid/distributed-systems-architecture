@@ -14,10 +14,10 @@ variables:
   GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
   GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
 
-  PROJECT_TYPE_JAVA_LIBRARY: java-library
-  PROJECT_TYPE_JAVA_MICROSERVICE: java-service
-  PROJECT_TYPE_DOTNET_LIBRARY: dotnet-library
-  PROJECT_TYPE_DOTNET_MICROSERVICE: dotnet-service
+  PROJECT_TYPE_LIBRARY_JAVA: java-library
+  PROJECT_TYPE_LIBRARY_DOTNET: dotnet-library
+  PROJECT_TYPE_MICROSERVICE_JAVA: java-service
+  PROJECT_TYPE_MICROSERVICE_DOTNET: dotnet-service
 
 workflow:
   rules:
@@ -55,7 +55,7 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY_JAVA
 
 trigger-shared-starter:
   stage: libraries
@@ -65,7 +65,7 @@ trigger-shared-starter:
   # - .trigger-shared-core
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
+    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY_JAVA
 
 
 # trigger microservices ==============================================================
@@ -76,8 +76,7 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
 
 
 trigger-gateway:
@@ -87,9 +86,8 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-    
+    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+
 
 trigger-authentication-service:
   stage: microservices
@@ -98,8 +96,7 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
     
 
 trigger-accounts-service:
@@ -109,8 +106,7 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
     
 
 trigger-audit-service:
@@ -120,8 +116,7 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
-    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
     
 
 #trigger-media-generation-service:
