@@ -126,9 +126,8 @@ trigger-audit-service:
 #  variables:
 #    PROJECT_NAME: media-generation-service
 #    PROJECT_NAME_SOLUTION: MediaGenerationService
-#    PROJECT_TYPE: $TARGET_TYPE_DOTNET
-#    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-#    
+#    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_DOTNET
+
 
 #trigger-content-service:
 #  extends: .trigger-template-dotnet
@@ -137,7 +136,5 @@ trigger-audit-service:
 #  variables:
 #    PROJECT_NAME: content-service
 #    PROJECT_NAME_SOLUTION: ContentService
-#    PROJECT_TYPE: $TARGET_TYPE_DOTNET
-#    PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-#    
+#    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_DOTNET
     

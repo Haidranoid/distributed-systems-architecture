@@ -11,6 +11,6 @@ default:
 
 include:
   - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/test-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/publish-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_DIR/microservices/deploy-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/test-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/publish-dotnet.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/deploy-dotnet.yml
