@@ -6,7 +6,7 @@ deploy:
       artifacts: true
 
   script:
-    - cd $K8S_DEV_LOCAL_MICROSERVICES_DIR/$PROJECT_NAME
+    - cd $PROJECT_K8S_KUSTOMIZATION_DIR
 
     - |
       kubectl create secret docker-registry ecr-credentials \
