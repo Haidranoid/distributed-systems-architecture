@@ -5,6 +5,7 @@ plugins {
     id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
     id 'jacoco'
+    id 'org.dsa.shared.shared-plugin' version '1.0.0'
 }
 
 group = 'org.dsa.services'
