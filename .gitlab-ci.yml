@@ -11,6 +11,8 @@ variables:
   GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
+  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
+
   PROJECT_TYPE_JAVA_LIBRARY: java-library
   PROJECT_TYPE_JAVA_MICROSERVICE: java-service
   PROJECT_TYPE_DOTNET_LIBRARY: dotnet-library
