@@ -16,9 +16,6 @@ variables:
   PROJECT_TYPE_DOTNET_LIBRARY: dotnet-library
   PROJECT_TYPE_DOTNET_MICROSERVICE: dotnet-service
 
-  LIBRARIES_DIR: libraries
-  MICROSERVICES_DIR: microservices
-
 workflow:
   rules:
     # Merge Requests
@@ -55,9 +52,7 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_KIND: $LIBRARIES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
-    PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
 
 trigger-shared-starter:
   stage: libraries
@@ -67,9 +62,7 @@ trigger-shared-starter:
   # - .trigger-shared-core
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_KIND: $LIBRARIES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_LIBRARY
-    PROJECT_DIR: $LIBRARIES_DIR/$PROJECT_NAME
 
 
 # trigger microservices ==============================================================
@@ -80,10 +73,9 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_KIND: $MICROSERVICES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
-    
+
 
 trigger-gateway:
   stage: microservices
@@ -92,7 +84,6 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_KIND: $MICROSERVICES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
@@ -104,7 +95,6 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_KIND: $MICROSERVICES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
@@ -116,7 +106,6 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_KIND: $MICROSERVICES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
@@ -128,7 +117,6 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_KIND: $MICROSERVICES_DIR
     PROJECT_TYPE: $PROJECT_TYPE_JAVA_MICROSERVICE
     PROJECT_DIR: $MICROSERVICES_DIR/$PROJECT_NAME
     
