@@ -1,5 +1,12 @@
 include:
-  local: "$GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml"
+  local: $GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml
+
+variables:
+  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=true
+    -Dorg.gradle.caching=true
 
 default:
   image:

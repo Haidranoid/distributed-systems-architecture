@@ -1,12 +1,6 @@
 variables:
   GIT_DEPTH: 0
 
-  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
-  GRADLE_OPTS: >-
-    -Dorg.gradle.daemon=false
-    -Dorg.gradle.parallel=true
-    -Dorg.gradle.caching=true
-
   GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
   GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
