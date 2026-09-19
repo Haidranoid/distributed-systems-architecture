@@ -1,5 +1,5 @@
 #!/bin/sh
 
-. "$SCRIPTS_DIR/aws-utils.sh"
-. "$SCRIPTS_DIR/docker-utils.sh"
-. "$SCRIPTS_DIR/composes-utils.sh"
+. "$SCRIPTS_DIR/utils/aws-utils.sh"
+. "$SCRIPTS_DIR/utils/docker-utils.sh"
+. "$SCRIPTS_DIR/utils/composes-utils.sh"
