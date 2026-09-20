@@ -8,11 +8,11 @@ variables:
   GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
   GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
 
-  PROJECT_TYPE_LIBRARY: library
-  PROJECT_TYPE_MICROSERVICE: service
+  ARTIFACT_TARGET_LIBRARY: library
+  ARTIFACT_TARGET_MICROSERVICE: service
 
-  PROJECT_LANG_JAVA: java
-  PROJECT_LANG_DOTNET: dotnet
+  ARTIFACT_LANG_JAVA: java
+  ARTIFACT_LANG_DOTNET: dotnet
 
 workflow:
   rules:
@@ -33,7 +33,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $PROJECT_PIPELINE
+      - local: $PROJECT_PIPELINE_YAML_FILE
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -42,7 +42,8 @@ stages:
         #- $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
   variables:
-    PROJECT_PIPELINE: "$GITLAB_CI_PIPELINES_DIR/$PROJECT_LANG-$PROJECT_TYPE.yml"
+    PROJECT_PIPELINE_YAML_NAME: '$PROJECT_TYPE-$PROJECT_LANG.yml'
+    PROJECT_PIPELINE_YAML_FILE: '$GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_YAML_NAME'
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -52,8 +53,8 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY
-    PROJECT_LANG: $PROJECT_LANG_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_LIBRARY
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
 
 trigger-shared-starter:
   stage: libraries
@@ -63,7 +64,8 @@ trigger-shared-starter:
   # - .trigger-shared-core
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_LIBRARY
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
 
 
 # trigger microservices ==============================================================
@@ -74,7 +76,8 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_MICROSERVICE
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
 
 
 trigger-gateway:
@@ -84,7 +87,8 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_MICROSERVICE
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
 
 
 trigger-authentication-service:
@@ -94,7 +98,8 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_MICROSERVICE
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
     
 
 trigger-accounts-service:
@@ -104,7 +109,8 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_MICROSERVICE
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
     
 
 trigger-audit-service:
@@ -114,7 +120,8 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_JAVA
+    PROJECT_TYPE: $ARTIFACT_TARGET_MICROSERVICE
+    PROJECT_LANG: $ARTIFACT_LANG_JAVA
     
 
 #trigger-media-generation-service:
@@ -124,7 +131,7 @@ trigger-audit-service:
 #  variables:
 #    PROJECT_NAME: media-generation-service
 #    PROJECT_NAME_SOLUTION: MediaGenerationService
-#    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_DOTNET
+#    PROJECT_TYPE: $ARTIFACt_TARGET_MICROSERVICE_DOTNET
 
 
 #trigger-content-service:
@@ -134,5 +141,5 @@ trigger-audit-service:
 #  variables:
 #    PROJECT_NAME: content-service
 #    PROJECT_NAME_SOLUTION: ContentService
-#    PROJECT_TYPE: $PROJECT_TYPE_MICROSERVICE_DOTNET
+#    PROJECT_TYPE: $ARTIFACt_TARGET_MICROSERVICE_DOTNET
     
