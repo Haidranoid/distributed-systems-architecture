@@ -33,7 +33,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: '$PROJECT_PIPELINE_YAML_PATH'
+      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_YAML
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -52,7 +52,7 @@ trigger-shared-core:
     PROJECT_NAME: shared-core
     PROJECT_TYPE: $ARTIFACT_TARGET_LIBRARY
     PROJECT_LANG: $ARTIFACT_LANG_JAVA
-    PROJECT_PIPELINE_YAML_PATH: '$GITLAB_CI_PIPELINES_DIR/$PROJECT_TYPE-$PROJECT_LANG.yml'
+    PROJECT_PIPELINE_YAML: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
 
 trigger-shared-starter:
   stage: libraries
@@ -64,6 +64,7 @@ trigger-shared-starter:
     PROJECT_NAME: shared-starter
     PROJECT_TYPE: $ARTIFACT_TARGET_LIBRARY
     PROJECT_LANG: $ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_YAML: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
 
 
 # trigger microservices ==============================================================
