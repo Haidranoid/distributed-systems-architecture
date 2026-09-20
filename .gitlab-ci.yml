@@ -33,7 +33,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $PROJECT_PIPELINE_YAML_FILE
+      - local: '$PROJECT_PIPELINE_YAML_PATH'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -42,8 +42,7 @@ stages:
         #- $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
   variables:
-    PROJECT_PIPELINE_YAML_NAME: '$PROJECT_TYPE-$PROJECT_LANG.yml'
-    PROJECT_PIPELINE_YAML_FILE: '$GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_YAML_NAME'
+    PROJECT_PIPELINE_YAML_PATH: '$GITLAB_CI_PIPELINES_DIR/$PROJECT_TYPE-$PROJECT_LANG.yml'
 
 # trigger libraries ==============================================================
 trigger-shared-core:
