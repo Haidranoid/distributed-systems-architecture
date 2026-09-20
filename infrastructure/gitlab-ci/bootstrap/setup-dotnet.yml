@@ -1,3 +1,6 @@
+variables:
+  PROJECT_DOCKERFILE: $PROJECT_NAME_SOLUTION/Dockerfile
+
 include:
   local: $GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml
 
