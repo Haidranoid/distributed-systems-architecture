@@ -14,6 +14,7 @@ class SharedPlugin implements Plugin<Project> {
 
         project.extensions.create("snapshots", SnapshotsExtension, project)
 
+
         project.afterEvaluate(SharedPluginConfig.load)
     }
 }
