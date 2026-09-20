@@ -5,6 +5,7 @@ default:
     - aws_load_env_vars
     - docker_login
     - cd $PROJECT_DIR
-    - echo "$(pwd)"
-    - echo "$PROJECT_DIR"
-    - echo "$PROJECT_DOCKERFILE"
+
+variables:
+  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
+  GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
