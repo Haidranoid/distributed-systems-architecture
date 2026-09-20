@@ -1,6 +1,8 @@
 variables:
   GIT_DEPTH: 0
 
+  GITLAB_CI_DSA_ROOT_FILE: .gitlab-ci.yml
+
   GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
   GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
@@ -36,14 +38,13 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_ID.yml
+      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_ID
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
+        - $GITLAB_CI_DSA_ROOT_FILE
         - $PROJECT_DIR/**/*
-        - $PROJECT_TEMPLATES_DIR.yml
-        - $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_ID.yml
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -54,21 +55,21 @@ trigger-shared-core:
   variables:
     PROJECT_NAME: shared-core
     PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/$PROJECT_NAME/*-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-shared-starter:
   stage: libraries
 
   extends: .trigger-template-base
-  #needs:
-  # - .trigger-shared-core
+
+  needs:
+   - trigger-shared-core
+
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/$PROJECT_NAME/*-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
 
 
 # trigger microservices ==============================================================
@@ -80,8 +81,7 @@ trigger-config-server:
   variables:
     PROJECT_NAME: config-server
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
-    PROJECT_TEMPLATES_DIR: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/$PROJECT_NAME/*-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-gateway:
@@ -92,7 +92,7 @@ trigger-gateway:
   variables:
     PROJECT_NAME: gateway
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-authentication-service:
@@ -103,7 +103,7 @@ trigger-authentication-service:
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-accounts-service:
@@ -114,7 +114,7 @@ trigger-accounts-service:
   variables:
     PROJECT_NAME: accounts-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-audit-service:
@@ -125,7 +125,7 @@ trigger-audit-service:
   variables:
     PROJECT_NAME: audit-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
 
 
 trigger-media-generation-service:
@@ -137,7 +137,7 @@ trigger-media-generation-service:
     PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET.yml
 
 
 trigger-content-service:
@@ -149,5 +149,5 @@ trigger-content-service:
     PROJECT_NAME: content-service
     PROJECT_NAME_SOLUTION: ContentService
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET.yml
     
