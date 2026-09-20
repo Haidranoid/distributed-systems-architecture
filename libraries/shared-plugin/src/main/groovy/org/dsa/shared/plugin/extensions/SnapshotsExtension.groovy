@@ -11,27 +11,39 @@ class SnapshotsExtension {
         this.project = project
     }
 
-    def snapshot(String dependency) {
+    def implementation(Object args) {
+        def dependency = args.toString()
+
         dependencies << dependency
 
         project.dependencies.add("implementation", dependency)
     }
 
-    def methodMissing(String name, Object args) {
-        if (args == null || args.length != 1) {
-            throw new IllegalArgumentException("${name} expects exactly one dependency notation")
-        }
-
-        String dependency = args[0].toString()
-
-        //TODO: make the opposite
-        // if (project.configurations.dependencies.properties.containsKey(name)) {
-        if (!project.configurations.findByName(name)) {
-            throw new IllegalArgumentException("Unknown Gradle dependency configuration '${name}'")
-        }
+    def snapshotImplementation(Object args) {
+        def dependency = args.toString()
 
         dependencies << dependency
 
-        project.dependencies.add(name, dependency)
+        project.dependencies.add("implementation", dependency)
     }
 }
+
+/*
+def methodMissing(String name, Object args) {
+    if (args == null || args.length != 1) {
+        throw new IllegalArgumentException("${name} expects exactly one dependency notation")
+    }
+
+    String dependency = args[0].toString()
+
+    //TODO: make the opposite
+    // if (project.configurations.dependencies.properties.containsKey(name)) {
+    if (!project.configurations.findByName(name)) {
+        throw new IllegalArgumentException("Unknown Gradle dependency configuration '${name}'")
+    }
+
+    dependencies << dependency
+
+    project.dependencies.add(name, dependency)
+}
+*/

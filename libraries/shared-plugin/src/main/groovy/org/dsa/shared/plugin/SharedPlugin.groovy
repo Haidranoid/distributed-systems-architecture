@@ -1,6 +1,8 @@
 package org.dsa.shared.plugin
 
 import org.dsa.shared.plugin.config.SharedPluginConfig
+import org.dsa.shared.plugin.config.SnapshotsConfig
+import org.dsa.shared.plugin.config.UpdateVersionConfig
 import org.dsa.shared.plugin.extensions.SnapshotsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,7 +15,6 @@ class SharedPlugin implements Plugin<Project> {
         project.pluginManager.apply("java-library")
 
         project.extensions.create("snapshots", SnapshotsExtension, project)
-
 
         project.afterEvaluate(SharedPluginConfig.load)
     }
