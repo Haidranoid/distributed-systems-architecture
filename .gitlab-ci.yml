@@ -8,10 +8,11 @@ variables:
   GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
   GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
 
-  PROJECT_TYPE_LIBRARY_JAVA: java-library
-  PROJECT_TYPE_LIBRARY_DOTNET: dotnet-library
-  PROJECT_TYPE_MICROSERVICE_JAVA: java-service
-  PROJECT_TYPE_MICROSERVICE_DOTNET: dotnet-service
+  PROJECT_TYPE_LIBRARY: library
+  PROJECT_TYPE_MICROSERVICE: service
+
+  PROJECT_LANG_JAVA: java
+  PROJECT_LANG_DOTNET: dotnet
 
 workflow:
   rules:
@@ -32,7 +33,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_TYPE.yml
+      - local: $PROJECT_PIPELINE
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -40,6 +41,8 @@ stages:
         - $PROJECT_DIR/**/*
         #- $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
 
+  variables:
+    PROJECT_PIPELINE: "$GITLAB_CI_PIPELINES_DIR/$PROJECT_LANG-$PROJECT_TYPE.yml"
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -49,7 +52,8 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY_JAVA
+    PROJECT_TYPE: $PROJECT_TYPE_LIBRARY
+    PROJECT_LANG: $PROJECT_LANG_JAVA
 
 trigger-shared-starter:
   stage: libraries
