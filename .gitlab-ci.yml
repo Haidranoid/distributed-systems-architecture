@@ -36,16 +36,13 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $GITLAB_PROJECT_PIPELINE
+      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_ID.yml
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - $PROJECT_DIR/**/*
         #- $GITLAB_CI_TEMPLATES_DIR/$PROJECT_KIND/**/*
-
-  variables:
-    GITLAB_PROJECT_PIPELINE: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE_ID.yml
 
 # trigger libraries ==============================================================
 trigger-shared-core:
