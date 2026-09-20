@@ -1,7 +1,7 @@
 variables:
   GIT_DEPTH: 0
 
-  GITLAB_CI_DSA_ROOT_FILE: .gitlab-ci.yml
+  GITLAB_CI_DSA_ROOT_FILE: ./.gitlab-ci.yml
 
   GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
   GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
