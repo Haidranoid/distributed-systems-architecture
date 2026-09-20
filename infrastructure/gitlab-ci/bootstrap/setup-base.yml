@@ -5,3 +5,6 @@ default:
     - aws_load_env_vars
     - docker_login
     - cd $PROJECT_DIR
+    - echo "$(pwd)"
+    - echo "$PROJECT_DIR"
+    - echo "$PROJECT_DOCKERFILE"
