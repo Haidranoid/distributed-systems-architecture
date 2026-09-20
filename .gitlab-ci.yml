@@ -124,22 +124,24 @@ trigger-audit-service:
     PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
     
 
-#trigger-media-generation-service:
-#  extends: .trigger-template-dotnet
-#  stage: microservices
+trigger-media-generation-service:
+  extends: .trigger-template-dotnet
+  stage: microservices
 
-#  variables:
-#    PROJECT_NAME: media-generation-service
-#    PROJECT_NAME_SOLUTION: MediaGenerationService
-#    PROJECT_TYPE: $ARTIFACt_TARGET_MICROSERVICE_DOTNET
+  variables:
+    PROJECT_NAME: media-generation-service
+    PROJECT_NAME_SOLUTION: MediaGenerationService
+    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET
 
 
-#trigger-content-service:
-#  extends: .trigger-template-dotnet
-#  stage: microservices
+trigger-content-service:
+  extends: .trigger-template-dotnet
+  stage: microservices
 
-#  variables:
-#    PROJECT_NAME: content-service
-#    PROJECT_NAME_SOLUTION: ContentService
-#    PROJECT_TYPE: $ARTIFACt_TARGET_MICROSERVICE_DOTNET
+  variables:
+    PROJECT_NAME: content-service
+    PROJECT_NAME_SOLUTION: ContentService
+    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
+    PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET
     
