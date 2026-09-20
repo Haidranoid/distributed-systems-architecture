@@ -13,7 +13,7 @@ plugins {
     id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
     id 'jacoco'
-    id 'org.dsa.shared.shared-plugin' version '1.0.0'
+    //id 'org.dsa.shared.shared-plugin' version '1.0.0'
 }
 
 //apply plugin: 'org.dsa.shared.shared-plugin'
@@ -134,12 +134,14 @@ dependencyManagement {
     }
 }
 
+/*
 snapshots {
     snapshot 'org.dsa.shared:shared-starter:1.0.0'
     //implementation 'org.dsa.shared:shared-core:1.0.0'
     //testImplementation 'org.dsa.shared:shared-core:1.0.0'
     //api 'org.dsa.shared:shared-core:1.0.0'
 }
+*/
 
 dependencies {
     implementation 'com.google.guava:guava'
