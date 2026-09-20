@@ -124,9 +124,16 @@ dependencyManagement {
     }
 }
 
+snapshots {
+    snapshot 'org.dsa.shared:shared-starter:1.0.0'
+    //implementation 'org.dsa.shared:shared-core:1.0.0'
+    //testImplementation 'org.dsa.shared:shared-core:1.0.0'
+    //api 'org.dsa.shared:shared-core:1.0.0'
+}
+
 dependencies {
     implementation 'com.google.guava:guava'
-    implementation 'org.dsa.shared:shared-starter:1.0.0'
+    //implementation 'org.dsa.shared:shared-starter:1.0.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

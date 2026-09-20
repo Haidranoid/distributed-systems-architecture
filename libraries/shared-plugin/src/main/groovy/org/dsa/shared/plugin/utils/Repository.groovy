@@ -10,7 +10,7 @@ class Repository {
             mavenLocal()
 
             maven {
-                url = Repositories.BACKEND_CORE.repositoryUrl
+                url = Repositories.BACKEND_CORE.url
                 credentials {
                     username = "aws"
                     password = System.getenv("AUTH_TOKEN")
@@ -18,7 +18,7 @@ class Repository {
             }
 
             maven {
-                url = Repositories.COMMON_UTILS.repositoryUrl
+                url = Repositories.COMMON_UTILS.url
                 credentials {
                     username = "aws"
                     password = System.getenv("AUTH_TOKEN")

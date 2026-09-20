@@ -10,10 +10,10 @@ public enum Repositories {
       "https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/"),
   COMMON_UTILS(
       "https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/"),
-  BOOTIFY_PLUGIN_URL(
+  BOOTIFY_PLUGIN(
       "https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/"),
-  AWS_CODEARTIFACT_SHARED_URL(
+  AWS_CODEARTIFACT_SHARED(
       "https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/");
 
-  private final String repositoryUrl;
+  private final String url;
 }
