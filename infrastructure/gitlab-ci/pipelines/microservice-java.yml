@@ -1,3 +1,19 @@
+variables:
+  GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
+  PROJECT_DOCKERFILE: Dockerfile
+
+  GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
+  GRADLE_OPTS: >-
+    -Dorg.gradle.daemon=false
+    -Dorg.gradle.parallel=true
+    -Dorg.gradle.caching=true
+
+include:
+  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/test-java.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/publish-java.yml
+  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/deploy-java.yml
+
 stages:
   - test
   - publish
@@ -8,9 +24,3 @@ default:
     - local
     - java
     - microservice
-
-include:
-  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
-  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/test-java.yml
-  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/publish-java.yml
-  - local: $GITLAB_CI_TEMPLATES_MICROSERVICES_DIR/deploy-java.yml

@@ -1,3 +1,12 @@
+variables:
+  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
+
+include:
+  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
+  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/test-java.yml
+  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/publish-java.yml
+  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/deploy-java.yml
+
 stages:
   - test
   - publish
@@ -8,9 +17,3 @@ default:
     - local
     - java
     - library
-
-include:
-  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/test-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/publish-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/deploy-java.yml
