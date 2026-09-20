@@ -100,7 +100,7 @@ trigger-authentication-service:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
     PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
-    
+
 
 trigger-accounts-service:
   stage: microservices
@@ -111,7 +111,7 @@ trigger-accounts-service:
     PROJECT_NAME: accounts-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
     PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
-    
+
 
 trigger-audit-service:
   stage: microservices
@@ -122,11 +122,12 @@ trigger-audit-service:
     PROJECT_NAME: audit-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
     PROJECT_PIPELINE_ID: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA
-    
+
 
 trigger-media-generation-service:
-  extends: .trigger-template-dotnet
   stage: microservices
+
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: media-generation-service
@@ -136,8 +137,9 @@ trigger-media-generation-service:
 
 
 trigger-content-service:
-  extends: .trigger-template-dotnet
   stage: microservices
+
+  extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: content-service
