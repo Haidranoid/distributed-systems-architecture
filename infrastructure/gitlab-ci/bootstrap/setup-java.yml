@@ -7,6 +7,9 @@ default:
     pull_policy: if-not-present
 
 variables:
+  PROJECT_DOCKERFILE: $PROJECT_DIR/Dockerfile
+  PROJECT_K8S_KUSTOMIZATION_DIR: $K8S_DEV_LOCAL_MICROSERVICES_DIR/$PROJECT_NAME
+
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false
