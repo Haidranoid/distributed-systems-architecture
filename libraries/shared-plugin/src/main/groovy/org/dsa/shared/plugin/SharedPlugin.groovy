@@ -1,8 +1,7 @@
 package org.dsa.shared.plugin
 
-import org.dsa.shared.plugin.constants.Repositories
+import org.dsa.shared.plugin.config.SharedPluginConfig
 import org.dsa.shared.plugin.extensions.SnapshotsExtension
-import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -13,37 +12,9 @@ class SharedPlugin implements Plugin<Project> {
 
         project.pluginManager.apply("java-library")
 
-        def snapshots = project.extensions.create("snapshots", SnapshotsExtension, project)
+        project.extensions.create("snapshots", SnapshotsExtension, project)
 
-        project.afterEvaluate {
-
-            if (snapshots.dependencies.isEmpty()) {
-                return
-            }
-
-            project.repositories.maven {
-                name = "snapshots"
-                url = Repositories.AWS_CODEARTIFACT_SHARED.url
-
-                credentials { credentials ->
-                    credentials.username = "aws"
-                    credentials.password = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
-                }
-
-                content { contentDescriptor ->
-                    snapshots.dependencies.each { dependency ->
-
-                        def dependencyParts = dependency.split(":")
-
-                        if (dependencyParts.size() != 3) {
-                            throw new GradleException("Invalid snapshot dependency '${dependency}'. Expected: group:artifact:version")
-                        }
-
-                        contentDescriptor.includeVersion(dependencyParts[0], dependencyParts[1], dependencyParts[2])
-                    }
-                }
-            }
-        }
+        project.afterEvaluate(SharedPluginConfig.load)
     }
 }
 

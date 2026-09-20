@@ -1,32 +1,32 @@
-package org.dsa.shared.plugin.utils
+package org.dsa.shared.plugin.config
 
-import org.dsa.shared.plugin.constants.Versions
+import org.dsa.shared.plugin.constants.Version
 import org.gradle.api.GradleException
-import org.gradle.api.Project;
+import org.gradle.api.Project
 
-class Version {
-    static def configureVersioning(Project target) {
-        target.tasks.register('versionPatch') {
-            doLast {
-                updateVersion(Versions.PATCH, target)
+class UpdateVersionConfig {
+    static def load = { Project project ->
+        project.tasks.register('versionPatch') { task ->
+            task.doLast {
+                updateVersion(project, Version.PATCH)
             }
         }
 
-        target.tasks.register('versionMinor') {
-            doLast {
-                updateVersion(Versions.MINOR, target)
+        project.tasks.register('versionMinor') { task ->
+            task.doLast {
+                updateVersion(project, Version.MINOR)
             }
         }
 
-        target.tasks.register('versionMajor') {
-            doLast {
-                updateVersion(Versions.MAYOR, target)
+        project.tasks.register('versionMajor') { task ->
+            task.doLast {
+                updateVersion(project, Version.MAYOR)
             }
         }
     }
 
-    private static def updateVersion(Versions incrementType, Project target) {
-        def gradleFile = target.file('build.gradle')
+    private static def updateVersion(Project project, Version incrementType) {
+        def gradleFile = project.file('build.gradle')
         def originalContent = gradleFile.text
 
         // Split the current version into major, minor, and patch components
@@ -39,16 +39,16 @@ class Version {
 
             // Increment the version based on the specified type
             switch (incrementType) {
-                case Versions.MAYOR:
+                case Version.MAYOR:
                     major++
                     minor = 0  // Reset minor to 0
                     patch = 0  // Reset patch to 0
                     break
-                case Versions.MINOR:
+                case Version.MINOR:
                     minor++
                     patch = 0  // Reset patch to 0
                     break
-                case Versions.PATCH:
+                case Version.PATCH:
                     patch++
                     break
                 default:

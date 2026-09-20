@@ -7,7 +7,6 @@ class SnapshotsExtension {
     private final Project project
     final List<String> dependencies = []
 
-
     SnapshotsExtension(Project project) {
         this.project = project
     }
@@ -18,7 +17,7 @@ class SnapshotsExtension {
         project.dependencies.add("implementation", dependency)
     }
 
-    def methodMissing(String name, Object args){
+    def methodMissing(String name, Object args) {
         if (args == null || args.length != 1) {
             throw new IllegalArgumentException("${name} expects exactly one dependency notation")
         }
@@ -26,6 +25,7 @@ class SnapshotsExtension {
         String dependency = args[0].toString()
 
         //TODO: make the opposite
+        // if (project.configurations.dependencies.properties.containsKey(name)) {
         if (!project.configurations.findByName(name)) {
             throw new IllegalArgumentException("Unknown Gradle dependency configuration '${name}'")
         }

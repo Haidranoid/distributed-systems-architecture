@@ -1,3 +1,11 @@
+/*
+buildscript {
+    dependencies {
+        classpath files("${System.properties['user.home']}/libs/shared-plugin-1.0.0.jar")
+    }
+}
+*/
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '4.0.6'
@@ -7,6 +15,8 @@ plugins {
     id 'jacoco'
     id 'org.dsa.shared.shared-plugin' version '1.0.0'
 }
+
+//apply plugin: 'org.dsa.shared.shared-plugin'
 
 group = 'org.dsa.services'
 version = '2.0.0'
