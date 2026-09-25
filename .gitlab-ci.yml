@@ -24,6 +24,7 @@ variables:
 
 
 workflow:
+  name: '$PROJECT_NAME-pipeline'
   rules:
     # Merge Requests
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -42,13 +43,15 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $PROJECT_PIPELINE
+      - local: '$PROJECT_PIPELINE'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
-        - .gitlab-ci.yml
-        - $PROJECT_DIR/**/*
+        - '.gitlab-ci.yml'
+        - '$PROJECT_DIR/**/*'
+      variables:
+        PROJECT_PIPELINE: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TYPE-$PROJECT_LANG.yml'
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -57,9 +60,10 @@ trigger-shared-core:
   extends: .trigger-template-base
 
   variables:
-    PROJECT_NAME: shared-core
-    PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_LIBRARY_JAVA
+    PROJECT_NAME: 'shared-core'
+    PROJECT_TYPE: '$ARTIFACT_TARGET_LIBRARY'
+    PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
+    PROJECT_DIR: '$DSA_LIBRARIES_DIR/$PROJECT_NAME'
 
 
 trigger-shared-starter:
@@ -71,9 +75,10 @@ trigger-shared-starter:
    - trigger-shared-core
 
   variables:
-    PROJECT_NAME: shared-starter
-    PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_LIBRARY_JAVA
+    PROJECT_NAME: 'shared-starter'
+    PROJECT_TYPE: '$ARTIFACT_TARGET_LIBRARY'
+    PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
+    PROJECT_DIR: '$DSA_LIBRARIES_DIR/$PROJECT_NAME'
 
 
 # trigger microservices ==============================================================
