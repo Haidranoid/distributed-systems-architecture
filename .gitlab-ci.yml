@@ -5,17 +5,20 @@ variables:
   GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
   GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
 
-  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
-  GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
-
   DSA_LIBRARIES_DIR: libraries
   DSA_MICROSERVICES_DIR: microservices
 
   ARTIFACT_TARGET_LIBRARY: library
   ARTIFACT_TARGET_MICROSERVICE: microservice
-
   ARTIFACT_LANG_JAVA: java
   ARTIFACT_LANG_DOTNET: dotnet
+
+
+  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: $GITLAB_CI_TEMPLATES_DIR/libraries
+  GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: $GITLAB_CI_TEMPLATES_DIR/microservices
+
+  GITLAB_CI_PIPELINE_LIBRARY_JAVA: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
+
 
 workflow:
   rules:
@@ -53,7 +56,7 @@ trigger-shared-core:
   variables:
     PROJECT_NAME: shared-core
     PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_LIBRARY_JAVA
 
 
 trigger-shared-starter:
@@ -67,7 +70,7 @@ trigger-shared-starter:
   variables:
     PROJECT_NAME: shared-starter
     PROJECT_DIR: $DSA_LIBRARIES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_LIBRARY-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_LIBRARY_JAVA
 
 
 # trigger microservices ==============================================================
