@@ -17,8 +17,10 @@ variables:
   GITLAB_CI_TEMPLATES_LIBRARIES_DIR: infrastructure/gitlab-ci/templates/libraries
   GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: infrastructure/gitlab-ci/templates/microservices
 
-  GITLAB_CI_PIPELINE_LIBRARY_JAVA: library-java.yml
-  GITLAB_CI_PIPELINE_MICROSERVICE_JAVA: microservice-java.yml
+  GITLAB_CI_PIPELINE_LIBRARY_JAVA: infrastructure/gitlab-ci/pipelines/pipeline-library-java.yml
+  GITLAB_CI_PIPELINE_LIBRARY_DOTNET: infrastructure/gitlab-ci/pipelines/pipeline-library-dotnet.yml
+  GITLAB_CI_PIPELINE_MICROSERVICE_JAVA: infrastructure/gitlab-ci/pipelines/pipeline-microservice-java.yml
+  GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET: infrastructure/gitlab-ci/pipelines/pipeline-microservice-dotnet.yml
 
 
 workflow:
@@ -40,7 +42,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: $GITLAB_CI_PIPELINES_DIR/$PROJECT_PIPELINE
+      - local: $PROJECT_PIPELINE
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -83,7 +85,7 @@ trigger-config-server:
   variables:
     PROJECT_NAME: config-server
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
 
 
 trigger-gateway:
@@ -94,7 +96,7 @@ trigger-gateway:
   variables:
     PROJECT_NAME: gateway
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
 
 
 trigger-authentication-service:
@@ -105,7 +107,7 @@ trigger-authentication-service:
   variables:
     PROJECT_NAME: authentication-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
 
 
 trigger-accounts-service:
@@ -116,7 +118,7 @@ trigger-accounts-service:
   variables:
     PROJECT_NAME: accounts-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
 
 
 trigger-audit-service:
@@ -127,7 +129,7 @@ trigger-audit-service:
   variables:
     PROJECT_NAME: audit-service
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_JAVA.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
 
 
 trigger-media-generation-service:
@@ -139,7 +141,7 @@ trigger-media-generation-service:
     PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET
 
 
 trigger-content-service:
@@ -151,5 +153,5 @@ trigger-content-service:
     PROJECT_NAME: content-service
     PROJECT_NAME_SOLUTION: ContentService
     PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $ARTIFACT_TARGET_MICROSERVICE-$ARTIFACT_LANG_DOTNET.yml
+    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET
     
