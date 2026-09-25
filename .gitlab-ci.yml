@@ -30,6 +30,8 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       # Default branch (master/main)
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      variables:
+        PROJECT_PIPELINE: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TYPE-$PROJECT_LANG.yml'
     # Everything else -> no pipeline
     - when: never
 
@@ -50,8 +52,6 @@ stages:
       changes:
         - '.gitlab-ci.yml'
         - '$PROJECT_DIR/**/*'
-      variables:
-        PROJECT_PIPELINE: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TYPE-$PROJECT_LANG.yml'
 
 # trigger libraries ==============================================================
 trigger-shared-core:
