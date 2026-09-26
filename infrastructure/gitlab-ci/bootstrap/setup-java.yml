@@ -8,7 +8,7 @@ variables:
     -Dorg.gradle.caching=true
 
 include:
-  local: $GITLAB_CI_BOOTSTRAP_DIR/setup-base.yml
+  local: infrastructure/gitlab-ci/bootstrap/setup-base.yml
 
 default:
   image:

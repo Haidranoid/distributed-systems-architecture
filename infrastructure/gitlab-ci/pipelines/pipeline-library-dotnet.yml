@@ -1,8 +1,8 @@
 include:
-  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/test-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/publish-dotnet.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/deploy-dotnet.yml
+  - local: infrastructure/gitlab-ci/bootstrap/setup-dotnet.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/test-dotnet.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/publish-dotnet.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/deploy-dotnet.yml
 
 stages:
   - test

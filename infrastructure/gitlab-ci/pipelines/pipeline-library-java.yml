@@ -1,8 +1,8 @@
 include:
-  - local: $GITLAB_CI_BOOTSTRAP_DIR/setup-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/test-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/publish-java.yml
-  - local: $GITLAB_CI_TEMPLATES_LIBRARIES_DIR/deploy-java.yml
+  - local: infrastructure/gitlab-ci/bootstrap/setup-java.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/test-java.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/publish-java.yml
+  - local: $infrastructure/gitlab-ci/templates/libraries/deploy-java.yml
 
 stages:
   - test

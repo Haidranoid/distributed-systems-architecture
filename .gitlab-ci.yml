@@ -1,26 +1,10 @@
 variables:
   GIT_DEPTH: 0
 
-  GITLAB_CI_BOOTSTRAP_DIR: infrastructure/gitlab-ci/bootstrap
-  GITLAB_CI_PIPELINES_DIR: infrastructure/gitlab-ci/pipelines
-  GITLAB_CI_TEMPLATES_DIR: infrastructure/gitlab-ci/templates
-
-  DSA_LIBRARIES_DIR: libraries
-  DSA_MICROSERVICES_DIR: microservices
-
   ARTIFACT_TARGET_LIBRARY: library
   ARTIFACT_TARGET_MICROSERVICE: microservice
   ARTIFACT_LANG_JAVA: java
   ARTIFACT_LANG_DOTNET: dotnet
-
-
-  GITLAB_CI_TEMPLATES_LIBRARIES_DIR: infrastructure/gitlab-ci/templates/libraries
-  GITLAB_CI_TEMPLATES_MICROSERVICES_DIR: infrastructure/gitlab-ci/templates/microservices
-
-  GITLAB_CI_PIPELINE_LIBRARY_JAVA: infrastructure/gitlab-ci/pipelines/pipeline-library-java.yml
-  GITLAB_CI_PIPELINE_LIBRARY_DOTNET: infrastructure/gitlab-ci/pipelines/pipeline-library-dotnet.yml
-  GITLAB_CI_PIPELINE_MICROSERVICE_JAVA: infrastructure/gitlab-ci/pipelines/pipeline-microservice-java.yml
-  GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET: infrastructure/gitlab-ci/pipelines/pipeline-microservice-dotnet.yml
 
 
 workflow:
@@ -43,12 +27,12 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TARGET-$PROJECT_LANG.yml'
+      - local: 'infrastructure/gitlab-ci/pipelines/pipeline-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
-        - '.gitlab-ci.yml'
+        - .gitlab-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
 # trigger libraries ==============================================================
@@ -58,10 +42,10 @@ trigger-shared-core:
   extends: .trigger-template-base
 
   variables:
-    PROJECT_NAME: 'shared-core'
-    PROJECT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
-    PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
-    PROJECT_DIR: '$DSA_LIBRARIES_DIR'
+    PROJECT_NAME: shared-core
+    PROJECT_DIR: libraries
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-shared-starter:
@@ -73,10 +57,10 @@ trigger-shared-starter:
    - trigger-shared-core
 
   variables:
-    PROJECT_NAME: 'shared-starter'
-    PROJECT_TYPE: '$ARTIFACT_TARGET_LIBRARY'
-    PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
-    PROJECT_DIR: '$DSA_LIBRARIES_DIR/$PROJECT_NAME'
+    PROJECT_NAME: shared-starter
+    PROJECT_DIR: libraries
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 # trigger microservices ==============================================================
@@ -87,8 +71,9 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-gateway:
@@ -98,8 +83,9 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-authentication-service:
@@ -109,8 +95,9 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-accounts-service:
@@ -120,8 +107,9 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-audit-service:
@@ -131,8 +119,9 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_JAVA
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-media-generation-service:
@@ -143,8 +132,9 @@ trigger-media-generation-service:
   variables:
     PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
 
 
 trigger-content-service:
@@ -155,6 +145,7 @@ trigger-content-service:
   variables:
     PROJECT_NAME: content-service
     PROJECT_NAME_SOLUTION: ContentService
-    PROJECT_DIR: $DSA_MICROSERVICES_DIR/$PROJECT_NAME
-    PROJECT_PIPELINE: $GITLAB_CI_PIPELINE_MICROSERVICE_DOTNET
+    PROJECT_DIR: microservices
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
     
