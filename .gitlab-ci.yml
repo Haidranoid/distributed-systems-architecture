@@ -30,8 +30,6 @@ workflow:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       # Default branch (master/main)
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      variables:
-        PROJECT_PIPELINE: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TYPE-$PROJECT_LANG.yml'
     # Everything else -> no pipeline
     - when: never
 
@@ -45,7 +43,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: '$PROJECT_PIPELINE'
+      - local: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_PIPELINE_NAME.yml'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -61,9 +59,10 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: 'shared-core'
-    PROJECT_TYPE: $ARTIFACT_TARGET_LIBRARY
-    PROJECT_LANG: "$ARTIFACT_LANG_JAVA"
+    PROJECT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
+    PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
     PROJECT_DIR: '$DSA_LIBRARIES_DIR/$PROJECT_NAME'
+    PROJECT_PIPELINE_NAME: '$PROJECT_TYPE-$PROJECT_LANG'
 
 
 trigger-shared-starter:
