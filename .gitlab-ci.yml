@@ -11,8 +11,7 @@ workflow:
   #name: '$PROJECT_NAME-pipeline'
   rules:
     - changes:
-        paths:
-          - .gitlac-ci.yml
+        - .gitlac-ci.yml
     # Merge Requests
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       # Default branch (master/main)
@@ -56,7 +55,7 @@ trigger-shared-starter:
   extends: .trigger-template-base
 
   needs:
-   - trigger-shared-core
+    - trigger-shared-core
 
   variables:
     PROJECT_NAME: shared-starter
