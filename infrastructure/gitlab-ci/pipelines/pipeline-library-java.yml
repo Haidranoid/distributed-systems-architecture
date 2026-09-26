@@ -5,6 +5,3 @@ stages:
   - test
   - publish
   - deploy
-
-tags:
-  - library
