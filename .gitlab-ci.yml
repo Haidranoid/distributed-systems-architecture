@@ -43,13 +43,13 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_PIPELINE_NAME.yml'
+      - local: '$GITLAB_CI_PIPELINES_DIR/pipeline-$PROJECT_TARGET-$PROJECT_LANG.yml'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - '.gitlab-ci.yml'
-        - '$PROJECT_DIR/**/*'
+        - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
 # trigger libraries ==============================================================
 trigger-shared-core:
@@ -61,8 +61,7 @@ trigger-shared-core:
     PROJECT_NAME: 'shared-core'
     PROJECT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
     PROJECT_LANG: '$ARTIFACT_LANG_JAVA'
-    PROJECT_DIR: '$DSA_LIBRARIES_DIR/$PROJECT_NAME'
-    PROJECT_PIPELINE_NAME: '$PROJECT_TYPE-$PROJECT_LANG'
+    PROJECT_DIR: '$DSA_LIBRARIES_DIR'
 
 
 trigger-shared-starter:
