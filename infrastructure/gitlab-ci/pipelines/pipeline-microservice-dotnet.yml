@@ -11,4 +11,6 @@ stages:
 
 default:
   tags:
+    - local
+    - dotnet
     - microservice

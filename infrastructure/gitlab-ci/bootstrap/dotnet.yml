@@ -6,8 +6,5 @@ default:
     name: haidranoid/gitlab-runner-dotnet10:latest
     pull_policy: if-not-present
 
-  tags:
-    - dotnet
-
 variables:
   PROJECT_DOCKERFILE: $PROJECT_NAME_SOLUTION/Dockerfile
