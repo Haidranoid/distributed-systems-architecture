@@ -7,8 +7,6 @@ default:
     pull_policy: if-not-present
 
 variables:
-  PROJECT_DOCKERFILE: Dockerfile
-
   GRADLE_USER_HOME: /cache/gradle/$PROJECT_NAME
   GRADLE_OPTS: >-
     -Dorg.gradle.daemon=false

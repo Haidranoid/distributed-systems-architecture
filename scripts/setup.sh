@@ -2,5 +2,5 @@
 
 #set -eu
 
-. "$SCRIPTS_DIR/env/setup-env.sh"
-. "$SCRIPTS_DIR/utils/setup-utils.sh"
+. "$SCRIPTS_DIR/env/setup.sh"
+. "$SCRIPTS_DIR/utils/setup.sh"
