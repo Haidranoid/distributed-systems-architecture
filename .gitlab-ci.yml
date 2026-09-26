@@ -27,7 +27,7 @@ stages:
   trigger:
     strategy: depend
     include:
-      - local: '/infrastructure/gitlab-ci/pipelines/pipeline-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml'
+      - local: '//infrastructure/gitlab-ci/pipelines/pipeline-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml'
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
@@ -58,7 +58,7 @@ trigger-shared-starter:
 
   variables:
     PROJECT_NAME: shared-starter
-    PROJECT_DIR: libraries
+    PROJECT_DIR: /libraries
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -71,7 +71,7 @@ trigger-config-server:
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -83,7 +83,7 @@ trigger-gateway:
 
   variables:
     PROJECT_NAME: gateway
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -95,7 +95,7 @@ trigger-authentication-service:
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -107,7 +107,7 @@ trigger-accounts-service:
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -119,7 +119,7 @@ trigger-audit-service:
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
@@ -132,7 +132,7 @@ trigger-media-generation-service:
   variables:
     PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
 
@@ -145,7 +145,7 @@ trigger-content-service:
   variables:
     PROJECT_NAME: content-service
     PROJECT_NAME_SOLUTION: ContentService
-    PROJECT_DIR: microservices
+    PROJECT_DIR: /microservices
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
     

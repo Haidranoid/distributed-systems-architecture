@@ -1,8 +1,8 @@
 include:
-  - local: infrastructure/gitlab-ci/bootstrap/setup-java.yml
-  - local: infrastructure/gitlab-ci/templates/microservices/test-java.yml
-  - local: infrastructure/gitlab-ci/templates/microservices/publish-java.yml
-  - local: infrastructure/gitlab-ci/templates/microservices/deploy-java.yml
+  - local: /infrastructure/gitlab-ci/bootstrap/setup-java.yml
+  - local: /infrastructure/gitlab-ci/templates/microservices/test-java.yml
+  - local: /infrastructure/gitlab-ci/templates/microservices/publish-java.yml
+  - local: /infrastructure/gitlab-ci/templates/microservices/deploy-java.yml
 
 stages:
   - test
