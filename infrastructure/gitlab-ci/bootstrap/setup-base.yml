@@ -7,7 +7,6 @@ default:
     - cd $PROJECT_DIR
 
 include:
-  - local: /infrastructure/gitlab-ci/bootstrap/setup-$PROJECT_ARTIFACT_LANG.yml
   - local: /infrastructure/gitlab-ci/templates/test-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
   - local: /infrastructure/gitlab-ci/templates/publish-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
   - local: /infrastructure/gitlab-ci/templates/deploy-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
