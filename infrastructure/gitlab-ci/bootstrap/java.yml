@@ -7,7 +7,6 @@ default:
     pull_policy: if-not-present
 
   tags:
-    - local
     - java
 
 variables:
