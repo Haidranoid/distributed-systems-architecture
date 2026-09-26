@@ -1,9 +1,3 @@
-include:
-  - local: /infrastructure/gitlab-ci/bootstrap/setup-java.yml
-  - local: /infrastructure/gitlab-ci/templates/test-microservice-java.yml
-  - local: /infrastructure/gitlab-ci/templates/publish-microservice-java.yml
-  - local: /infrastructure/gitlab-ci/templates/deploy-microservice-java.yml
-
 stages:
   - test
   - publish

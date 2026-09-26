@@ -1,9 +1,3 @@
-include:
-  - local: /infrastructure/gitlab-ci/bootstrap/setup-dotnet.yml
-  - local: /infrastructure/gitlab-ci/templates/test-library-dotnet.yml
-  - local: /infrastructure/gitlab-ci/templates/publish-library-dotnet.yml
-  - local: /infrastructure/gitlab-ci/templates/deploy-library-dotnet.yml
-
 stages:
   - test
   - publish
