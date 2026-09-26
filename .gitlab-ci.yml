@@ -29,15 +29,19 @@ stages:
     include:
       - local: '/infrastructure/gitlab-ci/pipelines/pipeline-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml'
 
-  before_script:
-    - . bootstrap.sh
-    - echo $PROJECT_K8S_KUSTOMIZATION_DIR
+  needs:
+    - start-bootstrap
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
         - .gitlab-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
+
+start-bootstrap:
+  before_script:
+    - . bootstrap.sh
+    - echo $PROJECT_K8S_KUSTOMIZATION_DIR
 
 # trigger libraries ==============================================================
 trigger-shared-core:
