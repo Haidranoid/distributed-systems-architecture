@@ -44,7 +44,7 @@ trigger-shared-core:
 
   variables:
     PROJECT_NAME: shared-core
-    PROJECT_DIR: libraries
+    PROJECT_DIR: /libraries
     PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_LIBRARY'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
