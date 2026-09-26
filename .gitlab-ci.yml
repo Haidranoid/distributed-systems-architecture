@@ -10,8 +10,6 @@ variables:
 workflow:
   #name: '$PROJECT_NAME-pipeline'
   rules:
-    - changes:
-        - /.gitlab-ci.yml
     # Merge Requests
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       # Default branch (master/main)
@@ -34,6 +32,7 @@ stages:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
+        - /.gitlab-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
 # trigger libraries ==============================================================
