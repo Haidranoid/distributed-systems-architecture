@@ -30,6 +30,11 @@ start-bootstrap:
     - . bootstrap.sh
     - echo $PROJECT_K8S_KUSTOMIZATION_DIR
 
+  tags:
+    - local
+    - java
+    - library
+
 
 # trigger templates base ==============================================================
 .trigger-template-base:
