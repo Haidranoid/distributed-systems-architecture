@@ -32,7 +32,7 @@ stages:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       changes:
-        - /.gitlab-ci.yml
+        - .gitlab-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
 # trigger libraries ==============================================================
