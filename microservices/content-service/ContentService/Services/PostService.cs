@@ -14,7 +14,7 @@ public class PostService : IPostService
     {
         _repository = repository;
     }
-    
+
     public async Task<IEnumerable<PostDto>> GetAllAsync()
     {
         var posts = await _repository.GetAllAsync();
@@ -25,10 +25,10 @@ public class PostService : IPostService
     public async Task<PostDto?> GetByIdAsync(long id)
     {
         var post = await _repository.GetByIdAsync(id);
-        
+
         if (post is null)
             return null;
-        
+
         return PostMapping.ToDto(post);
     }
 
@@ -41,39 +41,39 @@ public class PostService : IPostService
         };
 
         await _repository.CreateAsync(postToCreate);
-        
+
         return PostMapping.ToDto(postToCreate);
     }
 
     public async Task<PostDto?> UpdateAsync(long id, UpdatePostRequest updatePostRequest)
     {
         var postToUpdate = await _repository.GetByIdAsync(id);
-        
+
         if (postToUpdate is null)
             return null;
-        
-        
+
+
         if (updatePostRequest.Title != "")
             postToUpdate.Title = updatePostRequest.Title;
-        
+
         if (updatePostRequest.Content != "")
             postToUpdate.Content = updatePostRequest.Content;
-        
-        
+
+
         await _repository.UpdateAsync(postToUpdate);
-        
+
         return PostMapping.ToDto(postToUpdate);
     }
 
     public async Task<bool> DeleteAsync(long id)
     {
         var postToDelete = await _repository.GetByIdAsync(id);
-        
-        if(postToDelete is null)
+
+        if (postToDelete is null)
             return false;
-        
+
         await _repository.DeleteAsync(postToDelete);
-        
+
         return true;
     }
 }

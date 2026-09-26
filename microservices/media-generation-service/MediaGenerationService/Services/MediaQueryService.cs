@@ -14,7 +14,7 @@ public class MediaQueryService : IMediaQueryService
     {
         _repository = repository;
     }
-    
+
     public async Task<IEnumerable<MediaQueryDto>> GetAllAsync()
     {
         var mediaQueries = await _repository.GetAllAsync();
@@ -25,10 +25,10 @@ public class MediaQueryService : IMediaQueryService
     public async Task<MediaQueryDto?> GetByIdAsync(int id)
     {
         var mediaQuery = await _repository.GetByIdAsync(id);
-        
+
         if (mediaQuery is null)
             return null;
-        
+
         return MediaQueryMapping.ToDto(mediaQuery);
     }
 
@@ -40,34 +40,34 @@ public class MediaQueryService : IMediaQueryService
         };
 
         var mediaQueryCreated = await _repository.CreateAsync(mediaQueryToCreate);
-        
+
         return MediaQueryMapping.ToDto(mediaQueryToCreate);
     }
 
     public async Task<MediaQueryDto?> UpdateAsync(int id, UpdateMediaQueryRequest updateMediaQueryRequest)
     {
         var mediaQueryToUpdate = await _repository.GetByIdAsync(id);
-        
+
         if (mediaQueryToUpdate is null)
             return null;
-        
+
         if (updateMediaQueryRequest.PositivePrompt != "")
             mediaQueryToUpdate.PositivePrompt = updateMediaQueryRequest.PositivePrompt;
-        
+
         var mediaQueryUpdated = await _repository.UpdateAsync(mediaQueryToUpdate);
-        
+
         return MediaQueryMapping.ToDto(mediaQueryToUpdate);
     }
 
     public async Task<bool> DeleteAsync(int id)
     {
         var mediaQueryToDelete = await _repository.GetByIdAsync(id);
-        
-        if(mediaQueryToDelete is null)
+
+        if (mediaQueryToDelete is null)
             return false;
-        
+
         await _repository.DeleteAsync(mediaQueryToDelete);
-        
+
         return true;
     }
 }

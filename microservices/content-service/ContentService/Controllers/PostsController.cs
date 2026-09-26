@@ -38,7 +38,7 @@ public class PostsController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreatePostRequest createPostRequest)
     {
         var post = await _service.CreateAsync(createPostRequest);
-        
+
         return Ok(post);
     }
 
@@ -46,10 +46,10 @@ public class PostsController : ControllerBase
     public async Task<IActionResult> Update(long id, [FromBody] UpdatePostRequest updatePostRequest)
     {
         var post = await _service.UpdateAsync(id, updatePostRequest);
-        
+
         if (post is null)
             return NotFound();
-        
+
         return Ok(post);
     }
 
@@ -57,10 +57,10 @@ public class PostsController : ControllerBase
     public async Task<IActionResult> Delete(long id)
     {
         var success = await _service.DeleteAsync(id);
-        
+
         if (!success)
             return NotFound();
-        
+
         return NoContent();
     }
 }

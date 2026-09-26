@@ -6,5 +6,5 @@ public class CreateMediaQueryRequest
 {
     [Required]
     [StringLength(maximumLength: 100, MinimumLength = 4)]
-    public string PositivePrompt { get; set; } =  string.Empty;
+    public string PositivePrompt { get; set; } = string.Empty;
 }

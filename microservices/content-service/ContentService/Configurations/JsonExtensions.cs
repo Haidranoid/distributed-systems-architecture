@@ -8,6 +8,6 @@ public static class JsonExtensions
     {
         WriteIndented = true,
     };
-    
+
     public static string ToJsonPretty(this object? value) => JsonSerializer.Serialize(value, Pretty);
 }

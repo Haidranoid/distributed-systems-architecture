@@ -1,6 +1,6 @@
 namespace ContentService.Configurations;
 
-public sealed class SpringCloudConfigurationSource: IConfigurationSource
+public sealed class SpringCloudConfigurationSource : IConfigurationSource
 {
     public string Url { get; set; } = string.Empty;
     public string Application { get; set; } = string.Empty;

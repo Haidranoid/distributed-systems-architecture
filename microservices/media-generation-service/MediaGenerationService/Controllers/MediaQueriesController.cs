@@ -38,7 +38,7 @@ public class MediaQueriesController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateMediaQueryRequest createMediaQueryRequest)
     {
         var mediaQuery = await _service.CreateAsync(createMediaQueryRequest);
-        
+
         return Ok(mediaQuery);
     }
 
@@ -46,10 +46,10 @@ public class MediaQueriesController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateMediaQueryRequest updateMediaQueryRequest)
     {
         var mediaQuery = await _service.UpdateAsync(id, updateMediaQueryRequest);
-        
+
         if (mediaQuery is null)
             return NotFound();
-        
+
         return Ok(mediaQuery);
     }
 
@@ -57,10 +57,10 @@ public class MediaQueriesController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var success = await _service.DeleteAsync(id);
-        
+
         if (!success)
             return NotFound();
-        
+
         return NoContent();
     }
 }

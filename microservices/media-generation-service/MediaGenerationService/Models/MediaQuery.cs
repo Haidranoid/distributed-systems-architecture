@@ -9,7 +9,7 @@ public class MediaQuery
     [Column("id")]
     [Key]
     public int Id { get; set; }
-    
+
     [Column("positive_prompt")]
     [MaxLength(100)]
     public string PositivePrompt { get; set; } = string.Empty;
