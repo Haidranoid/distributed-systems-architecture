@@ -39,7 +39,7 @@ stages:
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
 start-bootstrap:
-  before_script:
+  script:
     - . bootstrap.sh
     - echo $PROJECT_K8S_KUSTOMIZATION_DIR
 
