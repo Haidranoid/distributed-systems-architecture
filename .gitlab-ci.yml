@@ -18,8 +18,17 @@ workflow:
     - when: never
 
 stages:
+  - setup
   - libraries
   - microservices
+
+
+start-bootstrap:
+  stage: setup
+
+  script:
+    - . bootstrap.sh
+    - echo $PROJECT_K8S_KUSTOMIZATION_DIR
 
 
 # trigger templates base ==============================================================
@@ -38,10 +47,6 @@ stages:
         - .gitlab-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
 
-start-bootstrap:
-  script:
-    - . bootstrap.sh
-    - echo $PROJECT_K8S_KUSTOMIZATION_DIR
 
 # trigger libraries ==============================================================
 trigger-shared-core:
