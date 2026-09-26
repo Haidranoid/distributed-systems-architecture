@@ -23,28 +23,12 @@ stages:
   - microservices
 
 
-start-bootstrap:
-  stage: setup
-
-  script:
-    - . bootstrap.sh
-    - echo $PROJECT_K8S_KUSTOMIZATION_DIR
-
-  tags:
-    - local
-    - java
-    - library
-
-
 # trigger templates base ==============================================================
 .trigger-template-base:
   trigger:
     strategy: depend
     include:
       - local: '/infrastructure/gitlab-ci/pipelines/pipeline-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml'
-
-  needs:
-    - start-bootstrap
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
