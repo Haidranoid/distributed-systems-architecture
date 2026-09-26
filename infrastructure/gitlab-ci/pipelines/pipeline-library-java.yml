@@ -6,8 +6,5 @@ stages:
   - publish
   - deploy
 
-default:
-  tags:
-    - local
-    - java
-    - library
+tags:
+  - library

@@ -14,3 +14,7 @@ default:
   image:
     name: haidranoid/gitlab-runner-java21:latest
     pull_policy: if-not-present
+
+  tags:
+    - local
+    - java

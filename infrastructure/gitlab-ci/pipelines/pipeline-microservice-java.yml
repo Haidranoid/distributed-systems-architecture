@@ -1,10 +1,10 @@
+include:
+  - local: /infrastructure/gitlab-ci/bootstrap/setup-$PROJECT_ARTIFACT_LANG.yml
+
 stages:
   - test
   - publish
   - deploy
 
-default:
-  tags:
-    - local
-    - java
-    - microservice
+tags:
+  - microservice
