@@ -31,6 +31,7 @@ stages:
 
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
       changes:
         - .gitlac-ci.yml
         - '$PROJECT_DIR/$PROJECT_NAME/**/*'
