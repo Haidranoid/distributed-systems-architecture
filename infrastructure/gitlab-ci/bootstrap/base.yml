@@ -1,0 +1,11 @@
+include:
+  - local: /infrastructure/gitlab-ci/templates/test-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
+  - local: /infrastructure/gitlab-ci/templates/publish-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
+  - local: /infrastructure/gitlab-ci/templates/deploy-$PROJECT_ARTIFACT_TARGET-$PROJECT_ARTIFACT_LANG.yml
+
+default:
+  before_script:
+    - aws_login v1
+    - aws_load_env_vars
+    - docker_login
+    - cd $PROJECT_DIR

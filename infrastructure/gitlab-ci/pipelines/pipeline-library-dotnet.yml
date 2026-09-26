@@ -1,7 +1,11 @@
 include:
-  - local: /infrastructure/gitlab-ci/bootstrap/setup-$PROJECT_ARTIFACT_LANG.yml
+  - local: /infrastructure/gitlab-ci/bootstrap/$PROJECT_ARTIFACT_LANG.yml
 
 stages:
   - test
   - publish
   - deploy
+
+default:
+  tags:
+    - library
