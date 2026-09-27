@@ -1,6 +1,6 @@
 package org.dsa.services.authenticationservice;
 
-import org.dsa.shared.starter.testing.annotations.IntegrationEnvironment;
+import org.dsa.shared.starter.test.annotations.IntegrationEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
