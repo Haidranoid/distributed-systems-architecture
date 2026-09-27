@@ -1,4 +1,4 @@
-package org.dsa.shared.starter.testing.annotations;
+package org.dsa.shared.starter.test.annotations;
 
 import java.lang.annotation.*;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;

@@ -1,7 +1,7 @@
-package org.dsa.shared.starter.testing.annotations;
+package org.dsa.shared.starter.test.annotations;
 
 import java.lang.annotation.*;
-import org.dsa.shared.starter.testing.config.ContainersTestConfig;
+import org.dsa.shared.starter.test.config.ContainersTestConfig;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 

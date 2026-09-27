@@ -6,7 +6,7 @@ plugins {
 
 group = 'org.dsa.shared'
 version = '1.0.0'
-description = 'starter'
+description = 'starter-test'
 
 java {
     toolchain {
@@ -94,20 +94,60 @@ publishing {
     }
 }
 
+
 ext {
+    set('googleGuavaVersion', "33.7.1-jre")
+    set('jUnitVersion', "5.14.4")
+    set('mockitoVersion', "5.20.0")
     set('springBootVersion', "4.0.6")
+    set('springCloudVersion', "2025.1.1")
+    set('testContainersVersion', "1.21.4")
 }
+
+/*
+dependencyManagement {
+    imports {
+        mavenBom "com.google.guava:guava-bom:${googleGuavaVersion}"
+        mavenBom "org.junit:junit-bom:${jUnitVersion}"
+        mavenBom "org.mockito:mockito-bom:${mockitoVersion}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        mavenBom "org.testcontainers:testcontainers-bom:${testContainersVersion}"
+    }
+}
+*/
 
 dependencies {
     // BOMs
+    implementation platform("com.google.guava:guava-bom:${googleGuavaVersion}")
+    api platform("org.junit:junit-bom:${jUnitVersion}")
+    api platform("org.mockito:mockito-bom:${mockitoVersion}")
     implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    implementation platform("org.testcontainers:testcontainers-bom:${testContainersVersion}")
 
-    // Shared core API
-    api 'org.dsa.shared:shared-core:1.0.0'
+    // Core testing framework (JUnit 5)
+    implementation 'org.junit.jupiter:junit-jupiter'
+
+    // Mocking library for isolating your service
+    implementation 'org.mockito:mockito-core'
+    implementation 'org.mockito:mockito-junit-jupiter'
 
     // Spring Boot
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    api 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security-test'
+    api 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test'
+    implementation 'org.springframework.boot:spring-boot-testcontainers'
+
+    // Testcontainers
+    implementation 'org.testcontainers:junit-jupiter'
+    implementation 'org.testcontainers:postgresql'
+
+    // Extras
+    implementation 'com.google.guava:guava-testlib'
+    api 'net.datafaker:datafaker:2.7.0'
 
     // Required launcher to execute tests on the JVM
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

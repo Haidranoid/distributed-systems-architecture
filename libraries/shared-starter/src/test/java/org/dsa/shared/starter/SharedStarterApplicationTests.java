@@ -2,9 +2,9 @@ package org.dsa.shared.starter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dsa.shared.starter.autoconfig.SharedStarterAutoConfig;
 import org.dsa.shared.core.utils.CurrentSession;
 import org.dsa.shared.core.utils.JwtAuthenticationConverter;
+import org.dsa.shared.starter.autoconfig.SharedStarterAutoConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.web.client.RestTemplate;
