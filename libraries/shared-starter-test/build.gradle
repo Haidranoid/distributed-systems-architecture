@@ -139,6 +139,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-webmvc-test'
     implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client-test'
     implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test'
+    api 'org.springframework.boot:spring-boot-starter-kafka-test'
     implementation 'org.springframework.boot:spring-boot-testcontainers'
 
     // Testcontainers

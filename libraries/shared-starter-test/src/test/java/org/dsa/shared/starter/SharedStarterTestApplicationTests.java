@@ -6,6 +6,6 @@ class SharedStarterTestApplicationTests {
 
   @Test
   void contextLoads() {
-      //TODO
+    // TODO
   }
 }

@@ -122,16 +122,6 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 
-ext {
-    set('springCloudVersion', "2025.1.1")
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-
 /*
 snapshots {
     //implementation 'org.dsa.shared:shared-starter:1.0.0'
@@ -147,7 +137,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
 
-    testImplementation 'org.dsa.shared:shared-starter-test:1.0.0'
+    testImplementation 'org.dsa.shared:shared-starter-test:2.0.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
