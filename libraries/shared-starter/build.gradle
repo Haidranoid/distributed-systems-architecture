@@ -113,6 +113,8 @@ dependencies {
     implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
     api platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
 
+    // TODO: starters should not contain any kind of logic, only:
+    // META-INF/ - AutoConfiguration - @Configuration - @EnableConfigurationProperties
     // Shared core API
     api 'org.dsa.shared:shared-core:2.0.0'
 

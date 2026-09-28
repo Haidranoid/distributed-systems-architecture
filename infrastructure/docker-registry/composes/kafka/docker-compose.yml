@@ -43,6 +43,17 @@ services:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
 
+  kafka-cli:
+    image: apache/kafka:4.3.1
+    container_name: kafka-cli
+    depends_on:
+      - kafka
+    networks:
+      - default
+    entrypoint: [ "/bin/bash" ]
+    stdin_open: true
+    tty: true
+
 networks:
   default:
     external: true
