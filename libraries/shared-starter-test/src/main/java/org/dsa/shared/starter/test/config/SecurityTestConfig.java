@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityTestConfig {
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) {
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) {
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
     return http.build();

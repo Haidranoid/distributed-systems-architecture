@@ -1,4 +1,4 @@
-package org.dsa.shared.core.messaging.producers;
+package org.dsa.shared.starter.messaging.producers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

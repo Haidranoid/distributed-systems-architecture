@@ -143,15 +143,7 @@ snapshots {
 */
 
 dependencies {
-    implementation 'org.dsa.shared:shared-starter:1.0.0'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.3'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-webclient'
-    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    implementation 'org.springframework.cloud:spring-cloud-starter-config'
-
+    implementation 'org.dsa.shared:shared-starter:2.0.0'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
 

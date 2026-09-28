@@ -5,22 +5,15 @@ import io.jsonwebtoken.security.SignatureAlgorithm;
 import java.security.KeyFactory;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import lombok.RequiredArgsConstructor;
-import org.dsa.shared.core.properties.JwtProperties;
-import org.jspecify.annotations.Nullable;
+import org.dsa.shared.starter.properties.JwtProperties;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.oauth2.core.OAuth2TokenValidator;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtValidators;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 
 @AutoConfiguration
 @EnableConfigurationProperties(JwtProperties.class)
@@ -28,17 +21,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 public class SecurityAutoConfig {
 
   private final JwtProperties jwtProperties;
-
-  @Bean
-  public JwtDecoder jwtDecoder(@Nullable PublicKey publicKey) {
-    NimbusJwtDecoder decoder = NimbusJwtDecoder.withPublicKey((RSAPublicKey) publicKey).build();
-    OAuth2TokenValidator<Jwt> validator =
-        JwtValidators.createDefaultWithIssuer(jwtProperties.issuer());
-
-    decoder.setJwtValidator(validator);
-
-    return decoder;
-  }
 
   @Bean
   public SignatureAlgorithm signatureAlgorithm() {

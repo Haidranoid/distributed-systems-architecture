@@ -3,8 +3,8 @@ package org.dsa.services.authenticationservice.integration.flows;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.shared.starter.test.integration.SpringBootIntegrationTest;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
+import org.dsa.shared.starter.test.integration.SpringBootIntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;

@@ -1,3 +1,4 @@
 org.dsa.shared.starter.autoconfig.KafkaAutoConfig
 org.dsa.shared.starter.autoconfig.SecurityAutoConfig
+org.dsa.shared.starter.autoconfig.SecurityFilterChainAutoConfig
 org.dsa.shared.starter.autoconfig.SharedStarterAutoConfig

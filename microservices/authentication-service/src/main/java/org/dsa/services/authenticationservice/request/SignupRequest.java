@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.dsa.shared.core.constants.Role;
 import org.dsa.services.authenticationservice.constants.FieldType;
+import org.dsa.shared.core.constants.Role;
 import org.jspecify.annotations.NonNull;
 
 @Builder

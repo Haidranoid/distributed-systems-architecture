@@ -5,13 +5,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.shared.core.constants.Role;
-import org.dsa.shared.core.exception.InvalidCredentialsException;
-import org.dsa.shared.starter.test.annotations.WebSliceEnvironment;
 import org.dsa.services.authenticationservice.controller.AuthenticationController;
 import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.service.AuthenticationService;
+import org.dsa.shared.core.constants.Role;
+import org.dsa.shared.core.exception.InvalidCredentialsException;
+import org.dsa.shared.starter.test.annotations.WebSliceEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +73,8 @@ public class AuthenticationControllerTest {
   }
 
   @Test
-  @DisplayName("POST /api/v1/authentication/signup returns 201 when account was created successfully")
+  @DisplayName(
+      "POST /api/v1/authentication/signup returns 201 when account was created successfully")
   public void signup_whenAccountWasCreated_shouldReturn200() throws Exception {
     var signupDto = AuthenticationDtoFixtures.managerSignupDto();
     var accountCreated = AuthenticationDtoFixtures.signupAuthResponseDto(1L);
