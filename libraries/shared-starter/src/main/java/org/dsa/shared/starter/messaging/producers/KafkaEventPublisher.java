@@ -1,21 +1,21 @@
 package org.dsa.shared.starter.messaging.producers;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.dsa.shared.core.messaging.contracts.KafkaEvent;
-import org.springframework.kafka.core.KafkaTemplate;
 
-@Slf4j
-@RequiredArgsConstructor
+// import org.springframework.kafka.core.KafkaTemplate;
+
+// @Slf4j
+// @RequiredArgsConstructor
 public class KafkaEventPublisher {
+  /*
+  private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
 
-  private final KafkaTemplate<String, Object> kafkaTemplate;
+  public void publish(String topic, String key, KafkaEvent event) {
 
-  public void publishEvent(String topic, String key, KafkaEvent payload) {
-    log.info(
-        "Publishing: event={}, topic={}, key={}", payload.getClass().getSimpleName(), topic, key);
+    var eventName = event.getClass().getSimpleName();
 
-    kafkaTemplate.send(topic, key, payload);
+    log.info("Publishing in topic={}: event={} with key={}", topic, eventName, key);
+
+    kafkaTemplate.send(topic, key, event);
     /*.whenComplete((result, ex) -> {
 
         if (ex != null) {
@@ -33,6 +33,6 @@ public class KafkaEventPublisher {
         );
     });*/
 
-    log.info("Kafka publish completed: topic={}", topic);
-  }
+  // log.info("Publish completed in topic={}: event={} with key={}", topic, eventName, key);
+  // }*/
 }
