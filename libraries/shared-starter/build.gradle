@@ -131,8 +131,8 @@ dependencies {
     api 'org.springframework.cloud:spring-cloud-starter-config'
 
     //api 'org.springframework.boot:spring-boot-starter-kafka'
-    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
+    //implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client'
+    //implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
     api 'org.springframework.security:spring-security-oauth2-jose'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'

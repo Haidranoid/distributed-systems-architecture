@@ -1,4 +1,4 @@
-package org.dsa.shared.starter.utils;
+package org.dsa.shared.core.utils;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.Authentication;

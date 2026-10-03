@@ -1,4 +1,4 @@
-package org.dsa.shared.starter.utils;
+package org.dsa.shared.core.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;

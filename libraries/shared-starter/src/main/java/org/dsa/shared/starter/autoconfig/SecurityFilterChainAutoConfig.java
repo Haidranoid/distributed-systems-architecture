@@ -5,8 +5,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import lombok.RequiredArgsConstructor;
+import org.dsa.shared.core.utils.JwtAuthenticationConverter;
 import org.dsa.shared.starter.properties.JwtProperties;
-import org.dsa.shared.starter.utils.JwtAuthenticationConverter;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

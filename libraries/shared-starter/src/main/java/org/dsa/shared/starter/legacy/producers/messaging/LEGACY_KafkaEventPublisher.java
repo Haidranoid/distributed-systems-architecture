@@ -1,11 +1,11 @@
-package org.dsa.shared.starter.messaging.producers;
+package org.dsa.shared.starter.legacy.producers.messaging;
 
 
 // import org.springframework.kafka.core.KafkaTemplate;
 
 // @Slf4j
 // @RequiredArgsConstructor
-public class KafkaEventPublisher {
+public class LEGACY_KafkaEventPublisher {
   /*
   private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
 
