@@ -4,7 +4,7 @@ import lombok.Builder;
 import org.dsa.shared.core.messaging.contracts.AuthEvent;
 
 @Builder
-public record UserLoggedInEvent(Long accountId, String username, String email)
+public record UserSignedUpEvent(Long accountId, String username, String email)
     implements AuthEvent {
 
   @Override

@@ -1,3 +1,5 @@
 package org.dsa.shared.core.messaging.contracts;
 
-public interface KafkaEvent {}
+public interface KafkaEvent {
+  String getEventKey();
+}

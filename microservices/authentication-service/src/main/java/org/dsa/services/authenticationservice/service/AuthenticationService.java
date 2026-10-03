@@ -15,8 +15,8 @@ import org.dsa.services.authenticationservice.response.AccountResponse;
 import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 import org.dsa.shared.core.constants.Permission;
 import org.dsa.shared.core.exception.InvalidCredentialsException;
-import org.dsa.shared.core.messaging.events.AccountCreatedEvent;
 import org.dsa.shared.core.messaging.events.UserLoggedInEvent;
+import org.dsa.shared.core.messaging.events.UserSignedUpEvent;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,7 +66,6 @@ public class AuthenticationService {
         authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
 
     authEventProducer.publish(
-        accountAuthenticated.id().toString(),
         UserLoggedInEvent.builder()
             .accountId(accountAuthenticated.id())
             .username(accountAuthenticated.username())
@@ -94,8 +93,7 @@ public class AuthenticationService {
     var authResponseDto = authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
 
     authEventProducer.publish(
-        accountCreated.id().toString(),
-        AccountCreatedEvent.builder()
+        UserSignedUpEvent.builder()
             .accountId(accountCreated.id())
             .username(accountCreated.username())
             .email(accountCreated.email())
