@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.entity.Token;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
+import org.dsa.services.authenticationservice.messaging.producers.AuthEventProducer;
 import org.dsa.services.authenticationservice.properties.Endpoints;
 import org.dsa.services.authenticationservice.repository.TokenRepository;
 import org.dsa.services.authenticationservice.request.LoginRequest;
@@ -16,8 +17,6 @@ import org.dsa.shared.core.constants.Permission;
 import org.dsa.shared.core.exception.InvalidCredentialsException;
 import org.dsa.shared.core.messaging.events.AccountCreatedEvent;
 import org.dsa.shared.core.messaging.events.UserLoggedInEvent;
-import org.dsa.shared.core.messaging.topics.KafkaTopics;
-import org.dsa.shared.starter.messaging.producers.KafkaEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +34,7 @@ public class AuthenticationService {
   private final Endpoints endpoints;
   private final TokenRepository tokenRepository;
   private final AuthenticationMapper authMapper;
-  private final KafkaEventPublisher kafkaEventPublisher;
+  private final AuthEventProducer authEventProducer;
 
   public AuthenticationResponse login(LoginRequest loginRequest) {
     var accountAuthenticated =
@@ -66,8 +65,7 @@ public class AuthenticationService {
     var authResponseDto =
         authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
 
-    kafkaEventPublisher.publishEvent(
-        KafkaTopics.USER_LOGGED_IN,
+    authEventProducer.publish(
         accountAuthenticated.id().toString(),
         UserLoggedInEvent.builder()
             .accountId(accountAuthenticated.id())
@@ -95,8 +93,7 @@ public class AuthenticationService {
 
     var authResponseDto = authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
 
-    kafkaEventPublisher.publishEvent(
-        KafkaTopics.ACCOUNT_CREATED,
+    authEventProducer.publish(
         accountCreated.id().toString(),
         AccountCreatedEvent.builder()
             .accountId(accountCreated.id())
