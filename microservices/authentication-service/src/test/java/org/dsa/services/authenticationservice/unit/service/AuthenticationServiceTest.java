@@ -12,16 +12,15 @@ import org.dsa.services.authenticationservice.constants.TokenType;
 import org.dsa.services.authenticationservice.dtos.response.AccountResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
+import org.dsa.services.authenticationservice.messaging.producers.AuthEventProducer;
 import org.dsa.services.authenticationservice.properties.Endpoints;
 import org.dsa.services.authenticationservice.repository.TokenRepository;
 import org.dsa.services.authenticationservice.service.AuthenticationService;
 import org.dsa.services.authenticationservice.service.JwtSignerService;
 import org.dsa.shared.core.constants.Permission;
 import org.dsa.shared.core.exception.InvalidCredentialsException;
-import org.dsa.shared.core.messaging.events.AccountCreatedEvent;
 import org.dsa.shared.core.messaging.events.UserLoggedInEvent;
-import org.dsa.shared.core.messaging.topics.KafkaTopics;
-import org.dsa.shared.starter.messaging.producers.KafkaEventPublisher;
+import org.dsa.shared.core.messaging.events.UserSignedUpEvent;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -40,7 +39,7 @@ class AuthenticationServiceTest {
   @Mock private Endpoints endpoints;
   @Mock private TokenRepository tokenRepository;
   @Mock private AuthenticationMapper authMapper;
-  @Mock private KafkaEventPublisher kafkaEventPublisher;
+  @Mock private AuthEventProducer authEventProducer;
 
   @InjectMocks private AuthenticationService authenticationService;
 
@@ -78,10 +77,8 @@ class AuthenticationServiceTest {
         .thenReturn(authResponseDto);
 
     Mockito.doNothing()
-        .when(kafkaEventPublisher)
-        .publishEvent(
-            KafkaTopics.USER_LOGGED_IN,
-            accountAuthenticated.id().toString(),
+        .when(authEventProducer)
+        .publish(
             UserLoggedInEvent.builder()
                 .accountId(accountAuthenticated.id())
                 .username(accountAuthenticated.username())
@@ -151,11 +148,9 @@ class AuthenticationServiceTest {
 
     // TODO: verify method params
     Mockito.doNothing()
-        .when(kafkaEventPublisher)
-        .publishEvent(
-            KafkaTopics.ACCOUNT_CREATED,
-            accountCreated.id().toString(),
-            AccountCreatedEvent.builder()
+        .when(authEventProducer)
+        .publish(
+            UserSignedUpEvent.builder()
                 .accountId(accountCreated.id())
                 .username(accountCreated.username())
                 .email(accountCreated.email())
@@ -190,11 +185,9 @@ class AuthenticationServiceTest {
 
     // TODO: verify method params
     Mockito.doNothing()
-        .when(kafkaEventPublisher)
-        .publishEvent(
-            KafkaTopics.ACCOUNT_CREATED,
-            accountCreated.id().toString(),
-            AccountCreatedEvent.builder()
+        .when(authEventProducer)
+        .publish(
+            UserSignedUpEvent.builder()
                 .accountId(accountCreated.id())
                 .username(accountCreated.username())
                 .email(accountCreated.email())
