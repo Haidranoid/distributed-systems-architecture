@@ -1,5 +1,4 @@
-package org.dsa.shared.starter.legacy.producers.messaging;
-
+package org.dsa.shared.core.messaging.producers;
 
 // import org.springframework.kafka.core.KafkaTemplate;
 

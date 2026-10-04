@@ -1,11 +1,11 @@
 package org.dsa.services.authenticationservice.fixture;
 
 import org.dsa.services.authenticationservice.constants.TokenType;
+import org.dsa.services.authenticationservice.dtos.request.LoginRequest;
+import org.dsa.services.authenticationservice.dtos.request.SignupRequest;
+import org.dsa.services.authenticationservice.dtos.response.AccountResponse;
+import org.dsa.services.authenticationservice.dtos.response.AuthenticationResponse;
 import org.dsa.services.authenticationservice.entity.Token;
-import org.dsa.services.authenticationservice.request.LoginRequest;
-import org.dsa.services.authenticationservice.request.SignupRequest;
-import org.dsa.services.authenticationservice.response.AccountResponse;
-import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 import org.dsa.shared.core.constants.Role;
 
 public class AuthenticationDtoFixtures {

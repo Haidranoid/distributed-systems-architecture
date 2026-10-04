@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.request;
+package org.dsa.services.authenticationservice.dtos.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

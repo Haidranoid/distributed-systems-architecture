@@ -1,4 +1,4 @@
-package org.dsa.shared.starter.properties;
+package org.dsa.shared.core.properties;
 
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;

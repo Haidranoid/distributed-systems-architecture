@@ -13,4 +13,9 @@ public class AuthEventProducer extends KafkaEventPublisher<AuthEvent> {
   public AuthEventProducer(KafkaTemplate<String, KafkaEvent> kafkaTemplate) {
     super(KafkaTopics.AUTHENTICATION_SERVICE_TOPIC, kafkaTemplate);
   }
+
+  @Override
+  protected String generateEventKey(AuthEvent event) {
+    return event.accountId().toString();
+  }
 }

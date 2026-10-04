@@ -5,10 +5,4 @@ import org.dsa.shared.core.messaging.contracts.AuthEvent;
 
 @Builder
 public record UserLoggedOutEvent(Long accountId, String username, String email)
-    implements AuthEvent {
-
-  @Override
-  public String getEventKey() {
-    return accountId.toString();
-  }
-}
+    implements AuthEvent {}

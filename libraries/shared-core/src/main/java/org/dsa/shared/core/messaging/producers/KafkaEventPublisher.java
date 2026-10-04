@@ -12,6 +12,8 @@ public abstract class KafkaEventPublisher<T extends KafkaEvent> {
   private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
 
   public void publish(T event) {
-    kafkaTemplate.send(topic.toString(), event.getEventKey(), event);
+    kafkaTemplate.send(topic.toString(), this.generateEventKey(event), event);
   }
+
+  protected abstract String generateEventKey(T event);
 }

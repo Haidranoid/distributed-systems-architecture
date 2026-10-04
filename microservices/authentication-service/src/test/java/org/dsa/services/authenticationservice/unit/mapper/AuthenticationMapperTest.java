@@ -2,10 +2,10 @@ package org.dsa.services.authenticationservice.unit.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.dsa.services.authenticationservice.dtos.response.AccountResponse;
+import org.dsa.services.authenticationservice.dtos.response.AuthenticationResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
-import org.dsa.services.authenticationservice.response.AccountResponse;
-import org.dsa.services.authenticationservice.response.AuthenticationResponse;
 import org.junit.jupiter.api.Test;
 
 public class AuthenticationMapperTest {

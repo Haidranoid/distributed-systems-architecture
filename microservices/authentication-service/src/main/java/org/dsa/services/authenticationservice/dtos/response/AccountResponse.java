@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.response;
+package org.dsa.services.authenticationservice.dtos.response;
 
 import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
