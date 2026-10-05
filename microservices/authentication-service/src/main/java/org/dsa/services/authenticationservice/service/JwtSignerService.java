@@ -1,12 +1,11 @@
 package org.dsa.services.authenticationservice.service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.SignatureAlgorithm;
-import java.security.PrivateKey;
 import java.util.Date;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.dsa.shared.core.properties.JwtProperties;
+import org.dsa.shared.core.utils.AlgorithmKeyPair;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,8 +13,7 @@ import org.springframework.stereotype.Service;
 public class JwtSignerService {
 
   private final JwtProperties jwtProperties;
-  private final PrivateKey privateKey;
-  private final SignatureAlgorithm signatureAlgorithm;
+  private final AlgorithmKeyPair algorithmKeyPair;
 
   public String generateAccessToken(String subject, Map<String, Object> claims) {
     return buildToken(subject, claims, jwtProperties.accessTokenExpiration());
@@ -27,7 +25,7 @@ public class JwtSignerService {
 
   private String buildToken(String subject, Map<String, Object> claims, long expiration) {
     return Jwts.builder()
-        .signWith(privateKey, signatureAlgorithm)
+        .signWith(algorithmKeyPair.getPrivateKey(), algorithmKeyPair.getSignatureAlgorithm())
         .issuer(jwtProperties.issuer())
         .subject(subject)
         .claims(claims)
