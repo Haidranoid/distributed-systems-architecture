@@ -5,6 +5,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 import lombok.RequiredArgsConstructor;
 import org.dsa.shared.core.properties.JwtProperties;
 import org.dsa.shared.core.utils.AlgorithmKeyPair;
+import org.dsa.shared.core.utils.CurrentSession;
 import org.dsa.shared.core.utils.JsonWebTokenDecoder;
 import org.dsa.shared.core.utils.JwtAuthenticationConverter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -99,5 +100,10 @@ public class SecurityAutoConfig {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
+  }
+
+  @Bean
+  public CurrentSession currentSession() {
+    return new CurrentSession();
   }
 }
