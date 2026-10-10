@@ -2,14 +2,14 @@ package org.dsa.services.auditservice.messaging.consumers;
 
 import lombok.RequiredArgsConstructor;
 import org.dsa.services.auditservice.service.AuditService;
-import org.dsa.shared.core.messaging.contracts.AccountEvent;
 import org.dsa.shared.core.messaging.contracts.KafkaListenerTopic;
+import org.dsa.shared.core.messaging.events.AccountEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserLoggedInConsumer {
+public class AccountsConsumer {
 
   private final AuditService auditService;
 

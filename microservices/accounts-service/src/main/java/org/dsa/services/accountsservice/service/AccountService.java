@@ -8,8 +8,9 @@ import org.dsa.services.accountsservice.dtos.request.UpdateAccountRequest;
 import org.dsa.services.accountsservice.dtos.request.VerifyAccountCredentialsRequest;
 import org.dsa.services.accountsservice.dtos.response.AccountResponse;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
+import org.dsa.services.accountsservice.messaging.producers.AccountsEventProducer;
 import org.dsa.services.accountsservice.repository.AccountRepository;
-import org.dsa.shared.core.contracts.BaseService;
+import org.dsa.shared.core.contracts.CrudService;
 import org.dsa.shared.core.exception.AccountNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class AccountService
-    implements BaseService<Long, AccountResponse, CreateAccountRequest, UpdateAccountRequest> {
+    implements CrudService<Long, AccountResponse, CreateAccountRequest, UpdateAccountRequest> {
 
   private final AccountRepository accountRepository;
   private final AccountMapper accountMapper;
+  private final AccountsEventProducer accountsEventProducer;
 
   public AccountResponse create(CreateAccountRequest createAccountRequest) {
     // TODO: handle the case when the account already exist
@@ -42,7 +44,6 @@ public class AccountService
     return accountMapper.toDto(account);
   }
 
-  @Transactional(readOnly = true)
   public List<AccountResponse> findAll() {
     var accountsList = accountRepository.findAll().stream().map(accountMapper::toDto).toList();
 

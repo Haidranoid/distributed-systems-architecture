@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class AppConfig {
+public class AppConfiguration {
 
     @Bean
     public RestTemplate restTemplate() {

@@ -1,14 +1,17 @@
 package org.dsa.shared.core.contracts;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface BaseService<ID, RP, CP, UP> {
+public interface CrudService<ID, RP, CP, UP> {
   // Create
   RP create(CP createPayload);
 
   // Read
+  @Transactional(readOnly = true)
   RP findById(ID id);
 
+  @Transactional(readOnly = true)
   List<RP> findAll();
 
   // Collection<R> findAll();

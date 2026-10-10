@@ -10,7 +10,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 
 // @Configuration
-public class CustomKafkaConfig {
+public class KafkaConfiguration {
 
   // @Bean
   public ProducerFactory<String, Object> producerFactory() {
