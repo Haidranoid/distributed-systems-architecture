@@ -12,6 +12,7 @@ class SharedPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
 
+        //project.pluginManager.apply("java")
         project.pluginManager.apply("java-library")
 
         project.extensions.create("snapshots", SnapshotsExtension, project)
