@@ -76,7 +76,7 @@ public class SecurityAutoConfig {
   @Bean
   public AlgorithmKeyPair algorithmKeyPair() throws Exception {
     return new AlgorithmKeyPair(
-        jwtProperties.algorithm(), jwtProperties.privateKey(), jwtProperties.publicKey());
+        jwtProperties.algorithm(), jwtProperties.publicKey(), jwtProperties.privateKey());
   }
 
   @Bean

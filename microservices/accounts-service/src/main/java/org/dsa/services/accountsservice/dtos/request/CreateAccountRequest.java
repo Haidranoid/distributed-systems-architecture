@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.request;
+package org.dsa.services.accountsservice.dtos.request;
 
 import com.google.common.base.MoreObjects;
 import jakarta.validation.constraints.Email;

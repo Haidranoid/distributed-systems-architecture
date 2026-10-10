@@ -1,13 +1,13 @@
 package org.dsa.services.accountsservice.unit.service;
 
 import java.util.Optional;
-import org.dsa.shared.core.exception.AccountNotFoundException;
 import org.dsa.services.accountsservice.entity.Account;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.dsa.services.accountsservice.service.AccountService;
+import org.dsa.shared.core.exception.AccountNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

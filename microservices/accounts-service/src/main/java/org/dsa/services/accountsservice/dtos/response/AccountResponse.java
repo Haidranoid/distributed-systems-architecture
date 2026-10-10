@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.response;
+package org.dsa.services.accountsservice.dtos.response;
 
 import com.google.common.base.MoreObjects;
 import lombok.Builder;

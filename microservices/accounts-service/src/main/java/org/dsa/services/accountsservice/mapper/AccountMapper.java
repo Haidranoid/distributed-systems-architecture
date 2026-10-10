@@ -1,8 +1,8 @@
 package org.dsa.services.accountsservice.mapper;
 
+import org.dsa.services.accountsservice.dtos.request.CreateAccountRequest;
+import org.dsa.services.accountsservice.dtos.response.AccountResponse;
 import org.dsa.services.accountsservice.entity.Account;
-import org.dsa.services.accountsservice.request.CreateAccountRequest;
-import org.dsa.services.accountsservice.response.AccountResponse;
 import org.springframework.stereotype.Component;
 
 @Component

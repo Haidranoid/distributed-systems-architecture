@@ -3,12 +3,12 @@ package org.dsa.services.accountsservice.fixture;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.dsa.services.accountsservice.dtos.request.CreateAccountRequest;
+import org.dsa.services.accountsservice.dtos.request.UpdateAccountPasswordRequest;
+import org.dsa.services.accountsservice.dtos.request.UpdateAccountRequest;
+import org.dsa.services.accountsservice.dtos.request.VerifyAccountCredentialsRequest;
+import org.dsa.services.accountsservice.dtos.response.AccountResponse;
 import org.dsa.shared.core.constants.Role;
-import org.dsa.services.accountsservice.request.CreateAccountRequest;
-import org.dsa.services.accountsservice.request.UpdateAccountPasswordRequest;
-import org.dsa.services.accountsservice.request.UpdateAccountRequest;
-import org.dsa.services.accountsservice.request.VerifyAccountCredentialsRequest;
-import org.dsa.services.accountsservice.response.AccountResponse;
 
 public class AccountDtoFixtures {
 

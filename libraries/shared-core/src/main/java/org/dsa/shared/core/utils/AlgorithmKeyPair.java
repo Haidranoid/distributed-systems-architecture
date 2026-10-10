@@ -13,15 +13,21 @@ import lombok.Getter;
 @Getter
 public class AlgorithmKeyPair {
   private final SignatureAlgorithm signatureAlgorithm;
-  private final PrivateKey privateKey;
   private final PublicKey publicKey;
+  private final PrivateKey privateKey;
 
   public AlgorithmKeyPair(
-      String signatureAlgorithmPlain, String privateKeyPlain, String publicKeyPlain)
+      String signatureAlgorithmPlain, String publicKeyPlain, String privateKeyPlain)
       throws Exception {
     this.signatureAlgorithm = this.generateSignatureAlgorithm(signatureAlgorithmPlain);
-    this.privateKey = this.generatePrivateKey(privateKeyPlain);
     this.publicKey = this.generatePublicKey(publicKeyPlain);
+
+    // TODO: refactor
+    if (privateKeyPlain != null) {
+      this.privateKey = this.generatePrivateKey(privateKeyPlain);
+    } else {
+      this.privateKey = null;
+    }
   }
 
   private SignatureAlgorithm generateSignatureAlgorithm(String signatureAlgorithmPlain) {

@@ -6,12 +6,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.shared.core.exception.AccountNotFoundException;
-import org.dsa.shared.starter.testing.annotations.WebSliceEnvironment;
 import org.dsa.services.accountsservice.controller.AccountsController;
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.service.AccountService;
+import org.dsa.shared.core.exception.AccountNotFoundException;
+import org.dsa.shared.starter.test.annotations.WebSliceEnvironment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

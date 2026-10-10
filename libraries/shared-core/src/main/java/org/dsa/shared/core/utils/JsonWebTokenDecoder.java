@@ -17,7 +17,8 @@ public class JsonWebTokenDecoder {
   }
 
   private NimbusJwtDecoder generateNimbusJwtDecoder(String issuer, PublicKey publicKey) {
-    NimbusJwtDecoder nimbusDecoder = NimbusJwtDecoder.withPublicKey((RSAPublicKey) publicKey).build();
+    NimbusJwtDecoder nimbusDecoder =
+        NimbusJwtDecoder.withPublicKey((RSAPublicKey) publicKey).build();
     OAuth2TokenValidator<Jwt> validator = JwtValidators.createDefaultWithIssuer(issuer);
 
     nimbusDecoder.setJwtValidator(validator);

@@ -2,9 +2,7 @@ package org.dsa.services.authenticationservice.slice.context;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dsa.services.authenticationservice.config.AppConfig;
 import org.dsa.shared.core.utils.AlgorithmKeyPair;
-import org.dsa.shared.core.utils.CurrentSession;
 import org.dsa.shared.core.utils.JsonWebTokenDecoder;
 import org.dsa.shared.core.utils.JwtAuthenticationConverter;
 import org.dsa.shared.starter.autoconfig.SecurityAutoConfig;
@@ -13,7 +11,6 @@ import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 class SharedStarterContextTest {

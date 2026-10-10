@@ -1,8 +1,8 @@
 package org.dsa.services.accountsservice.factory;
 
 import net.datafaker.Faker;
-import org.dsa.shared.core.constants.Role;
 import org.dsa.services.accountsservice.entity.Account;
+import org.dsa.shared.core.constants.Role;
 
 public class AccountTestDataFactory {
 
