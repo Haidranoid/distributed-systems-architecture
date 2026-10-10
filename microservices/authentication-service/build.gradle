@@ -7,13 +7,13 @@ buildscript {
 */
 
 plugins {
-    //id 'org.dsa.shared.shared-plugin' version '1.0.0'
     id 'java'
+    id 'maven-publish'
+    id 'jacoco'
     id 'org.springframework.boot' version '4.0.6'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'io.freefair.lombok' version '9.5.0'
-    id 'maven-publish'
-    id 'jacoco'
+    //id 'org.dsa.shared.shared-plugin' version '2.0.0'
 }
 
 //apply plugin: 'org.dsa.shared.shared-plugin'
