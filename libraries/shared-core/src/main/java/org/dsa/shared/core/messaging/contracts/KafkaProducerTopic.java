@@ -1,6 +1,6 @@
 package org.dsa.shared.core.messaging.contracts;
 
-public enum KafkaTopics {
+public enum KafkaProducerTopic {
   AUTHENTICATION_SERVICE_TOPIC,
   ACCOUNTS_SERVICE_TOPIC;
 
