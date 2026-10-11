@@ -3,15 +3,16 @@ package org.dsa.services.gateway.config;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import lombok.RequiredArgsConstructor;
-import org.dsa.shared.core.utils.JwtAuthenticationConverter;
 import org.dsa.services.gateway.handler.CustomAccessDeniedHandler;
 import org.dsa.services.gateway.handler.CustomAuthenticationEntryPoint;
+import org.dsa.shared.core.utils.JsonWebTokenDecoder;
+import org.dsa.shared.core.utils.JwtAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
 
@@ -20,26 +21,45 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-  private final CorsConfigurationSource corsConfigurationSource;
   private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
   private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
+  private static final String[] SWAGGER_LIST_URL = {
+    "/v2/api-docs",
+    "/v3/api-docs",
+    "/v3/api-docs/**",
+    "/swagger-resources",
+    "/swagger-resources/**",
+    "/configuration/ui",
+    "/configuration/security",
+    "/swagger-ui/**",
+    "/webjars/**",
+    "/swagger-ui.html"
+  };
+
   private static final String[] WHITE_LIST_URL = {
-    "/actuator/**", "/api/v1/**", "/api/v2/**",
+    "/api/v1/**", "/api/v2/**",
   };
 
   @Bean
+  @Primary
   public SecurityFilterChain securityFilterChain(
-      HttpSecurity http, JwtAuthenticationConverter converter, JwtDecoder decoder)
-      throws Exception {
+      HttpSecurity http,
+      JsonWebTokenDecoder jsonWebTokenDecoder,
+      JwtAuthenticationConverter jwtAuthenticationConverter,
+      CorsConfigurationSource corsConfigurationSource) {
     http.csrf(AbstractHttpConfigurer::disable)
         .httpBasic(AbstractHttpConfigurer::disable)
         .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
         .cors(cors -> cors.configurationSource(corsConfigurationSource))
         .authorizeHttpRequests(
-            req -> req.requestMatchers(WHITE_LIST_URL).permitAll()
-            // .anyRequest().authenticated()
-            )
+            req ->
+                req.requestMatchers(SWAGGER_LIST_URL)
+                    .permitAll()
+                    .requestMatchers(WHITE_LIST_URL)
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
         .exceptionHandling(
             exception ->
                 exception
@@ -48,7 +68,10 @@ public class SecurityConfig {
             )
         .oauth2ResourceServer(
             oauth2 ->
-                oauth2.jwt(jwt -> jwt.decoder(decoder).jwtAuthenticationConverter(converter)));
+                oauth2.jwt(
+                    jwt ->
+                        jwt.decoder(jsonWebTokenDecoder.getNimbusDecoder())
+                            .jwtAuthenticationConverter(jwtAuthenticationConverter)));
     return http.build();
   }
 }

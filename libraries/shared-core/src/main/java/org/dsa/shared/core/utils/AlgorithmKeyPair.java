@@ -13,20 +13,28 @@ import lombok.Getter;
 @Getter
 public class AlgorithmKeyPair {
   private final SignatureAlgorithm signatureAlgorithm;
-  private final PublicKey publicKey;
-  private final PrivateKey privateKey;
+  private PublicKey publicKey;
+  private PrivateKey privateKey;
 
   public AlgorithmKeyPair(
       String signatureAlgorithmPlain, String publicKeyPlain, String privateKeyPlain)
       throws Exception {
-    this.signatureAlgorithm = this.generateSignatureAlgorithm(signatureAlgorithmPlain);
-    this.publicKey = this.generatePublicKey(publicKeyPlain);
 
     // TODO: refactor
+    if (signatureAlgorithmPlain == null) {
+        this.signatureAlgorithm = null;
+        this.privateKey = null;
+        this.publicKey = null;
+        return;
+    }
+
+    this.signatureAlgorithm = this.generateSignatureAlgorithm(signatureAlgorithmPlain);
+
     if (privateKeyPlain != null) {
       this.privateKey = this.generatePrivateKey(privateKeyPlain);
-    } else {
-      this.privateKey = null;
+    }
+    if (publicKeyPlain != null) {
+      this.publicKey = this.generatePublicKey(publicKeyPlain);
     }
   }
 

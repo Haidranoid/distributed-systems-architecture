@@ -13,6 +13,8 @@ spring:
   threads:
     virtual:
       enabled: true
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
