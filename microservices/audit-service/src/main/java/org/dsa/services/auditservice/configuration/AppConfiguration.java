@@ -1,4 +1,4 @@
-package org.dsa.services.auditservice.config;
+package org.dsa.services.auditservice.configuration;
 
 import org.springframework.context.annotation.Configuration;
 

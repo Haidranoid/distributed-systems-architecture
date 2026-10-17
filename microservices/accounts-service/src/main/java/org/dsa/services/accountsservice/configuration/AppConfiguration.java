@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.config;
+package org.dsa.services.accountsservice.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

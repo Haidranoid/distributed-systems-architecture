@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.constants;
+package org.dsa.services.authenticationservice.constant;
 
 import lombok.NoArgsConstructor;
 

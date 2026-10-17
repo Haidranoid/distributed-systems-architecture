@@ -3,7 +3,7 @@ package org.dsa.services.authenticationservice.service;
 import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.authenticationservice.constants.TokenType;
+import org.dsa.services.authenticationservice.constant.TokenType;
 import org.dsa.services.authenticationservice.dto.request.LoginRequest;
 import org.dsa.services.authenticationservice.dto.request.SignupRequest;
 import org.dsa.services.authenticationservice.dto.response.AccountResponse;

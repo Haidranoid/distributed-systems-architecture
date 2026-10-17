@@ -8,7 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.dsa.services.authenticationservice.constants.TokenType;
+import org.dsa.services.authenticationservice.constant.TokenType;
 import org.dsa.services.authenticationservice.dto.response.AccountResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;

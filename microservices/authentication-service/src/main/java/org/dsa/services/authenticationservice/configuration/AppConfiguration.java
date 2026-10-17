@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.config;
+package org.dsa.services.authenticationservice.configuration;
 
 import org.dsa.services.authenticationservice.properties.Endpoints;
 import org.springframework.context.annotation.Bean;

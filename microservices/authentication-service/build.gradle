@@ -74,8 +74,8 @@ jacocoTestReport {
             files(classDirectories.files.collect {
                 fileTree(dir: it, exclude: [
                         '**/*Application*',
-                        '**/config/**',
-                        '**/constants/**',
+                        '**/configuration/**',
+                        '**/constant/**',
                         '**/entity/**',
                         '**/properties/**',
                         '**/dto/**',
@@ -100,9 +100,9 @@ jacocoTestCoverageVerification {
 
             excludes = [
                     '*Application*',
-                    '*config*',
+                    '*configuration*',
+                    '*constant*',
                     '*controller*',
-                    '*constants*',
                     '*entity*',
                     '*properties*',
                     '*dto*',

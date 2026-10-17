@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.config;
+package org.dsa.services.authenticationservice.configuration;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 

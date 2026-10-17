@@ -3,7 +3,7 @@ package org.dsa.services.authenticationservice.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.dsa.services.authenticationservice.constants.TokenType;
+import org.dsa.services.authenticationservice.constant.TokenType;
 
 @Table(name = "tokens")
 @Entity
