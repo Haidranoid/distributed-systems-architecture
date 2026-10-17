@@ -4,7 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.dsa.services.accountsservice.dtos.response.AccountResponse;
+import org.dsa.services.accountsservice.dto.response.AccountResponse;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.shared.starter.test.integration.SpringBootIntegrationTest;
 import org.junit.jupiter.api.Test;

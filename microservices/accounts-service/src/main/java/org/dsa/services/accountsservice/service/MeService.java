@@ -2,7 +2,7 @@ package org.dsa.services.accountsservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.dsa.services.accountsservice.dtos.response.AccountResponse;
+import org.dsa.services.accountsservice.dto.response.AccountResponse;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.dsa.shared.core.exception.AccountNotFoundException;

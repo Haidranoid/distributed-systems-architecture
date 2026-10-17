@@ -22,10 +22,10 @@ public class AlgorithmKeyPair {
 
     // TODO: refactor
     if (signatureAlgorithmPlain == null) {
-        this.signatureAlgorithm = null;
-        this.privateKey = null;
-        this.publicKey = null;
-        return;
+      this.signatureAlgorithm = null;
+      this.privateKey = null;
+      this.publicKey = null;
+      return;
     }
 
     this.signatureAlgorithm = this.generateSignatureAlgorithm(signatureAlgorithmPlain);

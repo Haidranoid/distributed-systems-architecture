@@ -1,7 +1,7 @@
 package org.dsa.services.authenticationservice.mapper;
 
-import org.dsa.services.authenticationservice.dtos.response.AccountResponse;
-import org.dsa.services.authenticationservice.dtos.response.AuthenticationResponse;
+import org.dsa.services.authenticationservice.dto.response.AccountResponse;
+import org.dsa.services.authenticationservice.dto.response.AuthenticationResponse;
 import org.springframework.stereotype.Component;
 
 @Component

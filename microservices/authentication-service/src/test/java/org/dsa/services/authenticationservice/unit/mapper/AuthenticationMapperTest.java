@@ -2,8 +2,8 @@ package org.dsa.services.authenticationservice.unit.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.dsa.services.authenticationservice.dtos.response.AccountResponse;
-import org.dsa.services.authenticationservice.dtos.response.AuthenticationResponse;
+import org.dsa.services.authenticationservice.dto.response.AccountResponse;
+import org.dsa.services.authenticationservice.dto.response.AuthenticationResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
 import org.junit.jupiter.api.Test;

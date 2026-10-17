@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'io.freefair.lombok' version '9.5.0'
+    id 'io.freefair.lombok' version '9.8.0'
     id 'maven-publish'
 }
 
@@ -62,8 +62,7 @@ publishing {
 }
 
 ext {
-    set('springBootVersion', "4.0.6")
-    set('googleGuavaVersion', "33.7.2-jre")
+    set('springBootVersion', "4.1.1")
 }
 
 dependencies {

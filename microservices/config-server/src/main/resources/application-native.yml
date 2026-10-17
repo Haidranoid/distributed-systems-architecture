@@ -4,5 +4,5 @@ spring:
       server:
         native:
           search-locations:
-          - "file://${user.home:./}/MyProjects/distributed-systems-architecture-properties"
-          - file:///dsa-properties-repository
+            - "file://${user.home:./}/MyProjects/distributed-systems-architecture-properties"
+            - file:///dsa-properties-repository

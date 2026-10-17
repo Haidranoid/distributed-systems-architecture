@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.messaging.producers;
+package org.dsa.services.authenticationservice.messaging.producer;
 
 import org.dsa.shared.core.messaging.contracts.KafkaEvent;
 import org.dsa.shared.core.messaging.contracts.KafkaProducerTopic;

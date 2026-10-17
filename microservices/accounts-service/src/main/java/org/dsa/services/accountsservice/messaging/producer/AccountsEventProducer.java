@@ -1,4 +1,4 @@
-package org.dsa.services.accountsservice.messaging.producers;
+package org.dsa.services.accountsservice.messaging.producer;
 
 import org.dsa.shared.core.messaging.contracts.KafkaEvent;
 import org.dsa.shared.core.messaging.contracts.KafkaProducerTopic;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountsEventProducer extends KafkaEventPublisher<AccountEvent> {
 
-    public AccountsEventProducer(KafkaTemplate<String, KafkaEvent> kafkaTemplate) {
-        super(KafkaProducerTopic.ACCOUNTS_SERVICE_TOPIC, kafkaTemplate);
-    }
+  public AccountsEventProducer(KafkaTemplate<String, KafkaEvent> kafkaTemplate) {
+    super(KafkaProducerTopic.ACCOUNTS_SERVICE_TOPIC, kafkaTemplate);
+  }
 
-    @Override
-    protected String generateEventKey(AccountEvent event) {
-        return event.accountId().toString();
-    }
+  @Override
+  protected String generateEventKey(AccountEvent event) {
+    return event.accountId().toString();
+  }
 }

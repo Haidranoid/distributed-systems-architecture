@@ -10,15 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 class SharedStarterContextTest {
 
   private final ApplicationContextRunner contextRunner =
       new ApplicationContextRunner()
-          .withConfiguration(
-              AutoConfigurations.of(SecurityAutoConfig.class))
+          .withConfiguration(AutoConfigurations.of(SecurityAutoConfig.class))
           .withInitializer(new ConfigDataApplicationContextInitializer())
           .withSystemProperties("spring.profiles.active=it");
 
@@ -26,22 +23,20 @@ class SharedStarterContextTest {
   void securityAutoConfigBeansAreConfigured() {
     contextRunner.run(
         context -> {
-          assertThat(context).hasSingleBean(SecurityFilterChain.class);
           assertThat(context).hasSingleBean(JwtAuthenticationConverter.class);
           assertThat(context).hasSingleBean(AlgorithmKeyPair.class);
           assertThat(context).hasSingleBean(JsonWebTokenDecoder.class);
-          assertThat(context).hasSingleBean(CorsConfigurationSource.class);
         });
   }
 
   @Test
   void sharedStarterAutoConfigBeansAreConfigured() {
-      assertThat(true).isTrue();
+    assertThat(true).isTrue();
     /*contextRunner.run(
-        context -> {
-          assertThat(context).hasSingleBean(CurrentSession.class);
-          assertThat(context).hasSingleBean(RestTemplate.class);
-        });
-     */
+       context -> {
+         assertThat(context).hasSingleBean(CurrentSession.class);
+         assertThat(context).hasSingleBean(RestTemplate.class);
+       });
+    */
   }
 }

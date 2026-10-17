@@ -1,4 +1,4 @@
-package org.dsa.services.authenticationservice.dtos.request;
+package org.dsa.services.authenticationservice.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
