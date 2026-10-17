@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
-    id 'io.freefair.lombok' version '9.5.0'
     id 'maven-publish'
+    id 'io.freefair.lombok' version '9.8.0'
 }
 
 group = 'org.dsa.shared'
@@ -96,11 +96,9 @@ publishing {
 
 
 ext {
-    set('googleGuavaVersion', "33.7.1-jre")
     set('jUnitVersion', "5.14.4")
     set('mockitoVersion', "5.20.0")
-    set('springBootVersion', "4.0.6")
-    set('springCloudVersion', "2025.1.1")
+    set('springBootVersion', "4.1.1")
     set('testContainersVersion', "1.21.4")
 }
 
@@ -119,35 +117,30 @@ dependencyManagement {
 
 dependencies {
     // BOMs
-    implementation platform("com.google.guava:guava-bom:${googleGuavaVersion}")
     api platform("org.junit:junit-bom:${jUnitVersion}")
     api platform("org.mockito:mockito-bom:${mockitoVersion}")
     implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
-    implementation platform("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
-    implementation platform("org.testcontainers:testcontainers-bom:${testContainersVersion}")
+    api platform("org.testcontainers:testcontainers-bom:${testContainersVersion}")
 
-    // Core testing framework (JUnit 5)
-    implementation 'org.junit.jupiter:junit-jupiter'
+    api 'org.junit.jupiter:junit-jupiter'
+    api 'org.mockito:mockito-core'
+    api 'org.mockito:mockito-junit-jupiter'
 
-    // Mocking library for isolating your service
-    implementation 'org.mockito:mockito-core'
-    implementation 'org.mockito:mockito-junit-jupiter'
-
-    // Spring Boot
+    api 'org.springframework.boot:spring-boot-starter-actuator-test'
     api 'org.springframework.boot:spring-boot-starter-data-jpa-test'
-    implementation 'org.springframework.boot:spring-boot-starter-security-test'
+    api 'org.springframework.boot:spring-boot-starter-security-test'
     api 'org.springframework.boot:spring-boot-starter-webmvc-test'
-    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client-test'
-    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test'
+    api 'org.springframework.boot:spring-boot-starter-security-test'
+    api 'org.springframework.boot:spring-boot-starter-security-oauth2-client-test'
+    api 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test'
     api 'org.springframework.boot:spring-boot-starter-kafka-test'
-    implementation 'org.springframework.boot:spring-boot-testcontainers'
+    api 'org.springframework.boot:spring-boot-testcontainers'
 
     // Testcontainers
-    implementation 'org.testcontainers:junit-jupiter'
-    implementation 'org.testcontainers:postgresql'
+    api 'org.testcontainers:junit-jupiter'
+    api 'org.testcontainers:postgresql'
 
     // Extras
-    implementation 'com.google.guava:guava-testlib'
     api 'net.datafaker:datafaker:2.7.0'
 
     // Required launcher to execute tests on the JVM
