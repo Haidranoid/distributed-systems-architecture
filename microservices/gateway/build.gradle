@@ -77,8 +77,9 @@ dependencies {
     implementation 'org.springframework.security:spring-security-oauth2-jose'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testImplementation 'org.dsa.shared:shared-starter-test:2.0.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.postgresql:postgresql'
 }
 
 tasks.named('test') {
