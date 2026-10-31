@@ -70,26 +70,25 @@ publishing {
 
         def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
 
-        if (!codeArtifactAuthToken) {
-            /*
-            providers.exec {
-                commandLine 'aws', 'login'
+        try {
+            if (!codeArtifactAuthToken) {
+                codeArtifactAuthToken = providers.exec {
+                    commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                            '--domain', 'artifacts',
+                            '--query', 'authorizationToken',
+                            '--output', 'text'
+                }.standardOutput.asText.get().trim()
             }
-            */
-            codeArtifactAuthToken = providers.exec {
-                commandLine 'aws', 'codeartifact', 'get-authorization-token',
-                        '--domain', 'artifacts',
-                        '--query', 'authorizationToken',
-                        '--output', 'text'
-            }.standardOutput.asText.get().trim()
-        }
 
-        maven {
-            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
-            credentials {
-                username "aws"
-                password codeArtifactAuthToken
+            maven {
+                url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
+                credentials {
+                    username "aws"
+                    password codeArtifactAuthToken
+                }
             }
+        } catch (Exception ignored) {
+            mavenCentral()
         }
     }
 }
