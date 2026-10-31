@@ -1,0 +1,8 @@
+namespace: dev-local
+
+resources:
+  - ../../common
+  - ../../../../base/services/posts-service
+
+patches:
+  - path: deployment-patch.yml

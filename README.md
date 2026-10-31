@@ -1,6 +1,6 @@
 # Distributed Systems Architecture
 
-A backend engineering project that explores modern distributed systems architecture through independently managed microservices, reusable platform libraries, infrastructure automation, and container orchestration.
+A backend engineering project that explores modern distributed systems architecture through independently managed services, reusable platform libraries, infrastructure automation, and container orchestration.
 
 The platform is primarily built with Java and Spring Boot, while also incorporating ASP.NET Core services as part of a polyglot backend architecture.
 
@@ -8,14 +8,14 @@ Rather than focusing on business complexity, this repository serves as a referen
 
 # Project Goals
 
-- Build independently deployable microservices.
+- Build independently deployable services.
 - Establish clear service boundaries through domain ownership.
 - Provide reusable platform components without tightly coupling services.
 - Support Java/Spring and .NET application ecosystems.
 - Introduce asynchronous communication using Apache Kafka.
 - Provide reproducible local environments with Docker Compose.
-- Deploy microservices using Kubernetes and Kustomize.
-- Standardize CI/CD pipelines across libraries and microservices.
+- Deploy services using Kubernetes and Kustomize.
+- Standardize CI/CD pipelines across libraries and services.
 - Keep each project independently buildable and maintainable.
 - Continuously evolve the platform with distributed-systems patterns.
 
@@ -23,9 +23,9 @@ Rather than focusing on business complexity, this repository serves as a referen
 
 ## System Architecture
 
-The platform is composed of independently managed microservices, shared libraries, and reusable infrastructure.
+The platform is composed of independently managed services, shared libraries, and reusable infrastructure.
 
-The main request flow is centered around the gateway:
+The main request flow is centered around the api-gateway:
 
 ```text
                     +----------------------+
@@ -63,19 +63,19 @@ The `config-server` provides centralized configuration to services that consume 
 
 The `media-generation-service` provides media generation capabilities within the platform.
 
-## Microservices
+## Services
 
 | Service | Responsibility |
 |---|---|
-| `gateway` | Entry point for client applications and request routing. |
+| `api-gateway` | Entry point for client applications and request routing. |
 | `config-server` | Centralized configuration management. |
 | `authentication-service` | Authentication, authorization, and identity-related responsibilities. |
 | `accounts-service` | Account-related domain operations and business logic. |
 | `audit-service` | Kafka event consumption and audit processing. |
-| `content-service` | Content management and related business operations. |
+| `posts-service` | Content management and related business operations. |
 | `media-generation-service` | Media generation workflows. |
 
-Each microservice is maintained as an independent project with its own source code, build configuration, tests, and container definition.
+Each service is maintained as an independent project with its own source code, build configuration, tests, and container definition.
 
 ## Service Communication
 
@@ -110,7 +110,7 @@ This provides a shared repository for coordinated architectural changes while pr
 │   ├── docker-registry/
 │   │   ├── composes/
 │   │   │   ├── kafka/
-│   │   │   └── microservices/
+│   │   │   └── services/
 │   │   └── images/
 │   │       └── gitlab-runners/
 │   │           ├── dotnet/
@@ -132,13 +132,13 @@ This provides a shared repository for coordinated architectural changes while pr
 │   ├── shared-starter/
 │   └── shared-starter-test/
 │
-├── microservices/
+├── services/
 │   ├── accounts-service/
 │   ├── audit-service/
 │   ├── authentication-service/
 │   ├── config-server/
-│   ├── content-service/
-│   ├── gateway/
+│   ├── posts-service/
+│   ├── api-gateway/
 │   └── media-generation-service/
 │
 ├── scripts/
@@ -152,7 +152,7 @@ This provides a shared repository for coordinated architectural changes while pr
 |---|---|
 | `infrastructure/` | Container environments, CI/CD definitions, and Kubernetes deployment configuration. |
 | `libraries/` | Reusable platform libraries and build tooling. |
-| `microservices/` | Independently deployable backend services. |
+| `services/` | Independently deployable backend services. |
 | `scripts/` | Repository and development automation scripts. |
 
 # Shared Libraries
@@ -203,7 +203,7 @@ The platform also includes ASP.NET Core services and shared .NET functionality.
 
 Current .NET projects include:
 
-- `content-service`
+- `posts-service`
 - `media-generation-service`
 - `common-core`
 
@@ -223,13 +223,13 @@ Two Compose environments are maintained:
 infrastructure/docker-registry/composes/
 ├── kafka/
 │   └── docker-compose.yml
-└── microservices/
+└── services/
     └── docker-compose.yml
 ```
 
 The Kafka Compose configuration starts the Kafka infrastructure.
 
-The microservices Compose configuration provides a local containerized environment for running the platform's microservices.
+The services Compose configuration provides a local containerized environment for running the platform's services.
 
 ### Custom GitLab Runner Images
 
@@ -260,13 +260,13 @@ The Kubernetes configuration follows a Kustomize-based `base` and `overlay` stru
 
 ### Base Resources
 
-Common resources for each microservice are maintained under:
+Common resources for each service are maintained under:
 
 ```text
-infrastructure/k8s/base/microservices/
+infrastructure/k8s/base/services/
 ```
 
-Each microservice has its own:
+Each service has its own:
 
 ```text
 deployment.yml
@@ -292,13 +292,13 @@ dev-local/
 │   ├── configmap.yml
 │   ├── kustomization.yml
 │   └── namespace.yml
-└── microservices/
+└── services/
     ├── accounts-service/
     ├── audit-service/
     ├── authentication-service/
     ├── config-server/
-    ├── content-service/
-    ├── gateway/
+    ├── posts-service/
+    ├── api-gateway/
     └── media-generation-service/
 ```
 
@@ -306,7 +306,7 @@ This separation allows common deployment resources to remain in `base/` while en
 
 # CI/CD
 
-The repository contains reusable GitLab CI/CD pipelines designed to standardize the lifecycle of libraries and microservices across Java and .NET.
+The repository contains reusable GitLab CI/CD pipelines designed to standardize the lifecycle of libraries and services across Java and .NET.
 
 The CI/CD configuration is organized into three layers:
 
@@ -339,11 +339,11 @@ Pipeline definitions are separated by project type and ecosystem:
 infrastructure/gitlab-ci/pipelines/
 ├── pipeline-library-dotnet.yml
 ├── pipeline-library-java.yml
-├── pipeline-microservice-dotnet.yml
-└── pipeline-microservice-java.yml
+├── pipeline-service-dotnet.yml
+└── pipeline-service-java.yml
 ```
 
-This allows libraries and microservices to have distinct lifecycle pipelines while sharing the same CI/CD infrastructure.
+This allows libraries and services to have distinct lifecycle pipelines while sharing the same CI/CD infrastructure.
 
 ## Reusable Templates
 
@@ -353,15 +353,15 @@ The template layer contains reusable jobs for common lifecycle operations:
 infrastructure/gitlab-ci/templates/
 ├── deploy-library-dotnet.yml
 ├── deploy-library-java.yml
-├── deploy-microservice-dotnet.yml
-├── deploy-microservice-java.yml
+├── deploy-service-dotnet.yml
+├── deploy-service-java.yml
 ├── publish-library-java.yml
-├── publish-microservice-dotnet.yml
-├── publish-microservice-java.yml
+├── publish-service-dotnet.yml
+├── publish-service-java.yml
 ├── test-library-dotnet.yml
 ├── test-library-java.yml
-├── test-microservice-dotnet.yml
-└── test-microservice-java.yml
+├── test-service-dotnet.yml
+└── test-service-java.yml
 ```
 
 Templates are separated by ecosystem and project type where build, test, publish, or deployment requirements differ.
@@ -390,11 +390,11 @@ This structure keeps reusable CI/CD behavior in the infrastructure layer instead
 
 ## Independent Project Lifecycles
 
-Every microservice and library is independently managed despite living in the same Git repository.
+Every service and library is independently managed despite living in the same Git repository.
 
 ## Clear Service Boundaries
 
-Each microservice owns a defined business or platform responsibility rather than becoming a shared application module.
+Each service owns a defined business or platform responsibility rather than becoming a shared application module.
 
 ## Reusable Platform Components
 

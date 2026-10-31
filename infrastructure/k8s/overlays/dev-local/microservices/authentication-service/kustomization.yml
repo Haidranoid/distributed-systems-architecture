@@ -1,8 +1,0 @@
-namespace: dev-local
-
-resources:
-  - ../../common
-  - ../../../../base/microservices/authentication-service
-
-patches:
-  - path: deployment-patch.yml

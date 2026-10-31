@@ -2,11 +2,11 @@ variables:
   GIT_DEPTH: 0
 
   DSA_LIBRARIES_DIR: libraries
-  DSA_MICROSERVICES_DIR: microservices
+  DSA_SERVICES_DIR: services
   DSA_WEBAPPS_DIR: webapps
 
   ARTIFACT_TARGET_LIBRARY: library
-  ARTIFACT_TARGET_MICROSERVICE: microservice
+  ARTIFACT_TARGET_SERVICE: service
   ARTIFACT_LANG_JAVA: java
   ARTIFACT_LANG_DOTNET: dotnet
 
@@ -15,15 +15,15 @@ workflow:
   #name: '$PROJECT_NAME-pipeline'
   rules:
     # Merge Requests
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      # Default branch (master/main)
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    #- if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    #  Default branch (master/main)
+    #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     # Everything else -> no pipeline
-    - when: never
+    #- when: never
 
 stages:
   - libraries
-  - microservices
+  - services
 
 
 # trigger templates base ==============================================================
@@ -68,89 +68,89 @@ trigger-shared-starter:
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
-# trigger microservices ==============================================================
+# trigger services ==============================================================
 trigger-config-server:
-  stage: microservices
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: config-server
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
-trigger-gateway:
-  stage: microservices
+trigger-api-gateway:
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
-    PROJECT_NAME: gateway
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_NAME: api-gateway
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-authentication-service:
-  stage: microservices
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: authentication-service
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-accounts-service:
-  stage: microservices
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: accounts-service
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-audit-service:
-  stage: microservices
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: audit-service
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_JAVA'
 
 
 trigger-media-generation-service:
-  stage: microservices
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
     PROJECT_NAME: media-generation-service
     PROJECT_NAME_SOLUTION: MediaGenerationService
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
 
 
-trigger-content-service:
-  stage: microservices
+trigger-posts-service:
+  stage: services
 
   extends: .trigger-template-base
 
   variables:
-    PROJECT_NAME: content-service
+    PROJECT_NAME: posts-service
     PROJECT_NAME_SOLUTION: ContentService
-    PROJECT_DIR: '$DSA_MICROSERVICES_DIR/$PROJECT_NAME'
-    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_MICROSERVICE'
+    PROJECT_DIR: '$DSA_SERVICES_DIR/$PROJECT_NAME'
+    PROJECT_ARTIFACT_TARGET: '$ARTIFACT_TARGET_SERVICE'
     PROJECT_ARTIFACT_LANG: '$ARTIFACT_LANG_DOTNET'
     

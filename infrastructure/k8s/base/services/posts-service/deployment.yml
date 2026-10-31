@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posts-service
+  template:
+    metadata:
+      labels:
+        app: posts-service
+    spec:
+      containers:
+        - name: posts-service
+          image: posts-service
+          ports:
+            - containerPort: 8080

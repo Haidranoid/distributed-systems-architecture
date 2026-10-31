@@ -1,0 +1,8 @@
+namespace: dev-local
+
+resources:
+  - ../../common
+  - ../../../../base/services/accounts-service
+
+patches:
+  - path: deployment-patch.yml

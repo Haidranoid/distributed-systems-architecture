@@ -1,0 +1,6 @@
+@PostsService_HostAddress = http://localhost:8085
+
+GET {{PostsService_HostAddress}}/api/v1/posts/
+Accept: application/json
+
+###

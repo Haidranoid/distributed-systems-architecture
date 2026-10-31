@@ -1,0 +1,7 @@
+﻿services:
+  postsservice:
+    image: postsservice
+    build:
+      context: .
+      dockerfile: PostsService/Dockerfile
+
