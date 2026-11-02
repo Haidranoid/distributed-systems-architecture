@@ -1,0 +1,151 @@
+plugins {
+	id 'java'
+    id 'maven-publish'
+    id 'jacoco'
+	id 'org.springframework.boot' version '4.1.2'
+	id 'io.spring.dependency-management' version '1.1.7'
+    id 'io.freefair.lombok' version '9.8.0'
+}
+
+group = 'org.dsa.services'
+version = '1.0.0'
+description = 'comments-service'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+jar {
+    enabled = false
+}
+
+repositories {
+    mavenLocal()
+
+    def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
+
+    try {
+        if (!codeArtifactAuthToken) {
+
+            providers.exec {
+                commandLine 'aws', 'login'
+            }
+
+            codeArtifactAuthToken = providers.exec {
+                commandLine 'aws', 'codeartifact', 'get-authorization-token',
+                        '--domain', 'artifacts',
+                        '--query', 'authorizationToken',
+                        '--output', 'text'
+            }.standardOutput.asText.get().trim()
+        }
+
+        maven {
+            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
+            credentials {
+                username "aws"
+                password codeArtifactAuthToken
+            }
+        }
+    } catch (Exception ignored) {
+        mavenCentral()
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+    dependsOn test
+
+    classDirectories.setFrom(
+            files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        '**/*Application*',
+                        '**/configuration/**',
+                        '**/constant/**',
+                        '**/entity/**',
+                        '**/properties/**',
+                        '**/dto/**',
+                        '**/utils/**',
+                ])
+            })
+    )
+
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+jacocoTestCoverageVerification {
+    dependsOn jacocoTestReport
+
+    violationRules {
+        rule {
+            element = 'CLASS'
+
+            excludes = [
+                    '*Application*',
+                    '*configuration*',
+                    '*constant*',
+                    '*controller*',
+                    '*entity*',
+                    '*properties*',
+                    '*dto*',
+                    '*utils*',
+            ]
+
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+ext {
+    set('springCloudVersion', "2025.1.4")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.dsa.shared:shared-starter:2.0.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-kafka'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-webclient'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.security:spring-security-oauth2-jose'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webclient-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webflux-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+    systemProperty "spring.cloud.config.enabled", "false"
+    systemProperty "spring.cloud.config.import-check.enabled", "false"
+}
