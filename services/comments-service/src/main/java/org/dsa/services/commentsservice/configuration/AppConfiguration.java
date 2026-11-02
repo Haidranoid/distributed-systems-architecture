@@ -6,8 +6,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class AppConfiguration {
-    @Bean
-    public WebClient webClient() {
-        return WebClient.builder().baseUrl("/api/v1").build();
-    }
+  @Bean
+  public WebClient webClient() {
+    return WebClient.builder().baseUrl("/api/v1").build();
+  }
 }

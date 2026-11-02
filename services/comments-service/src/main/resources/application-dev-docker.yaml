@@ -2,10 +2,8 @@ spring:
   cloud:
     config:
       enabled: false
-  datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/comments_service_dev
+
+  r2dbc:
+    url: r2dbc:postgresql://host.docker.internal:5432/comments_service_dev
     username: postgres
     password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update

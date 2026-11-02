@@ -6,13 +6,9 @@ import lombok.Builder;
 import org.jspecify.annotations.NonNull;
 
 @Builder
-public record CreateCommentRequest(
-        @NotBlank String textContent
-) {
-    @Override
-    public @NonNull String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("textContent", textContent)
-                .toString();
-    }
+public record CreateCommentRequest(@NotBlank String textContent) {
+  @Override
+  public @NonNull String toString() {
+    return MoreObjects.toStringHelper(this).add("textContent", textContent).toString();
+  }
 }

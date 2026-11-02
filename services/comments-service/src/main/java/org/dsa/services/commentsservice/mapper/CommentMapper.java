@@ -7,16 +7,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CommentMapper {
-    public Comment toCommentEntity(CreateCommentRequest createCommentRequest) {
-        return Comment.builder()
-                .textContent(createCommentRequest.textContent())
-                .build();
-    }
+  public Comment toEntity(CreateCommentRequest request) {
+    return Comment.builder().textContent(request.textContent()).build();
+  }
 
-    public CommentResponse toCommentResponse(Comment commentEntity) {
-        return CommentResponse.builder()
-                .id(commentEntity.getId())
-                .textContent(commentEntity.getTextContent())
-                .build();
-    }
+  public CommentResponse toResponse(Comment comment) {
+    return CommentResponse.builder().textContent(comment.getTextContent()).build();
+  }
 }

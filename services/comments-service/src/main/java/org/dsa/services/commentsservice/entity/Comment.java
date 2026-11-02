@@ -1,22 +1,22 @@
 package org.dsa.services.commentsservice.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "comments")
-@Entity
 @Getter
 @Setter
 @SuperBuilder
 @NoArgsConstructor
 public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Setter(AccessLevel.NONE)
-    private Long id;
+  @Id
+  @Setter(AccessLevel.NONE)
+  private Long id;
 
-    @NonNull
-    @Column(nullable = false)
-    private String textContent;
+  @NonNull
+  @Column("text_content")
+  private String textContent;
 }

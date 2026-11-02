@@ -1,4 +1,3 @@
 package org.dsa.services.commentsservice.controller.advice;
 
-public class GlobalControllerAdvice {
-}
+public class GlobalControllerAdvice {}

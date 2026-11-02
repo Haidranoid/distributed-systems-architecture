@@ -5,14 +5,12 @@ import lombok.Builder;
 import org.jspecify.annotations.NonNull;
 
 @Builder
-public record CommentResponse(
-        Long id, String textContent
-) {
-    @Override
-    public @NonNull String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("id", id)
-                .add("textContent", textContent)
-                .toString();
-    }
+public record CommentResponse(Long id, String textContent) {
+  @Override
+  public @NonNull String toString() {
+    return MoreObjects.toStringHelper(this)
+        .add("id", id)
+        .add("textContent", textContent)
+        .toString();
+  }
 }

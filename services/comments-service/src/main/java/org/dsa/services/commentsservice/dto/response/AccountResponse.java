@@ -8,16 +8,16 @@ import org.jspecify.annotations.NonNull;
 
 @Builder
 public record AccountResponse(
-        Long id, String username, String firstName, String lastName, String email, Role role) {
-    @Override
-    public @NonNull String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-                .append("id", id)
-                .append("username", username)
-                .append("firstName", firstName)
-                .append("lastName", lastName)
-                .append("email", email)
-                .append("role", role)
-                .toString();
-    }
+    Long id, String username, String firstName, String lastName, String email, Role role) {
+  @Override
+  public @NonNull String toString() {
+    return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        .append("id", id)
+        .append("username", username)
+        .append("firstName", firstName)
+        .append("lastName", lastName)
+        .append("email", email)
+        .append("role", role)
+        .toString();
+  }
 }

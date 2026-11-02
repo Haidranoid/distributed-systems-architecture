@@ -1,23 +1,21 @@
 server:
   port: 8086
+
 spring:
   application:
     name: comments-service
   config:
     import: ${CONFIG_IMPORT:}
-  datasource:
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
-    open-in-view: false
+  sql:
+    init:
+      mode: always
+
 management:
   endpoints:
     web:
       exposure:
         include: health, info
+
 logging:
   level:
     # Kafka
@@ -25,14 +23,16 @@ logging:
     org.apache.kafka.common.utils.AppInfoParser: WARN
     org.apache.kafka.clients.producer.KafkaProducer: WARN
 
-    # Hibernate
-    org.hibernate.orm.connections.pooling: WARN
+    # R2DBC Postgres
+    org.springframework.r2dbc.core: DEBUG
 
-    # MVC
-    org.springframework.web.servlet.DispatcherServlet: WARN
+    # WebFlux
+    # org.springframework.web.reactive.DispatcherHandler: WARN
+    org.springframework.web.reactive: WARN
 
     # SpringDoc
     org.springdoc.core.events.SpringDocAppInitializer: ERROR
+
 application:
   security:
     jwt:

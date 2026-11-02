@@ -8,8 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationPropertiesScan
 public class CommentsServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(CommentsServiceApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(CommentsServiceApplication.class, args);
+  }
 }
