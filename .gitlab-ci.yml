@@ -19,7 +19,7 @@ workflow:
     #  Default branch (master/main)
     #- if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     # Everything else -> no pipeline
-    #- when: never
+    - when: never
 
 stages:
   - libraries
