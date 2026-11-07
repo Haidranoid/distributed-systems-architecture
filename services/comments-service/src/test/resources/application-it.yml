@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+
+  sql:
+    init:
+      mode: embedded
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/comments_servie_dev
+    username: postgres
+    password: postgres

@@ -110,45 +110,82 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 
+configurations {
+    mockitoAgent
+}
+
 ext {
     set('googleGuavaVersion', "33.8.0-jre")
     set('springCloudVersion', "2025.1.4")
     set('springReactorVersion', "2025.0.8")
+    set('springSecurityVersion', "7.1.2")
 }
 
 dependencyManagement {
     imports {
         mavenBom "com.google.guava:guava-bom:${googleGuavaVersion}"
-        mavenBom "io.projectreactor:reactor-bom:${springReactorVersion}"
+        //mavenBom "io.projectreactor:reactor-bom:${springReactorVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        //mavenBom "org.springframework.security:spring-security-bom:${springSecurityVersion}"
     }
 }
 
 dependencies {
     implementation 'com.google.guava:guava'
-    //implementation 'org.dsa.shared:shared-core:2.0.0'
+
+    // Documentation
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.2.0'
+
+    // Monitoring
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Persistence
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    // Messaging
     implementation 'org.springframework.boot:spring-boot-starter-kafka'
+
+    // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security-oauth2-resource-server'
+    //implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+    // HTTP
     implementation 'org.springframework.boot:spring-boot-starter-webclient'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Configuration
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
-    implementation 'org.springframework.security:spring-security-oauth2-jose'
+
+    // Development
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Runtime
     runtimeOnly 'org.postgresql:r2dbc-postgresql'
+
+    // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-data-r2dbc-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webclient-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux-test'
     testImplementation 'io.projectreactor:reactor-test'
+
+    // Mockito (if used directly by your tests)
+    mockitoAgent('org.mockito:mockito-core') { transitive = false }
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+
+    jvmArgs "-javaagent:${configurations.mockitoAgent.asPath}"
 }
 
 test {

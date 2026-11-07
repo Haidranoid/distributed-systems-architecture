@@ -3,12 +3,12 @@ package org.dsa.services.commentsservice.dto.response;
 import lombok.Builder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.dsa.shared.core.constants.Role;
+//import org.dsa.shared.core.constants.Role;
 import org.jspecify.annotations.NonNull;
 
 @Builder
 public record AccountResponse(
-    Long id, String username, String firstName, String lastName, String email, Role role) {
+    Long id, String username, String firstName, String lastName, String email, String role) {
   @Override
   public @NonNull String toString() {
     return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
