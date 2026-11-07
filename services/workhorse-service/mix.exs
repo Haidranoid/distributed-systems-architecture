@@ -1,26 +1,14 @@
-defmodule WorkhorseService.MixProject do
+defmodule WorkhorseService.Umbrella.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :workhorse_service,
+      apps_path: "apps",
       version: "0.1.0",
-      elixir: "~> 1.17",
-      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
       deps: deps(),
+      aliases: aliases(),
       listeners: [Phoenix.CodeReloader]
-    ]
-  end
-
-  # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
-  def application do
-    [
-      mod: {WorkhorseService.Application, []},
-      extra_applications: [:logger, :runtime_tools]
     ]
   end
 
@@ -30,28 +18,20 @@ defmodule WorkhorseService.MixProject do
     ]
   end
 
-  # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
-
-  # Specifies your project dependencies.
+  # Dependencies can be Hex packages:
   #
-  # Type `mix help deps` for examples and options.
+  #   {:mydep, "~> 0.3.0"}
+  #
+  # Or git/path repositories:
+  #
+  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
+  #
+  # Type "mix help deps" for more examples and options.
+  #
+  # Dependencies listed here are available only for this project
+  # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
-    [
-      {:phoenix, "~> 1.8.16"},
-      {:phoenix_ecto, "~> 4.5"},
-      {:ecto_sql, "~> 3.13"},
-      {:postgrex, ">= 0.0.0"},
-      {:swoosh, "~> 1.16"},
-      {:req, "~> 0.5"},
-      {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 1.0"},
-      {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
-    ]
+    []
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -60,12 +40,13 @@ defmodule WorkhorseService.MixProject do
   #     $ mix setup
   #
   # See the documentation for `Mix` for more info on aliases.
+  #
+  # Aliases listed here are available only for this project
+  # and cannot be accessed from applications inside the apps/ folder.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      # run `mix setup` in all child apps
+      setup: ["cmd mix setup"],
       precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
     ]
   end

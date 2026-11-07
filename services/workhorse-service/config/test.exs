@@ -15,19 +15,19 @@ config :workhorse_service, WorkhorseService.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :workhorse_service, WorkhorseServiceWeb.Endpoint,
+config :workhorse_service_web, WorkhorseServiceWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "/2mltzxmvUHlXGwfY5AxtQZtqb69DkgP35aKgD6x6YT+L+Oj1mSMPxgo6nLuBmMJ",
+  secret_key_base: "CD7nY5ifKPwHj8rCnfADoIJTr0tkcUmk+d8NMjppL4oeaaHaPpsk2lNnp4Hr+EDL",
   server: false
+
+# Print only warnings and errors during test
+config :logger, level: :warning
 
 # In test we don't send emails
 config :workhorse_service, WorkhorseService.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false
-
-# Print only warnings and errors during test
-config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime

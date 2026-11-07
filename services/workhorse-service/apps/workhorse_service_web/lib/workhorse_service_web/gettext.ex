@@ -21,5 +21,5 @@ defmodule WorkhorseServiceWeb.Gettext do
 
   See the [Gettext Docs](https://gettext.hexdocs.pm) for detailed usage.
   """
-  use Gettext.Backend, otp_app: :workhorse_service
+  use Gettext.Backend, otp_app: :workhorse_service_web
 end

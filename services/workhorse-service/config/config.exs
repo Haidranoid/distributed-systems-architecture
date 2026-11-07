@@ -1,26 +1,17 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Config module.
+# This file is responsible for configuring your umbrella
+# and **all applications** and their dependencies with the
+# help of the Config module.
 #
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
+# Note that all applications in your umbrella share the
+# same configuration and dependencies, which is why they
+# all use the same configuration file. If you want different
+# configurations or dependencies per app, it is best to
+# move said applications out of the umbrella.
 import Config
 
+# Configure Mix tasks and generators
 config :workhorse_service,
-  ecto_repos: [WorkhorseService.Repo],
-  generators: [timestamp_type: :utc_datetime]
-
-# Configure the endpoint
-config :workhorse_service, WorkhorseServiceWeb.Endpoint,
-  url: [host: "localhost"],
-  adapter: Bandit.PhoenixAdapter,
-  render_errors: [
-    formats: [json: WorkhorseServiceWeb.ErrorJSON],
-    layout: false
-  ],
-  pubsub_server: WorkhorseService.PubSub,
-  live_view: [signing_salt: "cqrowoMF"]
+  ecto_repos: [WorkhorseService.Repo]
 
 # Configure the mailer
 #
@@ -30,6 +21,21 @@ config :workhorse_service, WorkhorseServiceWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :workhorse_service, WorkhorseService.Mailer, adapter: Swoosh.Adapters.Local
+
+config :workhorse_service_web,
+  ecto_repos: [WorkhorseService.Repo],
+  generators: [context_app: :workhorse_service]
+
+# Configures the endpoint
+config :workhorse_service_web, WorkhorseServiceWeb.Endpoint,
+  url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
+  render_errors: [
+    formats: [json: WorkhorseServiceWeb.ErrorJSON],
+    layout: false
+  ],
+  pubsub_server: WorkhorseService.PubSub,
+  live_view: [signing_salt: "D6zr9Txs"]
 
 # Configure Elixir's Logger
 config :logger, :default_formatter,

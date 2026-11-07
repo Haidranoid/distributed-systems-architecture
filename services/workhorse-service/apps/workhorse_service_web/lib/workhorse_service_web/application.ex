@@ -1,4 +1,4 @@
-defmodule WorkhorseService.Application do
+defmodule WorkhorseServiceWeb.Application do
   # See https://elixir.hexdocs.pm/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -9,18 +9,15 @@ defmodule WorkhorseService.Application do
   def start(_type, _args) do
     children = [
       WorkhorseServiceWeb.Telemetry,
-      WorkhorseService.Repo,
-      {DNSCluster, query: Application.get_env(:workhorse_service, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: WorkhorseService.PubSub},
-      # Start a worker by calling: WorkhorseService.Worker.start_link(arg)
-      # {WorkhorseService.Worker, arg},
+      # Start a worker by calling: WorkhorseServiceWeb.Worker.start_link(arg)
+      # {WorkhorseServiceWeb.Worker, arg},
       # Start to serve requests, typically the last entry
       WorkhorseServiceWeb.Endpoint
     ]
 
     # See https://elixir.hexdocs.pm/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: WorkhorseService.Supervisor]
+    opts = [strategy: :one_for_one, name: WorkhorseServiceWeb.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
