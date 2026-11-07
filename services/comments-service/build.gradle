@@ -111,19 +111,22 @@ jacocoTestCoverageVerification {
 check.dependsOn jacocoTestCoverageVerification
 
 ext {
+    set('googleGuavaVersion', "33.8.0-jre")
     set('springCloudVersion', "2025.1.4")
     set('springReactorVersion', "2025.0.8")
 }
 
 dependencyManagement {
     imports {
+        mavenBom "com.google.guava:guava-bom:${googleGuavaVersion}"
         mavenBom "io.projectreactor:reactor-bom:${springReactorVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
 
 dependencies {
-    implementation 'org.dsa.shared:shared-starter:2.0.0'
+    implementation 'com.google.guava:guava'
+    //implementation 'org.dsa.shared:shared-core:2.0.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:3.2.0'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
