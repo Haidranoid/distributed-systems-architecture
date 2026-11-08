@@ -1,8 +1,9 @@
-using PostsService.Configurations;
+//using PostsService.Configurations;
 using PostsService.Data;
 using PostsService.Repositories;
 using PostsService.Services;
 using Microsoft.EntityFrameworkCore;
+using Steeltoe.Configuration.ConfigServer;
 
 namespace PostsService;
 
@@ -10,10 +11,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
-
-        // Configure the configuration environment.
-        if (Environment.GetEnvironmentVariable("SPRING_CLOUD_URL") is not null)
+        /*
+         if (Environment.GetEnvironmentVariable("SPRING_CLOUD_URL") is not null)
         {
             var springCloudUrl = Environment.GetEnvironmentVariable("SPRING_CLOUD_URL");
             var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -28,6 +27,13 @@ public class Program
                 options.Profile = environmentName!;
             });
         }
+        */
+
+        // Creates the configuration environment.
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Steeltoe Spring ConfigServer
+        builder.AddConfigServer();
 
         // Add services to the container.
         builder.Services.AddControllers();
@@ -64,7 +70,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 
