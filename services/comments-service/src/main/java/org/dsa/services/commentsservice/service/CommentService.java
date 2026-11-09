@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.commentsservice.dto.request.CreateCommentRequest;
 import org.dsa.services.commentsservice.dto.request.UpdateCommentRequest;
 import org.dsa.services.commentsservice.dto.response.CommentResponse;
+import org.dsa.services.commentsservice.entity.Comment;
+import org.dsa.services.commentsservice.exception.CommentNotFoundException;
 import org.dsa.services.commentsservice.mapper.CommentMapper;
 import org.dsa.services.commentsservice.repository.CommentRepository;
 import org.springframework.stereotype.Service;
@@ -19,21 +21,47 @@ public class CommentService {
   private final CommentRepository commentRepository;
   private final CommentMapper commentMapper;
 
-  public CommentResponse create(CreateCommentRequest request) {
-    return null;
+  public Mono<CommentResponse> persist(CreateCommentRequest createCommentRequest) {
+    Comment comment = commentMapper.toEntity(createCommentRequest);
+
+    return commentRepository
+        .save(comment)
+        .map(commentMapper::toResponse)
+        .doOnSuccess(response -> log.debug("Comment created: {}", response));
   }
 
-  public Mono<CommentResponse> findById(Long id) {
-    return commentRepository.findById(id).map(commentMapper::toResponse);
+  public Mono<CommentResponse> getById(Long id) {
+    return commentRepository
+        .findById(id)
+        .switchIfEmpty(Mono.error(new CommentNotFoundException(id)))
+        .map(commentMapper::toResponse)
+        .doOnSuccess(response -> log.debug("Comment retrieved: {}", response));
   }
 
-  public Flux<CommentResponse> findAll() {
-    return commentRepository.findAll().map(commentMapper::toResponse);
+  public Flux<CommentResponse> getAll() {
+    return commentRepository
+        .findAll()
+        .map(commentMapper::toResponse)
+        .doOnComplete(() -> log.debug("All comments retrieved"));
   }
 
-  public Mono<CommentResponse> update(Long id, UpdateCommentRequest request) {
-    return commentRepository.findById(id).map(commentMapper::toResponse);
+  public Mono<CommentResponse> modify(Long id, UpdateCommentRequest updateCommentRequest) {
+    return commentRepository
+        .findById(id)
+        .switchIfEmpty(Mono.error(new CommentNotFoundException(id)))
+        .flatMap(comment -> {
+          comment.setTextContent(updateCommentRequest.textContent());
+          return commentRepository.save(comment);
+        })
+        .map(commentMapper::toResponse)
+        .doOnSuccess(response -> log.debug("Comment updated: {}", response));
   }
 
-  public void delete(Long id) {}
+  public Mono<Void> remove(Long id) {
+    return commentRepository
+        .findById(id)
+        .switchIfEmpty(Mono.error(new CommentNotFoundException(id)))
+        .flatMap(commentRepository::delete)
+        .doOnSuccess(ignored -> log.debug("Comment deleted: {}", id));
+  }
 }

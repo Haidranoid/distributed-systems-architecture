@@ -1,3 +1,14 @@
 package org.dsa.services.commentsservice.dto.request;
 
-public class UpdateCommentRequest {}
+import com.google.common.base.MoreObjects;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
+import org.jspecify.annotations.NonNull;
+
+@Builder
+public record UpdateCommentRequest(@NotBlank String textContent) {
+  @Override
+  public @NonNull String toString() {
+    return MoreObjects.toStringHelper(this).add("textContent", textContent).toString();
+  }
+}

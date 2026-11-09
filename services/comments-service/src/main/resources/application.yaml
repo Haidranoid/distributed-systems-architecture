@@ -18,6 +18,9 @@ management:
 
 logging:
   level:
+    # Service
+    org.dsa.services.commentsservice.service: trace
+
     # Kafka
     org.apache.kafka.common.config.AbstractConfig: WARN
     org.apache.kafka.common.utils.AppInfoParser: WARN
@@ -28,7 +31,7 @@ logging:
 
     # WebFlux
     # org.springframework.web.reactive.DispatcherHandler: WARN
-    org.springframework.web.reactive: WARN
+    org.springframework.web.reactive: warn
 
     # SpringDoc
     org.springdoc.core.events.SpringDocAppInitializer: ERROR

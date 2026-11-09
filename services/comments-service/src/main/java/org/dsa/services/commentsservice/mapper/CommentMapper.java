@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CommentMapper {
+
   public Comment toEntity(CreateCommentRequest request) {
     return Comment.builder().textContent(request.textContent()).build();
   }
