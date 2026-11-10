@@ -22,4 +22,14 @@ erl_crash.dump
 # Temporary files, for example, from tests.
 /tmp/
 
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 
+### VS Code ###
+.vscode/
