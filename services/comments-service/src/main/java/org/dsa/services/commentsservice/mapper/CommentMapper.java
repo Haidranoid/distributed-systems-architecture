@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommentMapper {
 
-  public Comment toEntity(CreateCommentRequest request) {
+  public Comment mapCreateCommentRequestToEntity(CreateCommentRequest request) {
     return Comment.builder().textContent(request.textContent()).build();
   }
 
-  public CommentResponse toResponse(Comment comment) {
+  public CommentResponse mapToCommentResponse(Comment comment) {
     return CommentResponse.builder().textContent(comment.getTextContent()).build();
   }
 }
