@@ -1,12 +1,12 @@
 package org.dsa.services.authenticationservice.unit.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.dsa.services.authenticationservice.dto.response.AccountResponse;
 import org.dsa.services.authenticationservice.dto.response.AuthenticationResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.services.authenticationservice.mapper.AuthenticationMapper;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AuthenticationMapperTest {
 
@@ -14,12 +14,12 @@ public class AuthenticationMapperTest {
       authenticationMapper = new AuthenticationMapper();
 
   @Test
-  void toAuthResponseDto_shouldMapAllFields_fromAuthAccountDto() {
+  void mapToAuthResponseDto_shouldMapAllFields_fromAuthAccountDto() {
     String accessToken = AuthenticationDtoFixtures.randomAccessToken();
     String refreshToken = AuthenticationDtoFixtures.randomRefreshToken();
     AccountResponse accountResponse = AuthenticationDtoFixtures.authAccountDto(1L);
     AuthenticationResponse authenticationResponse =
-        authenticationMapper.toAuthResponseDto(accountResponse, accessToken, refreshToken);
+        authenticationMapper.mapToAuthResponseDto(accountResponse, accessToken, refreshToken);
 
     assertThat(authenticationResponse.accessToken())
         .isEqualTo("access-token-añsldfjañeifaisdfjalsdkjfasldfjasñldfkjasñldfkj");

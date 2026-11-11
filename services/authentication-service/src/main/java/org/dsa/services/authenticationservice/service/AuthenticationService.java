@@ -1,6 +1,5 @@
 package org.dsa.services.authenticationservice.service;
 
-import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.authenticationservice.constant.TokenType;
@@ -22,6 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -63,7 +66,7 @@ public class AuthenticationService {
     var refreshToken = jwtSignerService.generateRefreshToken(accountAuthenticated.username());
 
     var authResponseDto =
-        authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
+        authMapper.mapToAuthResponseDto(accountAuthenticated, accessToken, refreshToken);
 
     authEventProducer.publish(
         UserLoggedInEvent.builder()
@@ -90,7 +93,7 @@ public class AuthenticationService {
 
     saveAccountToken(accountCreated.id(), accessToken);
 
-    var authResponseDto = authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken);
+    var authResponseDto = authMapper.mapToAuthResponseDto(accountCreated, accessToken, refreshToken);
 
     authEventProducer.publish(
         UserSignedUpEvent.builder()

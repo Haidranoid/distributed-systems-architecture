@@ -1,13 +1,5 @@
 package org.dsa.services.authenticationservice.unit.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.dsa.services.authenticationservice.constant.TokenType;
 import org.dsa.services.authenticationservice.dto.response.AccountResponse;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
@@ -31,17 +23,34 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 class AuthenticationServiceTest {
 
-  @Mock private JwtSignerService jwtSignerService;
-  @Mock private RestTemplate restTemplate;
-  @Mock private Endpoints endpoints;
-  @Mock private TokenRepository tokenRepository;
-  @Mock private AuthenticationMapper authMapper;
-  @Mock private AuthEventProducer authEventProducer;
+  @Mock
+  private JwtSignerService jwtSignerService;
+  @Mock
+  private RestTemplate restTemplate;
+  @Mock
+  private Endpoints endpoints;
+  @Mock
+  private TokenRepository tokenRepository;
+  @Mock
+  private AuthenticationMapper authMapper;
+  @Mock
+  private AuthEventProducer authEventProducer;
 
-  @InjectMocks private AuthenticationService authenticationService;
+  @InjectMocks
+  private AuthenticationService authenticationService;
 
   @Test
   void login_whenCredentialsAreValid_shouldReturnAuthResponseDto() {
@@ -62,9 +71,9 @@ class AuthenticationServiceTest {
     claims.put("scope", String.join(" ", scopes));
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
-            loginDto,
-            AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
+        loginDto,
+        AccountResponse.class))
         .thenReturn(accountAuthenticated);
 
     when(jwtSignerService.generateAccessToken(accountAuthenticated.username(), claims))
@@ -73,7 +82,7 @@ class AuthenticationServiceTest {
     when(jwtSignerService.generateRefreshToken(accountAuthenticated.username()))
         .thenReturn(refreshToken);
 
-    when(authMapper.toAuthResponseDto(accountAuthenticated, accessToken, refreshToken))
+    when(authMapper.mapToAuthResponseDto(accountAuthenticated, accessToken, refreshToken))
         .thenReturn(authResponseDto);
 
     Mockito.doNothing()
@@ -97,9 +106,9 @@ class AuthenticationServiceTest {
     var loginDto = AuthenticationDtoFixtures.loginWithUsernameAndPassword();
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
-            loginDto,
-            AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
+        loginDto,
+        AccountResponse.class))
         .thenThrow(
             new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid username or password"));
 
@@ -114,9 +123,9 @@ class AuthenticationServiceTest {
     var loginDto = AuthenticationDtoFixtures.loginWithUsernameAndPassword();
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
-            loginDto,
-            AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint() + "/verify-credentials",
+        loginDto,
+        AccountResponse.class))
         .thenReturn(null);
 
     var exception =
@@ -135,7 +144,7 @@ class AuthenticationServiceTest {
     var authResponseDto = AuthenticationDtoFixtures.signupAuthResponseDto(1L);
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
         .thenReturn(accountCreated);
 
     when(jwtSignerService.generateAccessToken(accountCreated.username(), new HashMap<>()))
@@ -143,7 +152,7 @@ class AuthenticationServiceTest {
 
     when(jwtSignerService.generateRefreshToken(accountCreated.username())).thenReturn(refreshToken);
 
-    when(authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken))
+    when(authMapper.mapToAuthResponseDto(accountCreated, accessToken, refreshToken))
         .thenReturn(authResponseDto);
 
     // TODO: verify method params
@@ -172,7 +181,7 @@ class AuthenticationServiceTest {
     var authResponseDto = AuthenticationDtoFixtures.signupAuthResponseDto(1L);
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
         .thenReturn(accountCreated);
 
     when(jwtSignerService.generateAccessToken(accountCreated.username(), new HashMap<>()))
@@ -180,7 +189,7 @@ class AuthenticationServiceTest {
 
     when(jwtSignerService.generateRefreshToken(accountCreated.username())).thenReturn(refreshToken);
 
-    when(authMapper.toAuthResponseDto(accountCreated, accessToken, refreshToken))
+    when(authMapper.mapToAuthResponseDto(accountCreated, accessToken, refreshToken))
         .thenReturn(authResponseDto);
 
     // TODO: verify method params
@@ -211,7 +220,7 @@ class AuthenticationServiceTest {
     var signupDto = AuthenticationDtoFixtures.managerSignupDto();
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
         .thenThrow(new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request body"));
 
     var exception =
@@ -225,7 +234,7 @@ class AuthenticationServiceTest {
     var signupDto = AuthenticationDtoFixtures.managerSignupDto();
 
     when(restTemplate.postForObject(
-            endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
+        endpoints.accountsServiceInternalEndpoint(), signupDto, AccountResponse.class))
         .thenReturn(null);
 
     var exception =

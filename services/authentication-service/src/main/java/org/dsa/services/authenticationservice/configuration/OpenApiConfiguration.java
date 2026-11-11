@@ -12,22 +12,22 @@ import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(
     info =
-        @Info(
-            contact =
-                @Contact(
-                    name = "Eduardo Martínez",
-                    email = "martinezlara_joseeduardo@hotmail.com",
-                    url = "https://github.com/Haidranoid"),
-            description = "OpenApi documentation for authentication-service",
-            title = "OpenApi specification",
-            version = "1.0",
-            license = @License(name = "Licence name", url = "https://github.com/Haidranoid"),
-            termsOfService = "Terms of service"),
+    @Info(
+        contact =
+        @Contact(
+            name = "Eduardo Martínez",
+            email = "martinezlara_joseeduardo@hotmail.com",
+            url = "https://github.com/Haidranoid"),
+        description = "OpenApi documentation for authentication-service",
+        title = "OpenApi specification",
+        version = "1.0",
+        license = @License(name = "Licence name", url = "https://github.com/Haidranoid"),
+        termsOfService = "Terms of service"),
     servers = {
-      @Server(description = "local env", url = "http://localhost:8080"),
-      @Server(
-          description = "staging env",
-          url = "https://staging.placeholder.com/authentication-service")
+        @Server(description = "local env", url = "http://localhost:8080"),
+        @Server(
+            description = "staging env",
+            url = "https://staging.placeholder.com/authentication-service")
     },
     security = {@SecurityRequirement(name = "bearerAuth")})
 @SecurityScheme(
@@ -37,4 +37,5 @@ import io.swagger.v3.oas.annotations.servers.Server;
     type = SecuritySchemeType.HTTP,
     bearerFormat = "JWT",
     in = SecuritySchemeIn.HEADER)
-public class OpenApiConfiguration {}
+public class OpenApiConfiguration {
+}

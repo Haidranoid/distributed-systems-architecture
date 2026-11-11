@@ -1,12 +1,13 @@
 package org.dsa.services.authenticationservice.service;
 
 import io.jsonwebtoken.Jwts;
-import java.util.Date;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.dsa.shared.core.properties.JwtProperties;
 import org.dsa.shared.core.utils.AlgorithmKeyPair;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor

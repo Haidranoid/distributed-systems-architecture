@@ -11,5 +11,6 @@ class AuthenticationServiceApplicationTests {
 
   @Test
   @DisplayName("authentication-service smoke test")
-  void contextLoads() {}
+  void contextLoads() {
+  }
 }

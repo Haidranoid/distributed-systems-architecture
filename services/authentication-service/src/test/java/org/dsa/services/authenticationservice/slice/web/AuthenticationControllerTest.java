@@ -1,10 +1,5 @@
 package org.dsa.services.authenticationservice.slice.web;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.dsa.services.authenticationservice.controller.AuthenticationController;
 import org.dsa.services.authenticationservice.controller.advice.GlobalControllerAdvice;
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
@@ -21,14 +16,22 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebSliceEnvironment(AuthenticationController.class)
 @Import(GlobalControllerAdvice.class)
 public class AuthenticationControllerTest {
 
-  @Autowired private MockMvc mockMvc;
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private MockMvc mockMvc;
+  @Autowired
+  private ObjectMapper objectMapper;
 
-  @MockitoBean private AuthenticationService authenticationService;
+  @MockitoBean
+  private AuthenticationService authenticationService;
 
   @Test
   @DisplayName("POST /api/v1/authentication/login returns 200 when credentials are valid")

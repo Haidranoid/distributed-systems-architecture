@@ -1,7 +1,9 @@
 package org.dsa.services.authenticationservice.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.dsa.services.authenticationservice.constant.TokenType;
 
@@ -12,7 +14,9 @@ import org.dsa.services.authenticationservice.constant.TokenType;
 @SuperBuilder
 @NoArgsConstructor
 public class Token {
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
   @Column(unique = true, length = 1000)
   private String token;

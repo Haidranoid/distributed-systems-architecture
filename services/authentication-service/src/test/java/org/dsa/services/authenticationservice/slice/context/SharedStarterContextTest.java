@@ -1,7 +1,5 @@
 package org.dsa.services.authenticationservice.slice.context;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.dsa.shared.core.utils.AlgorithmKeyPair;
 import org.dsa.shared.core.utils.JsonWebTokenDecoder;
 import org.dsa.shared.core.utils.JwtAuthenticationConverter;
@@ -10,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.ConfigDataApplicationContextInitializer;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SharedStarterContextTest {
 

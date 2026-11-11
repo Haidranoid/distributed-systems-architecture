@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationMapper {
 
-  public AuthenticationResponse toAuthResponseDto(
+  public AuthenticationResponse mapToAuthResponseDto(
       AccountResponse accountResponse, String accessToken, String refreshToken) {
     return AuthenticationResponse.builder()
         .accessToken(accessToken)

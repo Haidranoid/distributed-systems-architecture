@@ -1,8 +1,5 @@
 package org.dsa.services.authenticationservice.integration.flows;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.dsa.services.authenticationservice.fixture.AuthenticationDtoFixtures;
 import org.dsa.shared.starter.test.integration.SpringBootIntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +7,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 public class AuthenticateLoginFlowIT extends SpringBootIntegrationTest {
 
-  @Autowired MockMvc mvc;
-  @Autowired ObjectMapper objectMapper;
+  @Autowired
+  MockMvc mvc;
+  @Autowired
+  ObjectMapper objectMapper;
 
   // @Test
   void authenticateLoginFlow_shouldReturnTheAccountSession() throws Exception {
