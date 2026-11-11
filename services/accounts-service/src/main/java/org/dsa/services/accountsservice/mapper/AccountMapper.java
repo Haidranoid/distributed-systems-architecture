@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountMapper {
 
-  public Account toEntity(CreateAccountRequest dto) {
+  public Account mapCreateAccountRequestToEntity(CreateAccountRequest dto) {
     return Account.builder()
         .username(dto.username())
         .firstName(dto.firstName())
@@ -19,7 +19,7 @@ public class AccountMapper {
         .build();
   }
 
-  public AccountResponse toDto(Account account) {
+  public AccountResponse mapToAccountResponse(Account account) {
     return AccountResponse.builder()
         .id(account.getId())
         .username(account.getUsername())

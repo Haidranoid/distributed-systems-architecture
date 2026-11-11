@@ -1,6 +1,5 @@
 package org.dsa.services.accountsservice.unit.service;
 
-import java.util.Optional;
 import org.dsa.services.accountsservice.entity.Account;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
@@ -18,13 +17,18 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Optional;
+
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceTest {
 
-  @Mock private AccountRepository accountRepository;
-  @Mock private AccountMapper accountsMapper;
+  @Mock
+  private AccountRepository accountRepository;
+  @Mock
+  private AccountMapper accountsMapper;
 
-  @InjectMocks private AccountService accountService;
+  @InjectMocks
+  private AccountService accountService;
 
   @Test
   void create_whenAccountIsCreated_shouldReturnAccountResponseDto() {
@@ -33,17 +37,17 @@ public class AccountServiceTest {
     var accountPersisted = AccountFixtures.adminAccountPersisted(1L);
     var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
-    Mockito.when(accountsMapper.toEntity(createAccountDto)).thenReturn(accountEntity);
+    Mockito.when(accountsMapper.mapCreateAccountRequestToEntity(createAccountDto)).thenReturn(accountEntity);
     Mockito.when(accountRepository.save(accountEntity)).thenReturn(accountPersisted);
-    Mockito.when(accountsMapper.toDto(accountPersisted)).thenReturn(accountDto);
+    Mockito.when(accountsMapper.mapToAccountResponse(accountPersisted)).thenReturn(accountDto);
 
     var accountCreated = accountService.create(createAccountDto);
 
     Assertions.assertNotNull(accountCreated);
 
-    Mockito.verify(accountsMapper).toEntity(createAccountDto);
+    Mockito.verify(accountsMapper).mapCreateAccountRequestToEntity(createAccountDto);
     Mockito.verify(accountRepository).save(accountEntity);
-    Mockito.verify(accountsMapper).toDto(accountPersisted);
+    Mockito.verify(accountsMapper).mapToAccountResponse(accountPersisted);
   }
 
   @Test
@@ -52,7 +56,7 @@ public class AccountServiceTest {
     var accountDto = AccountDtoFixtures.adminAccountResponseDto(1L);
 
     Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(accountPersisted));
-    Mockito.when(accountsMapper.toDto(accountPersisted)).thenReturn(accountDto);
+    Mockito.when(accountsMapper.mapToAccountResponse(accountPersisted)).thenReturn(accountDto);
 
     var accountFound = accountService.findById(1L);
 
@@ -61,7 +65,7 @@ public class AccountServiceTest {
     Assertions.assertEquals(accountDto, accountFound);
 
     Mockito.verify(accountRepository).findById(1L);
-    Mockito.verify(accountsMapper).toDto(accountPersisted);
+    Mockito.verify(accountsMapper).mapToAccountResponse(accountPersisted);
   }
 
   @Test
@@ -74,7 +78,7 @@ public class AccountServiceTest {
     Assertions.assertEquals("Account not found: id " + 1L, exception.getMessage());
 
     Mockito.verify(accountRepository).findById(1L);
-    Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any());
+    Mockito.verify(accountsMapper, Mockito.never()).mapToAccountResponse(Mockito.any());
   }
 
   @Test
@@ -99,13 +103,13 @@ public class AccountServiceTest {
     var accountsPersisted = AccountFixtures.twoAccountsPersisted();
 
     Mockito.when(accountRepository.findAll()).thenReturn(accountsPersisted);
-    Mockito.when(accountsMapper.toDto(accountsPersisted.get(0)))
+    Mockito.when(accountsMapper.mapToAccountResponse(accountsPersisted.get(0)))
         .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
-    Mockito.when(accountsMapper.toDto(accountsPersisted.get(1)))
+    Mockito.when(accountsMapper.mapToAccountResponse(accountsPersisted.get(1)))
         .thenReturn(AccountDtoFixtures.adminAccountResponseDto(2L));
     /*
     mockedAccounts.forEach(account -> {
-        Mockito.when(accountsMapper.toDto(account))
+        Mockito.when(accountsMapper.mapToAccountResponse(account))
                 .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
     });
     */
@@ -127,7 +131,7 @@ public class AccountServiceTest {
 
     Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(accountPersisted));
     Mockito.when(accountRepository.save(accountPersisted)).thenReturn(accountUpdated);
-    Mockito.when(accountsMapper.toDto(accountUpdated))
+    Mockito.when(accountsMapper.mapToAccountResponse(accountUpdated))
         .thenReturn(AccountDtoFixtures.adminAccountResponseDto(1L));
 
     var account = accountService.update(1L, updateAccountDto);
@@ -136,7 +140,7 @@ public class AccountServiceTest {
     Assertions.assertEquals("admin", account.username());
 
     Mockito.verify(accountRepository).findById(1L);
-    Mockito.verify(accountsMapper).toDto(accountUpdated);
+    Mockito.verify(accountsMapper).mapToAccountResponse(accountUpdated);
   }
 
   @Test
@@ -152,7 +156,7 @@ public class AccountServiceTest {
     Assertions.assertEquals("Account not found", exception.getMessage());
 
     Mockito.verify(accountRepository, Mockito.never()).save(Mockito.any());
-    Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any());
+    Mockito.verify(accountsMapper, Mockito.never()).mapToAccountResponse(Mockito.any());
   }
 
   @Test
@@ -191,7 +195,7 @@ public class AccountServiceTest {
 
     Mockito.when(accountRepository.findByUsername(authenticateAccountDto.username()))
         .thenReturn(Optional.of(accountPersisted));
-    Mockito.when(accountsMapper.toDto(accountPersisted)).thenReturn(accountDto);
+    Mockito.when(accountsMapper.mapToAccountResponse(accountPersisted)).thenReturn(accountDto);
 
     var accountFound = accountService.verifyCredentials(authenticateAccountDto);
 
@@ -200,7 +204,7 @@ public class AccountServiceTest {
     Assertions.assertEquals(accountDto, accountFound);
 
     Mockito.verify(accountRepository).findByUsername("admin");
-    Mockito.verify(accountsMapper).toDto(accountPersisted);
+    Mockito.verify(accountsMapper).mapToAccountResponse(accountPersisted);
   }
 
   @Test
@@ -219,6 +223,6 @@ public class AccountServiceTest {
 
     Mockito.verify(accountRepository, Mockito.atMostOnce())
         .findByUsername(authenticateAccountDto.username());
-    Mockito.verify(accountsMapper, Mockito.never()).toDto(Mockito.any(Account.class));
+    Mockito.verify(accountsMapper, Mockito.never()).mapToAccountResponse(Mockito.any(Account.class));
   }
 }

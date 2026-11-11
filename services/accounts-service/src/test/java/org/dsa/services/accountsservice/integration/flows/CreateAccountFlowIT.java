@@ -1,9 +1,5 @@
 package org.dsa.services.accountsservice.integration.flows;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.dsa.services.accountsservice.dto.response.AccountResponse;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.shared.starter.test.integration.SpringBootIntegrationTest;
@@ -13,10 +9,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 public class CreateAccountFlowIT extends SpringBootIntegrationTest {
 
-  @Autowired private MockMvc mvc;
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private MockMvc mvc;
+  @Autowired
+  private ObjectMapper objectMapper;
 
   @Test
   void createAccountFlow_shouldPersistAndReturnAccount() throws Exception {

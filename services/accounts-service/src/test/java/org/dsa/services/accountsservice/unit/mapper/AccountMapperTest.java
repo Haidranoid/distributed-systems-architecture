@@ -1,7 +1,5 @@
 package org.dsa.services.accountsservice.unit.mapper;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.dsa.services.accountsservice.dto.request.CreateAccountRequest;
 import org.dsa.services.accountsservice.dto.response.AccountResponse;
 import org.dsa.services.accountsservice.entity.Account;
@@ -11,15 +9,17 @@ import org.dsa.services.accountsservice.mapper.AccountMapper;
 import org.dsa.shared.core.constants.Role;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AccountMapperTest {
 
   private final AccountMapper mapper = new AccountMapper();
 
   @Test
-  void toEntity_shouldMapAllFields() {
+  void mapCreateAccountRequestToEntity_shouldMapAllFields() {
     CreateAccountRequest createAccountRequest = AccountDtoFixtures.createAdminAccountDto();
 
-    Account account = mapper.toEntity(createAccountRequest);
+    Account account = mapper.mapCreateAccountRequestToEntity(createAccountRequest);
 
     assertThat(account.getUsername()).isEqualTo("admin");
     assertThat(account.getFirstName()).isEqualTo("Steve");
@@ -30,10 +30,10 @@ public class AccountMapperTest {
   }
 
   @Test
-  void toDto_shouldMapAllFields() {
+  void mapToAccountResponse_shouldMapAllFields() {
     Account account = AccountFixtures.adminAccountPersisted(1L);
 
-    AccountResponse dto = mapper.toDto(account);
+    AccountResponse dto = mapper.mapToAccountResponse(account);
 
     assertThat(dto.id()).isEqualTo(1L);
     assertThat(dto.username()).isEqualTo("admin");

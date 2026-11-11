@@ -1,6 +1,5 @@
 package org.dsa.services.accountsservice.controller.advice;
 
-import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.shared.core.error.ApiError;
 import org.dsa.shared.core.exception.BaseException;
@@ -8,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestControllerAdvice

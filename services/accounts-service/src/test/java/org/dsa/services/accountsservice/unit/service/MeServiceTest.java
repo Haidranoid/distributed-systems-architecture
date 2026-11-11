@@ -1,9 +1,5 @@
 package org.dsa.services.accountsservice.unit.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.Optional;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.mapper.AccountMapper;
@@ -19,14 +15,23 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class MeServiceTest {
 
-  @Mock private AccountRepository accountRepository;
-  @Mock private AccountMapper accountsMapper;
-  @Mock private CurrentSession currentSession;
+  @Mock
+  private AccountRepository accountRepository;
+  @Mock
+  private AccountMapper accountsMapper;
+  @Mock
+  private CurrentSession currentSession;
 
-  @InjectMocks private MeService meService;
+  @InjectMocks
+  private MeService meService;
 
   @Test
   void me_whenThereIsASession_shouldReturnAuthAccountDto() {
@@ -36,7 +41,7 @@ public class MeServiceTest {
 
     when(currentSession.getCurrentUsername()).thenReturn(username);
     when(accountRepository.findByUsername(username)).thenReturn(Optional.of(currentSessionAccount));
-    when(accountsMapper.toDto(currentSessionAccount)).thenReturn(currentSessionDto);
+    when(accountsMapper.mapToAccountResponse(currentSessionAccount)).thenReturn(currentSessionDto);
 
     var session = meService.me();
 

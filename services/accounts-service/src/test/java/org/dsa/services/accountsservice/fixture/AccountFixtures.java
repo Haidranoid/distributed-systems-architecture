@@ -1,10 +1,11 @@
 package org.dsa.services.accountsservice.fixture;
 
+import org.dsa.services.accountsservice.entity.Account;
+import org.dsa.shared.core.constants.Role;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.dsa.services.accountsservice.entity.Account;
-import org.dsa.shared.core.constants.Role;
 
 public class AccountFixtures {
 

@@ -2,7 +2,6 @@ package org.dsa.services.accountsservice.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.dto.request.UpdateAccountPasswordRequest;
@@ -11,6 +10,8 @@ import org.dsa.services.accountsservice.dto.response.AccountResponse;
 import org.dsa.services.accountsservice.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Tag(name = "AccountsController")

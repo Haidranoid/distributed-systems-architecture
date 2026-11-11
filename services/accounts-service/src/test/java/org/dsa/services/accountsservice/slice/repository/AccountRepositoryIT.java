@@ -1,16 +1,17 @@
 package org.dsa.services.accountsservice.slice.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.dsa.services.accountsservice.fixture.AccountFixtures;
 import org.dsa.services.accountsservice.repository.AccountRepository;
 import org.dsa.shared.starter.test.integration.DataJpaIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AccountRepositoryIT extends DataJpaIntegrationTest {
 
-  @Autowired AccountRepository accountRepository;
+  @Autowired
+  AccountRepository accountRepository;
 
   @Test
   void save_shouldPersistOneAccount() {

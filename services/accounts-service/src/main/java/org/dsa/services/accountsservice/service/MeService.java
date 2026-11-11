@@ -33,6 +33,6 @@ public class MeService {
             .findByUsername(username)
             .orElseThrow(() -> new AccountNotFoundException("username " + username));
 
-    return accountMapper.toDto(account);
+    return accountMapper.mapToAccountResponse(account);
   }
 }

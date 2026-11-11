@@ -1,10 +1,5 @@
 package org.dsa.services.accountsservice.slice.web.internal;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.dsa.services.accountsservice.controller.advice.GlobalControllerAdvice;
 import org.dsa.services.accountsservice.controller.internal.InternalAccountsController;
 import org.dsa.services.accountsservice.fixture.AccountDtoFixtures;
@@ -19,14 +14,22 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebSliceEnvironment(InternalAccountsController.class)
 @Import(GlobalControllerAdvice.class)
 public class InternalAccountsControllerTest {
 
-  @Autowired private MockMvc mvc;
-  @Autowired private ObjectMapper objectMapper;
+  @Autowired
+  private MockMvc mvc;
+  @Autowired
+  private ObjectMapper objectMapper;
 
-  @MockitoBean private AccountService accountService;
+  @MockitoBean
+  private AccountService accountService;
 
   @Test
   @DisplayName("POST /api/v1/internal/accounts returns 200 when account is created")

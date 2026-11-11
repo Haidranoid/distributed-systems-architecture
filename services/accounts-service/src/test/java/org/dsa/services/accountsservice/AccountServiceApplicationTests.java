@@ -11,5 +11,6 @@ class AccountServiceApplicationTests {
 
   @Test
   @DisplayName("accounts-service smoke test")
-  void contextLoads() {}
+  void contextLoads() {
+  }
 }

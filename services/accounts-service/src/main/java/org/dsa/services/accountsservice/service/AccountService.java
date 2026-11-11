@@ -1,6 +1,5 @@
 package org.dsa.services.accountsservice.service;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.accountsservice.dto.request.CreateAccountRequest;
@@ -16,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional
@@ -29,10 +30,10 @@ public class AccountService
 
   public AccountResponse create(CreateAccountRequest createAccountRequest) {
     // TODO: handle the case when the account already exist
-    var accountEntity = accountMapper.toEntity(createAccountRequest);
+    var accountEntity = accountMapper.mapCreateAccountRequestToEntity(createAccountRequest);
     var accountSaved = accountRepository.save(accountEntity);
 
-    return accountMapper.toDto(accountSaved);
+    return accountMapper.mapToAccountResponse(accountSaved);
   }
 
   public AccountResponse findById(Long userId) {
@@ -41,11 +42,11 @@ public class AccountService
             .findById(userId)
             .orElseThrow(() -> new AccountNotFoundException("id " + userId));
 
-    return accountMapper.toDto(account);
+    return accountMapper.mapToAccountResponse(account);
   }
 
   public List<AccountResponse> findAll() {
-    var accountsList = accountRepository.findAll().stream().map(accountMapper::toDto).toList();
+    var accountsList = accountRepository.findAll().stream().map(accountMapper::mapToAccountResponse).toList();
 
     return accountsList;
   }
@@ -60,7 +61,7 @@ public class AccountService
 
     var accountUpdated = accountRepository.save(account);
 
-    return accountMapper.toDto(accountUpdated);
+    return accountMapper.mapToAccountResponse(accountUpdated);
   }
 
   public void delete(Long userId) {
@@ -79,6 +80,6 @@ public class AccountService
             .findByUsername(verifyAccountCredentialsRequest.username())
             .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
 
-    return accountMapper.toDto(account);
+    return accountMapper.mapToAccountResponse(account);
   }
 }
