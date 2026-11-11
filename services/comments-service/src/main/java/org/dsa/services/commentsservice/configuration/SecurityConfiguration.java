@@ -13,20 +13,20 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfiguration {
 
   private static final String[] SWAGGER_LIST_URL = {
-    "/v2/api-docs",
-    "/v3/api-docs",
-    "/v3/api-docs/**",
-    "/swagger-resources",
-    "/swagger-resources/**",
-    "/configuration/ui",
-    "/configuration/security",
-    "/swagger-ui/**",
-    "/webjars/**",
-    "/swagger-ui.html"
+      "/v2/api-docs",
+      "/v3/api-docs",
+      "/v3/api-docs/**",
+      "/swagger-resources",
+      "/swagger-resources/**",
+      "/configuration/ui",
+      "/configuration/security",
+      "/swagger-ui/**",
+      "/webjars/**",
+      "/swagger-ui.html"
   };
 
   private static final String[] WHITE_LIST_URL = {
-    "/actuator/**", "/api/v1/**",
+      "/actuator/**", "/api/v1/**",
   };
 
   @Bean
@@ -41,8 +41,9 @@ public class SecurityConfiguration {
                     .pathMatchers(WHITE_LIST_URL)
                     .permitAll()
                     .anyExchange()
-                    .permitAll() // .authenticated() - TODO
-            )
+                    // .authenticated() - TODO
+                    .permitAll()
+        )
         .build();
   }
 }

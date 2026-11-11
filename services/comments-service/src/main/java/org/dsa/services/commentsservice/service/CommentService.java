@@ -22,11 +22,11 @@ public class CommentService {
   private final CommentMapper commentMapper;
 
   public Mono<CommentResponse> persist(CreateCommentRequest createCommentRequest) {
-    Comment comment = commentMapper.toEntity(createCommentRequest);
+    Comment comment = commentMapper.mapCreateCommentRequestToEntity(createCommentRequest);
 
     return commentRepository
         .save(comment)
-        .map(commentMapper::toResponse)
+        .map(commentMapper::mapToCommentResponse)
         .doOnSuccess(response -> log.debug("Comment created: {}", response));
   }
 
@@ -34,14 +34,14 @@ public class CommentService {
     return commentRepository
         .findById(id)
         .switchIfEmpty(Mono.error(new CommentNotFoundException(id)))
-        .map(commentMapper::toResponse)
+        .map(commentMapper::mapToCommentResponse)
         .doOnSuccess(response -> log.debug("Comment retrieved: {}", response));
   }
 
   public Flux<CommentResponse> getAll() {
     return commentRepository
         .findAll()
-        .map(commentMapper::toResponse)
+        .map(commentMapper::mapToCommentResponse)
         .doOnComplete(() -> log.debug("All comments retrieved"));
   }
 
@@ -53,7 +53,7 @@ public class CommentService {
           comment.setTextContent(updateCommentRequest.textContent());
           return commentRepository.save(comment);
         })
-        .map(commentMapper::toResponse)
+        .map(commentMapper::mapToCommentResponse)
         .doOnSuccess(response -> log.debug("Comment updated: {}", response));
   }
 

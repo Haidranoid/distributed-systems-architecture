@@ -23,7 +23,8 @@ public class CommentsController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Mono<CommentResponse> create(
-      @Valid @RequestBody CreateCommentRequest createCommentRequest) {
+      @Valid @RequestBody CreateCommentRequest createCommentRequest
+  ) {
     return commentService.persist(createCommentRequest);
   }
 
@@ -39,7 +40,9 @@ public class CommentsController {
 
   @PatchMapping("/{id}")
   public Mono<CommentResponse> update(
-      @PathVariable Long id, @Valid @RequestBody UpdateCommentRequest updateCommentRequest) {
+      @PathVariable Long id,
+      @Valid @RequestBody UpdateCommentRequest updateCommentRequest
+  ) {
     return commentService.modify(id, updateCommentRequest);
   }
 

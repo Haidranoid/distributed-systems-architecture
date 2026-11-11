@@ -9,5 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 class CommentsServiceApplicationTests {
 
   @Test
-  void contextLoads() {}
+  void contextLoads() {
+  }
 }
