@@ -1,36 +1,28 @@
 package org.dsa.shared.plugin.config
 
+import org.dsa.shared.plugin.constants.Repository
 import org.gradle.api.Project
 
 class RepositoriesConfig {
     static def load = { Project project ->
         project.repositories.add(project.repositories.mavenLocal())
-        project.repositories.add(project.repositories.mavenCentral())
 
-        project.repositories.add(
-                project.repositories.maven {
-                    try {
-                        def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
+        def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
 
-                        if (!codeArtifactAuthToken) {
+        try {
+            if (!codeArtifactAuthToken) {
+                throw new RuntimeException("AWS_CODEARTIFACT_AUTH_TOKEN not found")
+            }
 
-                            codeArtifactAuthToken = project.providers.exec {
-                                commandLine 'aws', 'codeartifact', 'get-authorization-token',
-                                        '--domain', 'artifacts',
-                                        '--query', 'authorizationToken',
-                                        '--output', 'text'
-                            }.standardOutput.asText.get().trim()
-                        }
-
-                        url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
-                        credentials {
-                            it.username = "aws"
-                            it.password = codeArtifactAuthToken
-                        }
-
-                    } catch (Exception ignored) {
-                        project.repositories.mavenCentral()
-                    }
-                })
+            project.repositories.add(project.repositories.maven {
+                url = Repository.AWS_CODEARTIFACT_SHARED.url
+                credentials { credentials
+                    credentials.username = "aws"
+                    credentials.password = codeArtifactAuthToken
+                }
+            })
+        } catch (Exception ignored) {
+            project.repositories.add(project.repositories.mavenCentral())
+        }
     }
 }

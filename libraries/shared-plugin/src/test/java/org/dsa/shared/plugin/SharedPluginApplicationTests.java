@@ -5,5 +5,6 @@ import org.junit.jupiter.api.Test;
 class SharedPluginApplicationTests {
 
   @Test
-  void contextLoads() {}
+  void contextLoads() {
+  }
 }
