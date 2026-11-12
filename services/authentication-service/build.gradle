@@ -13,7 +13,7 @@ plugins {
     id 'org.springframework.boot' version '4.1.1'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'io.freefair.lombok' version '9.8.0'
-    //id 'org.dsa.shared.shared-plugin' version '2.0.0'
+    id 'org.dsa.shared.shared-plugin' version '1.0.0'
 }
 
 //apply plugin: 'org.dsa.shared.shared-plugin'
@@ -37,30 +37,7 @@ bootJar {
 }
 
 repositories {
-    mavenLocal()
-
-    def codeArtifactAuthToken = System.getenv("AWS_CODEARTIFACT_AUTH_TOKEN")
-
-    try {
-        if (!codeArtifactAuthToken) {
-            codeArtifactAuthToken = providers.exec {
-                commandLine 'aws', 'codeartifact', 'get-authorization-token',
-                        '--domain', 'artifacts',
-                        '--query', 'authorizationToken',
-                        '--output', 'text'
-            }.standardOutput.asText.get().trim()
-        }
-
-        maven {
-            url 'https://artifacts-314812911342.d.codeartifact.us-east-1.amazonaws.com/maven/shared/'
-            credentials {
-                username "aws"
-                password codeArtifactAuthToken
-            }
-        }
-    } catch (Exception ignored) {
-        mavenCentral()
-    }
+    // configured by 'org.dsa.shared.shared-plugin'
 }
 
 jacoco {
