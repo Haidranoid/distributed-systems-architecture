@@ -3,6 +3,7 @@ package org.dsa.services.commentsservice.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.dsa.services.commentsservice.dto.request.CreateCommentRequest;
 import org.dsa.services.commentsservice.dto.request.UpdateCommentRequest;
 import org.dsa.services.commentsservice.dto.response.CommentResponse;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "CommentsController")
@@ -35,7 +37,8 @@ public class CommentsController {
 
   @GetMapping("/{id}")
   public Mono<CommentResponse> readById(@PathVariable Long id) {
-    return commentService.getById(id);
+    return commentService.getById(id)
+        .doOnError(error -> log.error("Controller error", error));
   }
 
   @PatchMapping("/{id}")

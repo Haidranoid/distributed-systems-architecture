@@ -54,7 +54,8 @@ public class CommentService {
           return commentRepository.save(comment);
         })
         .map(commentMapper::mapToCommentResponse)
-        .doOnSuccess(response -> log.debug("Comment updated: {}", response));
+        .doOnSuccess(response -> log.debug("Comment updated: {}", response))
+        .doOnError(error -> log.error("Error: {}", error.getMessage()));
   }
 
   public Mono<Void> remove(Long id) {
