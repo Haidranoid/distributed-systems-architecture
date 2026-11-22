@@ -43,9 +43,10 @@ defmodule WorkhorseServiceWeb.MixProject do
       {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 1.0"},
-      {:workhorse_service, in_umbrella: true},
       {:jason, "~> 1.2"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:workhorse_service, in_umbrella: true},
+      {:workhorse_service_jobs, in_umbrella: true}
     ]
   end
 

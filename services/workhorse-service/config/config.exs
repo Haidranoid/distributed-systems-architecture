@@ -13,6 +13,10 @@ import Config
 config :workhorse_service,
   ecto_repos: [WorkhorseService.Repo]
 
+# Umbrella - Configure Mix tasks and generators
+config :workhorse_service_jobs,
+  ecto_repos: [WorkhorseServiceJobs.Repo]
+
 # Configure the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
@@ -23,8 +27,9 @@ config :workhorse_service,
 config :workhorse_service, WorkhorseService.Mailer, adapter: Swoosh.Adapters.Local
 
 config :workhorse_service_web,
-  ecto_repos: [WorkhorseService.Repo],
-  generators: [context_app: :workhorse_service]
+  # ecto_repos: [WorkhorseService.Repo, WorkhorseServiceJobs.Repo],
+  # generators: [context_app: :workhorse_service]
+  generators: [context_app: :workhorse_service_jobs]
 
 # Configures the endpoint
 config :workhorse_service_web, WorkhorseServiceWeb.Endpoint,

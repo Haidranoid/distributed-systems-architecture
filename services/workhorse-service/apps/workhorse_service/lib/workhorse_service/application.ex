@@ -9,6 +9,7 @@ defmodule WorkhorseService.Application do
   def start(_type, _args) do
     children = [
       WorkhorseService.Repo,
+      WorkhorseServiceJobs.Repo,
       {DNSCluster, query: Application.get_env(:workhorse_service, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: WorkhorseService.PubSub}
       # Start a worker by calling: WorkhorseService.Worker.start_link(arg)

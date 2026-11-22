@@ -10,6 +10,16 @@ config :workhorse_service, WorkhorseService.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+# Umbrella - Configure your database
+config :workhorse_service_jobs, WorkhorseServiceJobs.Repo,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "workhorse_service_jobs_dev",
+  stacktrace: true,
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
