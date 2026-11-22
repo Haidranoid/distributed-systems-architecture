@@ -1,5 +1,6 @@
 publish:
   stage: publish
+  when: manual
   needs:
     - job: test
       artifacts: true
