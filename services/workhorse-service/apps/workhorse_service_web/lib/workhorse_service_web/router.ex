@@ -9,6 +9,12 @@ defmodule WorkhorseServiceWeb.Router do
     pipe_through :api
   end
 
+  scope "/api/v1", WorkhorseServiceWeb do
+    pipe_through :api
+
+    # resource "/jobs", 
+  end
+
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:workhorse_service_web, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
