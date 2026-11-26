@@ -18,17 +18,17 @@ defmodule WorkhorseServiceWeb.JobControllerTest do
 
   describe "index" do
     test "lists all jobs", %{conn: conn} do
-      conn = get(conn, ~p"/api/jobs")
+      conn = get(conn, ~p"/api/v1/workhorse-service/jobs")
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create job" do
     test "renders job when data is valid", %{conn: conn} do
-      conn = post(conn, ~p"/api/jobs", job: @create_attrs)
+      conn = post(conn, ~p"/api/v1/workhorse-service/jobs", job: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get(conn, ~p"/api/jobs/#{id}")
+      conn = get(conn, ~p"/api/v1/workhorse-service/jobs/#{id}")
 
       assert %{
                "id" => ^id,
@@ -37,7 +37,7 @@ defmodule WorkhorseServiceWeb.JobControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, ~p"/api/jobs", job: @invalid_attrs)
+      conn = post(conn, ~p"/api/v1/workhorse-service/jobs", job: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -46,10 +46,10 @@ defmodule WorkhorseServiceWeb.JobControllerTest do
     setup [:create_job]
 
     test "renders job when data is valid", %{conn: conn, job: %Job{id: id} = job} do
-      conn = put(conn, ~p"/api/jobs/#{job}", job: @update_attrs)
+      conn = put(conn, ~p"/api/v1/workhorse-service/jobs/#{job}", job: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get(conn, ~p"/api/jobs/#{id}")
+      conn = get(conn, ~p"/api/v1/workhorse-service/jobs/#{id}")
 
       assert %{
                "id" => ^id,
@@ -58,7 +58,7 @@ defmodule WorkhorseServiceWeb.JobControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, job: job} do
-      conn = put(conn, ~p"/api/jobs/#{job}", job: @invalid_attrs)
+      conn = put(conn, ~p"/api/v1/workhorse-service/jobs/#{job}", job: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -67,11 +67,11 @@ defmodule WorkhorseServiceWeb.JobControllerTest do
     setup [:create_job]
 
     test "deletes chosen job", %{conn: conn, job: job} do
-      conn = delete(conn, ~p"/api/jobs/#{job}")
+      conn = delete(conn, ~p"/api/v1/workhorse-service/jobs/#{job}")
       assert response(conn, 204)
 
       assert_error_sent 404, fn ->
-        get(conn, ~p"/api/jobs/#{job}")
+        get(conn, ~p"/api/v1/workhorse-service/jobs/#{job}")
       end
     end
   end

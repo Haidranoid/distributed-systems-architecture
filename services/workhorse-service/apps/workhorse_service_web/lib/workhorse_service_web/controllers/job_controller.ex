@@ -15,7 +15,7 @@ defmodule WorkhorseServiceWeb.JobController do
     with {:ok, %Job{} = job} <- Jobs.create_job(job_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/jobs/#{job}")
+      |> put_resp_header("location", ~p"/api/v1/workhorse-service/jobs/#{job}")
       |> render(:show, job: job)
     end
   end

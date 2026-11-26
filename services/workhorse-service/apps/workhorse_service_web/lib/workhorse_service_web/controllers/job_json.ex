@@ -18,7 +18,12 @@ defmodule WorkhorseServiceWeb.JobJSON do
   defp data(%Job{} = job) do
     %{
       id: job.id,
-      name: job.name
+      name: job.name,
+      status: job.status,
+      scheduled_at: job.scheduled_at,
+      started_at: job.started_at,
+      inserted_at: job.inserted_at,
+      updated_at: job.updated_at
     }
   end
 end

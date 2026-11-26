@@ -9,10 +9,10 @@ defmodule WorkhorseServiceWeb.Router do
     pipe_through :api
   end
 
-  scope "/api/v1", WorkhorseServiceWeb do
+  scope "/api/v1/workhorse-service", WorkhorseServiceWeb do
     pipe_through :api
 
-    resources "/jobs", JobController, except: [:new, :edit]
+    resources "/jobs", JobController, only: [:index, :show, :create]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
