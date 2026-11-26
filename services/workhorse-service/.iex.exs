@@ -1,1 +1,2 @@
 alias WorkhorseServiceJobs.Jobs
+alias WorkhorseService.Accounts.Scope
