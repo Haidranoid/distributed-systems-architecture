@@ -1,6 +1,6 @@
 defmodule WorkhorseServiceWeb.Plugs.LoadScope do
-  import Plug.Conn
-  import Phoenix.Controller
+  # import Plug.Conn
+  # import Phoenix.Controller
 
   def init(opts), do: opts
 
